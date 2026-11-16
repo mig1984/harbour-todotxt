@@ -2,6 +2,19 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>CalendarPage</name>
+    <message>
+        <location filename="../qml/pages/CalendarPage.qml" line="98"/>
+        <source>Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/CalendarPage.qml" line="105"/>
+        <source>Today</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CoverPage</name>
     <message>
         <location filename="../qml/cover/CoverPage.qml" line="13"/>
@@ -198,140 +211,140 @@
 <context>
     <name>MainPage</name>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="37"/>
+        <location filename="../qml/pages/MainPage.qml" line="42"/>
         <source>%n selected</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="42"/>
+        <location filename="../qml/pages/MainPage.qml" line="47"/>
         <source>All tasks</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="50"/>
+        <location filename="../qml/pages/MainPage.qml" line="51"/>
         <source>%n tasks</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="52"/>
+        <location filename="../qml/pages/MainPage.qml" line="53"/>
         <source>unsaved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="65"/>
+        <location filename="../qml/pages/MainPage.qml" line="66"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="70"/>
+        <location filename="../qml/pages/MainPage.qml" line="71"/>
         <source>Saved filters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="75"/>
+        <location filename="../qml/pages/MainPage.qml" line="76"/>
         <source>Sort order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="80"/>
+        <location filename="../qml/pages/MainPage.qml" line="81"/>
         <source>Hide search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="80"/>
-        <location filename="../qml/pages/MainPage.qml" line="189"/>
+        <location filename="../qml/pages/MainPage.qml" line="81"/>
+        <location filename="../qml/pages/MainPage.qml" line="200"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="92"/>
+        <location filename="../qml/pages/MainPage.qml" line="93"/>
         <source>Cancel selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="92"/>
+        <location filename="../qml/pages/MainPage.qml" line="93"/>
         <source>Select tasks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="99"/>
+        <location filename="../qml/pages/MainPage.qml" line="100"/>
         <source>Select all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="104"/>
+        <location filename="../qml/pages/MainPage.qml" line="105"/>
         <source>Mark incomplete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="124"/>
+        <location filename="../qml/pages/MainPage.qml" line="125"/>
         <source>Archive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="131"/>
+        <location filename="../qml/pages/MainPage.qml" line="132"/>
         <source>New task</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="140"/>
+        <location filename="../qml/pages/MainPage.qml" line="141"/>
         <source>Reload file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="144"/>
+        <location filename="../qml/pages/MainPage.qml" line="145"/>
         <source>Archive completed tasks</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="148"/>
+        <location filename="../qml/pages/MainPage.qml" line="149"/>
         <source>Archiving %n tasks</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="217"/>
+        <location filename="../qml/pages/MainPage.qml" line="228"/>
         <source>No matching tasks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="217"/>
+        <location filename="../qml/pages/MainPage.qml" line="228"/>
         <source>No tasks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="219"/>
+        <location filename="../qml/pages/MainPage.qml" line="230"/>
         <source>Swipe left to change the filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="219"/>
+        <location filename="../qml/pages/MainPage.qml" line="230"/>
         <source>Pull down to add a task</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="254"/>
+        <location filename="../qml/pages/MainPage.qml" line="275"/>
         <source>Due date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="109"/>
-        <location filename="../qml/pages/MainPage.qml" line="112"/>
+        <location filename="../qml/pages/MainPage.qml" line="110"/>
+        <location filename="../qml/pages/MainPage.qml" line="113"/>
         <source>Threshold date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="127"/>
+        <location filename="../qml/pages/MainPage.qml" line="128"/>
         <source>Archiving</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="277"/>
+        <location filename="../qml/pages/MainPage.qml" line="298"/>
         <source>Deleting %n tasks</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -715,70 +728,70 @@
 <context>
     <name>TaskDialog</name>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="131"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="134"/>
         <source>Update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="131"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="134"/>
         <source>Add task</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="132"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="135"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="139"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="142"/>
         <source>One task per line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="160"/>
-        <location filename="../qml/pages/TaskDialog.qml" line="172"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="142"/>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="170"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="182"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="183"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="193"/>
         <source>Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="184"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="194"/>
         <source>No priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="192"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="202"/>
         <source>Due</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="193"/>
-        <location filename="../qml/pages/TaskDialog.qml" line="201"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="203"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="211"/>
         <source>No date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="195"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="205"/>
         <source>Due date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="200"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="210"/>
         <source>Threshold</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="203"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="213"/>
         <source>Threshold date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="209"/>
-        <source>Next line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -790,62 +803,62 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="452"/>
+        <location filename="../src/taskmodel.cpp" line="458"/>
         <source>today</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="454"/>
+        <location filename="../src/taskmodel.cpp" line="460"/>
         <source>tomorrow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="456"/>
+        <location filename="../src/taskmodel.cpp" line="462"/>
         <source>yesterday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="460"/>
+        <location filename="../src/taskmodel.cpp" line="466"/>
         <source>%1 days</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="462"/>
+        <location filename="../src/taskmodel.cpp" line="468"/>
         <source>1 week</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="462"/>
+        <location filename="../src/taskmodel.cpp" line="468"/>
         <source>%1 weeks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="464"/>
+        <location filename="../src/taskmodel.cpp" line="470"/>
         <source>1 month</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="464"/>
+        <location filename="../src/taskmodel.cpp" line="470"/>
         <source>%1 months</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="466"/>
+        <location filename="../src/taskmodel.cpp" line="472"/>
         <source>1 year</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="466"/>
+        <location filename="../src/taskmodel.cpp" line="472"/>
         <source>%1 years</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="467"/>
+        <location filename="../src/taskmodel.cpp" line="473"/>
         <source>%1 ago</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="467"/>
+        <location filename="../src/taskmodel.cpp" line="473"/>
         <source>in %1</source>
         <translation type="unfinished"></translation>
     </message>

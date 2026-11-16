@@ -31,6 +31,8 @@ class Settings : public QObject
     SETTING(bool, capitalizeTasks, CapitalizeTasks, "capitalizeTasks", true)
     SETTING(QString, queryJson, QueryJson, "queryJson", QString())
     SETTING(QString, savedFiltersJson, SavedFiltersJson, "savedFiltersJson", QString())
+    SETTING(int, calendarYear, CalendarYear, "calendarYear", 0)
+    SETTING(int, calendarMonth, CalendarMonth, "calendarMonth", -1)
 
 public:
     explicit Settings(QObject *parent = 0);

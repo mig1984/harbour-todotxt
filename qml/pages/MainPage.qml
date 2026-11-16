@@ -15,11 +15,16 @@ Page {
         }
     }
 
-    // Scroll the list to today's task, or the nearest one by due date.
-    function scrollToDue() {
-        var row = taskModel.nearestDueRow()
+    // Scroll to the first task due on the given yyyy-MM-dd date.
+    function scrollToDate(date) {
+        var row = taskModel.rowForDueDate(date)
         if (row >= 0)
             listView.positionViewAtIndex(row, ListView.Beginning)
+    }
+
+    function openCalendar() {
+        var p = pageStack.push(Qt.resolvedUrl("CalendarPage.qml"))
+        p.dateSelected.connect(function(date) { page.scrollToDate(date) })
     }
 
     function exitSelection() {
@@ -177,7 +182,7 @@ Page {
                             verticalCenter: parent.verticalCenter
                         }
                         icon.source: "image://theme/icon-m-date"
-                        onClicked: page.scrollToDue()
+                        onClicked: page.openCalendar()
                     }
                 ]
             }
@@ -220,6 +225,16 @@ Page {
         }
 
         VerticalScrollDecorator { }
+    }
+
+    // Swipe right on the list opens the new task dialog (the filter page is
+    // revealed by swiping left, so this is the free direction).
+    Connections {
+        target: swipeDetector
+        onSwipeRight: {
+            if (page.status === PageStatus.Active && !page.selectionMode)
+                app.newTask()
+        }
     }
 
     RemorsePopup { id: remorse }

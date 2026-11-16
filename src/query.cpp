@@ -120,6 +120,8 @@ QString Query::proposedName() const
 QString Query::prefill() const
 {
     QStringList parts;
+    if (!m_prioritiesNot && m_priorities.size() == 1 && m_priorities.first() != "-")
+        parts << "(" + m_priorities.first() + ")";
     if (!m_contextsNot && m_contexts.size() == 1 && m_contexts.first() != "-")
         parts << "@" + m_contexts.first();
     if (!m_projectsNot && m_projects.size() == 1 && m_projects.first() != "-")

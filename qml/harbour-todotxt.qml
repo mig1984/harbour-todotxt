@@ -51,10 +51,19 @@ ApplicationWindow {
 
     function newTask(prefillText) {
         var prefill = prefillText !== undefined ? prefillText : query.prefill
+        // Put the cursor after a leading priority token, so the task text is
+        // typed in the right place. A space is left at the cursor so that
+        // typing pushes the prefilled context/project to the right:
+        // "(A) " + typed text + " @home +proj".
+        var pos = 0
+        var m = prefill.match(/^\([^)]+\)\s+/)
+        if (m) pos = m[0].length
+        var text = prefill.length > 0
+                ? prefill.substring(0, pos) + " " + prefill.substring(pos) : ""
         var dlg = pageStack.push(Qt.resolvedUrl("pages/TaskDialog.qml"), {
             "taskIds": [],
-            "text": prefill.length > 0 ? prefill + " " : "",
-            "cursorAtStart": prefill.length > 0
+            "text": text,
+            "initialCursor": pos
         })
         return dlg
     }

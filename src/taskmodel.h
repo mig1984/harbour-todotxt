@@ -5,6 +5,7 @@
 #include <QSet>
 #include <QTimer>
 #include <QVariantList>
+#include <QStringList>
 
 class TodoStore;
 class Query;
@@ -66,8 +67,10 @@ public:
     Q_INVOKABLE QVariantMap get(int row) const;
     Q_INVOKABLE int indexOfId(int id) const;
     Q_INVOKABLE void refresh();
-    // Row to jump to: first open task due today, else nearest upcoming due, else latest overdue. -1 if none.
-    Q_INVOKABLE int nearestDueRow() const;
+    // Distinct due dates of visible tasks, sorted (for the calendar).
+    Q_INVOKABLE QStringList dueDates() const;
+    // First visible row due on the given yyyy-MM-dd date; -1 if none.
+    Q_INVOKABLE int rowForDueDate(const QString &date) const;
 
     // Selection
     Q_INVOKABLE void toggleSelected(int id);

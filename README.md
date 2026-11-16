@@ -25,6 +25,11 @@ German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
 - **Task list** grouped by the first sort key, with due/threshold dates on a
   separate line (optional), coloured dates (overdue, today), uppercase headers
   (optional). Cover shows the counts of overdue and due-today tasks.
+- **Calendar**: the date icon in the header opens a month view of the due dates
+  of the tasks in the current filter, colour-coded like the list (overdue red,
+  today green, tomorrow blue, the day after tomorrow dark blue, later yellow).
+  Tap a day to jump to the first task due that day. The shown month/year is
+  remembered; the **Today** button resets it to the current month.
 - **Add / edit** with a text editor, quick insertion of priority, contexts,
   projects, due and threshold dates. New tasks get a creation date and a
   capital first letter (both optional).
@@ -88,6 +93,7 @@ src/settings.{h,cpp}           Settings: QSettings-backed properties
 src/harbour-todotxt.cpp        main: context properties, QML view
 qml/harbour-todotxt.qml        ApplicationWindow, helpers (terms, dialogs)
 qml/pages/MainPage.qml         task list, pulley, selection mode, search
+qml/pages/CalendarPage.qml     month view of due dates, jump to a day
 qml/pages/FilterPage.qml       attached filter page
 qml/pages/ItemsPage.qml        pick contexts / projects for the selection
 qml/pages/PriorityPage.qml     pick a priority

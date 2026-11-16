@@ -8,14 +8,16 @@ SOURCES += src/harbour-todotxt.cpp \
     src/query.cpp \
     src/todostore.cpp \
     src/taskmodel.cpp \
-    src/filterstore.cpp
+    src/filterstore.cpp \
+    src/swipedetector.cpp
 
 HEADERS += src/task.h \
     src/settings.h \
     src/query.h \
     src/todostore.h \
     src/taskmodel.h \
-    src/filterstore.h
+    src/filterstore.h \
+    src/swipedetector.h
 
 DISTFILES += qml/harbour-todotxt.qml \
     qml/cover/CoverPage.qml \

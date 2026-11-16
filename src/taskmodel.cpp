@@ -170,28 +170,34 @@ void TaskModel::refresh()
     scheduleRebuild();
 }
 
-int TaskModel::nearestDueRow() const
+QStringList TaskModel::dueDates() const
 {
-    int futureRow = -1, overdueRow = -1;
-    QString futureDate, overdueDate;
+    QSet<QString> seen;
+    QStringList out;
     for (int i = 0; i < m_rows.size(); ++i) {
         const Task *t = m_store->findTask(m_rows[i]);
-        if (!t || t->isCompleted() || t->dueDate().isEmpty())
+        if (!t || t->dueDate().isEmpty() || seen.contains(t->dueDate()))
             continue;
-        const QString d = t->dueDate();
-        if (d == m_today)
-            return i;
-        if (d > m_today) {
-            if (futureRow < 0 || d < futureDate) {
-                futureRow = i;
-                futureDate = d;
-            }
-        } else if (overdueRow < 0 || d > overdueDate) {
-            overdueRow = i;
-            overdueDate = d;
-        }
+        seen.insert(t->dueDate());
+        out << t->dueDate();
     }
-    return futureRow >= 0 ? futureRow : overdueRow;
+    out.sort();
+    return out;
+}
+
+int TaskModel::rowForDueDate(const QString &date) const
+{
+    int completedRow = -1;
+    for (int i = 0; i < m_rows.size(); ++i) {
+        const Task *t = m_store->findTask(m_rows[i]);
+        if (!t || t->dueDate() != date)
+            continue;
+        if (!t->isCompleted())
+            return i;
+        if (completedRow < 0)
+            completedRow = i;
+    }
+    return completedRow;
 }
 
 void TaskModel::setShowSelected(bool s)

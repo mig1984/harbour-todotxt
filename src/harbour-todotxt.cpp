@@ -6,6 +6,7 @@
 #include "query.h"
 #include "taskmodel.h"
 #include "filterstore.h"
+#include "swipedetector.h"
 
 int main(int argc, char *argv[])
 {
@@ -34,11 +35,15 @@ int main(int argc, char *argv[])
     qmlRegisterType<Query>("harbour.todotxt", 1, 0, "Query");
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
+
+    SwipeDetector swipeDetector;
+    view->installEventFilter(&swipeDetector);
     view->rootContext()->setContextProperty("settings", &settings);
     view->rootContext()->setContextProperty("store", &store);
     view->rootContext()->setContextProperty("query", &query);
     view->rootContext()->setContextProperty("taskModel", &model);
     view->rootContext()->setContextProperty("filterStore", &filters);
+    view->rootContext()->setContextProperty("swipeDetector", &swipeDetector);
     view->setSource(SailfishApp::pathToMainQml());
     view->show();
 

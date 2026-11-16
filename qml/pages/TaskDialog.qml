@@ -6,8 +6,11 @@ Dialog {
 
     property var taskIds: []      // empty = new task(s)
     property string text: ""
-    property bool cursorAtStart: false
+    property int initialCursor: -1
     readonly property bool editing: taskIds.length > 0
+    // The editor works with a single line; the exception is editing several
+    // selected tasks at once, where each line still maps to one task.
+    readonly property bool singleLine: taskIds.length <= 1
 
     canAccept: editing || editor.text.trim().length > 0
 
@@ -136,10 +139,17 @@ Dialog {
                 id: editor
                 width: parent.width
                 text: dialog.text
-                placeholderText: qsTr("One task per line")
+                placeholderText: dialog.singleLine ? qsTr("Task") : qsTr("One task per line")
                 inputMethodHints: settings.capitalizeTasks ? Qt.ImhNone : Qt.ImhNoAutoUppercase
+                onTextChanged: {
+                    if (!dialog.singleLine || text.indexOf("\n") < 0) return
+                    var pos = cursorPosition
+                    var t = text.replace(/\s*\n+\s*/g, " ")
+                    text = t
+                    cursorPosition = Math.min(pos, t.length)
+                }
                 Component.onCompleted: {
-                    cursorPosition = cursorAtStart ? 0 : text.length
+                    cursorPosition = initialCursor >= 0 ? initialCursor : text.length
                     forceActiveFocus()
                 }
             }
@@ -202,19 +212,6 @@ Dialog {
                 onClicked: {
                     var p = pageStack.push(Qt.resolvedUrl("DeferPage.qml"), { "title": qsTr("Threshold date"), "current": column.lineThreshold })
                     p.selected.connect(function(d) { setKeyValue("t", deferValue(d)) })
-                }
-            }
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Next line")
-                onClicked: {
-                    var items = lineItems("@").map(function(x) { return "@" + x })
-                        .concat(lineItems("+").map(function(x) { return "+" + x }))
-                    var t = editor.text.replace(/\s+$/, "")
-                    var add = items.length > 0 ? items.join(" ") + " " : ""
-                    editor.text = (t.length > 0 ? t + "\n" : "") + add
-                    editor.cursorPosition = editor.text.length
-                    editor.forceActiveFocus()
                 }
             }
             Item { width: 1; height: Theme.paddingLarge }
