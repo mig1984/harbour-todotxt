@@ -154,3 +154,10 @@ cd tests && qmake && make && ./tst_task
 ## 6. Licence
 
 GPLv3, following Simpletask. Simpletask is (c) Mark Janssen and contributors.
+
+## Privacy
+
+All data stays on the device. The app reads and writes `todo.txt` and
+`done.txt` in the folder you choose (`~/Documents/todotxt/` by default) and
+keeps its settings locally. It does not connect to the network and sends
+nothing anywhere.
