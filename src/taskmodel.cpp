@@ -170,6 +170,30 @@ void TaskModel::refresh()
     scheduleRebuild();
 }
 
+int TaskModel::nearestDueRow() const
+{
+    int futureRow = -1, overdueRow = -1;
+    QString futureDate, overdueDate;
+    for (int i = 0; i < m_rows.size(); ++i) {
+        const Task *t = m_store->findTask(m_rows[i]);
+        if (!t || t->isCompleted() || t->dueDate().isEmpty())
+            continue;
+        const QString d = t->dueDate();
+        if (d == m_today)
+            return i;
+        if (d > m_today) {
+            if (futureRow < 0 || d < futureDate) {
+                futureRow = i;
+                futureDate = d;
+            }
+        } else if (overdueRow < 0 || d > overdueDate) {
+            overdueRow = i;
+            overdueDate = d;
+        }
+    }
+    return futureRow >= 0 ? futureRow : overdueRow;
+}
+
 void TaskModel::setShowSelected(bool s)
 {
     if (m_showSelected == s)

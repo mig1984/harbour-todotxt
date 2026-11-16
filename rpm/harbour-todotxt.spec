@@ -1,6 +1,6 @@
 Name:       harbour-todotxt
 Summary:    Todo.txt task list for Sailfish OS (Simpletask port)
-Version:    1.0.0
+Version:    1.1.0
 Release:    1
 License:    GPLv3
 URL:        https://github.com/mig1984/harbour-todotxt
@@ -40,6 +40,13 @@ desktop-file-install --delete-original \
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Mon Nov 16 2026 Jan Molič <jan.molic@1984.cz> - 1.1.0-1
+- Sort order: all keys listed, active keys reorderable by drag&drop and
+  direction flip, inactive keys can be added/removed; entry in main menu
+- Default sort: completed, due date, manual #N, ..., alphabetical last
+- Filter: clear button per section (lists, tags, priorities)
+- Undo bar when completing/uncompleting a task
+- Header: jump to today's task (or nearest due), clear filter button
 * Mon Nov 16 2026 Jan Molič <jan.molic@1984.cz> - 1.0.0-1
 - First public release: Simpletask feature set (priorities, contexts, projects,
   due/threshold dates, recurrence, filters, multi-key sort, saved filters,

@@ -24,6 +24,13 @@ ListItem {
             app.openTaskDialog([taskId])
     }
 
+    // Completing/uncompleting shows a remorse bar; tapping it cancels the change.
+    function toggleCompleteWithUndo() {
+        var id = taskId
+        item.remorseAction(completed ? qsTr("Marking incomplete") : qsTr("Completing"),
+                           function() { store.toggleComplete(id) })
+    }
+
     function dateLine() {
         var parts = []
         if (age.length > 0 && !completed)
@@ -60,7 +67,7 @@ ListItem {
             anchors.margins: -Theme.paddingMedium
             onClicked: {
                 if (selectionMode) taskModel.toggleSelected(taskId)
-                else store.toggleComplete(taskId)
+                else item.toggleCompleteWithUndo()
             }
         }
     }
@@ -145,7 +152,7 @@ ListItem {
         ContextMenu {
             MenuItem {
                 text: completed ? qsTr("Mark incomplete") : qsTr("Complete")
-                onClicked: store.toggleComplete(taskId)
+                onClicked: item.toggleCompleteWithUndo()
             }
             MenuItem {
                 text: qsTr("Priority")

@@ -18,9 +18,11 @@ Query::Query(QObject *parent)
 
 QStringList Query::allSortKeys()
 {
-    return QStringList() << "completed" << "by_context" << "by_prio" << "alphabetical"
-                         << "manual" << "by_project" << "by_creation_date" << "in_future"
-                         << "by_due_date" << "by_threshold_date" << "by_completion_date";
+    // Order is also the default sort order (see defaultSorts()).
+    return QStringList() << "completed" << "by_due_date" << "manual"
+                         << "by_context" << "by_prio" << "by_project" << "by_creation_date"
+                         << "in_future" << "by_threshold_date" << "by_completion_date"
+                         << "alphabetical";
 }
 
 QStringList Query::defaultSorts()
@@ -184,6 +186,24 @@ void Query::clear()
     m_search.clear();
     m_name.clear();
     emit changed();
+}
+
+void Query::clearContexts()
+{
+    setContexts(QStringList());
+    setContextsNot(false);
+}
+
+void Query::clearProjects()
+{
+    setProjects(QStringList());
+    setProjectsNot(false);
+}
+
+void Query::clearPriorities()
+{
+    setPriorities(QStringList());
+    setPrioritiesNot(false);
 }
 
 static void toggle(QStringList &list, const QString &v, bool on)

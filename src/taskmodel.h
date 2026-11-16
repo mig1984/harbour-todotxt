@@ -66,6 +66,8 @@ public:
     Q_INVOKABLE QVariantMap get(int row) const;
     Q_INVOKABLE int indexOfId(int id) const;
     Q_INVOKABLE void refresh();
+    // Row to jump to: first open task due today, else nearest upcoming due, else latest overdue. -1 if none.
+    Q_INVOKABLE int nearestDueRow() const;
 
     // Selection
     Q_INVOKABLE void toggleSelected(int id);

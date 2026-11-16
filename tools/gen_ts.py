@@ -44,6 +44,9 @@ T["cs"] = {
 "None": "Žádné", "today": "dnes", "tomorrow": "zítra", "yesterday": "včera", "%1 days": "%1 dní", "1 week": "1 týden", "%1 weeks": "%1 týdnů", "1 month": "1 měsíc", "%1 months": "%1 měsíců",
 "1 year": "1 rok", "%1 years": "%1 let", "%1 ago": "před %1", "in %1": "za %1", "Cannot read %1": "Nelze číst %1", "Cannot write %1": "Nelze zapsat %1",
 "List": "Seznam", "Contexts": "Kontexty", "Lists": "Seznamy", "Tag": "Štítek", "Projects": "Projekty", "Tags": "Štítky",
+"Remove from sort": "Odebrat z řazení", "Add to sort": "Přidat do řazení",
+"Clear": "Vymazat",
+"Completing": "Dokončování", "Marking incomplete": "Označování jako nedokončené",
 }
 
 T["de"] = {
@@ -71,6 +74,9 @@ T["de"] = {
 "None": "Keine", "today": "heute", "tomorrow": "morgen", "yesterday": "gestern", "%1 days": "%1 Tagen", "1 week": "1 Woche", "%1 weeks": "%1 Wochen", "1 month": "1 Monat", "%1 months": "%1 Monaten", "1 year": "1 Jahr", "%1 years": "%1 Jahren",
 "%1 ago": "vor %1", "in %1": "in %1", "Cannot read %1": "%1 kann nicht gelesen werden", "Cannot write %1": "%1 kann nicht geschrieben werden",
 "List": "Liste", "Contexts": "Kontexte", "Lists": "Listen", "Tag": "Tag", "Projects": "Projekte", "Tags": "Tags",
+"Remove from sort": "Aus Sortierung entfernen", "Add to sort": "Zur Sortierung hinzufügen",
+"Clear": "Leeren",
+"Completing": "Wird abgeschlossen", "Marking incomplete": "Wird als unerledigt markiert",
 }
 
 T["fr"] = {
@@ -98,6 +104,9 @@ T["fr"] = {
 "None": "Aucune", "today": "aujourd'hui", "tomorrow": "demain", "yesterday": "hier", "%1 days": "%1 jours", "1 week": "1 semaine", "%1 weeks": "%1 semaines", "1 month": "1 mois", "%1 months": "%1 mois", "1 year": "1 an", "%1 years": "%1 ans",
 "%1 ago": "il y a %1", "in %1": "dans %1", "Cannot read %1": "Impossible de lire %1", "Cannot write %1": "Impossible d'écrire %1",
 "List": "Liste", "Contexts": "Contextes", "Lists": "Listes", "Tag": "Étiquette", "Projects": "Projets", "Tags": "Étiquettes",
+"Remove from sort": "Retirer du tri", "Add to sort": "Ajouter au tri",
+"Clear": "Effacer",
+"Completing": "Achèvement", "Marking incomplete": "Marquage comme non terminé",
 }
 
 T["es"] = {
@@ -125,6 +134,9 @@ T["es"] = {
 "None": "Ninguna", "today": "hoy", "tomorrow": "mañana", "yesterday": "ayer", "%1 days": "%1 días", "1 week": "1 semana", "%1 weeks": "%1 semanas", "1 month": "1 mes", "%1 months": "%1 meses", "1 year": "1 año", "%1 years": "%1 años",
 "%1 ago": "hace %1", "in %1": "en %1", "Cannot read %1": "No se puede leer %1", "Cannot write %1": "No se puede escribir %1",
 "List": "Lista", "Contexts": "Contextos", "Lists": "Listas", "Tag": "Etiqueta", "Projects": "Proyectos", "Tags": "Etiquetas",
+"Remove from sort": "Quitar del orden", "Add to sort": "Añadir al orden",
+"Clear": "Borrar",
+"Completing": "Completando", "Marking incomplete": "Marcando como incompleta",
 }
 
 T["it"] = {
@@ -152,6 +164,9 @@ T["it"] = {
 "None": "Nessuna", "today": "oggi", "tomorrow": "domani", "yesterday": "ieri", "%1 days": "%1 giorni", "1 week": "1 settimana", "%1 weeks": "%1 settimane", "1 month": "1 mese", "%1 months": "%1 mesi", "1 year": "1 anno", "%1 years": "%1 anni",
 "%1 ago": "%1 fa", "in %1": "tra %1", "Cannot read %1": "Impossibile leggere %1", "Cannot write %1": "Impossibile scrivere %1",
 "List": "Lista", "Contexts": "Contesti", "Lists": "Liste", "Tag": "Etichetta", "Projects": "Progetti", "Tags": "Etichette",
+"Remove from sort": "Rimuovi dall'ordinamento", "Add to sort": "Aggiungi all'ordinamento",
+"Clear": "Cancella",
+"Completing": "Completamento", "Marking incomplete": "Contrassegno come incompleta",
 }
 
 T["ru"] = {
@@ -179,6 +194,9 @@ T["ru"] = {
 "None": "Нет", "today": "сегодня", "tomorrow": "завтра", "yesterday": "вчера", "%1 days": "%1 дн.", "1 week": "1 нед.", "%1 weeks": "%1 нед.", "1 month": "1 мес.", "%1 months": "%1 мес.", "1 year": "1 год", "%1 years": "%1 г.",
 "%1 ago": "%1 назад", "in %1": "через %1", "Cannot read %1": "Не удалось прочитать %1", "Cannot write %1": "Не удалось записать %1",
 "List": "Список", "Contexts": "Контексты", "Lists": "Списки", "Tag": "Метка", "Projects": "Проекты", "Tags": "Метки",
+"Remove from sort": "Убрать из сортировки", "Add to sort": "Добавить в сортировку",
+"Clear": "Очистить",
+"Completing": "Выполняется", "Marking incomplete": "Отмечается как невыполненная",
 }
 
 T["pl"] = {
@@ -206,6 +224,9 @@ T["pl"] = {
 "None": "Brak", "today": "dziś", "tomorrow": "jutro", "yesterday": "wczoraj", "%1 days": "%1 dni", "1 week": "1 tydzień", "%1 weeks": "%1 tyg.", "1 month": "1 miesiąc", "%1 months": "%1 mies.", "1 year": "1 rok", "%1 years": "%1 lat",
 "%1 ago": "%1 temu", "in %1": "za %1", "Cannot read %1": "Nie można odczytać %1", "Cannot write %1": "Nie można zapisać %1",
 "List": "Lista", "Contexts": "Konteksty", "Lists": "Listy", "Tag": "Tag", "Projects": "Projekty", "Tags": "Tagi",
+"Remove from sort": "Usuń z sortowania", "Add to sort": "Dodaj do sortowania",
+"Clear": "Wyczyść",
+"Completing": "Kończenie", "Marking incomplete": "Oznaczanie jako nieukończone",
 }
 
 T["nl"] = {
@@ -233,6 +254,9 @@ T["nl"] = {
 "None": "Geen", "today": "vandaag", "tomorrow": "morgen", "yesterday": "gisteren", "%1 days": "%1 dagen", "1 week": "1 week", "%1 weeks": "%1 weken", "1 month": "1 maand", "%1 months": "%1 maanden", "1 year": "1 jaar", "%1 years": "%1 jaar",
 "%1 ago": "%1 geleden", "in %1": "over %1", "Cannot read %1": "Kan %1 niet lezen", "Cannot write %1": "Kan %1 niet schrijven",
 "List": "Lijst", "Contexts": "Contexten", "Lists": "Lijsten", "Tag": "Tag", "Projects": "Projecten", "Tags": "Tags",
+"Remove from sort": "Verwijderen uit sortering", "Add to sort": "Toevoegen aan sortering",
+"Clear": "Wissen",
+"Completing": "Voltooien", "Marking incomplete": "Markeren als onvoltooid",
 }
 
 T["sv"] = {
@@ -260,6 +284,9 @@ T["sv"] = {
 "None": "Ingen", "today": "idag", "tomorrow": "imorgon", "yesterday": "igår", "%1 days": "%1 dagar", "1 week": "1 vecka", "%1 weeks": "%1 veckor", "1 month": "1 månad", "%1 months": "%1 månader", "1 year": "1 år", "%1 years": "%1 år",
 "%1 ago": "%1 sedan", "in %1": "om %1", "Cannot read %1": "Kan inte läsa %1", "Cannot write %1": "Kan inte skriva %1",
 "List": "Lista", "Contexts": "Kontexter", "Lists": "Listor", "Tag": "Tagg", "Projects": "Projekt", "Tags": "Taggar",
+"Remove from sort": "Ta bort från sortering", "Add to sort": "Lägg till i sortering",
+"Clear": "Rensa",
+"Completing": "Slutför", "Marking incomplete": "Markerar som ej slutförd",
 }
 
 T["fi"] = {
@@ -287,6 +314,9 @@ T["fi"] = {
 "None": "Ei mitään", "today": "tänään", "tomorrow": "huomenna", "yesterday": "eilen", "%1 days": "%1 päivää", "1 week": "1 viikko", "%1 weeks": "%1 viikkoa", "1 month": "1 kuukausi", "%1 months": "%1 kuukautta", "1 year": "1 vuosi", "%1 years": "%1 vuotta",
 "%1 ago": "%1 sitten", "in %1": "%1 päästä", "Cannot read %1": "Tiedostoa %1 ei voi lukea", "Cannot write %1": "Tiedostoon %1 ei voi kirjoittaa",
 "List": "Lista", "Contexts": "Kontekstit", "Lists": "Listat", "Tag": "Tunniste", "Projects": "Projektit", "Tags": "Tunnisteet",
+"Remove from sort": "Poista järjestyksestä", "Add to sort": "Lisää järjestykseen",
+"Clear": "Tyhjennä",
+"Completing": "Merkitään valmiiksi", "Marking incomplete": "Merkitään keskeneräiseksi",
 }
 
 base = ET.parse(BASE)

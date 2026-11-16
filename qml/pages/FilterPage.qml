@@ -61,6 +61,12 @@ Page {
                     title: app.listsTerm + (query.contexts.length > 0 ? " (" + query.contexts.length + ")" : "")
                     content.sourceComponent: Column {
                         width: page.width
+                        Button {
+                            text: qsTr("Clear")
+                            x: Theme.horizontalPageMargin
+                            enabled: query.contexts.length > 0 || query.contextsNot
+                            onClicked: query.clearContexts()
+                        }
                         TextSwitch {
                             text: qsTr("Invert")
                             description: qsTr("Show tasks NOT matching the selection")
@@ -83,6 +89,12 @@ Page {
                     title: app.tagsTerm + (query.projects.length > 0 ? " (" + query.projects.length + ")" : "")
                     content.sourceComponent: Column {
                         width: page.width
+                        Button {
+                            text: qsTr("Clear")
+                            x: Theme.horizontalPageMargin
+                            enabled: query.projects.length > 0 || query.projectsNot
+                            onClicked: query.clearProjects()
+                        }
                         TextSwitch {
                             text: qsTr("Invert")
                             description: qsTr("Show tasks NOT matching the selection")
@@ -105,6 +117,12 @@ Page {
                     title: qsTr("Priorities") + (query.priorities.length > 0 ? " (" + query.priorities.length + ")" : "")
                     content.sourceComponent: Column {
                         width: page.width
+                        Button {
+                            text: qsTr("Clear")
+                            x: Theme.horizontalPageMargin
+                            enabled: query.priorities.length > 0 || query.prioritiesNot
+                            onClicked: query.clearPriorities()
+                        }
                         TextSwitch {
                             text: qsTr("Invert")
                             checked: query.prioritiesNot

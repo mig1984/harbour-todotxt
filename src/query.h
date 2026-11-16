@@ -47,6 +47,7 @@ public:
     static QStringList allSortKeys();
     static QStringList defaultSorts();
     Q_INVOKABLE static QString sortKeyLabel(const QString &key);
+    Q_INVOKABLE QStringList allKeys() const { return allSortKeys(); }
 
     bool hasFilter() const;
     QString summary() const;
@@ -61,6 +62,9 @@ public:
     Q_INVOKABLE void toggleContext(const QString &c, bool on);
     Q_INVOKABLE void toggleProject(const QString &p, bool on);
     Q_INVOKABLE void togglePriority(const QString &p, bool on);
+    Q_INVOKABLE void clearContexts();  // selection + invert of the section
+    Q_INVOKABLE void clearProjects();
+    Q_INVOKABLE void clearPriorities();
     Q_INVOKABLE void setSortDirection(int index, bool reversed);
     Q_INVOKABLE void moveSort(int from, int to);
 

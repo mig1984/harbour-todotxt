@@ -15,6 +15,13 @@ Page {
         }
     }
 
+    // Scroll the list to today's task, or the nearest one by due date.
+    function scrollToDue() {
+        var row = taskModel.nearestDueRow()
+        if (row >= 0)
+            listView.positionViewAtIndex(row, ListView.Beginning)
+    }
+
     function exitSelection() {
         selectionMode = false
         taskModel.clearSelection()
@@ -63,6 +70,11 @@ Page {
                 text: qsTr("Saved filters")
                 visible: !selectionMode
                 onClicked: pageStack.push(Qt.resolvedUrl("SavedFiltersPage.qml"))
+            }
+            MenuItem {
+                text: qsTr("Sort order")
+                visible: !selectionMode
+                onClicked: pageStack.push(Qt.resolvedUrl("SortPage.qml"))
             }
             MenuItem {
                 text: searching ? qsTr("Hide search") : qsTr("Search")
@@ -146,6 +158,28 @@ Page {
                 id: pageHeader
                 title: headerTitle()
                 description: headerDescription()
+                extraContent.children: [
+                    IconButton {
+                        id: clearButton
+                        visible: query.hasFilter
+                        anchors {
+                            right: parent.right
+                            rightMargin: Theme.horizontalPageMargin
+                            verticalCenter: parent.verticalCenter
+                        }
+                        icon.source: "image://theme/icon-m-clear"
+                        onClicked: query.clear()
+                    },
+                    IconButton {
+                        anchors {
+                            right: clearButton.visible ? clearButton.left : parent.right
+                            rightMargin: clearButton.visible ? 0 : Theme.horizontalPageMargin
+                            verticalCenter: parent.verticalCenter
+                        }
+                        icon.source: "image://theme/icon-m-date"
+                        onClicked: page.scrollToDue()
+                    }
+                ]
             }
             SearchField {
                 id: searchField

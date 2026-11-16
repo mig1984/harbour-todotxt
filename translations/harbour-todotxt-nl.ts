@@ -102,71 +102,78 @@
     </message>
     <message>
         <location filename="../qml/pages/FilterPage.qml" line="65"/>
-        <location filename="../qml/pages/FilterPage.qml" line="87"/>
-        <location filename="../qml/pages/FilterPage.qml" line="109"/>
+        <location filename="../qml/pages/FilterPage.qml" line="93"/>
+        <location filename="../qml/pages/FilterPage.qml" line="121"/>
+        <source>Clear</source>
+        <translation>Wissen</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FilterPage.qml" line="71"/>
+        <location filename="../qml/pages/FilterPage.qml" line="99"/>
+        <location filename="../qml/pages/FilterPage.qml" line="127"/>
         <source>Invert</source>
         <translation>Omkeren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="66"/>
-        <location filename="../qml/pages/FilterPage.qml" line="88"/>
+        <location filename="../qml/pages/FilterPage.qml" line="72"/>
+        <location filename="../qml/pages/FilterPage.qml" line="100"/>
         <source>Show tasks NOT matching the selection</source>
         <translation>Taken tonen die NIET overeenkomen met de selectie</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="73"/>
-        <location filename="../qml/pages/FilterPage.qml" line="95"/>
+        <location filename="../qml/pages/FilterPage.qml" line="79"/>
+        <location filename="../qml/pages/FilterPage.qml" line="107"/>
         <source>Without %1</source>
         <translation>Zonder %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="105"/>
+        <location filename="../qml/pages/FilterPage.qml" line="117"/>
         <source>Priorities</source>
         <translation>Prioriteiten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="116"/>
+        <location filename="../qml/pages/FilterPage.qml" line="134"/>
         <source>No priority</source>
         <translation>Geen prioriteit</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="126"/>
+        <location filename="../qml/pages/FilterPage.qml" line="144"/>
         <source>Other</source>
         <translation>Overig</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="130"/>
+        <location filename="../qml/pages/FilterPage.qml" line="148"/>
         <source>Show completed</source>
         <translation>Voltooide tonen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="135"/>
+        <location filename="../qml/pages/FilterPage.qml" line="153"/>
         <source>Show future</source>
         <translation>Toekomstige tonen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="136"/>
+        <location filename="../qml/pages/FilterPage.qml" line="154"/>
         <source>Tasks with a threshold date in the future</source>
         <translation>Taken met een drempeldatum in de toekomst</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="141"/>
+        <location filename="../qml/pages/FilterPage.qml" line="159"/>
         <source>Show hidden</source>
         <translation>Verborgen tonen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="142"/>
+        <location filename="../qml/pages/FilterPage.qml" line="160"/>
         <source>Tasks with h:1</source>
         <translation>Taken met h:1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="147"/>
-        <location filename="../qml/pages/FilterPage.qml" line="152"/>
+        <location filename="../qml/pages/FilterPage.qml" line="165"/>
+        <location filename="../qml/pages/FilterPage.qml" line="170"/>
         <source>Show %1 in tasks</source>
         <translation>%1 in taken tonen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="157"/>
+        <location filename="../qml/pages/FilterPage.qml" line="175"/>
         <source>Creation date is threshold</source>
         <translation>Aanmaakdatum als drempel</translation>
     </message>
@@ -193,7 +200,7 @@
 <context>
     <name>MainPage</name>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="30"/>
+        <location filename="../qml/pages/MainPage.qml" line="37"/>
         <source>%n selected</source>
         <translation>
             <numerusform></numerusform>
@@ -201,12 +208,12 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="35"/>
+        <location filename="../qml/pages/MainPage.qml" line="42"/>
         <source>All tasks</source>
         <translation>Alle taken</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="43"/>
+        <location filename="../qml/pages/MainPage.qml" line="50"/>
         <source>%n tasks</source>
         <translation>
             <numerusform></numerusform>
@@ -214,73 +221,78 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="45"/>
+        <location filename="../qml/pages/MainPage.qml" line="52"/>
         <source>unsaved</source>
         <translation>niet opgeslagen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="58"/>
+        <location filename="../qml/pages/MainPage.qml" line="65"/>
         <source>Settings</source>
         <translation>Instellingen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="63"/>
+        <location filename="../qml/pages/MainPage.qml" line="70"/>
         <source>Saved filters</source>
         <translation>Opgeslagen filters</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="68"/>
+        <location filename="../qml/pages/MainPage.qml" line="75"/>
+        <source>Sort order</source>
+        <translation>Sorteervolgorde</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="80"/>
         <source>Hide search</source>
         <translation>Zoeken verbergen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="68"/>
-        <location filename="../qml/pages/MainPage.qml" line="155"/>
+        <location filename="../qml/pages/MainPage.qml" line="80"/>
+        <location filename="../qml/pages/MainPage.qml" line="189"/>
         <source>Search</source>
         <translation>Zoeken</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="80"/>
+        <location filename="../qml/pages/MainPage.qml" line="92"/>
         <source>Cancel selection</source>
         <translation>Selectie annuleren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="80"/>
+        <location filename="../qml/pages/MainPage.qml" line="92"/>
         <source>Select tasks</source>
         <translation>Taken selecteren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="87"/>
+        <location filename="../qml/pages/MainPage.qml" line="99"/>
         <source>Select all</source>
         <translation>Alles selecteren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="92"/>
+        <location filename="../qml/pages/MainPage.qml" line="104"/>
         <source>Mark incomplete</source>
         <translation>Markeren als onvoltooid</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="112"/>
+        <location filename="../qml/pages/MainPage.qml" line="124"/>
         <source>Archive</source>
         <translation>Archiveren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="119"/>
+        <location filename="../qml/pages/MainPage.qml" line="131"/>
         <source>New task</source>
         <translation>Nieuwe taak</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="128"/>
+        <location filename="../qml/pages/MainPage.qml" line="140"/>
         <source>Reload file</source>
         <translation>Bestand herladen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="132"/>
+        <location filename="../qml/pages/MainPage.qml" line="144"/>
         <source>Archive completed tasks</source>
         <translation>Voltooide taken archiveren</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="136"/>
+        <location filename="../qml/pages/MainPage.qml" line="148"/>
         <source>Archiving %n tasks</source>
         <translation>
             <numerusform></numerusform>
@@ -288,43 +300,43 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="183"/>
+        <location filename="../qml/pages/MainPage.qml" line="217"/>
         <source>No matching tasks</source>
         <translation>Geen overeenkomende taken</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="183"/>
+        <location filename="../qml/pages/MainPage.qml" line="217"/>
         <source>No tasks</source>
         <translation>Geen taken</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="185"/>
+        <location filename="../qml/pages/MainPage.qml" line="219"/>
         <source>Swipe left to change the filter</source>
         <translation>Veeg naar links om het filter te wijzigen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="185"/>
+        <location filename="../qml/pages/MainPage.qml" line="219"/>
         <source>Pull down to add a task</source>
         <translation>Trek omlaag om een taak toe te voegen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="220"/>
+        <location filename="../qml/pages/MainPage.qml" line="254"/>
         <source>Due date</source>
         <translation>Vervaldatum</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="97"/>
-        <location filename="../qml/pages/MainPage.qml" line="100"/>
+        <location filename="../qml/pages/MainPage.qml" line="109"/>
+        <location filename="../qml/pages/MainPage.qml" line="112"/>
         <source>Threshold date</source>
         <translation>Drempeldatum</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="115"/>
+        <location filename="../qml/pages/MainPage.qml" line="127"/>
         <source>Archiving</source>
         <translation>Archiveren</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="243"/>
+        <location filename="../qml/pages/MainPage.qml" line="277"/>
         <source>Deleting %n tasks</source>
         <translation>
             <numerusform></numerusform>
@@ -357,57 +369,57 @@
 <context>
     <name>Query</name>
     <message>
-        <location filename="../src/query.cpp" line="39"/>
+        <location filename="../src/query.cpp" line="41"/>
         <source>Completed last</source>
         <translation>Voltooide als laatste</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="40"/>
+        <location filename="../src/query.cpp" line="42"/>
         <source>Context</source>
         <translation>Context</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="41"/>
+        <location filename="../src/query.cpp" line="43"/>
         <source>Priority</source>
         <translation>Prioriteit</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="42"/>
+        <location filename="../src/query.cpp" line="44"/>
         <source>Alphabetical</source>
         <translation>Alfabetisch</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="43"/>
+        <location filename="../src/query.cpp" line="45"/>
         <source>Manual order (#N)</source>
         <translation>Handmatige volgorde (#N)</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="44"/>
+        <location filename="../src/query.cpp" line="46"/>
         <source>Project</source>
         <translation>Project</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="45"/>
+        <location filename="../src/query.cpp" line="47"/>
         <source>Creation date</source>
         <translation>Aanmaakdatum</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="46"/>
+        <location filename="../src/query.cpp" line="48"/>
         <source>Future tasks last</source>
         <translation>Toekomstige als laatste</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="47"/>
+        <location filename="../src/query.cpp" line="49"/>
         <source>Due date</source>
         <translation>Vervaldatum</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="48"/>
+        <location filename="../src/query.cpp" line="50"/>
         <source>Threshold date</source>
         <translation>Drempeldatum</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="49"/>
+        <location filename="../src/query.cpp" line="51"/>
         <source>Completion date</source>
         <translation>Voltooiingsdatum</translation>
     </message>
@@ -576,112 +588,132 @@
 <context>
     <name>SortPage</name>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="14"/>
+        <location filename="../qml/pages/SortPage.qml" line="91"/>
         <source>Reset to default</source>
         <translation>Standaard herstellen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="20"/>
+        <location filename="../qml/pages/SortPage.qml" line="100"/>
         <source>Sort order</source>
         <translation>Sorteervolgorde</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="21"/>
+        <location filename="../qml/pages/SortPage.qml" line="101"/>
         <source>Manual ordering active</source>
         <translation>Handmatige volgorde actief</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="21"/>
+        <location filename="../qml/pages/SortPage.qml" line="101"/>
         <source>Tap to flip direction, long press to move</source>
         <translation>Tik om richting om te keren, lang indrukken om te verplaatsen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="31"/>
+        <location filename="../qml/pages/SortPage.qml" line="113"/>
         <source>Move to top</source>
         <translation>Naar boven</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="36"/>
+        <location filename="../qml/pages/SortPage.qml" line="119"/>
         <source>Move up</source>
         <translation>Omhoog</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="41"/>
+        <location filename="../qml/pages/SortPage.qml" line="125"/>
         <source>Move down</source>
         <translation>Omlaag</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SortPage.qml" line="131"/>
+        <source>Remove from sort</source>
+        <translation>Verwijderen uit sortering</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SortPage.qml" line="137"/>
+        <source>Add to sort</source>
+        <translation>Toevoegen aan sortering</translation>
     </message>
 </context>
 <context>
     <name>TaskDelegate</name>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="32"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="30"/>
+        <source>Marking incomplete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/TaskDelegate.qml" line="30"/>
+        <source>Completing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/TaskDelegate.qml" line="39"/>
         <source>done %1</source>
         <translation>voltooid %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="34"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="41"/>
         <source>due %1</source>
         <translation>vervalt %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="36"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="43"/>
         <source>t %1</source>
         <translation>drempel %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="147"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="154"/>
         <source>Mark incomplete</source>
         <translation>Markeren als onvoltooid</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="147"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="154"/>
         <source>Complete</source>
         <translation>Voltooien</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="151"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="158"/>
         <source>Priority</source>
         <translation>Prioriteit</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="158"/>
-        <location filename="../qml/components/TaskDelegate.qml" line="160"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="165"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="167"/>
         <source>Due date</source>
         <translation>Vervaldatum</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="165"/>
-        <location filename="../qml/components/TaskDelegate.qml" line="167"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="172"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="174"/>
         <source>Threshold date</source>
         <translation>Drempeldatum</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="174"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="181"/>
         <source>Open %1</source>
         <translation>%1 openen</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="182"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="189"/>
         <source>Call %1</source>
         <translation>%1 bellen</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="189"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="196"/>
         <source>Mail %1</source>
         <translation>%1 mailen</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="194"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="201"/>
         <source>Select</source>
         <translation>Selecteren</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="199"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="206"/>
         <source>Delete</source>
         <translation>Verwijderen</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="200"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="207"/>
         <source>Deleting</source>
         <translation>Verwijderen</translation>
     </message>
@@ -764,62 +796,62 @@
         <translation>Geen</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="428"/>
+        <location filename="../src/taskmodel.cpp" line="452"/>
         <source>today</source>
         <translation>vandaag</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="430"/>
+        <location filename="../src/taskmodel.cpp" line="454"/>
         <source>tomorrow</source>
         <translation>morgen</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="432"/>
+        <location filename="../src/taskmodel.cpp" line="456"/>
         <source>yesterday</source>
         <translation>gisteren</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="436"/>
+        <location filename="../src/taskmodel.cpp" line="460"/>
         <source>%1 days</source>
         <translation>%1 dagen</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="438"/>
+        <location filename="../src/taskmodel.cpp" line="462"/>
         <source>1 week</source>
         <translation>1 week</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="438"/>
+        <location filename="../src/taskmodel.cpp" line="462"/>
         <source>%1 weeks</source>
         <translation>%1 weken</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="440"/>
+        <location filename="../src/taskmodel.cpp" line="464"/>
         <source>1 month</source>
         <translation>1 maand</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="440"/>
+        <location filename="../src/taskmodel.cpp" line="464"/>
         <source>%1 months</source>
         <translation>%1 maanden</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="442"/>
+        <location filename="../src/taskmodel.cpp" line="466"/>
         <source>1 year</source>
         <translation>1 jaar</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="442"/>
+        <location filename="../src/taskmodel.cpp" line="466"/>
         <source>%1 years</source>
         <translation>%1 jaar</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="443"/>
+        <location filename="../src/taskmodel.cpp" line="467"/>
         <source>%1 ago</source>
         <translation>%1 geleden</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="443"/>
+        <location filename="../src/taskmodel.cpp" line="467"/>
         <source>in %1</source>
         <translation>over %1</translation>
     </message>

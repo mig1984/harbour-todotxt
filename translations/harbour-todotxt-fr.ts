@@ -102,71 +102,78 @@
     </message>
     <message>
         <location filename="../qml/pages/FilterPage.qml" line="65"/>
-        <location filename="../qml/pages/FilterPage.qml" line="87"/>
-        <location filename="../qml/pages/FilterPage.qml" line="109"/>
+        <location filename="../qml/pages/FilterPage.qml" line="93"/>
+        <location filename="../qml/pages/FilterPage.qml" line="121"/>
+        <source>Clear</source>
+        <translation>Effacer</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FilterPage.qml" line="71"/>
+        <location filename="../qml/pages/FilterPage.qml" line="99"/>
+        <location filename="../qml/pages/FilterPage.qml" line="127"/>
         <source>Invert</source>
         <translation>Inverser</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="66"/>
-        <location filename="../qml/pages/FilterPage.qml" line="88"/>
+        <location filename="../qml/pages/FilterPage.qml" line="72"/>
+        <location filename="../qml/pages/FilterPage.qml" line="100"/>
         <source>Show tasks NOT matching the selection</source>
         <translation>Afficher les tâches NE correspondant PAS à la sélection</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="73"/>
-        <location filename="../qml/pages/FilterPage.qml" line="95"/>
+        <location filename="../qml/pages/FilterPage.qml" line="79"/>
+        <location filename="../qml/pages/FilterPage.qml" line="107"/>
         <source>Without %1</source>
         <translation>Sans %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="105"/>
+        <location filename="../qml/pages/FilterPage.qml" line="117"/>
         <source>Priorities</source>
         <translation>Priorités</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="116"/>
+        <location filename="../qml/pages/FilterPage.qml" line="134"/>
         <source>No priority</source>
         <translation>Sans priorité</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="126"/>
+        <location filename="../qml/pages/FilterPage.qml" line="144"/>
         <source>Other</source>
         <translation>Autres</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="130"/>
+        <location filename="../qml/pages/FilterPage.qml" line="148"/>
         <source>Show completed</source>
         <translation>Afficher les terminées</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="135"/>
+        <location filename="../qml/pages/FilterPage.qml" line="153"/>
         <source>Show future</source>
         <translation>Afficher les futures</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="136"/>
+        <location filename="../qml/pages/FilterPage.qml" line="154"/>
         <source>Tasks with a threshold date in the future</source>
         <translation>Tâches dont la date seuil est dans le futur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="141"/>
+        <location filename="../qml/pages/FilterPage.qml" line="159"/>
         <source>Show hidden</source>
         <translation>Afficher les masquées</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="142"/>
+        <location filename="../qml/pages/FilterPage.qml" line="160"/>
         <source>Tasks with h:1</source>
         <translation>Tâches avec h:1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="147"/>
-        <location filename="../qml/pages/FilterPage.qml" line="152"/>
+        <location filename="../qml/pages/FilterPage.qml" line="165"/>
+        <location filename="../qml/pages/FilterPage.qml" line="170"/>
         <source>Show %1 in tasks</source>
         <translation>Afficher %1 dans les tâches</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="157"/>
+        <location filename="../qml/pages/FilterPage.qml" line="175"/>
         <source>Creation date is threshold</source>
         <translation>Date de création comme seuil</translation>
     </message>
@@ -193,7 +200,7 @@
 <context>
     <name>MainPage</name>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="30"/>
+        <location filename="../qml/pages/MainPage.qml" line="37"/>
         <source>%n selected</source>
         <translation>
             <numerusform></numerusform>
@@ -201,12 +208,12 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="35"/>
+        <location filename="../qml/pages/MainPage.qml" line="42"/>
         <source>All tasks</source>
         <translation>Toutes les tâches</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="43"/>
+        <location filename="../qml/pages/MainPage.qml" line="50"/>
         <source>%n tasks</source>
         <translation>
             <numerusform></numerusform>
@@ -214,73 +221,78 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="45"/>
+        <location filename="../qml/pages/MainPage.qml" line="52"/>
         <source>unsaved</source>
         <translation>non enregistré</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="58"/>
+        <location filename="../qml/pages/MainPage.qml" line="65"/>
         <source>Settings</source>
         <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="63"/>
+        <location filename="../qml/pages/MainPage.qml" line="70"/>
         <source>Saved filters</source>
         <translation>Filtres enregistrés</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="68"/>
+        <location filename="../qml/pages/MainPage.qml" line="75"/>
+        <source>Sort order</source>
+        <translation>Ordre de tri</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="80"/>
         <source>Hide search</source>
         <translation>Masquer la recherche</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="68"/>
-        <location filename="../qml/pages/MainPage.qml" line="155"/>
+        <location filename="../qml/pages/MainPage.qml" line="80"/>
+        <location filename="../qml/pages/MainPage.qml" line="189"/>
         <source>Search</source>
         <translation>Rechercher</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="80"/>
+        <location filename="../qml/pages/MainPage.qml" line="92"/>
         <source>Cancel selection</source>
         <translation>Annuler la sélection</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="80"/>
+        <location filename="../qml/pages/MainPage.qml" line="92"/>
         <source>Select tasks</source>
         <translation>Sélectionner des tâches</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="87"/>
+        <location filename="../qml/pages/MainPage.qml" line="99"/>
         <source>Select all</source>
         <translation>Tout sélectionner</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="92"/>
+        <location filename="../qml/pages/MainPage.qml" line="104"/>
         <source>Mark incomplete</source>
         <translation>Marquer non terminée</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="112"/>
+        <location filename="../qml/pages/MainPage.qml" line="124"/>
         <source>Archive</source>
         <translation>Archiver</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="119"/>
+        <location filename="../qml/pages/MainPage.qml" line="131"/>
         <source>New task</source>
         <translation>Nouvelle tâche</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="128"/>
+        <location filename="../qml/pages/MainPage.qml" line="140"/>
         <source>Reload file</source>
         <translation>Recharger le fichier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="132"/>
+        <location filename="../qml/pages/MainPage.qml" line="144"/>
         <source>Archive completed tasks</source>
         <translation>Archiver les tâches terminées</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="136"/>
+        <location filename="../qml/pages/MainPage.qml" line="148"/>
         <source>Archiving %n tasks</source>
         <translation>
             <numerusform></numerusform>
@@ -288,43 +300,43 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="183"/>
+        <location filename="../qml/pages/MainPage.qml" line="217"/>
         <source>No matching tasks</source>
         <translation>Aucune tâche correspondante</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="183"/>
+        <location filename="../qml/pages/MainPage.qml" line="217"/>
         <source>No tasks</source>
         <translation>Aucune tâche</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="185"/>
+        <location filename="../qml/pages/MainPage.qml" line="219"/>
         <source>Swipe left to change the filter</source>
         <translation>Glissez vers la gauche pour changer le filtre</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="185"/>
+        <location filename="../qml/pages/MainPage.qml" line="219"/>
         <source>Pull down to add a task</source>
         <translation>Tirez vers le bas pour ajouter une tâche</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="220"/>
+        <location filename="../qml/pages/MainPage.qml" line="254"/>
         <source>Due date</source>
         <translation>Échéance</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="97"/>
-        <location filename="../qml/pages/MainPage.qml" line="100"/>
+        <location filename="../qml/pages/MainPage.qml" line="109"/>
+        <location filename="../qml/pages/MainPage.qml" line="112"/>
         <source>Threshold date</source>
         <translation>Date seuil</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="115"/>
+        <location filename="../qml/pages/MainPage.qml" line="127"/>
         <source>Archiving</source>
         <translation>Archivage</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="243"/>
+        <location filename="../qml/pages/MainPage.qml" line="277"/>
         <source>Deleting %n tasks</source>
         <translation>
             <numerusform></numerusform>
@@ -357,57 +369,57 @@
 <context>
     <name>Query</name>
     <message>
-        <location filename="../src/query.cpp" line="39"/>
+        <location filename="../src/query.cpp" line="41"/>
         <source>Completed last</source>
         <translation>Terminées en dernier</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="40"/>
+        <location filename="../src/query.cpp" line="42"/>
         <source>Context</source>
         <translation>Contexte</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="41"/>
+        <location filename="../src/query.cpp" line="43"/>
         <source>Priority</source>
         <translation>Priorité</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="42"/>
+        <location filename="../src/query.cpp" line="44"/>
         <source>Alphabetical</source>
         <translation>Alphabétique</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="43"/>
+        <location filename="../src/query.cpp" line="45"/>
         <source>Manual order (#N)</source>
         <translation>Ordre manuel (#N)</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="44"/>
+        <location filename="../src/query.cpp" line="46"/>
         <source>Project</source>
         <translation>Projet</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="45"/>
+        <location filename="../src/query.cpp" line="47"/>
         <source>Creation date</source>
         <translation>Date de création</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="46"/>
+        <location filename="../src/query.cpp" line="48"/>
         <source>Future tasks last</source>
         <translation>Futures en dernier</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="47"/>
+        <location filename="../src/query.cpp" line="49"/>
         <source>Due date</source>
         <translation>Échéance</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="48"/>
+        <location filename="../src/query.cpp" line="50"/>
         <source>Threshold date</source>
         <translation>Date seuil</translation>
     </message>
     <message>
-        <location filename="../src/query.cpp" line="49"/>
+        <location filename="../src/query.cpp" line="51"/>
         <source>Completion date</source>
         <translation>Date de fin</translation>
     </message>
@@ -576,112 +588,132 @@
 <context>
     <name>SortPage</name>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="14"/>
+        <location filename="../qml/pages/SortPage.qml" line="91"/>
         <source>Reset to default</source>
         <translation>Réinitialiser</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="20"/>
+        <location filename="../qml/pages/SortPage.qml" line="100"/>
         <source>Sort order</source>
         <translation>Ordre de tri</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="21"/>
+        <location filename="../qml/pages/SortPage.qml" line="101"/>
         <source>Manual ordering active</source>
         <translation>Ordre manuel actif</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="21"/>
+        <location filename="../qml/pages/SortPage.qml" line="101"/>
         <source>Tap to flip direction, long press to move</source>
         <translation>Touchez pour inverser, appui long pour déplacer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="31"/>
+        <location filename="../qml/pages/SortPage.qml" line="113"/>
         <source>Move to top</source>
         <translation>Tout en haut</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="36"/>
+        <location filename="../qml/pages/SortPage.qml" line="119"/>
         <source>Move up</source>
         <translation>Monter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="41"/>
+        <location filename="../qml/pages/SortPage.qml" line="125"/>
         <source>Move down</source>
         <translation>Descendre</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SortPage.qml" line="131"/>
+        <source>Remove from sort</source>
+        <translation>Retirer du tri</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SortPage.qml" line="137"/>
+        <source>Add to sort</source>
+        <translation>Ajouter au tri</translation>
     </message>
 </context>
 <context>
     <name>TaskDelegate</name>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="32"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="30"/>
+        <source>Marking incomplete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/TaskDelegate.qml" line="30"/>
+        <source>Completing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/TaskDelegate.qml" line="39"/>
         <source>done %1</source>
         <translation>terminé %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="34"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="41"/>
         <source>due %1</source>
         <translation>échéance %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="36"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="43"/>
         <source>t %1</source>
         <translation>seuil %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="147"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="154"/>
         <source>Mark incomplete</source>
         <translation>Marquer non terminée</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="147"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="154"/>
         <source>Complete</source>
         <translation>Terminer</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="151"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="158"/>
         <source>Priority</source>
         <translation>Priorité</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="158"/>
-        <location filename="../qml/components/TaskDelegate.qml" line="160"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="165"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="167"/>
         <source>Due date</source>
         <translation>Échéance</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="165"/>
-        <location filename="../qml/components/TaskDelegate.qml" line="167"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="172"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="174"/>
         <source>Threshold date</source>
         <translation>Date seuil</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="174"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="181"/>
         <source>Open %1</source>
         <translation>Ouvrir %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="182"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="189"/>
         <source>Call %1</source>
         <translation>Appeler %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="189"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="196"/>
         <source>Mail %1</source>
         <translation>Écrire à %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="194"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="201"/>
         <source>Select</source>
         <translation>Sélectionner</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="199"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="206"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="200"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="207"/>
         <source>Deleting</source>
         <translation>Suppression</translation>
     </message>
@@ -764,62 +796,62 @@
         <translation>Aucune</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="428"/>
+        <location filename="../src/taskmodel.cpp" line="452"/>
         <source>today</source>
         <translation>aujourd&apos;hui</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="430"/>
+        <location filename="../src/taskmodel.cpp" line="454"/>
         <source>tomorrow</source>
         <translation>demain</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="432"/>
+        <location filename="../src/taskmodel.cpp" line="456"/>
         <source>yesterday</source>
         <translation>hier</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="436"/>
+        <location filename="../src/taskmodel.cpp" line="460"/>
         <source>%1 days</source>
         <translation>%1 jours</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="438"/>
+        <location filename="../src/taskmodel.cpp" line="462"/>
         <source>1 week</source>
         <translation>1 semaine</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="438"/>
+        <location filename="../src/taskmodel.cpp" line="462"/>
         <source>%1 weeks</source>
         <translation>%1 semaines</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="440"/>
+        <location filename="../src/taskmodel.cpp" line="464"/>
         <source>1 month</source>
         <translation>1 mois</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="440"/>
+        <location filename="../src/taskmodel.cpp" line="464"/>
         <source>%1 months</source>
         <translation>%1 mois</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="442"/>
+        <location filename="../src/taskmodel.cpp" line="466"/>
         <source>1 year</source>
         <translation>1 an</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="442"/>
+        <location filename="../src/taskmodel.cpp" line="466"/>
         <source>%1 years</source>
         <translation>%1 ans</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="443"/>
+        <location filename="../src/taskmodel.cpp" line="467"/>
         <source>%1 ago</source>
         <translation>il y a %1</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="443"/>
+        <location filename="../src/taskmodel.cpp" line="467"/>
         <source>in %1</source>
         <translation>dans %1</translation>
     </message>
