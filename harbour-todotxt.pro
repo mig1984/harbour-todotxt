@@ -37,4 +37,5 @@ TRANSLATIONS += translations/harbour-todotxt-cs.ts \
     translations/harbour-todotxt-pl.ts \
     translations/harbour-todotxt-nl.ts \
     translations/harbour-todotxt-sv.ts \
-    translations/harbour-todotxt-fi.ts
+    translations/harbour-todotxt-fi.ts \
+    translations/harbour-todotxt-zh_CN.ts
