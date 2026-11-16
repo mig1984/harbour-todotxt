@@ -1,0 +1,24 @@
+# deploy key (never commit)
+deploy_key_todotxt
+deploy_key_todotxt.pub
+
+# qmake / build output
+build/
+RPMS/
+.sfdk/
+Makefile
+*.o
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.qm
+documentation.list
+/harbour-todotxt
+*.rpm
+*.tar.*
+
+# editor / OS
+*.swp
+*~
+.DS_Store

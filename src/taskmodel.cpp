@@ -1,0 +1,444 @@
+#include "taskmodel.h"
+#include "todostore.h"
+#include "query.h"
+#include "settings.h"
+
+#include <QDate>
+#include <algorithm>
+
+TaskModel::TaskModel(TodoStore *store, Query *query, Settings *settings, QObject *parent)
+    : QAbstractListModel(parent)
+    , m_store(store), m_query(query), m_settings(settings)
+    , m_overdue(0), m_dueToday(0), m_showSelected(true), m_moving(false)
+{
+    m_rebuildTimer.setSingleShot(true);
+    m_rebuildTimer.setInterval(0);
+    connect(&m_rebuildTimer, SIGNAL(timeout()), this, SLOT(rebuild()));
+    connect(m_store, SIGNAL(tasksChanged()), this, SLOT(scheduleRebuild()));
+    connect(m_query, SIGNAL(changed()), this, SLOT(scheduleRebuild()));
+    connect(m_settings, SIGNAL(showDateBarChanged()), this, SLOT(scheduleRebuild()));
+    connect(m_settings, SIGNAL(caseSensitiveSortChanged()), this, SLOT(scheduleRebuild()));
+    m_today = Task::today();
+}
+
+QHash<int, QByteArray> TaskModel::roleNames() const
+{
+    QHash<int, QByteArray> r;
+    r[IdRole] = "taskId";
+    r[TextRole] = "text";
+    r[DisplayRole] = "display";
+    r[PriorityRole] = "priority";
+    r[CompletedRole] = "completed";
+    r[DueRole] = "due";
+    r[ThresholdRole] = "threshold";
+    r[CreateDateRole] = "createDate";
+    r[CompletionDateRole] = "completionDate";
+    r[ListsRole] = "lists";
+    r[TagsRole] = "tags";
+    r[LinksRole] = "links";
+    r[PhonesRole] = "phones";
+    r[MailsRole] = "mails";
+    r[SectionRole] = "section";
+    r[SelectedRole] = "isSelected";
+    r[HiddenRole] = "hidden";
+    r[InFutureRole] = "inFuture";
+    r[AgeRole] = "age";
+    r[DueStateRole] = "dueState";
+    r[ThresholdStateRole] = "thresholdState";
+    r[RecurrenceRole] = "recurrence";
+    r[OrderRole] = "order";
+    return r;
+}
+
+int TaskModel::rowCount(const QModelIndex &parent) const
+{
+    return parent.isValid() ? 0 : m_rows.size();
+}
+
+int TaskModel::totalCount() const
+{
+    return m_store->count();
+}
+
+const Task *TaskModel::taskAt(int row) const
+{
+    if (row < 0 || row >= m_rows.size())
+        return 0;
+    return m_store->findTask(m_rows[row]);
+}
+
+int TaskModel::dateState(const QString &date) const
+{
+    if (date.isEmpty())
+        return 0;
+    if (date < m_today)
+        return 1;
+    if (date == m_today)
+        return 2;
+    if (date == QDate::fromString(m_today, "yyyy-MM-dd").addDays(1).toString("yyyy-MM-dd"))
+        return 3;
+    return 4;
+}
+
+QString TaskModel::displayHtml(const Task &t) const
+{
+    const bool hideDates = m_settings->showDateBar();
+    QStringList parts;
+    foreach (const Token &tok, t.tokens()) {
+        switch (tok.type) {
+        case TokenType::Completed:
+        case TokenType::CompletedDate:
+        case TokenType::CreateDate:
+        case TokenType::Uuid:
+        case TokenType::Order:
+        case TokenType::Priority:
+            continue;
+        case TokenType::List:
+            if (m_query->hideLists()) continue;
+            parts << "<font color=\"#SEC#\">" + tok.text.toHtmlEscaped() + "</font>";
+            continue;
+        case TokenType::Tag:
+            if (m_query->hideTags()) continue;
+            parts << "<font color=\"#SEC#\">" + tok.text.toHtmlEscaped() + "</font>";
+            continue;
+        case TokenType::Due:
+        case TokenType::Threshold:
+        case TokenType::Recurrence:
+            if (hideDates) continue;
+            parts << "<font color=\"#SEC#\">" + tok.text.toHtmlEscaped() + "</font>";
+            continue;
+        case TokenType::Link:
+            parts << "<font color=\"#LINK#\">" + tok.text.toHtmlEscaped() + "</font>";
+            continue;
+        default:
+            parts << tok.text.toHtmlEscaped();
+        }
+    }
+    return parts.join(" ").trimmed();
+}
+
+QVariant TaskModel::data(const QModelIndex &index, int role) const
+{
+    const Task *t = taskAt(index.row());
+    if (!t)
+        return QVariant();
+    switch (role) {
+    case IdRole: return t->id();
+    case TextRole: return t->text();
+    case DisplayRole: return displayHtml(*t);
+    case PriorityRole: return QString(t->priority());
+    case CompletedRole: return t->isCompleted();
+    case DueRole: return t->dueDate();
+    case ThresholdRole: return t->thresholdDate();
+    case CreateDateRole: return t->createDate();
+    case CompletionDateRole: return t->completionDate();
+    case ListsRole: return t->lists();
+    case TagsRole: return t->tags();
+    case LinksRole: return t->links();
+    case PhonesRole: return t->phones();
+    case MailsRole: return t->mails();
+    case SectionRole: return m_query->section(*t, tr("None"));
+    case SelectedRole: return m_selected.contains(t->id());
+    case HiddenRole: return t->isHidden();
+    case InFutureRole: return t->inFuture(m_today, m_query->createIsThreshold());
+    case AgeRole: return t->createDate().isEmpty() ? QString() : relativeDate(t->createDate());
+    case DueStateRole: return dateState(t->dueDate());
+    case ThresholdStateRole: return dateState(t->thresholdDate());
+    case RecurrenceRole: return t->recurrence();
+    case OrderRole: return t->manualOrder();
+    }
+    return QVariant();
+}
+
+QVariantMap TaskModel::get(int row) const
+{
+    QVariantMap m;
+    QModelIndex idx = index(row);
+    QHash<int, QByteArray> names = roleNames();
+    for (QHash<int, QByteArray>::const_iterator it = names.begin(); it != names.end(); ++it)
+        m[QString::fromLatin1(it.value())] = data(idx, it.key());
+    return m;
+}
+
+int TaskModel::indexOfId(int id) const
+{
+    return m_rows.indexOf(id);
+}
+
+void TaskModel::refresh()
+{
+    scheduleRebuild();
+}
+
+void TaskModel::setShowSelected(bool s)
+{
+    if (m_showSelected == s)
+        return;
+    m_showSelected = s;
+    emit showSelectedChanged();
+    scheduleRebuild();
+}
+
+void TaskModel::scheduleRebuild()
+{
+    if (m_moving)
+        return;
+    m_rebuildTimer.start();
+}
+
+void TaskModel::rebuild()
+{
+    if (m_moving)
+        return;
+    m_today = Task::today();
+    m_query->setCaseSensitive(m_settings->caseSensitiveSort());
+
+    QList<const Task *> visible;
+    const QList<Task> &all = m_store->tasks();
+    QSet<int> existing;
+    for (int i = 0; i < all.size(); ++i) {
+        const Task &t = all[i];
+        existing.insert(t.id());
+        if ((m_showSelected && m_selected.contains(t.id())) || m_query->matches(t, m_today))
+            visible << &t;
+    }
+    // Forget selection of tasks that no longer exist.
+    QSet<int> sel;
+    foreach (int id, m_selected)
+        if (existing.contains(id))
+            sel.insert(id);
+    bool selChanged = sel.size() != m_selected.size();
+    m_selected = sel;
+
+    Query *q = m_query;
+    std::stable_sort(visible.begin(), visible.end(), [q](const Task *a, const Task *b) {
+        return q->compare(*a, *b) < 0;
+    });
+
+    QList<int> rows;
+    int overdue = 0, dueToday = 0;
+    foreach (const Task *t, visible) {
+        rows << t->id();
+        if (!t->isCompleted()) {
+            int s = dateState(t->dueDate());
+            if (s == 1) overdue++;
+            else if (s == 2) dueToday++;
+        }
+    }
+    m_overdue = overdue;
+    m_dueToday = dueToday;
+
+    if (rows == m_rows) {
+        if (!m_rows.isEmpty())
+            emit dataChanged(index(0), index(m_rows.size() - 1));
+    } else {
+        beginResetModel();
+        m_rows = rows;
+        endResetModel();
+    }
+    emit countChanged();
+    if (selChanged)
+        emit selectionChanged();
+}
+
+void TaskModel::toggleSelected(int id)
+{
+    setSelected(id, !m_selected.contains(id));
+}
+
+void TaskModel::setSelected(int id, bool on)
+{
+    if (on == m_selected.contains(id))
+        return;
+    if (on)
+        m_selected.insert(id);
+    else
+        m_selected.remove(id);
+    int row = m_rows.indexOf(id);
+    if (row >= 0)
+        emit dataChanged(index(row), index(row), QVector<int>() << SelectedRole);
+    emit selectionChanged();
+}
+
+void TaskModel::selectAll()
+{
+    foreach (int id, m_rows)
+        m_selected.insert(id);
+    if (!m_rows.isEmpty())
+        emit dataChanged(index(0), index(m_rows.size() - 1), QVector<int>() << SelectedRole);
+    emit selectionChanged();
+}
+
+void TaskModel::clearSelection()
+{
+    if (m_selected.isEmpty())
+        return;
+    m_selected.clear();
+    emit selectionChanged();
+    // selected-but-filtered tasks may disappear now
+    scheduleRebuild();
+    if (!m_rows.isEmpty())
+        emit dataChanged(index(0), index(m_rows.size() - 1), QVector<int>() << SelectedRole);
+}
+
+QVariantList TaskModel::selectedIds() const
+{
+    QVariantList r;
+    foreach (int id, m_rows)
+        if (m_selected.contains(id))
+            r << id;
+    return r;
+}
+
+QVariantList TaskModel::completedVisibleIds() const
+{
+    QVariantList r;
+    foreach (int id, m_rows) {
+        const Task *t = m_store->findTask(id);
+        if (t && t->isCompleted())
+            r << id;
+    }
+    return r;
+}
+
+static int stateOf(int have, int total)
+{
+    if (total == 0 || have == 0)
+        return 0;
+    return have == total ? 2 : 1;
+}
+
+int TaskModel::listState(const QVariantList &ids, const QString &name) const
+{
+    int have = 0;
+    foreach (const QVariant &v, ids) {
+        const Task *t = m_store->findTask(v.toInt());
+        if (t && t->lists().contains(name))
+            have++;
+    }
+    return stateOf(have, ids.size());
+}
+
+int TaskModel::tagState(const QVariantList &ids, const QString &name) const
+{
+    int have = 0;
+    foreach (const QVariant &v, ids) {
+        const Task *t = m_store->findTask(v.toInt());
+        if (t && t->tags().contains(name))
+            have++;
+    }
+    return stateOf(have, ids.size());
+}
+
+bool TaskModel::canMove(int from, int to) const
+{
+    if (from == to)
+        return true;
+    int m = m_query->manualSort() ? m_query->manualSortIndex() : -1;
+    if (m < 0 || from < 0 || to < 0 || from >= m_rows.size() || to >= m_rows.size())
+        return false;
+    QList<int> rows = m_rows;
+    rows.move(from, to);
+    const Task *moved = m_store->findTask(rows[to]);
+    if (!moved)
+        return false;
+    if (to > 0) {
+        const Task *prev = m_store->findTask(rows[to - 1]);
+        if (prev && m_query->compare(*prev, *moved, m) > 0)
+            return false;
+    }
+    if (to + 1 < rows.size()) {
+        const Task *next = m_store->findTask(rows[to + 1]);
+        if (next && m_query->compare(*moved, *next, m) > 0)
+            return false;
+    }
+    return true;
+}
+
+bool TaskModel::previewMove(int from, int to)
+{
+    if (from == to)
+        return true;
+    if (!canMove(from, to))
+        return false;
+    m_moving = true;
+    int dest = to > from ? to + 1 : to;
+    if (!beginMoveRows(QModelIndex(), from, from, QModelIndex(), dest))
+        return false;
+    m_rows.move(from, to);
+    endMoveRows();
+    return true;
+}
+
+void TaskModel::commitMove(int row)
+{
+    m_moving = false;
+    int m = m_query->manualSort() ? m_query->manualSortIndex() : -1;
+    const Task *moved = taskAt(row);
+    if (m < 0 || !moved) {
+        rebuild();
+        return;
+    }
+    // Tie group: contiguous rows equal to the moved task on the keys before "manual".
+    int start = row, end = row;
+    while (start > 0) {
+        const Task *p = taskAt(start - 1);
+        if (!p || m_query->compare(*p, *moved, m) != 0)
+            break;
+        start--;
+    }
+    while (end + 1 < m_rows.size()) {
+        const Task *n = taskAt(end + 1);
+        if (!n || m_query->compare(*moved, *n, m) != 0)
+            break;
+        end++;
+    }
+    // Number everything up to the last numbered task (or the moved one).
+    int last = row;
+    for (int i = end; i > row; --i) {
+        const Task *t = taskAt(i);
+        if (t && t->manualOrder() >= 0) {
+            last = i;
+            break;
+        }
+    }
+    int counter = 1024;
+    for (int i = start; i <= last; ++i) {
+        Task *t = m_store->findTask(m_rows[i]);
+        if (t && !t->isCompleted()) {
+            t->setManualOrder(counter);
+            counter += 1024;
+        }
+    }
+    m_store->notifyChanged();
+}
+
+QString TaskModel::today()
+{
+    return Task::today();
+}
+
+QString TaskModel::relativeDate(const QString &date)
+{
+    QDate d = QDate::fromString(date, "yyyy-MM-dd");
+    if (!d.isValid())
+        return date;
+    qint64 days = QDate::currentDate().daysTo(d);
+    if (days == 0)
+        return tr("today");
+    if (days == 1)
+        return tr("tomorrow");
+    if (days == -1)
+        return tr("yesterday");
+    qint64 a = days < 0 ? -days : days;
+    QString unit;
+    if (a < 14)
+        unit = tr("%1 days").arg(a);
+    else if (a < 60)
+        unit = a / 7 == 1 ? tr("1 week") : tr("%1 weeks").arg(a / 7);
+    else if (a < 730)
+        unit = a / 30 == 1 ? tr("1 month") : tr("%1 months").arg(a / 30);
+    else
+        unit = a / 365 == 1 ? tr("1 year") : tr("%1 years").arg(a / 365);
+    return days < 0 ? tr("%1 ago").arg(unit) : tr("in %1").arg(unit);
+}

@@ -1,0 +1,318 @@
+#!/usr/bin/env python3
+# Generates translations/harbour-todotxt-<lang>.ts from harbour-todotxt.ts + tables below.
+import xml.etree.ElementTree as ET, copy, sys, os
+
+BASE = sys.argv[1]
+OUT = os.path.dirname(BASE)
+
+# plural forms per language: list of translations for numerus messages
+T = {}
+
+T["cs"] = {
+"Choose file…": "Vybrat soubor…", "Archive": "Archivovat",
+"Todo.txt": "Todo.txt", "%n overdue": ["%n po termínu", "%n po termínu", "%n po termínu"],
+"%n today": ["%n dnes", "%n dnes", "%n dnes"],
+"Date": "Datum", "No date": "Bez data", "Today": "Dnes", "Tomorrow": "Zítra", "In one week": "Za týden",
+"In two weeks": "Za dva týdny", "In one month": "Za měsíc", "Pick a date…": "Vybrat datum…",
+"Clear filter": "Zrušit filtr", "Sort order": "Řazení", "Save as filter": "Uložit jako filtr", "Save filter": "Uložit filtr",
+"Filter": "Filtr", "No filter": "Bez filtru", "Invert": "Obrátit", "Show tasks NOT matching the selection": "Zobrazit úkoly, které výběru NEodpovídají",
+"Without %1": "Bez %1", "Priorities": "Priority", "No priority": "Bez priority", "Other": "Ostatní",
+"Show completed": "Zobrazit dokončené", "Show future": "Zobrazit budoucí", "Tasks with a threshold date in the future": "Úkoly s prahovým datem v budoucnosti",
+"Show hidden": "Zobrazit skryté", "Tasks with h:1": "Úkoly s h:1", "Show %1 in tasks": "Zobrazovat %1 v úkolech", "Creation date is threshold": "Datum vytvoření jako práh",
+"Apply": "Použít", "New %1 (space separated)": "Nové %1 (oddělené mezerou)", "on some of the selected tasks": "u některých vybraných úkolů",
+"%n selected": ["%n vybraný", "%n vybrané", "%n vybraných"], "All tasks": "Všechny úkoly", "%n tasks": ["%n úkol", "%n úkoly", "%n úkolů"],
+"unsaved": "neuloženo", "Settings": "Nastavení", "Saved filters": "Uložené filtry", "Hide search": "Skrýt hledání", "Search": "Hledat",
+"Cancel selection": "Zrušit výběr", "Select tasks": "Vybrat úkoly", "Select all": "Vybrat vše", "New task": "Nový úkol", "Reload file": "Znovu načíst soubor",
+"Archive completed tasks": "Archivovat dokončené úkoly", "Archiving %n tasks": ["Archivuji %n úkol", "Archivuji %n úkoly", "Archivuji %n úkolů"],
+"No matching tasks": "Žádné odpovídající úkoly", "No tasks": "Žádné úkoly", "Swipe left to change the filter": "Filtr změníte tažením doleva",
+"Pull down to add a task": "Úkol přidáte stažením dolů", "Due date": "Termín", "Threshold date": "Prahové datum", "Archiving": "Archivuji",
+"Deleting %n tasks": ["Mažu %n úkol", "Mažu %n úkoly", "Mažu %n úkolů"], "Name": "Název", "Priority": "Priorita",
+"Completed last": "Dokončené nakonec", "Context": "Kontext", "Alphabetical": "Abecedně", "Manual order (#N)": "Ruční pořadí (#N)", "Project": "Projekt",
+"Creation date": "Datum vytvoření", "Future tasks last": "Budoucí nakonec", "Completion date": "Datum dokončení",
+"Save current filter": "Uložit aktuální filtr", "Update with current filter": "Přepsat aktuálním filtrem", "Rename": "Přejmenovat", "Rename filter": "Přejmenovat filtr",
+"Delete": "Smazat", "Deleting": "Mažu", "No saved filters": "Žádné uložené filtry", "Set up a filter and pull down to save it": "Nastavte filtr a stažením dolů ho uložte",
+"File": "Soubor", "todo.txt": "todo.txt", "done.txt is kept next to it": "done.txt je uložen vedle něj", "Path": "Cesta", "Windows line breaks (CRLF)": "Konce řádků Windows (CRLF)",
+"Delay before saving": "Prodleva před uložením", "Tasks": "Úkoly", "Add creation date to new tasks": "Přidávat datum vytvoření", "Add new tasks at the end": "Nové úkoly přidávat na konec",
+"Keep priority of completed tasks": "Zachovat prioritu dokončených", "Archive completed tasks automatically": "Automaticky archivovat dokončené", "Move to done.txt right after completing": "Přesunout do done.txt hned po dokončení",
+"Capitalize new tasks": "Velké písmeno na začátku úkolu", "Appearance": "Vzhled", "Show dates on a separate line": "Data na samostatném řádku", "Color due dates": "Barevné termíny",
+"Uppercase section headers": "Hlavičky skupin velkými písmeny", "Case sensitive sorting": "Řazení rozlišuje velikost písmen", "Use todo.txt terms (context/project)": "Používat pojmy todo.txt (kontext/projekt)", "Instead of list/tag": "Místo seznam/štítek",
+"Reset to default": "Obnovit výchozí", "Manual ordering active": "Ruční pořadí aktivní", "Tap to flip direction, long press to move": "Klepnutím otočíte směr, podržením přesunete",
+"Move to top": "Přesunout nahoru", "Move up": "O jedno výš", "Move down": "O jedno níž",
+"done %1": "hotovo %1", "due %1": "termín %1", "t %1": "práh %1", "Mark incomplete": "Označit jako nedokončený", "Complete": "Dokončit",
+"Open %1": "Otevřít %1", "Call %1": "Volat %1", "Mail %1": "Napsat %1", "Select": "Vybrat",
+"Update": "Upravit", "Add task": "Přidat úkol", "Save": "Uložit", "One task per line": "Jeden úkol na řádek", "Due": "Termín", "Threshold": "Práh", "Next line": "Další řádek",
+"None": "Žádné", "today": "dnes", "tomorrow": "zítra", "yesterday": "včera", "%1 days": "%1 dní", "1 week": "1 týden", "%1 weeks": "%1 týdnů", "1 month": "1 měsíc", "%1 months": "%1 měsíců",
+"1 year": "1 rok", "%1 years": "%1 let", "%1 ago": "před %1", "in %1": "za %1", "Cannot read %1": "Nelze číst %1", "Cannot write %1": "Nelze zapsat %1",
+"List": "Seznam", "Contexts": "Kontexty", "Lists": "Seznamy", "Tag": "Štítek", "Projects": "Projekty", "Tags": "Štítky",
+}
+
+T["de"] = {
+"Choose file…": "Datei wählen…", "Archive": "Archivieren",
+"Todo.txt": "Todo.txt", "%n overdue": ["%n überfällig", "%n überfällig"], "%n today": ["%n heute", "%n heute"],
+"Date": "Datum", "No date": "Kein Datum", "Today": "Heute", "Tomorrow": "Morgen", "In one week": "In einer Woche", "In two weeks": "In zwei Wochen", "In one month": "In einem Monat", "Pick a date…": "Datum wählen…",
+"Clear filter": "Filter löschen", "Sort order": "Sortierung", "Save as filter": "Als Filter speichern", "Save filter": "Filter speichern", "Filter": "Filter", "No filter": "Kein Filter", "Invert": "Umkehren",
+"Show tasks NOT matching the selection": "Aufgaben anzeigen, die NICHT der Auswahl entsprechen", "Without %1": "Ohne %1", "Priorities": "Prioritäten", "No priority": "Keine Priorität", "Other": "Sonstige",
+"Show completed": "Erledigte anzeigen", "Show future": "Zukünftige anzeigen", "Tasks with a threshold date in the future": "Aufgaben mit Schwellendatum in der Zukunft", "Show hidden": "Versteckte anzeigen", "Tasks with h:1": "Aufgaben mit h:1",
+"Show %1 in tasks": "%1 in Aufgaben anzeigen", "Creation date is threshold": "Erstelldatum als Schwelle", "Apply": "Anwenden", "New %1 (space separated)": "Neue %1 (durch Leerzeichen getrennt)", "on some of the selected tasks": "bei einigen ausgewählten Aufgaben",
+"%n selected": ["%n ausgewählt", "%n ausgewählt"], "All tasks": "Alle Aufgaben", "%n tasks": ["%n Aufgabe", "%n Aufgaben"], "unsaved": "ungespeichert", "Settings": "Einstellungen", "Saved filters": "Gespeicherte Filter",
+"Hide search": "Suche ausblenden", "Search": "Suchen", "Cancel selection": "Auswahl abbrechen", "Select tasks": "Aufgaben auswählen", "Select all": "Alle auswählen", "New task": "Neue Aufgabe", "Reload file": "Datei neu laden",
+"Archive completed tasks": "Erledigte Aufgaben archivieren", "Archiving %n tasks": ["Archiviere %n Aufgabe", "Archiviere %n Aufgaben"], "No matching tasks": "Keine passenden Aufgaben", "No tasks": "Keine Aufgaben",
+"Swipe left to change the filter": "Nach links wischen, um den Filter zu ändern", "Pull down to add a task": "Herunterziehen, um eine Aufgabe hinzuzufügen", "Due date": "Fälligkeitsdatum", "Threshold date": "Schwellendatum", "Archiving": "Archiviere",
+"Deleting %n tasks": ["Lösche %n Aufgabe", "Lösche %n Aufgaben"], "Name": "Name", "Priority": "Priorität", "Completed last": "Erledigte zuletzt", "Context": "Kontext", "Alphabetical": "Alphabetisch", "Manual order (#N)": "Manuelle Reihenfolge (#N)",
+"Project": "Projekt", "Creation date": "Erstelldatum", "Future tasks last": "Zukünftige zuletzt", "Completion date": "Erledigungsdatum", "Save current filter": "Aktuellen Filter speichern", "Update with current filter": "Mit aktuellem Filter überschreiben",
+"Rename": "Umbenennen", "Rename filter": "Filter umbenennen", "Delete": "Löschen", "Deleting": "Lösche", "No saved filters": "Keine gespeicherten Filter", "Set up a filter and pull down to save it": "Filter einrichten und zum Speichern herunterziehen",
+"File": "Datei", "todo.txt": "todo.txt", "done.txt is kept next to it": "done.txt liegt daneben", "Path": "Pfad", "Windows line breaks (CRLF)": "Windows-Zeilenumbrüche (CRLF)", "Delay before saving": "Verzögerung vor dem Speichern", "Tasks": "Aufgaben",
+"Add creation date to new tasks": "Erstelldatum zu neuen Aufgaben hinzufügen", "Add new tasks at the end": "Neue Aufgaben am Ende anfügen", "Keep priority of completed tasks": "Priorität erledigter Aufgaben behalten", "Archive completed tasks automatically": "Erledigte Aufgaben automatisch archivieren",
+"Move to done.txt right after completing": "Sofort nach dem Erledigen nach done.txt verschieben", "Capitalize new tasks": "Neue Aufgaben groß beginnen", "Appearance": "Darstellung", "Show dates on a separate line": "Daten in eigener Zeile anzeigen", "Color due dates": "Fälligkeitsdaten einfärben",
+"Uppercase section headers": "Abschnittsüberschriften in Großbuchstaben", "Case sensitive sorting": "Sortierung nach Groß-/Kleinschreibung", "Use todo.txt terms (context/project)": "todo.txt-Begriffe verwenden (Kontext/Projekt)", "Instead of list/tag": "Statt Liste/Tag",
+"Reset to default": "Zurücksetzen", "Manual ordering active": "Manuelle Reihenfolge aktiv", "Tap to flip direction, long press to move": "Tippen zum Umkehren, lange drücken zum Verschieben", "Move to top": "Nach ganz oben", "Move up": "Nach oben", "Move down": "Nach unten",
+"done %1": "erledigt %1", "due %1": "fällig %1", "t %1": "t %1", "Mark incomplete": "Als unerledigt markieren", "Complete": "Erledigen", "Open %1": "%1 öffnen", "Call %1": "%1 anrufen", "Mail %1": "E-Mail an %1", "Select": "Auswählen",
+"Update": "Aktualisieren", "Add task": "Aufgabe hinzufügen", "Save": "Speichern", "One task per line": "Eine Aufgabe pro Zeile", "Due": "Fällig", "Threshold": "Schwelle", "Next line": "Nächste Zeile",
+"None": "Keine", "today": "heute", "tomorrow": "morgen", "yesterday": "gestern", "%1 days": "%1 Tagen", "1 week": "1 Woche", "%1 weeks": "%1 Wochen", "1 month": "1 Monat", "%1 months": "%1 Monaten", "1 year": "1 Jahr", "%1 years": "%1 Jahren",
+"%1 ago": "vor %1", "in %1": "in %1", "Cannot read %1": "%1 kann nicht gelesen werden", "Cannot write %1": "%1 kann nicht geschrieben werden",
+"List": "Liste", "Contexts": "Kontexte", "Lists": "Listen", "Tag": "Tag", "Projects": "Projekte", "Tags": "Tags",
+}
+
+T["fr"] = {
+"Choose file…": "Choisir un fichier…", "Archive": "Archiver",
+"Todo.txt": "Todo.txt", "%n overdue": ["%n en retard", "%n en retard"], "%n today": ["%n aujourd'hui", "%n aujourd'hui"],
+"Date": "Date", "No date": "Sans date", "Today": "Aujourd'hui", "Tomorrow": "Demain", "In one week": "Dans une semaine", "In two weeks": "Dans deux semaines", "In one month": "Dans un mois", "Pick a date…": "Choisir une date…",
+"Clear filter": "Effacer le filtre", "Sort order": "Ordre de tri", "Save as filter": "Enregistrer comme filtre", "Save filter": "Enregistrer le filtre", "Filter": "Filtre", "No filter": "Aucun filtre", "Invert": "Inverser",
+"Show tasks NOT matching the selection": "Afficher les tâches NE correspondant PAS à la sélection", "Without %1": "Sans %1", "Priorities": "Priorités", "No priority": "Sans priorité", "Other": "Autres",
+"Show completed": "Afficher les terminées", "Show future": "Afficher les futures", "Tasks with a threshold date in the future": "Tâches dont la date seuil est dans le futur", "Show hidden": "Afficher les masquées", "Tasks with h:1": "Tâches avec h:1",
+"Show %1 in tasks": "Afficher %1 dans les tâches", "Creation date is threshold": "Date de création comme seuil", "Apply": "Appliquer", "New %1 (space separated)": "Nouveaux %1 (séparés par des espaces)", "on some of the selected tasks": "sur certaines tâches sélectionnées",
+"%n selected": ["%n sélectionnée", "%n sélectionnées"], "All tasks": "Toutes les tâches", "%n tasks": ["%n tâche", "%n tâches"], "unsaved": "non enregistré", "Settings": "Paramètres", "Saved filters": "Filtres enregistrés",
+"Hide search": "Masquer la recherche", "Search": "Rechercher", "Cancel selection": "Annuler la sélection", "Select tasks": "Sélectionner des tâches", "Select all": "Tout sélectionner", "New task": "Nouvelle tâche", "Reload file": "Recharger le fichier",
+"Archive completed tasks": "Archiver les tâches terminées", "Archiving %n tasks": ["Archivage de %n tâche", "Archivage de %n tâches"], "No matching tasks": "Aucune tâche correspondante", "No tasks": "Aucune tâche",
+"Swipe left to change the filter": "Glissez vers la gauche pour changer le filtre", "Pull down to add a task": "Tirez vers le bas pour ajouter une tâche", "Due date": "Échéance", "Threshold date": "Date seuil", "Archiving": "Archivage",
+"Deleting %n tasks": ["Suppression de %n tâche", "Suppression de %n tâches"], "Name": "Nom", "Priority": "Priorité", "Completed last": "Terminées en dernier", "Context": "Contexte", "Alphabetical": "Alphabétique", "Manual order (#N)": "Ordre manuel (#N)",
+"Project": "Projet", "Creation date": "Date de création", "Future tasks last": "Futures en dernier", "Completion date": "Date de fin", "Save current filter": "Enregistrer le filtre actuel", "Update with current filter": "Remplacer par le filtre actuel",
+"Rename": "Renommer", "Rename filter": "Renommer le filtre", "Delete": "Supprimer", "Deleting": "Suppression", "No saved filters": "Aucun filtre enregistré", "Set up a filter and pull down to save it": "Configurez un filtre et tirez vers le bas pour l'enregistrer",
+"File": "Fichier", "todo.txt": "todo.txt", "done.txt is kept next to it": "done.txt est conservé à côté", "Path": "Chemin", "Windows line breaks (CRLF)": "Fins de ligne Windows (CRLF)", "Delay before saving": "Délai avant enregistrement", "Tasks": "Tâches",
+"Add creation date to new tasks": "Ajouter la date de création aux nouvelles tâches", "Add new tasks at the end": "Ajouter les nouvelles tâches à la fin", "Keep priority of completed tasks": "Conserver la priorité des tâches terminées", "Archive completed tasks automatically": "Archiver automatiquement les tâches terminées",
+"Move to done.txt right after completing": "Déplacer vers done.txt dès la fin", "Capitalize new tasks": "Majuscule au début des nouvelles tâches", "Appearance": "Apparence", "Show dates on a separate line": "Dates sur une ligne séparée", "Color due dates": "Colorer les échéances",
+"Uppercase section headers": "En-têtes de section en majuscules", "Case sensitive sorting": "Tri sensible à la casse", "Use todo.txt terms (context/project)": "Utiliser les termes todo.txt (contexte/projet)", "Instead of list/tag": "Au lieu de liste/étiquette",
+"Reset to default": "Réinitialiser", "Manual ordering active": "Ordre manuel actif", "Tap to flip direction, long press to move": "Touchez pour inverser, appui long pour déplacer", "Move to top": "Tout en haut", "Move up": "Monter", "Move down": "Descendre",
+"done %1": "terminé %1", "due %1": "échéance %1", "t %1": "seuil %1", "Mark incomplete": "Marquer non terminée", "Complete": "Terminer", "Open %1": "Ouvrir %1", "Call %1": "Appeler %1", "Mail %1": "Écrire à %1", "Select": "Sélectionner",
+"Update": "Mettre à jour", "Add task": "Ajouter une tâche", "Save": "Enregistrer", "One task per line": "Une tâche par ligne", "Due": "Échéance", "Threshold": "Seuil", "Next line": "Ligne suivante",
+"None": "Aucune", "today": "aujourd'hui", "tomorrow": "demain", "yesterday": "hier", "%1 days": "%1 jours", "1 week": "1 semaine", "%1 weeks": "%1 semaines", "1 month": "1 mois", "%1 months": "%1 mois", "1 year": "1 an", "%1 years": "%1 ans",
+"%1 ago": "il y a %1", "in %1": "dans %1", "Cannot read %1": "Impossible de lire %1", "Cannot write %1": "Impossible d'écrire %1",
+"List": "Liste", "Contexts": "Contextes", "Lists": "Listes", "Tag": "Étiquette", "Projects": "Projets", "Tags": "Étiquettes",
+}
+
+T["es"] = {
+"Choose file…": "Elegir archivo…", "Archive": "Archivar",
+"Todo.txt": "Todo.txt", "%n overdue": ["%n vencida", "%n vencidas"], "%n today": ["%n hoy", "%n hoy"],
+"Date": "Fecha", "No date": "Sin fecha", "Today": "Hoy", "Tomorrow": "Mañana", "In one week": "En una semana", "In two weeks": "En dos semanas", "In one month": "En un mes", "Pick a date…": "Elegir fecha…",
+"Clear filter": "Quitar filtro", "Sort order": "Orden", "Save as filter": "Guardar como filtro", "Save filter": "Guardar filtro", "Filter": "Filtro", "No filter": "Sin filtro", "Invert": "Invertir",
+"Show tasks NOT matching the selection": "Mostrar tareas que NO coinciden con la selección", "Without %1": "Sin %1", "Priorities": "Prioridades", "No priority": "Sin prioridad", "Other": "Otros",
+"Show completed": "Mostrar completadas", "Show future": "Mostrar futuras", "Tasks with a threshold date in the future": "Tareas con fecha umbral en el futuro", "Show hidden": "Mostrar ocultas", "Tasks with h:1": "Tareas con h:1",
+"Show %1 in tasks": "Mostrar %1 en las tareas", "Creation date is threshold": "La fecha de creación es el umbral", "Apply": "Aplicar", "New %1 (space separated)": "Nuevos %1 (separados por espacios)", "on some of the selected tasks": "en algunas tareas seleccionadas",
+"%n selected": ["%n seleccionada", "%n seleccionadas"], "All tasks": "Todas las tareas", "%n tasks": ["%n tarea", "%n tareas"], "unsaved": "sin guardar", "Settings": "Ajustes", "Saved filters": "Filtros guardados",
+"Hide search": "Ocultar búsqueda", "Search": "Buscar", "Cancel selection": "Cancelar selección", "Select tasks": "Seleccionar tareas", "Select all": "Seleccionar todo", "New task": "Nueva tarea", "Reload file": "Recargar archivo",
+"Archive completed tasks": "Archivar tareas completadas", "Archiving %n tasks": ["Archivando %n tarea", "Archivando %n tareas"], "No matching tasks": "No hay tareas coincidentes", "No tasks": "No hay tareas",
+"Swipe left to change the filter": "Desliza a la izquierda para cambiar el filtro", "Pull down to add a task": "Tira hacia abajo para añadir una tarea", "Due date": "Fecha de vencimiento", "Threshold date": "Fecha umbral", "Archiving": "Archivando",
+"Deleting %n tasks": ["Eliminando %n tarea", "Eliminando %n tareas"], "Name": "Nombre", "Priority": "Prioridad", "Completed last": "Completadas al final", "Context": "Contexto", "Alphabetical": "Alfabético", "Manual order (#N)": "Orden manual (#N)",
+"Project": "Proyecto", "Creation date": "Fecha de creación", "Future tasks last": "Futuras al final", "Completion date": "Fecha de finalización", "Save current filter": "Guardar filtro actual", "Update with current filter": "Sobrescribir con el filtro actual",
+"Rename": "Renombrar", "Rename filter": "Renombrar filtro", "Delete": "Eliminar", "Deleting": "Eliminando", "No saved filters": "No hay filtros guardados", "Set up a filter and pull down to save it": "Configura un filtro y tira hacia abajo para guardarlo",
+"File": "Archivo", "todo.txt": "todo.txt", "done.txt is kept next to it": "done.txt se guarda junto a él", "Path": "Ruta", "Windows line breaks (CRLF)": "Saltos de línea de Windows (CRLF)", "Delay before saving": "Retraso antes de guardar", "Tasks": "Tareas",
+"Add creation date to new tasks": "Añadir fecha de creación a las tareas nuevas", "Add new tasks at the end": "Añadir tareas nuevas al final", "Keep priority of completed tasks": "Mantener la prioridad de las tareas completadas", "Archive completed tasks automatically": "Archivar tareas completadas automáticamente",
+"Move to done.txt right after completing": "Mover a done.txt justo al completar", "Capitalize new tasks": "Mayúscula inicial en tareas nuevas", "Appearance": "Apariencia", "Show dates on a separate line": "Fechas en una línea aparte", "Color due dates": "Colorear vencimientos",
+"Uppercase section headers": "Encabezados de sección en mayúsculas", "Case sensitive sorting": "Orden sensible a mayúsculas", "Use todo.txt terms (context/project)": "Usar términos de todo.txt (contexto/proyecto)", "Instead of list/tag": "En lugar de lista/etiqueta",
+"Reset to default": "Restablecer", "Manual ordering active": "Orden manual activo", "Tap to flip direction, long press to move": "Toca para invertir, mantén pulsado para mover", "Move to top": "Mover al principio", "Move up": "Subir", "Move down": "Bajar",
+"done %1": "hecho %1", "due %1": "vence %1", "t %1": "umbral %1", "Mark incomplete": "Marcar como pendiente", "Complete": "Completar", "Open %1": "Abrir %1", "Call %1": "Llamar a %1", "Mail %1": "Escribir a %1", "Select": "Seleccionar",
+"Update": "Actualizar", "Add task": "Añadir tarea", "Save": "Guardar", "One task per line": "Una tarea por línea", "Due": "Vence", "Threshold": "Umbral", "Next line": "Siguiente línea",
+"None": "Ninguna", "today": "hoy", "tomorrow": "mañana", "yesterday": "ayer", "%1 days": "%1 días", "1 week": "1 semana", "%1 weeks": "%1 semanas", "1 month": "1 mes", "%1 months": "%1 meses", "1 year": "1 año", "%1 years": "%1 años",
+"%1 ago": "hace %1", "in %1": "en %1", "Cannot read %1": "No se puede leer %1", "Cannot write %1": "No se puede escribir %1",
+"List": "Lista", "Contexts": "Contextos", "Lists": "Listas", "Tag": "Etiqueta", "Projects": "Proyectos", "Tags": "Etiquetas",
+}
+
+T["it"] = {
+"Choose file…": "Scegli file…", "Archive": "Archivia",
+"Todo.txt": "Todo.txt", "%n overdue": ["%n scaduta", "%n scadute"], "%n today": ["%n oggi", "%n oggi"],
+"Date": "Data", "No date": "Nessuna data", "Today": "Oggi", "Tomorrow": "Domani", "In one week": "Tra una settimana", "In two weeks": "Tra due settimane", "In one month": "Tra un mese", "Pick a date…": "Scegli una data…",
+"Clear filter": "Azzera filtro", "Sort order": "Ordinamento", "Save as filter": "Salva come filtro", "Save filter": "Salva filtro", "Filter": "Filtro", "No filter": "Nessun filtro", "Invert": "Inverti",
+"Show tasks NOT matching the selection": "Mostra le attività che NON corrispondono alla selezione", "Without %1": "Senza %1", "Priorities": "Priorità", "No priority": "Nessuna priorità", "Other": "Altro",
+"Show completed": "Mostra completate", "Show future": "Mostra future", "Tasks with a threshold date in the future": "Attività con data soglia nel futuro", "Show hidden": "Mostra nascoste", "Tasks with h:1": "Attività con h:1",
+"Show %1 in tasks": "Mostra %1 nelle attività", "Creation date is threshold": "Data di creazione come soglia", "Apply": "Applica", "New %1 (space separated)": "Nuovi %1 (separati da spazi)", "on some of the selected tasks": "su alcune attività selezionate",
+"%n selected": ["%n selezionata", "%n selezionate"], "All tasks": "Tutte le attività", "%n tasks": ["%n attività", "%n attività"], "unsaved": "non salvato", "Settings": "Impostazioni", "Saved filters": "Filtri salvati",
+"Hide search": "Nascondi ricerca", "Search": "Cerca", "Cancel selection": "Annulla selezione", "Select tasks": "Seleziona attività", "Select all": "Seleziona tutto", "New task": "Nuova attività", "Reload file": "Ricarica file",
+"Archive completed tasks": "Archivia attività completate", "Archiving %n tasks": ["Archiviazione di %n attività", "Archiviazione di %n attività"], "No matching tasks": "Nessuna attività corrispondente", "No tasks": "Nessuna attività",
+"Swipe left to change the filter": "Scorri a sinistra per cambiare filtro", "Pull down to add a task": "Trascina in basso per aggiungere un'attività", "Due date": "Scadenza", "Threshold date": "Data soglia", "Archiving": "Archiviazione",
+"Deleting %n tasks": ["Eliminazione di %n attività", "Eliminazione di %n attività"], "Name": "Nome", "Priority": "Priorità", "Completed last": "Completate per ultime", "Context": "Contesto", "Alphabetical": "Alfabetico", "Manual order (#N)": "Ordine manuale (#N)",
+"Project": "Progetto", "Creation date": "Data di creazione", "Future tasks last": "Future per ultime", "Completion date": "Data di completamento", "Save current filter": "Salva filtro attuale", "Update with current filter": "Sovrascrivi con il filtro attuale",
+"Rename": "Rinomina", "Rename filter": "Rinomina filtro", "Delete": "Elimina", "Deleting": "Eliminazione", "No saved filters": "Nessun filtro salvato", "Set up a filter and pull down to save it": "Imposta un filtro e trascina in basso per salvarlo",
+"File": "File", "todo.txt": "todo.txt", "done.txt is kept next to it": "done.txt è conservato accanto", "Path": "Percorso", "Windows line breaks (CRLF)": "Fine riga Windows (CRLF)", "Delay before saving": "Ritardo prima del salvataggio", "Tasks": "Attività",
+"Add creation date to new tasks": "Aggiungi data di creazione alle nuove attività", "Add new tasks at the end": "Aggiungi le nuove attività in fondo", "Keep priority of completed tasks": "Mantieni la priorità delle attività completate", "Archive completed tasks automatically": "Archivia automaticamente le attività completate",
+"Move to done.txt right after completing": "Sposta in done.txt subito dopo il completamento", "Capitalize new tasks": "Iniziale maiuscola nelle nuove attività", "Appearance": "Aspetto", "Show dates on a separate line": "Date su una riga separata", "Color due dates": "Colora le scadenze",
+"Uppercase section headers": "Intestazioni di sezione in maiuscolo", "Case sensitive sorting": "Ordinamento sensibile alle maiuscole", "Use todo.txt terms (context/project)": "Usa i termini todo.txt (contesto/progetto)", "Instead of list/tag": "Invece di lista/etichetta",
+"Reset to default": "Ripristina", "Manual ordering active": "Ordine manuale attivo", "Tap to flip direction, long press to move": "Tocca per invertire, premi a lungo per spostare", "Move to top": "Sposta in cima", "Move up": "Sposta su", "Move down": "Sposta giù",
+"done %1": "fatto %1", "due %1": "scade %1", "t %1": "soglia %1", "Mark incomplete": "Segna come non completata", "Complete": "Completa", "Open %1": "Apri %1", "Call %1": "Chiama %1", "Mail %1": "Scrivi a %1", "Select": "Seleziona",
+"Update": "Aggiorna", "Add task": "Aggiungi attività", "Save": "Salva", "One task per line": "Un'attività per riga", "Due": "Scadenza", "Threshold": "Soglia", "Next line": "Riga successiva",
+"None": "Nessuna", "today": "oggi", "tomorrow": "domani", "yesterday": "ieri", "%1 days": "%1 giorni", "1 week": "1 settimana", "%1 weeks": "%1 settimane", "1 month": "1 mese", "%1 months": "%1 mesi", "1 year": "1 anno", "%1 years": "%1 anni",
+"%1 ago": "%1 fa", "in %1": "tra %1", "Cannot read %1": "Impossibile leggere %1", "Cannot write %1": "Impossibile scrivere %1",
+"List": "Lista", "Contexts": "Contesti", "Lists": "Liste", "Tag": "Etichetta", "Projects": "Progetti", "Tags": "Etichette",
+}
+
+T["ru"] = {
+"Choose file…": "Выбрать файл…", "Archive": "Архивировать",
+"Todo.txt": "Todo.txt", "%n overdue": ["%n просрочена", "%n просрочены", "%n просрочено"], "%n today": ["%n сегодня", "%n сегодня", "%n сегодня"],
+"Date": "Дата", "No date": "Без даты", "Today": "Сегодня", "Tomorrow": "Завтра", "In one week": "Через неделю", "In two weeks": "Через две недели", "In one month": "Через месяц", "Pick a date…": "Выбрать дату…",
+"Clear filter": "Сбросить фильтр", "Sort order": "Сортировка", "Save as filter": "Сохранить как фильтр", "Save filter": "Сохранить фильтр", "Filter": "Фильтр", "No filter": "Без фильтра", "Invert": "Инвертировать",
+"Show tasks NOT matching the selection": "Показывать задачи, НЕ соответствующие выбору", "Without %1": "Без %1", "Priorities": "Приоритеты", "No priority": "Без приоритета", "Other": "Прочее",
+"Show completed": "Показывать выполненные", "Show future": "Показывать будущие", "Tasks with a threshold date in the future": "Задачи с пороговой датой в будущем", "Show hidden": "Показывать скрытые", "Tasks with h:1": "Задачи с h:1",
+"Show %1 in tasks": "Показывать %1 в задачах", "Creation date is threshold": "Дата создания как порог", "Apply": "Применить", "New %1 (space separated)": "Новые %1 (через пробел)", "on some of the selected tasks": "у некоторых выбранных задач",
+"%n selected": ["%n выбрана", "%n выбраны", "%n выбрано"], "All tasks": "Все задачи", "%n tasks": ["%n задача", "%n задачи", "%n задач"], "unsaved": "не сохранено", "Settings": "Настройки", "Saved filters": "Сохранённые фильтры",
+"Hide search": "Скрыть поиск", "Search": "Поиск", "Cancel selection": "Отменить выбор", "Select tasks": "Выбрать задачи", "Select all": "Выбрать все", "New task": "Новая задача", "Reload file": "Перечитать файл",
+"Archive completed tasks": "Архивировать выполненные", "Archiving %n tasks": ["Архивирование %n задачи", "Архивирование %n задач", "Архивирование %n задач"], "No matching tasks": "Нет подходящих задач", "No tasks": "Нет задач",
+"Swipe left to change the filter": "Проведите влево, чтобы изменить фильтр", "Pull down to add a task": "Потяните вниз, чтобы добавить задачу", "Due date": "Срок", "Threshold date": "Пороговая дата", "Archiving": "Архивирование",
+"Deleting %n tasks": ["Удаление %n задачи", "Удаление %n задач", "Удаление %n задач"], "Name": "Название", "Priority": "Приоритет", "Completed last": "Выполненные в конце", "Context": "Контекст", "Alphabetical": "По алфавиту", "Manual order (#N)": "Ручной порядок (#N)",
+"Project": "Проект", "Creation date": "Дата создания", "Future tasks last": "Будущие в конце", "Completion date": "Дата выполнения", "Save current filter": "Сохранить текущий фильтр", "Update with current filter": "Заменить текущим фильтром",
+"Rename": "Переименовать", "Rename filter": "Переименовать фильтр", "Delete": "Удалить", "Deleting": "Удаление", "No saved filters": "Нет сохранённых фильтров", "Set up a filter and pull down to save it": "Настройте фильтр и потяните вниз, чтобы сохранить",
+"File": "Файл", "todo.txt": "todo.txt", "done.txt is kept next to it": "done.txt хранится рядом", "Path": "Путь", "Windows line breaks (CRLF)": "Переводы строк Windows (CRLF)", "Delay before saving": "Задержка перед сохранением", "Tasks": "Задачи",
+"Add creation date to new tasks": "Добавлять дату создания", "Add new tasks at the end": "Добавлять новые задачи в конец", "Keep priority of completed tasks": "Сохранять приоритет выполненных", "Archive completed tasks automatically": "Автоматически архивировать выполненные",
+"Move to done.txt right after completing": "Переносить в done.txt сразу после выполнения", "Capitalize new tasks": "Заглавная буква в новых задачах", "Appearance": "Внешний вид", "Show dates on a separate line": "Даты на отдельной строке", "Color due dates": "Подсвечивать сроки",
+"Uppercase section headers": "Заголовки разделов прописными", "Case sensitive sorting": "Сортировка с учётом регистра", "Use todo.txt terms (context/project)": "Термины todo.txt (контекст/проект)", "Instead of list/tag": "Вместо список/метка",
+"Reset to default": "Сбросить", "Manual ordering active": "Ручной порядок включён", "Tap to flip direction, long press to move": "Нажмите для смены направления, удерживайте для перемещения", "Move to top": "В начало", "Move up": "Выше", "Move down": "Ниже",
+"done %1": "выполнено %1", "due %1": "срок %1", "t %1": "порог %1", "Mark incomplete": "Отметить невыполненной", "Complete": "Выполнить", "Open %1": "Открыть %1", "Call %1": "Позвонить %1", "Mail %1": "Написать %1", "Select": "Выбрать",
+"Update": "Обновить", "Add task": "Добавить задачу", "Save": "Сохранить", "One task per line": "Одна задача на строку", "Due": "Срок", "Threshold": "Порог", "Next line": "Следующая строка",
+"None": "Нет", "today": "сегодня", "tomorrow": "завтра", "yesterday": "вчера", "%1 days": "%1 дн.", "1 week": "1 нед.", "%1 weeks": "%1 нед.", "1 month": "1 мес.", "%1 months": "%1 мес.", "1 year": "1 год", "%1 years": "%1 г.",
+"%1 ago": "%1 назад", "in %1": "через %1", "Cannot read %1": "Не удалось прочитать %1", "Cannot write %1": "Не удалось записать %1",
+"List": "Список", "Contexts": "Контексты", "Lists": "Списки", "Tag": "Метка", "Projects": "Проекты", "Tags": "Метки",
+}
+
+T["pl"] = {
+"Choose file…": "Wybierz plik…", "Archive": "Archiwizuj",
+"Todo.txt": "Todo.txt", "%n overdue": ["%n zaległe", "%n zaległe", "%n zaległych"], "%n today": ["%n dziś", "%n dziś", "%n dziś"],
+"Date": "Data", "No date": "Bez daty", "Today": "Dziś", "Tomorrow": "Jutro", "In one week": "Za tydzień", "In two weeks": "Za dwa tygodnie", "In one month": "Za miesiąc", "Pick a date…": "Wybierz datę…",
+"Clear filter": "Wyczyść filtr", "Sort order": "Sortowanie", "Save as filter": "Zapisz jako filtr", "Save filter": "Zapisz filtr", "Filter": "Filtr", "No filter": "Brak filtra", "Invert": "Odwróć",
+"Show tasks NOT matching the selection": "Pokaż zadania NIEpasujące do wyboru", "Without %1": "Bez %1", "Priorities": "Priorytety", "No priority": "Bez priorytetu", "Other": "Inne",
+"Show completed": "Pokaż ukończone", "Show future": "Pokaż przyszłe", "Tasks with a threshold date in the future": "Zadania z datą progową w przyszłości", "Show hidden": "Pokaż ukryte", "Tasks with h:1": "Zadania z h:1",
+"Show %1 in tasks": "Pokazuj %1 w zadaniach", "Creation date is threshold": "Data utworzenia jako próg", "Apply": "Zastosuj", "New %1 (space separated)": "Nowe %1 (oddzielone spacją)", "on some of the selected tasks": "w niektórych wybranych zadaniach",
+"%n selected": ["%n wybrane", "%n wybrane", "%n wybranych"], "All tasks": "Wszystkie zadania", "%n tasks": ["%n zadanie", "%n zadania", "%n zadań"], "unsaved": "niezapisane", "Settings": "Ustawienia", "Saved filters": "Zapisane filtry",
+"Hide search": "Ukryj wyszukiwanie", "Search": "Szukaj", "Cancel selection": "Anuluj wybór", "Select tasks": "Wybierz zadania", "Select all": "Zaznacz wszystko", "New task": "Nowe zadanie", "Reload file": "Wczytaj plik ponownie",
+"Archive completed tasks": "Archiwizuj ukończone zadania", "Archiving %n tasks": ["Archiwizowanie %n zadania", "Archiwizowanie %n zadań", "Archiwizowanie %n zadań"], "No matching tasks": "Brak pasujących zadań", "No tasks": "Brak zadań",
+"Swipe left to change the filter": "Przesuń w lewo, aby zmienić filtr", "Pull down to add a task": "Pociągnij w dół, aby dodać zadanie", "Due date": "Termin", "Threshold date": "Data progowa", "Archiving": "Archiwizowanie",
+"Deleting %n tasks": ["Usuwanie %n zadania", "Usuwanie %n zadań", "Usuwanie %n zadań"], "Name": "Nazwa", "Priority": "Priorytet", "Completed last": "Ukończone na końcu", "Context": "Kontekst", "Alphabetical": "Alfabetycznie", "Manual order (#N)": "Kolejność ręczna (#N)",
+"Project": "Projekt", "Creation date": "Data utworzenia", "Future tasks last": "Przyszłe na końcu", "Completion date": "Data ukończenia", "Save current filter": "Zapisz bieżący filtr", "Update with current filter": "Zastąp bieżącym filtrem",
+"Rename": "Zmień nazwę", "Rename filter": "Zmień nazwę filtra", "Delete": "Usuń", "Deleting": "Usuwanie", "No saved filters": "Brak zapisanych filtrów", "Set up a filter and pull down to save it": "Ustaw filtr i pociągnij w dół, aby go zapisać",
+"File": "Plik", "todo.txt": "todo.txt", "done.txt is kept next to it": "done.txt jest przechowywany obok", "Path": "Ścieżka", "Windows line breaks (CRLF)": "Końce linii Windows (CRLF)", "Delay before saving": "Opóźnienie przed zapisem", "Tasks": "Zadania",
+"Add creation date to new tasks": "Dodawaj datę utworzenia do nowych zadań", "Add new tasks at the end": "Dodawaj nowe zadania na końcu", "Keep priority of completed tasks": "Zachowaj priorytet ukończonych zadań", "Archive completed tasks automatically": "Automatycznie archiwizuj ukończone",
+"Move to done.txt right after completing": "Przenoś do done.txt zaraz po ukończeniu", "Capitalize new tasks": "Wielka litera na początku zadania", "Appearance": "Wygląd", "Show dates on a separate line": "Daty w osobnym wierszu", "Color due dates": "Koloruj terminy",
+"Uppercase section headers": "Nagłówki sekcji wielkimi literami", "Case sensitive sorting": "Sortowanie z uwzględnieniem wielkości liter", "Use todo.txt terms (context/project)": "Używaj terminów todo.txt (kontekst/projekt)", "Instead of list/tag": "Zamiast lista/tag",
+"Reset to default": "Przywróć domyślne", "Manual ordering active": "Kolejność ręczna aktywna", "Tap to flip direction, long press to move": "Dotknij, aby odwrócić; przytrzymaj, aby przesunąć", "Move to top": "Na początek", "Move up": "W górę", "Move down": "W dół",
+"done %1": "ukończono %1", "due %1": "termin %1", "t %1": "próg %1", "Mark incomplete": "Oznacz jako nieukończone", "Complete": "Ukończ", "Open %1": "Otwórz %1", "Call %1": "Zadzwoń %1", "Mail %1": "Napisz do %1", "Select": "Wybierz",
+"Update": "Aktualizuj", "Add task": "Dodaj zadanie", "Save": "Zapisz", "One task per line": "Jedno zadanie w wierszu", "Due": "Termin", "Threshold": "Próg", "Next line": "Następny wiersz",
+"None": "Brak", "today": "dziś", "tomorrow": "jutro", "yesterday": "wczoraj", "%1 days": "%1 dni", "1 week": "1 tydzień", "%1 weeks": "%1 tyg.", "1 month": "1 miesiąc", "%1 months": "%1 mies.", "1 year": "1 rok", "%1 years": "%1 lat",
+"%1 ago": "%1 temu", "in %1": "za %1", "Cannot read %1": "Nie można odczytać %1", "Cannot write %1": "Nie można zapisać %1",
+"List": "Lista", "Contexts": "Konteksty", "Lists": "Listy", "Tag": "Tag", "Projects": "Projekty", "Tags": "Tagi",
+}
+
+T["nl"] = {
+"Choose file…": "Bestand kiezen…", "Archive": "Archiveren",
+"Todo.txt": "Todo.txt", "%n overdue": ["%n verlopen", "%n verlopen"], "%n today": ["%n vandaag", "%n vandaag"],
+"Date": "Datum", "No date": "Geen datum", "Today": "Vandaag", "Tomorrow": "Morgen", "In one week": "Over een week", "In two weeks": "Over twee weken", "In one month": "Over een maand", "Pick a date…": "Kies een datum…",
+"Clear filter": "Filter wissen", "Sort order": "Sorteervolgorde", "Save as filter": "Opslaan als filter", "Save filter": "Filter opslaan", "Filter": "Filter", "No filter": "Geen filter", "Invert": "Omkeren",
+"Show tasks NOT matching the selection": "Taken tonen die NIET overeenkomen met de selectie", "Without %1": "Zonder %1", "Priorities": "Prioriteiten", "No priority": "Geen prioriteit", "Other": "Overig",
+"Show completed": "Voltooide tonen", "Show future": "Toekomstige tonen", "Tasks with a threshold date in the future": "Taken met een drempeldatum in de toekomst", "Show hidden": "Verborgen tonen", "Tasks with h:1": "Taken met h:1",
+"Show %1 in tasks": "%1 in taken tonen", "Creation date is threshold": "Aanmaakdatum als drempel", "Apply": "Toepassen", "New %1 (space separated)": "Nieuwe %1 (gescheiden door spaties)", "on some of the selected tasks": "bij sommige geselecteerde taken",
+"%n selected": ["%n geselecteerd", "%n geselecteerd"], "All tasks": "Alle taken", "%n tasks": ["%n taak", "%n taken"], "unsaved": "niet opgeslagen", "Settings": "Instellingen", "Saved filters": "Opgeslagen filters",
+"Hide search": "Zoeken verbergen", "Search": "Zoeken", "Cancel selection": "Selectie annuleren", "Select tasks": "Taken selecteren", "Select all": "Alles selecteren", "New task": "Nieuwe taak", "Reload file": "Bestand herladen",
+"Archive completed tasks": "Voltooide taken archiveren", "Archiving %n tasks": ["%n taak archiveren", "%n taken archiveren"], "No matching tasks": "Geen overeenkomende taken", "No tasks": "Geen taken",
+"Swipe left to change the filter": "Veeg naar links om het filter te wijzigen", "Pull down to add a task": "Trek omlaag om een taak toe te voegen", "Due date": "Vervaldatum", "Threshold date": "Drempeldatum", "Archiving": "Archiveren",
+"Deleting %n tasks": ["%n taak verwijderen", "%n taken verwijderen"], "Name": "Naam", "Priority": "Prioriteit", "Completed last": "Voltooide als laatste", "Context": "Context", "Alphabetical": "Alfabetisch", "Manual order (#N)": "Handmatige volgorde (#N)",
+"Project": "Project", "Creation date": "Aanmaakdatum", "Future tasks last": "Toekomstige als laatste", "Completion date": "Voltooiingsdatum", "Save current filter": "Huidig filter opslaan", "Update with current filter": "Overschrijven met huidig filter",
+"Rename": "Hernoemen", "Rename filter": "Filter hernoemen", "Delete": "Verwijderen", "Deleting": "Verwijderen", "No saved filters": "Geen opgeslagen filters", "Set up a filter and pull down to save it": "Stel een filter in en trek omlaag om het op te slaan",
+"File": "Bestand", "todo.txt": "todo.txt", "done.txt is kept next to it": "done.txt staat ernaast", "Path": "Pad", "Windows line breaks (CRLF)": "Windows-regeleinden (CRLF)", "Delay before saving": "Vertraging voor opslaan", "Tasks": "Taken",
+"Add creation date to new tasks": "Aanmaakdatum toevoegen aan nieuwe taken", "Add new tasks at the end": "Nieuwe taken aan het einde toevoegen", "Keep priority of completed tasks": "Prioriteit van voltooide taken behouden", "Archive completed tasks automatically": "Voltooide taken automatisch archiveren",
+"Move to done.txt right after completing": "Direct na voltooiing naar done.txt verplaatsen", "Capitalize new tasks": "Nieuwe taken met hoofdletter beginnen", "Appearance": "Weergave", "Show dates on a separate line": "Datums op een aparte regel", "Color due dates": "Vervaldatums kleuren",
+"Uppercase section headers": "Sectiekoppen in hoofdletters", "Case sensitive sorting": "Hoofdlettergevoelig sorteren", "Use todo.txt terms (context/project)": "todo.txt-termen gebruiken (context/project)", "Instead of list/tag": "In plaats van lijst/tag",
+"Reset to default": "Standaard herstellen", "Manual ordering active": "Handmatige volgorde actief", "Tap to flip direction, long press to move": "Tik om richting om te keren, lang indrukken om te verplaatsen", "Move to top": "Naar boven", "Move up": "Omhoog", "Move down": "Omlaag",
+"done %1": "voltooid %1", "due %1": "vervalt %1", "t %1": "drempel %1", "Mark incomplete": "Markeren als onvoltooid", "Complete": "Voltooien", "Open %1": "%1 openen", "Call %1": "%1 bellen", "Mail %1": "%1 mailen", "Select": "Selecteren",
+"Update": "Bijwerken", "Add task": "Taak toevoegen", "Save": "Opslaan", "One task per line": "Eén taak per regel", "Due": "Vervalt", "Threshold": "Drempel", "Next line": "Volgende regel",
+"None": "Geen", "today": "vandaag", "tomorrow": "morgen", "yesterday": "gisteren", "%1 days": "%1 dagen", "1 week": "1 week", "%1 weeks": "%1 weken", "1 month": "1 maand", "%1 months": "%1 maanden", "1 year": "1 jaar", "%1 years": "%1 jaar",
+"%1 ago": "%1 geleden", "in %1": "over %1", "Cannot read %1": "Kan %1 niet lezen", "Cannot write %1": "Kan %1 niet schrijven",
+"List": "Lijst", "Contexts": "Contexten", "Lists": "Lijsten", "Tag": "Tag", "Projects": "Projecten", "Tags": "Tags",
+}
+
+T["sv"] = {
+"Choose file…": "Välj fil…", "Archive": "Arkivera",
+"Todo.txt": "Todo.txt", "%n overdue": ["%n försenad", "%n försenade"], "%n today": ["%n idag", "%n idag"],
+"Date": "Datum", "No date": "Inget datum", "Today": "Idag", "Tomorrow": "Imorgon", "In one week": "Om en vecka", "In two weeks": "Om två veckor", "In one month": "Om en månad", "Pick a date…": "Välj datum…",
+"Clear filter": "Rensa filter", "Sort order": "Sorteringsordning", "Save as filter": "Spara som filter", "Save filter": "Spara filter", "Filter": "Filter", "No filter": "Inget filter", "Invert": "Invertera",
+"Show tasks NOT matching the selection": "Visa uppgifter som INTE matchar urvalet", "Without %1": "Utan %1", "Priorities": "Prioriteter", "No priority": "Ingen prioritet", "Other": "Övrigt",
+"Show completed": "Visa slutförda", "Show future": "Visa framtida", "Tasks with a threshold date in the future": "Uppgifter med tröskeldatum i framtiden", "Show hidden": "Visa dolda", "Tasks with h:1": "Uppgifter med h:1",
+"Show %1 in tasks": "Visa %1 i uppgifter", "Creation date is threshold": "Skapandedatum som tröskel", "Apply": "Tillämpa", "New %1 (space separated)": "Nya %1 (mellanslagsseparerade)", "on some of the selected tasks": "på några av de valda uppgifterna",
+"%n selected": ["%n vald", "%n valda"], "All tasks": "Alla uppgifter", "%n tasks": ["%n uppgift", "%n uppgifter"], "unsaved": "osparat", "Settings": "Inställningar", "Saved filters": "Sparade filter",
+"Hide search": "Dölj sökning", "Search": "Sök", "Cancel selection": "Avbryt markering", "Select tasks": "Välj uppgifter", "Select all": "Välj alla", "New task": "Ny uppgift", "Reload file": "Läs om filen",
+"Archive completed tasks": "Arkivera slutförda uppgifter", "Archiving %n tasks": ["Arkiverar %n uppgift", "Arkiverar %n uppgifter"], "No matching tasks": "Inga matchande uppgifter", "No tasks": "Inga uppgifter",
+"Swipe left to change the filter": "Svep åt vänster för att ändra filter", "Pull down to add a task": "Dra ner för att lägga till en uppgift", "Due date": "Förfallodatum", "Threshold date": "Tröskeldatum", "Archiving": "Arkiverar",
+"Deleting %n tasks": ["Tar bort %n uppgift", "Tar bort %n uppgifter"], "Name": "Namn", "Priority": "Prioritet", "Completed last": "Slutförda sist", "Context": "Kontext", "Alphabetical": "Alfabetisk", "Manual order (#N)": "Manuell ordning (#N)",
+"Project": "Projekt", "Creation date": "Skapandedatum", "Future tasks last": "Framtida sist", "Completion date": "Slutförandedatum", "Save current filter": "Spara aktuellt filter", "Update with current filter": "Skriv över med aktuellt filter",
+"Rename": "Byt namn", "Rename filter": "Byt namn på filter", "Delete": "Ta bort", "Deleting": "Tar bort", "No saved filters": "Inga sparade filter", "Set up a filter and pull down to save it": "Ställ in ett filter och dra ner för att spara det",
+"File": "Fil", "todo.txt": "todo.txt", "done.txt is kept next to it": "done.txt sparas bredvid", "Path": "Sökväg", "Windows line breaks (CRLF)": "Windows-radbrytningar (CRLF)", "Delay before saving": "Fördröjning före sparande", "Tasks": "Uppgifter",
+"Add creation date to new tasks": "Lägg till skapandedatum på nya uppgifter", "Add new tasks at the end": "Lägg nya uppgifter sist", "Keep priority of completed tasks": "Behåll prioritet för slutförda uppgifter", "Archive completed tasks automatically": "Arkivera slutförda uppgifter automatiskt",
+"Move to done.txt right after completing": "Flytta till done.txt direkt efter slutförande", "Capitalize new tasks": "Stor begynnelsebokstav på nya uppgifter", "Appearance": "Utseende", "Show dates on a separate line": "Visa datum på egen rad", "Color due dates": "Färga förfallodatum",
+"Uppercase section headers": "Avsnittsrubriker i versaler", "Case sensitive sorting": "Skiftlägeskänslig sortering", "Use todo.txt terms (context/project)": "Använd todo.txt-termer (kontext/projekt)", "Instead of list/tag": "Istället för lista/tagg",
+"Reset to default": "Återställ", "Manual ordering active": "Manuell ordning aktiv", "Tap to flip direction, long press to move": "Tryck för att vända riktning, håll för att flytta", "Move to top": "Flytta överst", "Move up": "Flytta upp", "Move down": "Flytta ner",
+"done %1": "klar %1", "due %1": "förfaller %1", "t %1": "tröskel %1", "Mark incomplete": "Markera som ej slutförd", "Complete": "Slutför", "Open %1": "Öppna %1", "Call %1": "Ring %1", "Mail %1": "Mejla %1", "Select": "Välj",
+"Update": "Uppdatera", "Add task": "Lägg till uppgift", "Save": "Spara", "One task per line": "En uppgift per rad", "Due": "Förfaller", "Threshold": "Tröskel", "Next line": "Nästa rad",
+"None": "Ingen", "today": "idag", "tomorrow": "imorgon", "yesterday": "igår", "%1 days": "%1 dagar", "1 week": "1 vecka", "%1 weeks": "%1 veckor", "1 month": "1 månad", "%1 months": "%1 månader", "1 year": "1 år", "%1 years": "%1 år",
+"%1 ago": "%1 sedan", "in %1": "om %1", "Cannot read %1": "Kan inte läsa %1", "Cannot write %1": "Kan inte skriva %1",
+"List": "Lista", "Contexts": "Kontexter", "Lists": "Listor", "Tag": "Tagg", "Projects": "Projekt", "Tags": "Taggar",
+}
+
+T["fi"] = {
+"Choose file…": "Valitse tiedosto…", "Archive": "Arkistoi",
+"Todo.txt": "Todo.txt", "%n overdue": ["%n myöhässä", "%n myöhässä"], "%n today": ["%n tänään", "%n tänään"],
+"Date": "Päivämäärä", "No date": "Ei päivämäärää", "Today": "Tänään", "Tomorrow": "Huomenna", "In one week": "Viikon päästä", "In two weeks": "Kahden viikon päästä", "In one month": "Kuukauden päästä", "Pick a date…": "Valitse päivämäärä…",
+"Clear filter": "Tyhjennä suodatin", "Sort order": "Järjestys", "Save as filter": "Tallenna suodattimena", "Save filter": "Tallenna suodatin", "Filter": "Suodatin", "No filter": "Ei suodatinta", "Invert": "Käänteinen",
+"Show tasks NOT matching the selection": "Näytä tehtävät, jotka EIVÄT vastaa valintaa", "Without %1": "Ilman: %1", "Priorities": "Prioriteetit", "No priority": "Ei prioriteettia", "Other": "Muut",
+"Show completed": "Näytä valmiit", "Show future": "Näytä tulevat", "Tasks with a threshold date in the future": "Tehtävät, joiden kynnyspäivä on tulevaisuudessa", "Show hidden": "Näytä piilotetut", "Tasks with h:1": "Tehtävät, joissa h:1",
+"Show %1 in tasks": "Näytä %1 tehtävissä", "Creation date is threshold": "Luontipäivä kynnyksenä", "Apply": "Käytä", "New %1 (space separated)": "Uudet %1 (välilyönnillä eroteltuna)", "on some of the selected tasks": "joissakin valituissa tehtävissä",
+"%n selected": ["%n valittu", "%n valittu"], "All tasks": "Kaikki tehtävät", "%n tasks": ["%n tehtävä", "%n tehtävää"], "unsaved": "tallentamatta", "Settings": "Asetukset", "Saved filters": "Tallennetut suodattimet",
+"Hide search": "Piilota haku", "Search": "Hae", "Cancel selection": "Peru valinta", "Select tasks": "Valitse tehtäviä", "Select all": "Valitse kaikki", "New task": "Uusi tehtävä", "Reload file": "Lataa tiedosto uudelleen",
+"Archive completed tasks": "Arkistoi valmiit tehtävät", "Archiving %n tasks": ["Arkistoidaan %n tehtävä", "Arkistoidaan %n tehtävää"], "No matching tasks": "Ei vastaavia tehtäviä", "No tasks": "Ei tehtäviä",
+"Swipe left to change the filter": "Pyyhkäise vasemmalle vaihtaaksesi suodatinta", "Pull down to add a task": "Vedä alas lisätäksesi tehtävän", "Due date": "Määräpäivä", "Threshold date": "Kynnyspäivä", "Archiving": "Arkistoidaan",
+"Deleting %n tasks": ["Poistetaan %n tehtävä", "Poistetaan %n tehtävää"], "Name": "Nimi", "Priority": "Prioriteetti", "Completed last": "Valmiit viimeisenä", "Context": "Konteksti", "Alphabetical": "Aakkosjärjestys", "Manual order (#N)": "Manuaalinen järjestys (#N)",
+"Project": "Projekti", "Creation date": "Luontipäivä", "Future tasks last": "Tulevat viimeisenä", "Completion date": "Valmistumispäivä", "Save current filter": "Tallenna nykyinen suodatin", "Update with current filter": "Korvaa nykyisellä suodattimella",
+"Rename": "Nimeä uudelleen", "Rename filter": "Nimeä suodatin uudelleen", "Delete": "Poista", "Deleting": "Poistetaan", "No saved filters": "Ei tallennettuja suodattimia", "Set up a filter and pull down to save it": "Aseta suodatin ja vedä alas tallentaaksesi sen",
+"File": "Tiedosto", "todo.txt": "todo.txt", "done.txt is kept next to it": "done.txt säilytetään sen vieressä", "Path": "Polku", "Windows line breaks (CRLF)": "Windows-rivinvaihdot (CRLF)", "Delay before saving": "Viive ennen tallennusta", "Tasks": "Tehtävät",
+"Add creation date to new tasks": "Lisää luontipäivä uusiin tehtäviin", "Add new tasks at the end": "Lisää uudet tehtävät loppuun", "Keep priority of completed tasks": "Säilytä valmiiden tehtävien prioriteetti", "Archive completed tasks automatically": "Arkistoi valmiit tehtävät automaattisesti",
+"Move to done.txt right after completing": "Siirrä done.txt-tiedostoon heti valmistuttua", "Capitalize new tasks": "Iso alkukirjain uusiin tehtäviin", "Appearance": "Ulkoasu", "Show dates on a separate line": "Päivämäärät omalla rivillä", "Color due dates": "Väritä määräpäivät",
+"Uppercase section headers": "Osioiden otsikot isoilla kirjaimilla", "Case sensitive sorting": "Kirjainkoon huomioiva järjestys", "Use todo.txt terms (context/project)": "Käytä todo.txt-termejä (konteksti/projekti)", "Instead of list/tag": "Lista/tunniste-termien sijaan",
+"Reset to default": "Palauta oletus", "Manual ordering active": "Manuaalinen järjestys käytössä", "Tap to flip direction, long press to move": "Napauta kääntääksesi suunnan, paina pitkään siirtääksesi", "Move to top": "Siirrä ylimmäksi", "Move up": "Siirrä ylös", "Move down": "Siirrä alas",
+"done %1": "valmis %1", "due %1": "määräpäivä %1", "t %1": "kynnys %1", "Mark incomplete": "Merkitse keskeneräiseksi", "Complete": "Merkitse valmiiksi", "Open %1": "Avaa %1", "Call %1": "Soita %1", "Mail %1": "Lähetä sähköpostia: %1", "Select": "Valitse",
+"Update": "Päivitä", "Add task": "Lisää tehtävä", "Save": "Tallenna", "One task per line": "Yksi tehtävä riviä kohden", "Due": "Määräpäivä", "Threshold": "Kynnys", "Next line": "Seuraava rivi",
+"None": "Ei mitään", "today": "tänään", "tomorrow": "huomenna", "yesterday": "eilen", "%1 days": "%1 päivää", "1 week": "1 viikko", "%1 weeks": "%1 viikkoa", "1 month": "1 kuukausi", "%1 months": "%1 kuukautta", "1 year": "1 vuosi", "%1 years": "%1 vuotta",
+"%1 ago": "%1 sitten", "in %1": "%1 päästä", "Cannot read %1": "Tiedostoa %1 ei voi lukea", "Cannot write %1": "Tiedostoon %1 ei voi kirjoittaa",
+"List": "Lista", "Contexts": "Kontekstit", "Lists": "Listat", "Tag": "Tunniste", "Projects": "Projektit", "Tags": "Tunnisteet",
+}
+
+base = ET.parse(BASE)
+missing = {}
+for lang, table in T.items():
+    tree = copy.deepcopy(base)
+    root = tree.getroot()
+    root.set("language", lang)
+    for ctx in root.findall("context"):
+        for m in ctx.findall("message"):
+            src = m.find("source").text
+            tr = m.find("translation")
+            for a in list(tr.attrib): del tr.attrib[a]
+            val = table.get(src)
+            if val is None:
+                missing.setdefault(lang, []).append(src); tr.set("type", "unfinished"); continue
+            if m.get("numerus") == "yes":
+                tr.text = None
+                for f in val:
+                    nf = ET.SubElement(tr, "numerusform"); nf.text = f
+            else:
+                tr.text = val
+    out = os.path.join(OUT, f"harbour-todotxt-{lang}.ts")
+    with open(out, "wb") as f:
+        f.write(b'<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE TS>\n')
+        tree.write(f, encoding="utf-8")
+    print(lang, "ok")
+for l, s in missing.items():
+    print("MISSING", l, s)

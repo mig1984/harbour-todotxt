@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Icon=harbour-todotxt
+Exec=harbour-todotxt
+Name=Todo.txt
+Name[cs]=Todo.txt
+Comment=Todo.txt task list (Simpletask port)
+Comment[cs]=Seznam úkolů todo.txt (port Simpletasku)
+
+[X-Sailjail]
+OrganizationName=cz.mig
+ApplicationName=harbour-todotxt
+Permissions=Documents;UserDirs
