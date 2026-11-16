@@ -48,11 +48,7 @@ Page {
     }
 
     function headerDescription() {
-        var s = ""
-        if (query.hasFilter || taskModel.count !== taskModel.totalCount)
-            s = taskModel.count + " / " + taskModel.totalCount
-        else
-            s = qsTr("%n tasks", "", taskModel.count)
+        var s = qsTr("%n tasks", "", taskModel.count)
         if (store.changesPending)
             s += " \u2022 " + qsTr("unsaved")
         return s
@@ -163,6 +159,15 @@ Page {
                 id: pageHeader
                 title: headerTitle()
                 description: headerDescription()
+
+                // Elide a long filter summary with "..." and keep it clear of
+                // the action buttons, which sit to the left of the title.
+                _titleItem.truncationMode: TruncationMode.Elide
+                _titleItem.width: Math.min(_titleItem.implicitWidth,
+                    pageHeader.width - pageHeader.leftMargin - pageHeader.rightMargin
+                    - Theme.horizontalPageMargin - calendarButton.width
+                    - (clearButton.visible ? clearButton.width : 0))
+
                 extraContent.children: [
                     IconButton {
                         id: clearButton
@@ -176,6 +181,7 @@ Page {
                         onClicked: query.clear()
                     },
                     IconButton {
+                        id: calendarButton
                         anchors {
                             right: clearButton.visible ? clearButton.left : parent.right
                             rightMargin: clearButton.visible ? 0 : Theme.horizontalPageMargin
