@@ -4,12 +4,12 @@
 <context>
     <name>CalendarPage</name>
     <message>
-        <location filename="../qml/pages/CalendarPage.qml" line="98"/>
+        <location filename="../qml/pages/CalendarPage.qml" line="97"/>
         <source>Calendar</source>
         <translation>日历</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CalendarPage.qml" line="105"/>
+        <location filename="../qml/pages/CalendarPage.qml" line="104"/>
         <source>Today</source>
         <translation>今天</translation>
     </message>
@@ -112,79 +112,79 @@
         <translation>无筛选</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="65"/>
-        <location filename="../qml/pages/FilterPage.qml" line="93"/>
-        <location filename="../qml/pages/FilterPage.qml" line="121"/>
+        <location filename="../qml/pages/FilterPage.qml" line="68"/>
+        <location filename="../qml/pages/FilterPage.qml" line="96"/>
+        <location filename="../qml/pages/FilterPage.qml" line="124"/>
         <source>Clear</source>
         <translation>清除</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="71"/>
-        <location filename="../qml/pages/FilterPage.qml" line="99"/>
-        <location filename="../qml/pages/FilterPage.qml" line="127"/>
+        <location filename="../qml/pages/FilterPage.qml" line="74"/>
+        <location filename="../qml/pages/FilterPage.qml" line="102"/>
+        <location filename="../qml/pages/FilterPage.qml" line="130"/>
         <source>Invert</source>
         <translation>反转</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="72"/>
-        <location filename="../qml/pages/FilterPage.qml" line="100"/>
+        <location filename="../qml/pages/FilterPage.qml" line="75"/>
+        <location filename="../qml/pages/FilterPage.qml" line="103"/>
         <source>Show tasks NOT matching the selection</source>
         <translation>显示不符合所选条件的任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="79"/>
-        <location filename="../qml/pages/FilterPage.qml" line="107"/>
+        <location filename="../qml/pages/FilterPage.qml" line="82"/>
+        <location filename="../qml/pages/FilterPage.qml" line="110"/>
         <source>Without %1</source>
         <translation>无%1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="117"/>
+        <location filename="../qml/pages/FilterPage.qml" line="120"/>
         <source>Priorities</source>
         <translation>优先级</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="134"/>
+        <location filename="../qml/pages/FilterPage.qml" line="137"/>
         <source>No priority</source>
         <translation>无优先级</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="144"/>
+        <location filename="../qml/pages/FilterPage.qml" line="147"/>
         <source>Other</source>
         <translation>其他</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="148"/>
+        <location filename="../qml/pages/FilterPage.qml" line="151"/>
         <source>Show completed</source>
         <translation>显示已完成</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="153"/>
+        <location filename="../qml/pages/FilterPage.qml" line="156"/>
         <source>Show future</source>
         <translation>显示未来任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="154"/>
+        <location filename="../qml/pages/FilterPage.qml" line="157"/>
         <source>Tasks with a threshold date in the future</source>
         <translation>阈值日期在未来的任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="159"/>
+        <location filename="../qml/pages/FilterPage.qml" line="162"/>
         <source>Show hidden</source>
         <translation>显示隐藏任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="160"/>
+        <location filename="../qml/pages/FilterPage.qml" line="163"/>
         <source>Tasks with h:1</source>
         <translation>带有 h:1 的任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="165"/>
-        <location filename="../qml/pages/FilterPage.qml" line="170"/>
+        <location filename="../qml/pages/FilterPage.qml" line="168"/>
+        <location filename="../qml/pages/FilterPage.qml" line="173"/>
         <source>Show %1 in tasks</source>
         <translation>在任务中显示%1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="175"/>
+        <location filename="../qml/pages/FilterPage.qml" line="178"/>
         <source>Creation date is threshold</source>
         <translation>创建日期即阈值</translation>
     </message>
@@ -211,140 +211,144 @@
 <context>
     <name>MainPage</name>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="42"/>
+        <location filename="../qml/pages/MainPage.qml" line="45"/>
         <source>%n selected</source>
         <translation>
             <numerusform>已选择 %n 项</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="47"/>
+        <location filename="../qml/pages/MainPage.qml" line="50"/>
         <source>All tasks</source>
         <translation>所有任务</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="51"/>
+        <location filename="../qml/pages/MainPage.qml" line="54"/>
         <source>%n tasks</source>
         <translation>
             <numerusform>%n 个任务</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="53"/>
+        <location filename="../qml/pages/MainPage.qml" line="56"/>
         <source>unsaved</source>
         <translation>未保存</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="66"/>
+        <location filename="../qml/pages/MainPage.qml" line="87"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="71"/>
+        <location filename="../qml/pages/MainPage.qml" line="92"/>
         <source>Saved filters</source>
         <translation>已保存的筛选</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="76"/>
+        <location filename="../qml/pages/MainPage.qml" line="97"/>
         <source>Sort order</source>
         <translation>排序</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="81"/>
-        <source>Hide search</source>
-        <translation>隐藏搜索</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/MainPage.qml" line="81"/>
-        <location filename="../qml/pages/MainPage.qml" line="200"/>
+        <location filename="../qml/pages/MainPage.qml" line="238"/>
         <source>Search</source>
         <translation>搜索</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="93"/>
+        <location filename="../qml/pages/MainPage.qml" line="118"/>
         <source>Cancel selection</source>
         <translation>取消选择</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="93"/>
+        <location filename="../qml/pages/MainPage.qml" line="118"/>
         <source>Select tasks</source>
         <translation>选择任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="100"/>
+        <location filename="../qml/pages/MainPage.qml" line="125"/>
         <source>Select all</source>
         <translation>全选</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="105"/>
+        <location filename="../qml/pages/MainPage.qml" line="130"/>
         <source>Mark incomplete</source>
         <translation>标记为未完成</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="125"/>
+        <location filename="../qml/pages/MainPage.qml" line="150"/>
         <source>Archive</source>
         <translation>归档</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="132"/>
+        <location filename="../qml/pages/MainPage.qml" line="157"/>
         <source>New task</source>
         <translation>新建任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="141"/>
+        <location filename="../qml/pages/MainPage.qml" line="102"/>
         <source>Reload file</source>
         <translation>重新加载文件</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="145"/>
+        <location filename="../qml/pages/MainPage.qml" line="107"/>
         <source>Archive completed tasks</source>
         <translation>归档已完成任务</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="149"/>
+        <location filename="../qml/pages/MainPage.qml" line="112"/>
         <source>Archiving %n tasks</source>
         <translation>
             <numerusform>正在归档 %n 个任务</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="228"/>
+        <location filename="../qml/pages/MainPage.qml" line="296"/>
+        <source>No folder selected</source>
+        <translation>未选择文件夹</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="298"/>
         <source>No matching tasks</source>
         <translation>没有匹配的任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="228"/>
+        <location filename="../qml/pages/MainPage.qml" line="298"/>
         <source>No tasks</source>
         <translation>没有任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="230"/>
-        <source>Swipe left to change the filter</source>
-        <translation>向左滑动更改筛选</translation>
+        <location filename="../qml/pages/MainPage.qml" line="299"/>
+        <source>Choose the folder with todo.txt in Settings</source>
+        <translation>在设置中选择包含 todo.txt 的文件夹</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="230"/>
+        <location filename="../qml/pages/MainPage.qml" line="301"/>
         <source>Pull down to add a task</source>
         <translation>下拉添加任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="275"/>
+        <location filename="../qml/pages/MainPage.qml" line="301"/>
+        <source>Tap the filter icon to change the filter</source>
+        <translation>点击筛选图标更改筛选</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="347"/>
         <source>Due date</source>
         <translation>截止日期</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="110"/>
-        <location filename="../qml/pages/MainPage.qml" line="113"/>
+        <location filename="../qml/pages/MainPage.qml" line="135"/>
+        <location filename="../qml/pages/MainPage.qml" line="138"/>
         <source>Threshold date</source>
         <translation>阈值日期</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="128"/>
+        <location filename="../qml/pages/MainPage.qml" line="153"/>
         <source>Archiving</source>
         <translation>正在归档</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="298"/>
+        <location filename="../qml/pages/MainPage.qml" line="370"/>
         <source>Deleting %n tasks</source>
         <translation>
             <numerusform>正在删除 %n 个任务</numerusform>
@@ -358,6 +362,24 @@
         <location filename="../qml/pages/NameDialog.qml" line="19"/>
         <source>Name</source>
         <translation>名称</translation>
+    </message>
+</context>
+<context>
+    <name>PickFolderPage</name>
+    <message>
+        <location filename="../qml/pages/PickFolderPage.qml" line="39"/>
+        <source>Choose</source>
+        <translation>选择</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PickFolderPage.qml" line="40"/>
+        <source>Back</source>
+        <translation>返回</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PickFolderPage.qml" line="76"/>
+        <source>No subfolders</source>
+        <translation>没有子文件夹</translation>
     </message>
 </context>
 <context>
@@ -487,107 +509,103 @@
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="16"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="15"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="18"/>
-        <source>File</source>
-        <translation>文件</translation>
+        <location filename="../qml/pages/SettingsPage.qml" line="17"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="21"/>
+        <source>Folder</source>
+        <translation>文件夹</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="22"/>
-        <source>todo.txt</source>
-        <translation>todo.txt</translation>
+        <source>todo.txt and done.txt are kept here</source>
+        <translation>todo.txt 和 done.txt 保存在这里</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="23"/>
-        <source>done.txt is kept next to it</source>
-        <translation>done.txt 保存在其旁边</translation>
+        <location filename="../qml/pages/SettingsPage.qml" line="31"/>
+        <source>Choose folder…</source>
+        <translation>选择文件夹…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="32"/>
-        <source>Choose file…</source>
-        <translation>选择文件…</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="37"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="39"/>
         <source>Windows line breaks (CRLF)</source>
         <translation>Windows 换行符 (CRLF)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="43"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="45"/>
         <source>Delay before saving</source>
         <translation>保存前延迟</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="50"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="52"/>
         <source>Tasks</source>
         <translation>任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="52"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="54"/>
         <source>Add creation date to new tasks</source>
         <translation>为新任务添加创建日期</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="57"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="59"/>
         <source>Add new tasks at the end</source>
         <translation>新任务添加到末尾</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="62"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="64"/>
         <source>Keep priority of completed tasks</source>
         <translation>保留已完成任务的优先级</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="67"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="69"/>
         <source>Archive completed tasks automatically</source>
         <translation>自动归档已完成任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="68"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="70"/>
         <source>Move to done.txt right after completing</source>
         <translation>完成后立即移至 done.txt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="73"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="75"/>
         <source>Capitalize new tasks</source>
         <translation>新任务首字母大写</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="78"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="80"/>
         <source>Appearance</source>
         <translation>外观</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="80"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="82"/>
         <source>Show dates on a separate line</source>
         <translation>日期单独一行显示</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="85"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="87"/>
         <source>Color due dates</source>
         <translation>截止日期着色</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="90"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="92"/>
         <source>Uppercase section headers</source>
         <translation>分组标题大写</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="95"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="97"/>
         <source>Case sensitive sorting</source>
         <translation>区分大小写排序</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="100"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="102"/>
         <source>Use todo.txt terms (context/project)</source>
         <translation>使用 todo.txt 术语（上下文/项目）</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="101"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="103"/>
         <source>Instead of list/tag</source>
         <translation>代替列表/标签</translation>
     </message>
@@ -643,84 +661,84 @@
 <context>
     <name>TaskDelegate</name>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="30"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="39"/>
         <source>Marking incomplete</source>
         <translation>正在标记为未完成</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="30"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="39"/>
         <source>Completing</source>
         <translation>正在完成</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="39"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="48"/>
         <source>done %1</source>
         <translation>完成于 %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="41"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="50"/>
         <source>due %1</source>
         <translation>截止 %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="43"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="52"/>
         <source>t %1</source>
         <translation>阈值 %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="154"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="223"/>
         <source>Mark incomplete</source>
         <translation>标记为未完成</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="154"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="223"/>
         <source>Complete</source>
         <translation>完成</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="158"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="227"/>
         <source>Priority</source>
         <translation>优先级</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="165"/>
-        <location filename="../qml/components/TaskDelegate.qml" line="167"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="234"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="236"/>
         <source>Due date</source>
         <translation>截止日期</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="172"/>
-        <location filename="../qml/components/TaskDelegate.qml" line="174"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="241"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="243"/>
         <source>Threshold date</source>
         <translation>阈值日期</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="181"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="250"/>
         <source>Open %1</source>
         <translation>打开 %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="189"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="258"/>
         <source>Call %1</source>
         <translation>呼叫 %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="196"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="265"/>
         <source>Mail %1</source>
         <translation>发送邮件至 %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="201"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="270"/>
         <source>Select</source>
         <translation>选择</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="206"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="275"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="207"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="276"/>
         <source>Deleting</source>
         <translation>正在删除</translation>
     </message>
@@ -728,69 +746,69 @@
 <context>
     <name>TaskDialog</name>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="134"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="178"/>
         <source>Update</source>
         <translation>更新</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="134"/>
-        <source>Add task</source>
+        <location filename="../qml/pages/TaskDialog.qml" line="178"/>
+        <source>Add tasks</source>
         <translation>添加任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="135"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="179"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="142"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="186"/>
         <source>One task per line</source>
         <translation>每行一个任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="142"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="186"/>
         <source>Task</source>
         <translation>任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="170"/>
-        <location filename="../qml/pages/TaskDialog.qml" line="182"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="250"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="262"/>
         <source>None</source>
         <translation>无</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="193"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="273"/>
         <source>Priority</source>
         <translation>优先级</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="194"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="274"/>
         <source>No priority</source>
         <translation>无优先级</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="202"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="282"/>
         <source>Due</source>
         <translation>截止</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="203"/>
-        <location filename="../qml/pages/TaskDialog.qml" line="211"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="283"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="291"/>
         <source>No date</source>
         <translation>无日期</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="205"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="285"/>
         <source>Due date</source>
         <translation>截止日期</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="210"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="290"/>
         <source>Threshold</source>
         <translation>阈值</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="213"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="293"/>
         <source>Threshold date</source>
         <translation>阈值日期</translation>
     </message>
@@ -798,67 +816,67 @@
 <context>
     <name>TaskModel</name>
     <message>
-        <location filename="../src/taskmodel.cpp" line="140"/>
+        <location filename="../src/taskmodel.cpp" line="149"/>
         <source>None</source>
         <translation>无</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="458"/>
+        <location filename="../src/taskmodel.cpp" line="530"/>
         <source>today</source>
         <translation>今天</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="460"/>
+        <location filename="../src/taskmodel.cpp" line="532"/>
         <source>tomorrow</source>
         <translation>明天</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="462"/>
+        <location filename="../src/taskmodel.cpp" line="534"/>
         <source>yesterday</source>
         <translation>昨天</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="466"/>
+        <location filename="../src/taskmodel.cpp" line="538"/>
         <source>%1 days</source>
         <translation>%1 天</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="468"/>
+        <location filename="../src/taskmodel.cpp" line="540"/>
         <source>1 week</source>
         <translation>1 周</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="468"/>
+        <location filename="../src/taskmodel.cpp" line="540"/>
         <source>%1 weeks</source>
         <translation>%1 周</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="470"/>
+        <location filename="../src/taskmodel.cpp" line="542"/>
         <source>1 month</source>
         <translation>1 个月</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="470"/>
+        <location filename="../src/taskmodel.cpp" line="542"/>
         <source>%1 months</source>
         <translation>%1 个月</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="472"/>
+        <location filename="../src/taskmodel.cpp" line="544"/>
         <source>1 year</source>
         <translation>1 年</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="472"/>
+        <location filename="../src/taskmodel.cpp" line="544"/>
         <source>%1 years</source>
         <translation>%1 年</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="473"/>
+        <location filename="../src/taskmodel.cpp" line="545"/>
         <source>%1 ago</source>
         <translation>%1 前</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="473"/>
+        <location filename="../src/taskmodel.cpp" line="545"/>
         <source>in %1</source>
         <translation>%1 后</translation>
     </message>
@@ -881,42 +899,42 @@
 <context>
     <name>harbour-todotxt</name>
     <message>
-        <location filename="../qml/harbour-todotxt.qml" line="14"/>
+        <location filename="../qml/harbour-todotxt.qml" line="18"/>
         <source>Context</source>
         <translation>上下文</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-todotxt.qml" line="14"/>
+        <location filename="../qml/harbour-todotxt.qml" line="18"/>
         <source>List</source>
         <translation>列表</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-todotxt.qml" line="15"/>
+        <location filename="../qml/harbour-todotxt.qml" line="19"/>
         <source>Contexts</source>
         <translation>上下文</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-todotxt.qml" line="15"/>
+        <location filename="../qml/harbour-todotxt.qml" line="19"/>
         <source>Lists</source>
         <translation>列表</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-todotxt.qml" line="16"/>
+        <location filename="../qml/harbour-todotxt.qml" line="20"/>
         <source>Project</source>
         <translation>项目</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-todotxt.qml" line="16"/>
+        <location filename="../qml/harbour-todotxt.qml" line="20"/>
         <source>Tag</source>
         <translation>标签</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-todotxt.qml" line="17"/>
+        <location filename="../qml/harbour-todotxt.qml" line="21"/>
         <source>Projects</source>
         <translation>项目</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-todotxt.qml" line="17"/>
+        <location filename="../qml/harbour-todotxt.qml" line="21"/>
         <source>Tags</source>
         <translation>标签</translation>
     </message>

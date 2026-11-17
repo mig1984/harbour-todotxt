@@ -18,6 +18,8 @@ class TaskModel : public QAbstractListModel
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(int totalCount READ totalCount NOTIFY countChanged)
+    Q_PROPERTY(int pendingCount READ pendingCount NOTIFY countChanged)
+    Q_PROPERTY(int completedCount READ completedCount NOTIFY countChanged)
     Q_PROPERTY(int selectedCount READ selectedCount NOTIFY selectionChanged)
     Q_PROPERTY(int overdueCount READ overdueCount NOTIFY countChanged)
     Q_PROPERTY(int dueTodayCount READ dueTodayCount NOTIFY countChanged)
@@ -44,8 +46,6 @@ public:
         HiddenRole,
         InFutureRole,
         AgeRole,
-        DueStateRole,      // 0 none, 1 overdue, 2 today, 3 tomorrow, 4 later
-        ThresholdStateRole,
         RecurrenceRole,
         OrderRole
     };
@@ -58,6 +58,8 @@ public:
 
     int count() const { return m_rows.size(); }
     int totalCount() const;
+    int pendingCount() const { return m_pending; }       // visible, not completed
+    int completedCount() const { return m_completed; }   // all completed in the file
     int selectedCount() const { return m_selected.size(); }
     int overdueCount() const { return m_overdue; }
     int dueTodayCount() const { return m_dueToday; }
@@ -89,6 +91,16 @@ public:
     Q_INVOKABLE bool canMove(int from, int to) const;
     Q_INVOKABLE bool previewMove(int from, int to);  // reorders rows only
     Q_INVOKABLE void commitMove(int row);            // renumbers #N around row
+    // Move the task at `row` into the due-date group of the task at `targetRow`,
+    // updating its due (empty for the "no date" group) and placing it at that
+    // row within the target group.
+    Q_INVOKABLE void moveToDue(int row, int targetRow);
+
+    // Due date of a visible row (yyyy-MM-dd, "" when it has none).
+    Q_INVOKABLE QString dueAt(int row) const;
+
+    // Ids of every completed task in the file (for archiving to done.txt).
+    Q_INVOKABLE QVariantList allCompletedIds() const;
 
     Q_INVOKABLE static QString relativeDate(const QString &date);
     Q_INVOKABLE static QString today();
@@ -116,6 +128,8 @@ private:
     QString m_today;
     int m_overdue;
     int m_dueToday;
+    int m_pending;
+    int m_completed;
     bool m_showSelected;
     bool m_moving;
 };

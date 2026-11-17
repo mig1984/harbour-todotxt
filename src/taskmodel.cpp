@@ -6,10 +6,21 @@
 #include <QDate>
 #include <algorithm>
 
+// True when "a" is a subsequence of "b" (same relative order).
+static bool isSubsequence(const QList<int> &a, const QList<int> &b)
+{
+    int j = 0;
+    for (int i = 0; i < b.size() && j < a.size(); ++i)
+        if (b[i] == a[j])
+            ++j;
+    return j == a.size();
+}
+
 TaskModel::TaskModel(TodoStore *store, Query *query, Settings *settings, QObject *parent)
     : QAbstractListModel(parent)
     , m_store(store), m_query(query), m_settings(settings)
-    , m_overdue(0), m_dueToday(0), m_showSelected(true), m_moving(false)
+    , m_overdue(0), m_dueToday(0), m_pending(0), m_completed(0)
+    , m_showSelected(true), m_moving(false)
 {
     m_rebuildTimer.setSingleShot(true);
     m_rebuildTimer.setInterval(0);
@@ -43,8 +54,6 @@ QHash<int, QByteArray> TaskModel::roleNames() const
     r[HiddenRole] = "hidden";
     r[InFutureRole] = "inFuture";
     r[AgeRole] = "age";
-    r[DueStateRole] = "dueState";
-    r[ThresholdStateRole] = "thresholdState";
     r[RecurrenceRole] = "recurrence";
     r[OrderRole] = "order";
     return r;
@@ -142,8 +151,6 @@ QVariant TaskModel::data(const QModelIndex &index, int role) const
     case HiddenRole: return t->isHidden();
     case InFutureRole: return t->inFuture(m_today, m_query->createIsThreshold());
     case AgeRole: return t->createDate().isEmpty() ? QString() : relativeDate(t->createDate());
-    case DueStateRole: return dateState(t->dueDate());
-    case ThresholdStateRole: return dateState(t->thresholdDate());
     case RecurrenceRole: return t->recurrence();
     case OrderRole: return t->manualOrder();
     }
@@ -226,9 +233,12 @@ void TaskModel::rebuild()
     QList<const Task *> visible;
     const QList<Task> &all = m_store->tasks();
     QSet<int> existing;
+    int completed = 0;
     for (int i = 0; i < all.size(); ++i) {
         const Task &t = all[i];
         existing.insert(t.id());
+        if (t.isCompleted())
+            completed++;
         if ((m_showSelected && m_selected.contains(t.id())) || m_query->matches(t, m_today))
             visible << &t;
     }
@@ -246,10 +256,11 @@ void TaskModel::rebuild()
     });
 
     QList<int> rows;
-    int overdue = 0, dueToday = 0;
+    int overdue = 0, dueToday = 0, pending = 0;
     foreach (const Task *t, visible) {
         rows << t->id();
         if (!t->isCompleted()) {
+            pending++;
             int s = dateState(t->dueDate());
             if (s == 1) overdue++;
             else if (s == 2) dueToday++;
@@ -257,10 +268,27 @@ void TaskModel::rebuild()
     }
     m_overdue = overdue;
     m_dueToday = dueToday;
+    m_pending = pending;
+    m_completed = completed;
 
     if (rows == m_rows) {
         if (!m_rows.isEmpty())
             emit dataChanged(index(0), index(m_rows.size() - 1));
+    } else if (isSubsequence(rows, m_rows)) {
+        // Only removals (e.g. deleting, archiving or hiding a task). Report
+        // them as row removals so the view keeps its scroll position instead
+        // of jumping to the top on a full model reset.
+        int j = 0;
+        for (int i = 0; i < m_rows.size(); ) {
+            if (j < rows.size() && m_rows[i] == rows[j]) {
+                ++i;
+                ++j;
+            } else {
+                beginRemoveRows(QModelIndex(), i, i);
+                m_rows.removeAt(i);
+                endRemoveRows();
+            }
+        }
     } else {
         beginResetModel();
         m_rows = rows;
@@ -328,6 +356,16 @@ QVariantList TaskModel::completedVisibleIds() const
         if (t && t->isCompleted())
             r << id;
     }
+    return r;
+}
+
+QVariantList TaskModel::allCompletedIds() const
+{
+    QVariantList r;
+    const QList<Task> &all = m_store->tasks();
+    for (int i = 0; i < all.size(); ++i)
+        if (all[i].isCompleted())
+            r << all[i].id();
     return r;
 }
 
@@ -441,6 +479,40 @@ void TaskModel::commitMove(int row)
         }
     }
     m_store->notifyChanged();
+}
+
+void TaskModel::moveToDue(int row, int targetRow)
+{
+    if (row < 0 || targetRow < 0 || row >= m_rows.size() || targetRow >= m_rows.size())
+        return;
+    Task *moved = m_store->findTask(m_rows[row]);
+    const Task *target = taskAt(targetRow);
+    if (!moved || !target || moved->id() == target->id())
+        return;
+    const QString due = target->dueDate();
+    if (moved->dueDate() == due)
+        return;
+
+    const int targetId = target->id();
+    moved->setDueDate(due);
+    m_store->notifyChanged();
+
+    // Rebuild so the moved task is grouped under its new due date, then place
+    // it at the row where it was dropped (commitMove renumbers #N there).
+    m_moving = false;
+    rebuild();
+    int mIdx = m_rows.indexOf(moved->id());
+    int tIdx = m_rows.indexOf(targetId);
+    if (mIdx < 0 || tIdx < 0 || mIdx == tIdx)
+        return;
+    if (previewMove(mIdx, tIdx))
+        commitMove(tIdx);
+}
+
+QString TaskModel::dueAt(int row) const
+{
+    const Task *t = taskAt(row);
+    return t ? t->dueDate() : QString();
 }
 
 QString TaskModel::today()

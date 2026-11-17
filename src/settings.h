@@ -15,7 +15,7 @@
 class Settings : public QObject
 {
     Q_OBJECT
-    SETTING(QString, todoFile, TodoFile, "todoFile", defaultTodoFile())
+    SETTING(QString, todoFolder, TodoFolder, "todoFolder", defaultTodoFolder())
     SETTING(bool, prependDate, PrependDate, "prependDate", true)
     SETTING(bool, appendAtEnd, AppendAtEnd, "appendAtEnd", true)
     SETTING(bool, keepPriority, KeepPriority, "keepPriority", true)
@@ -36,7 +36,13 @@ class Settings : public QObject
 
 public:
     explicit Settings(QObject *parent = 0);
-    static QString defaultTodoFile();
+    static QString defaultTodoFolder();
+
+    // The folder is what the user picks; todo.txt and done.txt live inside it.
+    Q_PROPERTY(QString todoFile READ todoFile NOTIFY todoFolderChanged)
+    Q_PROPERTY(bool todoFolderConfigured READ todoFolderConfigured NOTIFY todoFolderChanged)
+    QString todoFile() const;
+    bool todoFolderConfigured() const;
     Q_INVOKABLE QString doneFile() const;
 
 private:

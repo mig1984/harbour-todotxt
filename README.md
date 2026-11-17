@@ -6,14 +6,18 @@ ported from [Simpletask](https://github.com/mpcjanssen/simpletask-android)
 and writes `todo.txt` (and `done.txt` next to it) and can be combined with any
 sync tool that moves the file.
 
-Version 1.0.0 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
+Version 1.2.0 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
 German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
 
 ## Screenshots
 
-| Task list (filtered by a project) | Filter page (projects, inverted selection) |
-|---|---|
-| ![Tasks](docs/screenshot-tasks.png) | ![Filter](docs/screenshot-filter.png) |
+| Task list (grouped by due date) | Calendar | Add tasks (multi-line) |
+|---|---|---|
+| ![Task list](docs/screenshot-tasks.png) | ![Calendar](docs/screenshot-calendar.png) | ![Add tasks](docs/screenshot-add-tasks.png) |
+
+| Search (from the header icon) | Filter page | Sort order |
+|---|---|---|
+| ![Search](docs/screenshot-search.png) | ![Filter](docs/screenshot-filter.png) | ![Sort order](docs/screenshot-sort.png) |
 
 ---
 
@@ -23,40 +27,52 @@ German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
   `x` completion with dates, creation date, `@context`, `+project`, `due:`,
   `t:` threshold, `rec:` recurrence, `h:1` hidden, `key:value` tags, links).
 - **Task list** grouped by the first sort key, with due/threshold dates on a
-  separate line (optional), coloured dates (overdue, today), uppercase headers
-  (optional). Cover shows the counts of overdue and due-today tasks.
+  separate line (optional), coloured dates (overdue red, today green, soon
+  blue), uppercase headers (optional). The header shows the number of
+  *not-completed* tasks and has icon buttons for search, the filter and the
+  calendar. Cover shows the counts of overdue and due-today tasks.
 - **Calendar**: the date icon in the header opens a month view of the due dates
   of the tasks in the current filter, colour-coded like the list (overdue red,
-  today green, tomorrow blue, the day after tomorrow dark blue, later yellow).
+  today green, tomorrow and the day after blue, later grey).
   Tap a day to jump to the first task due that day. The shown month/year is
   remembered; the **Today** button resets it to the current month.
-- **Add / edit** with a text editor, quick insertion of priority, contexts,
-  projects, due and threshold dates. New tasks get a creation date and a
-  capital first letter (both optional).
+- **Add / edit** with a text editor. Adding is multi-line ("Add tasks"): press
+  Enter to start the next task, prefilled with the current line's priority,
+  contexts, projects, due and threshold dates. Quick insertion of priority,
+  contexts, projects, due and threshold dates (the buttons) applies to the line
+  under the cursor. New tasks get a creation date and a capital first letter
+  (both optional).
 - **Complete / uncomplete**, with recurrence (`rec:Nd|w|m|y`, `rec:+N...` strict
   from the due date) creating the next task.
 - **Multi-selection**: complete, delete, change priority, add/remove contexts and
   projects, defer due or threshold dates (today, tomorrow, +1 week, +2 weeks,
   +1 month, pick a date).
-- **Filter page** (attached to the right of the list): contexts, projects,
-  priorities, each with inversion ("NOT matching"), show completed / future /
-  hidden, free-text search.
+- **Filter page** (opened from the filter icon in the header; the sections start
+  collapsed and the expanded one is remembered): contexts, projects, priorities,
+  each with inversion ("NOT matching"), show completed / future / hidden.
+- **Search** from the magnifier icon in the header: a search field opens under
+  the title and closes again when emptied. A swipe left on the list opens the
+  new task dialog.
 - **Sort order** with multiple keys: completed last, future last, priority,
   context, project, due date, threshold date, creation date, completion date,
   alphabetical, **manual order**. Tap a key to flip its direction, long press
   to move it.
 - **Manual order** is stored in the file as a `#N` token at the end of the line
-  (this port's extension, N in steps of 1024), so it survives sync. Dragging a
-  task is allowed only when the result stays sorted by the keys above "manual";
-  only the tie group is renumbered. `#N` is removed from completed tasks and
+  (this port's extension, N in steps of 1024), so it survives sync. The drag
+  handle on the right reorders a task within its sort group (only the tie group
+  is renumbered) and auto-scrolls when dragged past a list edge. Dragging a task
+  into another due-date group changes its due date (or clears it for "no date")
+  and drops it at the target position. `#N` is removed from completed tasks and
   whenever no sort order needs it.
 - **Saved filters**: save the current filter + sort order under a name, rename,
   update, delete, switch from the pulley.
-- **Archive**: move completed tasks to `done.txt`, manually or automatically
-  right after completing.
-- **File handling**: configurable file path (file picker), the file is watched
-  and reloaded when changed externally; writes are delayed by a configurable
-  idle time (default 3 s) and coalesced; optional CRLF line breaks.
+- **Archive**: move completed tasks to `done.txt`, on demand from the pulley
+  (pull down; archives *every* completed task) or automatically right after
+  completing.
+- **File handling**: you pick the *folder* that holds `todo.txt` and `done.txt`
+  (folder picker; on the first run the app offers to choose one), the file is
+  watched and reloaded when changed externally; writes are delayed by a
+  configurable idle time (default 3 s) and coalesced; optional CRLF line breaks.
 - **Settings** for all of the above plus todo.txt terminology
   (context/project vs. list/tag) and case sensitive sorting.
 
@@ -66,8 +82,9 @@ German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
 
 | What | Where |
 |---|---|
-| Tasks | `~/Documents/todotxt/todo.txt` (default, configurable) |
-| Archive | `done.txt` next to the todo file |
+| Folder (chosen in Settings) | `~/Documents/todotxt/` by default |
+| Tasks | `todo.txt` in that folder |
+| Archive | `done.txt` in that folder |
 | Settings and saved filters | `~/.config/cz.mig/harbour-todotxt/harbour-todotxt.conf` |
 
 The Sailjail permission `Documents` is required for the default location;
@@ -89,7 +106,8 @@ src/query.{h,cpp}              Query: filter + sort state, matching, comparators
 src/taskmodel.{h,cpp}          TaskModel: QAbstractListModel over the store through
                                the query, selection, headers, manual move
 src/filterstore.{h,cpp}        FilterStore: saved filters (JSON in settings)
-src/settings.{h,cpp}           Settings: QSettings-backed properties
+src/settings.{h,cpp}           Settings: QSettings-backed properties (todo/done
+                               folder, derived todo.txt/done.txt paths)
 src/harbour-todotxt.cpp        main: context properties, QML view
 qml/harbour-todotxt.qml        ApplicationWindow, helpers (terms, dialogs)
 qml/pages/MainPage.qml         task list, pulley, selection mode, search
@@ -102,9 +120,10 @@ qml/pages/SortPage.qml         sort keys (flip, move)
 qml/pages/SavedFiltersPage.qml saved filters
 qml/pages/NameDialog.qml       name entry for saved filters
 qml/pages/TaskDialog.qml       add / edit task
-qml/pages/FilePickerPage.qml   choose the todo file
+qml/pages/PickFolderPage.qml   choose the folder with todo.txt (and done.txt)
 qml/pages/SettingsPage.qml     settings
-qml/components/TaskDelegate.qml list delegate
+qml/components/TaskDelegate.qml list delegate (completion mark, drag handle)
+qml/symbols/icon-m-filter.svg  filter icon used in the header
 qml/cover/CoverPage.qml        cover with overdue / today counts
 translations/                  harbour-todotxt.ts (source) + per-language .ts
 tools/gen_ts.py                generates the per-language .ts files from tables

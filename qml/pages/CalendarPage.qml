@@ -34,11 +34,10 @@ Page {
     }
     function stateColor(k) {
         var diff = daysFromToday(k)
-        if (diff < 0) return "#ff5d5d"      // missed
-        if (diff === 0) return "#5dc85d"    // today
-        if (diff === 1) return "#5d9cff"    // tomorrow
-        if (diff === 2) return "#2f5fa8"    // day after tomorrow
-        return "#ffd700"                    // later
+        if (diff < 0) return app.dateMissedColor       // missed
+        if (diff === 0) return app.dateTodayColor      // today
+        if (diff <= 2) return app.dateSoonColor        // tomorrow / day after
+        return Theme.secondaryColor                    // later
     }
     function stateTextColor(k) {
         return daysFromToday(k) > 2 ? "#000000" : "#ffffff"

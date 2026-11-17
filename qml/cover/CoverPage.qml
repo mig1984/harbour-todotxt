@@ -17,7 +17,7 @@ CoverBackground {
         }
         Label {
             width: parent.width
-            text: taskModel.count
+            text: taskModel.pendingCount
             font.pixelSize: Theme.fontSizeHuge
         }
         Label {

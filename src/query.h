@@ -40,6 +40,7 @@ class Query : public QObject
     Q_PROPERTY(QString prefill READ prefill NOTIFY changed)
     Q_PROPERTY(bool manualSort READ manualSort NOTIFY changed)
     Q_PROPERTY(QStringList effectiveSorts READ effectiveSorts NOTIFY changed)
+    Q_PROPERTY(QString sectionKey READ sectionKey NOTIFY changed)
 
 public:
     explicit Query(QObject *parent = 0);
@@ -55,6 +56,7 @@ public:
     QString prefill() const;
     bool manualSort() const;
     QStringList effectiveSorts() const;
+    QString sectionKey() const;        // sort key used for section headers ("" if none)
 
     Q_INVOKABLE QString toJson() const;
     Q_INVOKABLE void fromJson(const QString &json);

@@ -8,17 +8,61 @@ Dialog {
     property string text: ""
     property int initialCursor: -1
     readonly property bool editing: taskIds.length > 0
-    // The editor works with a single line; the exception is editing several
-    // selected tasks at once, where each line still maps to one task.
-    readonly property bool singleLine: taskIds.length <= 1
+    // One task per line, except when editing a single task, where the editor
+    // stays on a single line. Adding tasks is multi-line: Enter starts the
+    // next task.
+    readonly property bool singleLine: taskIds.length === 1
 
-    canAccept: editing || editor.text.trim().length > 0
+    canAccept: editing || hasTaskText(editor.text)
 
     onAccepted: {
         if (editing)
             store.updateTasks(taskIds, editor.text)
         else
-            store.addTasks(editor.text)
+            store.addTasks(tasksOnly(editor.text))
+    }
+
+    // True if the line holds any text besides todo.txt structure (priority,
+    // dates, key:value such as due:/t:, @lists and +tags).
+    function hasTaskText(line) {
+        var s = line
+            .replace(/^\s*x\s+/i, " ")
+            .replace(/(^|\s)(due|t|thr|rec|h|uuid|pri):\S+/ig, " ")
+            .replace(/\d{4}-\d{2}-\d{2}/g, " ")
+            .replace(/(^|\s)\(\w\)/g, " ")
+            .replace(/(^|\s)[@+]\S+/g, " ")
+        return s.trim().length > 0
+    }
+
+    function tasksOnly(text) {
+        var lines = text.split("\n")
+        var keep = []
+        for (var i = 0; i < lines.length; i++)
+            if (hasTaskText(lines[i])) keep.push(lines[i])
+        return keep.join("\n")
+    }
+
+    // Prefill for the next task when Enter is pressed: the structure of the
+    // current line (priority, due:, t:, @lists, +tags), with the cursor placed
+    // before it so the typed text goes first and the attributes end up at the
+    // end of the line - matching how the ValueButtons edit the line.
+    function nextLinePrefill(line) {
+        var m = line.match(/^(?:x \d{4}-\d{2}-\d{2} )?\((\w)\) /)
+        var head = m ? "(" + m[1] + ") " : ""
+        var tokens = []
+        var due = line.match(/(^|\s)due:(\d{4}-\d{2}-\d{2})/i)
+        if (due) tokens.push("due:" + due[2])
+        var thr = line.match(/(^|\s)t:(\d{4}-\d{2}-\d{2})/i)
+        if (thr) tokens.push("t:" + thr[2])
+        var lists = line.match(/(^|\s)@\S+/g) || []
+        for (var i = 0; i < lists.length; i++) tokens.push(lists[i].trim())
+        var tags = line.match(/(^|\s)\+\S+/g) || []
+        for (var j = 0; j < tags.length; j++) tokens.push(tags[j].trim())
+        if (head.length > 0)
+            return { "text": tokens.length > 0 ? head + " " + tokens.join(" ") : head, "pos": head.length }
+        if (tokens.length > 0)
+            return { "text": " " + tokens.join(" "), "pos": 0 }
+        return { "text": "", "pos": 0 }
     }
 
     // Returns [lineStart, lineEnd] of the line containing the cursor
@@ -131,7 +175,7 @@ Dialog {
             width: parent.width
 
             DialogHeader {
-                title: editing ? qsTr("Update") : qsTr("Add task")
+                title: editing ? qsTr("Update") : qsTr("Add tasks")
                 acceptText: qsTr("Save")
             }
 
@@ -141,16 +185,52 @@ Dialog {
                 text: dialog.text
                 placeholderText: dialog.singleLine ? qsTr("Task") : qsTr("One task per line")
                 inputMethodHints: settings.capitalizeTasks ? Qt.ImhNone : Qt.ImhNoAutoUppercase
+                // Text as it was before the last edit, to spot a line break
+                // added by pressing Enter; adjusting guards our own edits.
+                property string previousText: ""
+                property bool adjusting: false
+
+                function newlineCount(s) { return s.split("\n").length - 1 }
+
                 onTextChanged: {
-                    if (!dialog.singleLine || text.indexOf("\n") < 0) return
-                    var pos = cursorPosition
-                    var t = text.replace(/\s*\n+\s*/g, " ")
-                    text = t
-                    cursorPosition = Math.min(pos, t.length)
+                    if (adjusting) { previousText = text; return }
+                    if (dialog.singleLine) {
+                        if (text.indexOf("\n") < 0) { previousText = text; return }
+                        var pos = cursorPosition
+                        var collapsed = text.replace(/\s*\n+\s*/g, " ")
+                        adjusting = true
+                        text = collapsed
+                        cursorPosition = Math.min(pos, collapsed.length)
+                        adjusting = false
+                        previousText = text
+                        return
+                    }
+                    // Multi-line: a line break was just added at the cursor. The
+                    // editor may have split the line at the cursor, so rebuild
+                    // the whole line we left and add a new task below, prefilled
+                    // with all of its attributes.
+                    if (newlineCount(text) === newlineCount(previousText) + 1
+                            && cursorPosition > 0 && text.charAt(cursorPosition - 1) === "\n") {
+                        var at = cursorPosition
+                        var lineStart = text.lastIndexOf("\n", at - 2) + 1
+                        var lineEnd = text.indexOf("\n", at)
+                        if (lineEnd < 0) lineEnd = text.length
+                        var original = text.substring(lineStart, at - 1) + text.substring(at, lineEnd)
+                        var p = nextLinePrefill(original)
+                        adjusting = true
+                        // Assigning text resets cursorPosition, so set it after.
+                        text = text.substring(0, lineStart) + original + "\n" + p.text + text.substring(lineEnd)
+                        cursorPosition = lineStart + original.length + 1 + p.pos
+                        adjusting = false
+                        previousText = text
+                        return
+                    }
+                    previousText = text
                 }
                 Component.onCompleted: {
                     cursorPosition = initialCursor >= 0 ? initialCursor : text.length
                     forceActiveFocus()
+                    previousText = text
                 }
             }
 

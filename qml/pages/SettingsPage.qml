@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Sailfish.Pickers 1.0
 
 Page {
     id: page
@@ -15,22 +14,25 @@ Page {
 
             PageHeader { title: qsTr("Settings") }
 
-            SectionHeader { text: qsTr("File") }
+            SectionHeader { text: qsTr("Folder") }
             TextField {
                 id: pathField
                 width: parent.width
-                label: qsTr("todo.txt")
-                description: qsTr("done.txt is kept next to it")
-                text: settings.todoFile
+                label: qsTr("Folder")
+                description: qsTr("todo.txt and done.txt are kept here")
+                text: settings.todoFolder
                 inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                 EnterKey.iconSource: "image://theme/icon-m-enter-accept"
-                EnterKey.onClicked: { settings.todoFile = text; focus = false }
-                onActiveFocusChanged: if (!activeFocus && text !== settings.todoFile) settings.todoFile = text
+                EnterKey.onClicked: { settings.todoFolder = text; focus = false }
+                onActiveFocusChanged: if (!activeFocus && text !== settings.todoFolder) settings.todoFolder = text
             }
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Choose file…")
-                onClicked: pageStack.push(Qt.resolvedUrl("FilePickerPage.qml"))
+                text: qsTr("Choose folder…")
+                onClicked: {
+                    var dlg = pageStack.push(Qt.resolvedUrl("PickFolderPage.qml"))
+                    dlg.chosen.connect(function(path) { settings.todoFolder = path })
+                }
             }
             Item { width: 1; height: Theme.paddingMedium }
             TextSwitch {

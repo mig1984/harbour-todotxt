@@ -24,7 +24,7 @@ TodoStore::TodoStore(Settings *settings, QObject *parent)
     connect(&m_watchTimer, SIGNAL(timeout()), this, SLOT(reload()));
     connect(&m_watcher, SIGNAL(fileChanged(QString)), this, SLOT(onFileChanged(QString)));
     connect(&m_watcher, SIGNAL(directoryChanged(QString)), this, SLOT(onDirectoryChanged(QString)));
-    connect(m_settings, SIGNAL(todoFileChanged()), this, SLOT(onTodoFileSettingChanged()));
+    connect(m_settings, SIGNAL(todoFolderChanged()), this, SLOT(onTodoFileSettingChanged()));
 }
 
 QString TodoStore::todoFile() const

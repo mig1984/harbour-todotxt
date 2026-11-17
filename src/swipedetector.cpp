@@ -32,19 +32,17 @@ void SwipeDetector::finish(const QPointF &pos, QObject *watched)
 
     QWindow *window = qobject_cast<QWindow *>(watched);
     const qreal width = window ? window->width() : 0;
-    // Ignore gestures that begin at the left edge; there Sailfish uses a
-    // rightward swipe for page back navigation.
-    if (width > 0 && m_start.x() < width * 0.12)
-        return;
 
     const QPointF delta = pos - m_start;
     const qreal minDistance = qMax<qreal>(150, width * 0.25);
-    if (delta.x() < minDistance
+    // Only leftward gestures are meaningful; rightward swipes from the left
+    // edge are Sailfish's page back navigation and are ignored.
+    if (delta.x() > -minDistance
             || qAbs(delta.x()) < qAbs(delta.y()) * 1.5
             || m_timer.elapsed() > MIN_MS)
         return;
 
-    emit swipeRight();
+    emit swipeLeft();
 }
 
 bool SwipeDetector::eventFilter(QObject *watched, QEvent *event)

@@ -27,7 +27,7 @@ Dialog {
     function addItem(name, initial) {
         for (var i = 0; i < items.count; i++)
             if (items.get(i).name === name) return
-        items.append({ "name": name, "initial": initial, "state": initial })
+        items.append({ "name": name, "initial": initial, "checkState": initial })
     }
 
     Component.onCompleted: {
@@ -48,8 +48,8 @@ Dialog {
         }
         for (var i = 0; i < items.count; i++) {
             var it = items.get(i)
-            if (it.state === 2 && it.initial !== 2) added.push(it.name)
-            else if (it.state === 0 && it.initial !== 0) removed.push(it.name)
+            if (it.checkState === 2 && it.initial !== 2) added.push(it.name)
+            else if (it.checkState === 0 && it.initial !== 0) removed.push(it.name)
         }
         if (taskIds.length > 0) {
             if (removed.length > 0) isLists ? store.removeLists(taskIds, removed) : store.removeTags(taskIds, removed)
@@ -83,10 +83,10 @@ Dialog {
         }
         delegate: TextSwitch {
             text: prefix + name
-            description: state === 1 ? qsTr("on some of the selected tasks") : ""
-            checked: state === 2
+            description: checkState === 1 ? qsTr("on some of the selected tasks") : ""
+            checked: checkState === 2
             automaticCheck: false
-            onClicked: items.setProperty(index, "state", state === 2 ? 0 : 2)
+            onClicked: items.setProperty(index, "checkState", checkState === 2 ? 0 : 2)
         }
         VerticalScrollDecorator { }
     }

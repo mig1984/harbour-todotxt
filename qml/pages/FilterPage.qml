@@ -55,7 +55,10 @@ Page {
             }
 
             ExpandingSectionGroup {
-                currentIndex: 0
+                // No section expanded by default; remember the expanded section
+                // while navigating within the app.
+                currentIndex: app.filterSection
+                onCurrentIndexChanged: app.filterSection = currentIndex
 
                 ExpandingSection {
                     title: app.listsTerm + (query.contexts.length > 0 ? " (" + query.contexts.length + ")" : "")

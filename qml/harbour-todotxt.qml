@@ -6,6 +6,10 @@ import "cover"
 ApplicationWindow {
     id: app
 
+    // Which Filter page section is expanded (-1 = none). Kept across visits
+    // within the session so re-opening the filter keeps the last state.
+    property int filterSection: -1
+
     initialPage: Component { MainPage { } }
     cover: Component { CoverPage { } }
     allowedOrientations: defaultAllowedOrientations
@@ -26,15 +30,28 @@ ApplicationWindow {
         }
     }
 
-    // 0 none, 1 overdue, 2 today, 3 tomorrow, 4 later
-    function dateStateColor(state, fallback) {
-        if (!settings.colorDates) return fallback
-        switch (state) {
-        case 1: return "#ff5d5d"
-        case 2: return "#5dc85d"
-        case 3: return "#5d9cff"
-        default: return fallback
-        }
+    // Due date colors: missed red, today green, tomorrow/day after tomorrow
+    // blue, anything later left as the fallback (secondary) color.
+    readonly property string dateMissedColor: "#ff5d5d"
+    readonly property string dateTodayColor: "#5dc85d"
+    readonly property string dateSoonColor: "#5d9cff"
+
+    // Color a yyyy-MM-dd date according to how far it is from today.
+    // Returns fallback when the date is empty or when date coloring is off.
+    function dateColor(date, fallback) {
+        if (!settings.colorDates || !date)
+            return fallback
+        var p = date.split("-")
+        if (p.length !== 3)
+            return fallback
+        var t = taskModel.today().split("-")
+        var due = new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]))
+        var today = new Date(parseInt(t[0]), parseInt(t[1]) - 1, parseInt(t[2]))
+        var diff = Math.round((due.getTime() - today.getTime()) / 86400000)
+        if (diff < 0) return dateMissedColor
+        if (diff === 0) return dateTodayColor
+        if (diff <= 2) return dateSoonColor
+        return fallback
     }
 
     function openTaskDialog(ids) {

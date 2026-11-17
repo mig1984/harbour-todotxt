@@ -365,17 +365,20 @@ int Query::compare(const Task &a, const Task &b, int keyCount) const
     return 0;
 }
 
-QString Query::section(const Task &t, const QString &empty) const
+QString Query::sectionKey() const
 {
     QStringList s = effectiveSorts();
-    QString key;
     for (int i = 0; i < s.size() && i < 3; ++i) {
         QString k = s[i].section('!', 1);
-        if (k != "completed" && k != "in_future") {
-            key = k;
-            break;
-        }
+        if (k != "completed" && k != "in_future")
+            return k;
     }
+    return QString();
+}
+
+QString Query::section(const Task &t, const QString &empty) const
+{
+    QString key = sectionKey();
     if (key == "by_context") {
         QStringList l = t.lists();
         return l.isEmpty() ? empty : l.first();

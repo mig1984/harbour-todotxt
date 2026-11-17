@@ -1,6 +1,6 @@
 Name:       harbour-todotxt
 Summary:    Todo.txt task list for Sailfish OS (Simpletask port)
-Version:    1.1.0
+Version:    1.2.0
 Release:    1
 License:    GPLv3
 URL:        https://github.com/mig1984/harbour-todotxt
