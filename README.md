@@ -6,7 +6,7 @@ ported from [Simpletask](https://github.com/mpcjanssen/simpletask-android)
 and writes `todo.txt` (and `done.txt` next to it) and can be combined with any
 sync tool that moves the file.
 
-Version 1.2.0 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
+Version 1.3.0 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
 German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
 
 ## Screenshots
@@ -31,6 +31,9 @@ German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
   blue), uppercase headers (optional). The header shows the number of
   *not-completed* tasks and has icon buttons for search, the filter and the
   calendar. Cover shows the counts of overdue and due-today tasks.
+- **Task long-press menu**: priority, due date, a quick **Tomorrow** due action,
+  threshold date, and open/call/mail actions. Complete/uncomplete is done with
+  the checkbox next to the task (or from multi-selection).
 - **Calendar**: the date icon in the header opens a month view of the due dates
   of the tasks in the current filter, colour-coded like the list (overdue red,
   today green, tomorrow and the day after blue, later grey).

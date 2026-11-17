@@ -667,84 +667,79 @@
 <context>
     <name>TaskDelegate</name>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="39"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="38"/>
         <source>Marking incomplete</source>
         <translation>Marquage comme non terminé</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="39"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="38"/>
         <source>Completing</source>
         <translation>Achèvement</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="48"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="47"/>
         <source>done %1</source>
         <translation>terminé %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="50"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="49"/>
         <source>due %1</source>
         <translation>échéance %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="52"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="51"/>
         <source>t %1</source>
         <translation>seuil %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="223"/>
-        <source>Mark incomplete</source>
-        <translation>Marquer non terminée</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="223"/>
-        <source>Complete</source>
-        <translation>Terminer</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="227"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="228"/>
         <source>Priority</source>
         <translation>Priorité</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="234"/>
-        <location filename="../qml/components/TaskDelegate.qml" line="236"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="235"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="237"/>
         <source>Due date</source>
         <translation>Échéance</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="241"/>
-        <location filename="../qml/components/TaskDelegate.qml" line="243"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="224"/>
+        <source>Tomorrow</source>
+        <translation>Demain</translation>
+    </message>
+    <message>
+        <location filename="../qml/components/TaskDelegate.qml" line="242"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="244"/>
         <source>Threshold date</source>
         <translation>Date seuil</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="250"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="251"/>
         <source>Open %1</source>
         <translation>Ouvrir %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="258"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="259"/>
         <source>Call %1</source>
         <translation>Appeler %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="265"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="266"/>
         <source>Mail %1</source>
         <translation>Écrire à %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="270"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="271"/>
         <source>Select</source>
         <translation>Sélectionner</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="275"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="276"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="276"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="277"/>
         <source>Deleting</source>
         <translation>Suppression</translation>
     </message>

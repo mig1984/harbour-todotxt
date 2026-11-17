@@ -1,6 +1,6 @@
 Name:       harbour-todotxt
 Summary:    Todo.txt task list for Sailfish OS (Simpletask port)
-Version:    1.2.0
+Version:    1.3.0
 Release:    1
 License:    GPLv3
 URL:        https://github.com/mig1984/harbour-todotxt
@@ -41,6 +41,12 @@ desktop-file-install --delete-original \
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Tue Nov 17 2026 Jan Molič <jan.molic@1984.cz> - 1.3.0-1
+- Fix: the task long-press menu's priority, due date and threshold date
+  actions had no effect (the Component-based context menu was destroyed on
+  close, tearing down the page signal connections); the menu is now inline
+- Task long-press menu: remove Complete/Mark incomplete (use the checkbox)
+- Task long-press menu: add a quick "Tomorrow" due-date action
 * Mon Nov 16 2026 Jan Molič <jan.molic@1984.cz> - 1.1.0-1
 - Sort order: all keys listed, active keys reorderable by drag&drop and
   direction flip, inactive keys can be added/removed; entry in main menu
