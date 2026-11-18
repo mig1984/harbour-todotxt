@@ -61,8 +61,12 @@ ListItem {
         width: Theme.iconSizeSmall + Theme.paddingSmall
         height: width
         radius: width / 2
-        color: (selectionMode ? isSelected : completed) ? Theme.highlightColor : "transparent"
-        border.color: selectionMode ? Theme.highlightColor : Theme.secondaryColor
+        color: selectionMode
+               ? (isSelected ? app.selectionColor : "transparent")
+               : (completed ? Theme.highlightColor : "transparent")
+        border.color: selectionMode
+                      ? (isSelected ? app.selectionColor : Theme.secondaryColor)
+                      : Theme.secondaryColor
         border.width: Math.max(1, Theme.paddingSmall / 3)
         Icon {
             anchors.centerIn: parent

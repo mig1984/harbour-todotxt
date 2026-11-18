@@ -34,12 +34,13 @@ CoverBackground {
             height: cover.height * 0.55
             clip: true
             interactive: false
-            model: taskModel
+            model: taskModel.coverTasks
             delegate: Label {
                 width: parent.width
-                text: (priority !== "-" ? "(" + priority + ") " : "") + display.replace(/<[^>]*>/g, "")
+                text: (modelData.priority !== "-" ? "(" + modelData.priority + ") " : "")
+                      + modelData.text.replace(/<[^>]*>/g, "")
                 font.pixelSize: Theme.fontSizeExtraSmall
-                color: completed ? Theme.secondaryColor : Theme.primaryColor
+                color: Theme.primaryColor
                 truncationMode: TruncationMode.Fade
             }
         }

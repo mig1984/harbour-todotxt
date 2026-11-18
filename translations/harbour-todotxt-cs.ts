@@ -247,7 +247,7 @@
         <translation>Řazení</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="238" />
+        <location filename="../qml/pages/MainPage.qml" line="248" />
         <source>Search</source>
         <translation>Hledat</translation>
     </message>
@@ -297,37 +297,37 @@
         <translation><numerusform>Archivuji %n úkol</numerusform><numerusform>Archivuji %n úkoly</numerusform><numerusform>Archivuji %n úkolů</numerusform></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="322" />
+        <location filename="../qml/pages/MainPage.qml" line="332" />
         <source>No folder selected</source>
         <translation>Není vybrána složka</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="324" />
+        <location filename="../qml/pages/MainPage.qml" line="334" />
         <source>No matching tasks</source>
         <translation>Žádné odpovídající úkoly</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="324" />
+        <location filename="../qml/pages/MainPage.qml" line="334" />
         <source>No tasks</source>
         <translation>Žádné úkoly</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="325" />
+        <location filename="../qml/pages/MainPage.qml" line="335" />
         <source>Choose the folder with todo.txt in Settings</source>
         <translation>V nastavení vyberte složku s todo.txt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="327" />
+        <location filename="../qml/pages/MainPage.qml" line="337" />
         <source>Pull down to add a task</source>
         <translation>Úkol přidáte stažením dolů</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="327" />
+        <location filename="../qml/pages/MainPage.qml" line="337" />
         <source>Tap the filter icon to change the filter</source>
         <translation>Klepnutím na ikonu filtru změníte filtr</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="389" />
+        <location filename="../qml/pages/MainPage.qml" line="399" />
         <source>Due date</source>
         <translation>Termín</translation>
     </message>
@@ -343,7 +343,7 @@
         <translation>Archivuji</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="412" />
+        <location filename="../qml/pages/MainPage.qml" line="422" />
         <source>Deleting %n tasks</source>
         <translation><numerusform>Mažu %n úkol</numerusform><numerusform>Mažu %n úkoly</numerusform><numerusform>Mažu %n úkolů</numerusform></translation>
     </message>
@@ -669,18 +669,18 @@
         <translation>práh %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="232" />
+        <location filename="../qml/components/TaskDelegate.qml" line="236" />
         <source>Priority</source>
         <translation>Priorita</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="239" />
-        <location filename="../qml/components/TaskDelegate.qml" line="241" />
+        <location filename="../qml/components/TaskDelegate.qml" line="243" />
+        <location filename="../qml/components/TaskDelegate.qml" line="245" />
         <source>Due date</source>
         <translation>Termín</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="224" />
+        <location filename="../qml/components/TaskDelegate.qml" line="228" />
         <source>Tomorrow</source>
         <translation>Zítra</translation>
     </message>
@@ -695,43 +695,43 @@
         <translation>Dokončování</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="228" />
+        <location filename="../qml/components/TaskDelegate.qml" line="232" />
         <source>Day after tomorrow</source>
         <translation>Pozítří</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="246" />
-        <location filename="../qml/components/TaskDelegate.qml" line="248" />
+        <location filename="../qml/components/TaskDelegate.qml" line="250" />
+        <location filename="../qml/components/TaskDelegate.qml" line="252" />
         <source>Threshold date</source>
         <translation>Prahové datum</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="255" />
+        <location filename="../qml/components/TaskDelegate.qml" line="259" />
         <source>Open %1</source>
         <translation>Otevřít %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="263" />
+        <location filename="../qml/components/TaskDelegate.qml" line="267" />
         <source>Call %1</source>
         <translation>Volat %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="270" />
+        <location filename="../qml/components/TaskDelegate.qml" line="274" />
         <source>Mail %1</source>
         <translation>Napsat %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="275" />
+        <location filename="../qml/components/TaskDelegate.qml" line="279" />
         <source>Select</source>
         <translation>Vybrat</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="280" />
+        <location filename="../qml/components/TaskDelegate.qml" line="284" />
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="281" />
+        <location filename="../qml/components/TaskDelegate.qml" line="285" />
         <source>Deleting</source>
         <translation>Mažu</translation>
     </message>
@@ -814,62 +814,62 @@
         <translation>Žádné</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="644" />
+        <location filename="../src/taskmodel.cpp" line="667" />
         <source>today</source>
         <translation>dnes</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="646" />
+        <location filename="../src/taskmodel.cpp" line="669" />
         <source>tomorrow</source>
         <translation>zítra</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="648" />
+        <location filename="../src/taskmodel.cpp" line="671" />
         <source>yesterday</source>
         <translation>včera</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="652" />
+        <location filename="../src/taskmodel.cpp" line="675" />
         <source>%1 days</source>
         <translation>%1 dní</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="654" />
+        <location filename="../src/taskmodel.cpp" line="677" />
         <source>1 week</source>
         <translation>1 týden</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="654" />
+        <location filename="../src/taskmodel.cpp" line="677" />
         <source>%1 weeks</source>
         <translation>%1 týdnů</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="656" />
+        <location filename="../src/taskmodel.cpp" line="679" />
         <source>1 month</source>
         <translation>1 měsíc</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="656" />
+        <location filename="../src/taskmodel.cpp" line="679" />
         <source>%1 months</source>
         <translation>%1 měsíců</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="658" />
+        <location filename="../src/taskmodel.cpp" line="681" />
         <source>1 year</source>
         <translation>1 rok</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="658" />
+        <location filename="../src/taskmodel.cpp" line="681" />
         <source>%1 years</source>
         <translation>%1 let</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="659" />
+        <location filename="../src/taskmodel.cpp" line="682" />
         <source>%1 ago</source>
         <translation>před %1</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="659" />
+        <location filename="../src/taskmodel.cpp" line="682" />
         <source>in %1</source>
         <translation>za %1</translation>
     </message>

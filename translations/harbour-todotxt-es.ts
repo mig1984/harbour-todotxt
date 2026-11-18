@@ -247,7 +247,7 @@
         <translation>Orden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="238" />
+        <location filename="../qml/pages/MainPage.qml" line="248" />
         <source>Search</source>
         <translation>Buscar</translation>
     </message>
@@ -297,37 +297,37 @@
         <translation><numerusform>Archivando %n tarea</numerusform><numerusform>Archivando %n tareas</numerusform></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="322" />
+        <location filename="../qml/pages/MainPage.qml" line="332" />
         <source>No folder selected</source>
         <translation>Ninguna carpeta seleccionada</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="324" />
+        <location filename="../qml/pages/MainPage.qml" line="334" />
         <source>No matching tasks</source>
         <translation>No hay tareas coincidentes</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="324" />
+        <location filename="../qml/pages/MainPage.qml" line="334" />
         <source>No tasks</source>
         <translation>No hay tareas</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="325" />
+        <location filename="../qml/pages/MainPage.qml" line="335" />
         <source>Choose the folder with todo.txt in Settings</source>
         <translation>Elige la carpeta con todo.txt en Ajustes</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="327" />
+        <location filename="../qml/pages/MainPage.qml" line="337" />
         <source>Pull down to add a task</source>
         <translation>Tira hacia abajo para añadir una tarea</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="327" />
+        <location filename="../qml/pages/MainPage.qml" line="337" />
         <source>Tap the filter icon to change the filter</source>
         <translation>Toca el icono de filtro para cambiar el filtro</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="389" />
+        <location filename="../qml/pages/MainPage.qml" line="399" />
         <source>Due date</source>
         <translation>Fecha de vencimiento</translation>
     </message>
@@ -343,7 +343,7 @@
         <translation>Archivando</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="412" />
+        <location filename="../qml/pages/MainPage.qml" line="422" />
         <source>Deleting %n tasks</source>
         <translation><numerusform>Eliminando %n tarea</numerusform><numerusform>Eliminando %n tareas</numerusform></translation>
     </message>
@@ -669,18 +669,18 @@
         <translation>umbral %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="232" />
+        <location filename="../qml/components/TaskDelegate.qml" line="236" />
         <source>Priority</source>
         <translation>Prioridad</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="239" />
-        <location filename="../qml/components/TaskDelegate.qml" line="241" />
+        <location filename="../qml/components/TaskDelegate.qml" line="243" />
+        <location filename="../qml/components/TaskDelegate.qml" line="245" />
         <source>Due date</source>
         <translation>Fecha de vencimiento</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="224" />
+        <location filename="../qml/components/TaskDelegate.qml" line="228" />
         <source>Tomorrow</source>
         <translation>Mañana</translation>
     </message>
@@ -695,43 +695,43 @@
         <translation>Completando</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="228" />
+        <location filename="../qml/components/TaskDelegate.qml" line="232" />
         <source>Day after tomorrow</source>
         <translation>Pasado mañana</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="246" />
-        <location filename="../qml/components/TaskDelegate.qml" line="248" />
+        <location filename="../qml/components/TaskDelegate.qml" line="250" />
+        <location filename="../qml/components/TaskDelegate.qml" line="252" />
         <source>Threshold date</source>
         <translation>Fecha umbral</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="255" />
+        <location filename="../qml/components/TaskDelegate.qml" line="259" />
         <source>Open %1</source>
         <translation>Abrir %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="263" />
+        <location filename="../qml/components/TaskDelegate.qml" line="267" />
         <source>Call %1</source>
         <translation>Llamar a %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="270" />
+        <location filename="../qml/components/TaskDelegate.qml" line="274" />
         <source>Mail %1</source>
         <translation>Escribir a %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="275" />
+        <location filename="../qml/components/TaskDelegate.qml" line="279" />
         <source>Select</source>
         <translation>Seleccionar</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="280" />
+        <location filename="../qml/components/TaskDelegate.qml" line="284" />
         <source>Delete</source>
         <translation>Eliminar</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="281" />
+        <location filename="../qml/components/TaskDelegate.qml" line="285" />
         <source>Deleting</source>
         <translation>Eliminando</translation>
     </message>
@@ -814,62 +814,62 @@
         <translation>Ninguna</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="644" />
+        <location filename="../src/taskmodel.cpp" line="667" />
         <source>today</source>
         <translation>hoy</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="646" />
+        <location filename="../src/taskmodel.cpp" line="669" />
         <source>tomorrow</source>
         <translation>mañana</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="648" />
+        <location filename="../src/taskmodel.cpp" line="671" />
         <source>yesterday</source>
         <translation>ayer</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="652" />
+        <location filename="../src/taskmodel.cpp" line="675" />
         <source>%1 days</source>
         <translation>%1 días</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="654" />
+        <location filename="../src/taskmodel.cpp" line="677" />
         <source>1 week</source>
         <translation>1 semana</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="654" />
+        <location filename="../src/taskmodel.cpp" line="677" />
         <source>%1 weeks</source>
         <translation>%1 semanas</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="656" />
+        <location filename="../src/taskmodel.cpp" line="679" />
         <source>1 month</source>
         <translation>1 mes</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="656" />
+        <location filename="../src/taskmodel.cpp" line="679" />
         <source>%1 months</source>
         <translation>%1 meses</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="658" />
+        <location filename="../src/taskmodel.cpp" line="681" />
         <source>1 year</source>
         <translation>1 año</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="658" />
+        <location filename="../src/taskmodel.cpp" line="681" />
         <source>%1 years</source>
         <translation>%1 años</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="659" />
+        <location filename="../src/taskmodel.cpp" line="682" />
         <source>%1 ago</source>
         <translation>hace %1</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="659" />
+        <location filename="../src/taskmodel.cpp" line="682" />
         <source>in %1</source>
         <translation>en %1</translation>
     </message>

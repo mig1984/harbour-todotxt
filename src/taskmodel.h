@@ -23,9 +23,9 @@ class TaskModel : public QAbstractListModel
     Q_PROPERTY(int selectedCount READ selectedCount NOTIFY selectionChanged)
     Q_PROPERTY(int overdueCount READ overdueCount NOTIFY countChanged)
     Q_PROPERTY(int dueTodayCount READ dueTodayCount NOTIFY countChanged)
-    // Tasks for the cover: non-completed, those due up to the day after
-    // tomorrow first, then the rest (bounded). Each entry is a map with
-    // text/priority/due/completed.
+    // Tasks for the cover: non-completed, those due or thresholded on
+    // today..day after tomorrow first, then overdue (as filler), then the
+    // rest (bounded). Each entry is a map with text/priority/due.
     Q_PROPERTY(QVariantList coverTasks READ coverTasks NOTIFY countChanged)
     Q_PROPERTY(bool showSelected READ showSelected WRITE setShowSelected NOTIFY showSelectedChanged)
 

@@ -247,7 +247,7 @@
         <translation>Sorteringsordning</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="238" />
+        <location filename="../qml/pages/MainPage.qml" line="248" />
         <source>Search</source>
         <translation>Sök</translation>
     </message>
@@ -297,37 +297,37 @@
         <translation><numerusform>Arkiverar %n uppgift</numerusform><numerusform>Arkiverar %n uppgifter</numerusform></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="322" />
+        <location filename="../qml/pages/MainPage.qml" line="332" />
         <source>No folder selected</source>
         <translation>Ingen mapp vald</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="324" />
+        <location filename="../qml/pages/MainPage.qml" line="334" />
         <source>No matching tasks</source>
         <translation>Inga matchande uppgifter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="324" />
+        <location filename="../qml/pages/MainPage.qml" line="334" />
         <source>No tasks</source>
         <translation>Inga uppgifter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="325" />
+        <location filename="../qml/pages/MainPage.qml" line="335" />
         <source>Choose the folder with todo.txt in Settings</source>
         <translation>Välj mappen med todo.txt i Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="327" />
+        <location filename="../qml/pages/MainPage.qml" line="337" />
         <source>Pull down to add a task</source>
         <translation>Dra ner för att lägga till en uppgift</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="327" />
+        <location filename="../qml/pages/MainPage.qml" line="337" />
         <source>Tap the filter icon to change the filter</source>
         <translation>Tryck på filterikonen för att ändra filtret</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="389" />
+        <location filename="../qml/pages/MainPage.qml" line="399" />
         <source>Due date</source>
         <translation>Förfallodatum</translation>
     </message>
@@ -343,7 +343,7 @@
         <translation>Arkiverar</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="412" />
+        <location filename="../qml/pages/MainPage.qml" line="422" />
         <source>Deleting %n tasks</source>
         <translation><numerusform>Tar bort %n uppgift</numerusform><numerusform>Tar bort %n uppgifter</numerusform></translation>
     </message>
@@ -669,18 +669,18 @@
         <translation>tröskel %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="232" />
+        <location filename="../qml/components/TaskDelegate.qml" line="236" />
         <source>Priority</source>
         <translation>Prioritet</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="239" />
-        <location filename="../qml/components/TaskDelegate.qml" line="241" />
+        <location filename="../qml/components/TaskDelegate.qml" line="243" />
+        <location filename="../qml/components/TaskDelegate.qml" line="245" />
         <source>Due date</source>
         <translation>Förfallodatum</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="224" />
+        <location filename="../qml/components/TaskDelegate.qml" line="228" />
         <source>Tomorrow</source>
         <translation>Imorgon</translation>
     </message>
@@ -695,43 +695,43 @@
         <translation>Slutför</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="228" />
+        <location filename="../qml/components/TaskDelegate.qml" line="232" />
         <source>Day after tomorrow</source>
         <translation>I övermorgon</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="246" />
-        <location filename="../qml/components/TaskDelegate.qml" line="248" />
+        <location filename="../qml/components/TaskDelegate.qml" line="250" />
+        <location filename="../qml/components/TaskDelegate.qml" line="252" />
         <source>Threshold date</source>
         <translation>Tröskeldatum</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="255" />
+        <location filename="../qml/components/TaskDelegate.qml" line="259" />
         <source>Open %1</source>
         <translation>Öppna %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="263" />
+        <location filename="../qml/components/TaskDelegate.qml" line="267" />
         <source>Call %1</source>
         <translation>Ring %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="270" />
+        <location filename="../qml/components/TaskDelegate.qml" line="274" />
         <source>Mail %1</source>
         <translation>Mejla %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="275" />
+        <location filename="../qml/components/TaskDelegate.qml" line="279" />
         <source>Select</source>
         <translation>Välj</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="280" />
+        <location filename="../qml/components/TaskDelegate.qml" line="284" />
         <source>Delete</source>
         <translation>Ta bort</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="281" />
+        <location filename="../qml/components/TaskDelegate.qml" line="285" />
         <source>Deleting</source>
         <translation>Tar bort</translation>
     </message>
@@ -814,62 +814,62 @@
         <translation>Ingen</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="644" />
+        <location filename="../src/taskmodel.cpp" line="667" />
         <source>today</source>
         <translation>idag</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="646" />
+        <location filename="../src/taskmodel.cpp" line="669" />
         <source>tomorrow</source>
         <translation>imorgon</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="648" />
+        <location filename="../src/taskmodel.cpp" line="671" />
         <source>yesterday</source>
         <translation>igår</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="652" />
+        <location filename="../src/taskmodel.cpp" line="675" />
         <source>%1 days</source>
         <translation>%1 dagar</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="654" />
+        <location filename="../src/taskmodel.cpp" line="677" />
         <source>1 week</source>
         <translation>1 vecka</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="654" />
+        <location filename="../src/taskmodel.cpp" line="677" />
         <source>%1 weeks</source>
         <translation>%1 veckor</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="656" />
+        <location filename="../src/taskmodel.cpp" line="679" />
         <source>1 month</source>
         <translation>1 månad</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="656" />
+        <location filename="../src/taskmodel.cpp" line="679" />
         <source>%1 months</source>
         <translation>%1 månader</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="658" />
+        <location filename="../src/taskmodel.cpp" line="681" />
         <source>1 year</source>
         <translation>1 år</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="658" />
+        <location filename="../src/taskmodel.cpp" line="681" />
         <source>%1 years</source>
         <translation>%1 år</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="659" />
+        <location filename="../src/taskmodel.cpp" line="682" />
         <source>%1 ago</source>
         <translation>%1 sedan</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="659" />
+        <location filename="../src/taskmodel.cpp" line="682" />
         <source>in %1</source>
         <translation>om %1</translation>
     </message>

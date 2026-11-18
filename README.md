@@ -6,7 +6,7 @@ ported from [Simpletask](https://github.com/mpcjanssen/simpletask-android)
 and writes `todo.txt` (and `done.txt` next to it) and can be combined with any
 sync tool that moves the file.
 
-Version 1.4.0 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
+Version 1.4.1 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
 German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
 
 ## Screenshots

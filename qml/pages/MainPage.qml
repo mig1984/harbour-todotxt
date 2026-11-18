@@ -167,7 +167,17 @@ Page {
             PageHeader {
                 id: pageHeader
                 title: headerTitle()
-                description: headerDescription()
+                description: page.selectionMode ? "" : headerDescription()
+                titleColor: page.selectionMode ? Theme.primaryColor : Theme.highlightColor
+
+                // Red band behind the header while tasks are being selected,
+                // matching the selected task check circles.
+                Rectangle {
+                    anchors.fill: parent
+                    visible: page.selectionMode
+                    color: app.selectionColor
+                    z: -1
+                }
 
                 // Elide a long filter summary with "..." and keep it clear of
                 // the action buttons, which sit to the left of the title.

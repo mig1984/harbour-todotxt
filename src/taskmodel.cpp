@@ -420,45 +420,68 @@ static QString coverPriorityRank(QChar p)
 QVariantList TaskModel::coverTasks() const
 {
     const int maxItems = 8;
-    const QString dayAfter = QDate::fromString(m_today, "yyyy-MM-dd").addDays(2)
-                                 .toString("yyyy-MM-dd");
+    const QDate today = QDate::fromString(m_today, "yyyy-MM-dd");
+    const QString dayAfter = today.addDays(2).toString("yyyy-MM-dd");
 
-    QList<const Task *> soon, rest;
+    // Preferred first: tasks whose due or threshold falls on today, tomorrow
+    // or the day after tomorrow. Overdue tasks only fill the remaining slots.
+    QList<const Task *> windowTasks, overdue, rest;
     for (int i = 0; i < m_rows.size(); ++i) {
         const Task *t = m_store->findTask(m_rows[i]);
         if (!t || t->isCompleted())
             continue;
         const QString due = t->dueDate();
-        if (!due.isEmpty() && due <= dayAfter)
-            soon << t;
+        const QString threshold = t->thresholdDate();
+        const bool dueInWindow = !due.isEmpty() && due >= m_today && due <= dayAfter;
+        const bool thresholdInWindow = !threshold.isEmpty()
+                && threshold >= m_today && threshold <= dayAfter;
+        if (dueInWindow || thresholdInWindow)
+            windowTasks << t;
+        else if (!due.isEmpty() && due < m_today)
+            overdue << t;
         else
             rest << t;
     }
-    std::stable_sort(soon.begin(), soon.end(), [](const Task *a, const Task *b) {
+
+    // The earliest date that put the task into the window (due or threshold).
+    auto windowDate = [&](const Task *t) {
+        const QString due = t->dueDate();
+        const QString threshold = t->thresholdDate();
+        const bool dueIn = !due.isEmpty() && due >= m_today && due <= dayAfter;
+        const bool thrIn = !threshold.isEmpty() && threshold >= m_today && threshold <= dayAfter;
+        if (dueIn && thrIn)
+            return due < threshold ? due : threshold;
+        return dueIn ? due : threshold;
+    };
+
+    std::stable_sort(windowTasks.begin(), windowTasks.end(), [&](const Task *a, const Task *b) {
+        const QString da = windowDate(a);
+        const QString db = windowDate(b);
+        if (da != db)
+            return da < db;
+        return coverPriorityRank(a->priority()) < coverPriorityRank(b->priority());
+    });
+    std::stable_sort(overdue.begin(), overdue.end(), [](const Task *a, const Task *b) {
         if (a->dueDate() != b->dueDate())
             return a->dueDate() < b->dueDate();
         return coverPriorityRank(a->priority()) < coverPriorityRank(b->priority());
     });
 
     QVariantList out;
-    foreach (const Task *t, soon) {
-        if (out.size() >= maxItems) break;
-        QVariantMap m;
-        m["text"] = displayHtml(*t);
-        m["priority"] = QString(t->priority());
-        m["due"] = t->dueDate();
-        m["completed"] = t->isCompleted();
-        out << m;
-    }
-    foreach (const Task *t, rest) {
-        if (out.size() >= maxItems) break;
-        QVariantMap m;
-        m["text"] = displayHtml(*t);
-        m["priority"] = QString(t->priority());
-        m["due"] = t->dueDate();
-        m["completed"] = t->isCompleted();
-        out << m;
-    }
+    auto append = [&](const QList<const Task *> &list) {
+        foreach (const Task *t, list) {
+            if (out.size() >= maxItems)
+                return;
+            QVariantMap m;
+            m["text"] = displayHtml(*t);
+            m["priority"] = QString(t->priority());
+            m["due"] = t->dueDate();
+            out << m;
+        }
+    };
+    append(windowTasks);
+    append(overdue);
+    append(rest);
     return out;
 }
 

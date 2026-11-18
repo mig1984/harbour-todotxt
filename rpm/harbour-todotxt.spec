@@ -1,6 +1,6 @@
 Name:       harbour-todotxt
 Summary:    Todo.txt task list for Sailfish OS (Simpletask port)
-Version:    1.4.0
+Version:    1.4.1
 Release:    1
 License:    GPLv3
 URL:        https://github.com/mig1984/harbour-todotxt
@@ -41,6 +41,9 @@ desktop-file-install --delete-original \
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Wed Nov 18 2026 Jan Molič <jan.molic@1984.cz> - 1.4.1-1
+- Cover: tasks due or thresholded on today, tomorrow or the day after tomorrow are shown first (overdue only fills the remaining slots; completed tasks are no longer shown)
+- Selection mode: the header is highlighted to match the selected task check circles
 * Wed Nov 18 2026 Jan Molič <jan.molic@1984.cz> - 1.4.0-1
 - Incremental task list updates: the list is no longer reset and redrawn on every change, so the scroll position and any running undo bars are kept, and several tasks can be completed at once
 - Date menu and task long-press menu: add a quick "Day after tomorrow" due action

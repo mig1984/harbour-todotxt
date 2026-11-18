@@ -36,6 +36,10 @@ ApplicationWindow {
     readonly property string dateTodayColor: "#5dc85d"
     readonly property string dateSoonColor: "#5d9cff"
 
+    // Selection mode accent: the header band and the selected task check
+    // circles share this color so a selection is easy to spot.
+    readonly property string selectionColor: "#ff5d5d"
+
     // Color a yyyy-MM-dd date according to how far it is from today.
     // Returns fallback when the date is empty or when date coloring is off.
     function dateColor(date, fallback) {
