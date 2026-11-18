@@ -313,6 +313,7 @@
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="335" />
+        <location filename="../qml/pages/MainPage.qml" line="372" />
         <source>Choose the folder with todo.txt in Settings</source>
         <translation>Välj mappen med todo.txt i Inställningar</translation>
     </message>
@@ -327,7 +328,12 @@
         <translation>Tryck på filterikonen för att ändra filtret</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="399" />
+        <location filename="../qml/pages/MainPage.qml" line="359" />
+        <source>Example list</source>
+        <translation>Exempellista</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="438" />
         <source>Due date</source>
         <translation>Förfallodatum</translation>
     </message>
@@ -343,7 +349,7 @@
         <translation>Arkiverar</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="422" />
+        <location filename="../qml/pages/MainPage.qml" line="461" />
         <source>Deleting %n tasks</source>
         <translation><numerusform>Tar bort %n uppgift</numerusform><numerusform>Tar bort %n uppgifter</numerusform></translation>
     </message>
@@ -669,22 +675,6 @@
         <translation>tröskel %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="236" />
-        <source>Priority</source>
-        <translation>Prioritet</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="243" />
-        <location filename="../qml/components/TaskDelegate.qml" line="245" />
-        <source>Due date</source>
-        <translation>Förfallodatum</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="228" />
-        <source>Tomorrow</source>
-        <translation>Imorgon</translation>
-    </message>
-    <message>
         <location filename="../qml/components/TaskDelegate.qml" line="38" />
         <source>Marking incomplete</source>
         <translation>Markerar som ej slutförd</translation>
@@ -694,114 +684,88 @@
         <source>Completing</source>
         <translation>Slutför</translation>
     </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="232" />
-        <source>Day after tomorrow</source>
-        <translation>I övermorgon</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="250" />
-        <location filename="../qml/components/TaskDelegate.qml" line="252" />
-        <source>Threshold date</source>
-        <translation>Tröskeldatum</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="259" />
-        <source>Open %1</source>
-        <translation>Öppna %1</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="267" />
-        <source>Call %1</source>
-        <translation>Ring %1</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="274" />
-        <source>Mail %1</source>
-        <translation>Mejla %1</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="279" />
-        <source>Select</source>
-        <translation>Välj</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="284" />
-        <source>Delete</source>
-        <translation>Ta bort</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="285" />
-        <source>Deleting</source>
-        <translation>Tar bort</translation>
-    </message>
 </context>
 <context>
     <name>TaskDialog</name>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="178" />
+        <location filename="../qml/pages/TaskDialog.qml" line="183" />
+        <source>Open %1</source>
+        <translation>Öppna %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="186" />
+        <source>Mail %1</source>
+        <translation>Mejla %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="191" />
+        <source>Call %1</source>
+        <translation>Ring %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="205" />
         <source>Update</source>
         <translation>Uppdatera</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="178" />
+        <location filename="../qml/pages/TaskDialog.qml" line="205" />
         <source>Add tasks</source>
         <translation>Lägg till uppgifter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="179" />
+        <location filename="../qml/pages/TaskDialog.qml" line="206" />
         <source>Save</source>
         <translation>Spara</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="186" />
+        <location filename="../qml/pages/TaskDialog.qml" line="213" />
         <source>One task per line</source>
         <translation>En uppgift per rad</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="186" />
+        <location filename="../qml/pages/TaskDialog.qml" line="213" />
         <source>Task</source>
         <translation>Uppgift</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="250" />
-        <location filename="../qml/pages/TaskDialog.qml" line="262" />
+        <location filename="../qml/pages/TaskDialog.qml" line="278" />
+        <location filename="../qml/pages/TaskDialog.qml" line="290" />
         <source>None</source>
         <translation>Ingen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="273" />
+        <location filename="../qml/pages/TaskDialog.qml" line="301" />
         <source>Priority</source>
         <translation>Prioritet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="274" />
+        <location filename="../qml/pages/TaskDialog.qml" line="302" />
         <source>No priority</source>
         <translation>Ingen prioritet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="282" />
+        <location filename="../qml/pages/TaskDialog.qml" line="310" />
         <source>Due</source>
         <translation>Förfaller</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="283" />
-        <location filename="../qml/pages/TaskDialog.qml" line="291" />
+        <location filename="../qml/pages/TaskDialog.qml" line="311" />
+        <location filename="../qml/pages/TaskDialog.qml" line="319" />
         <source>No date</source>
         <translation>Inget datum</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="285" />
+        <location filename="../qml/pages/TaskDialog.qml" line="313" />
         <source>Due date</source>
         <translation>Förfallodatum</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="290" />
+        <location filename="../qml/pages/TaskDialog.qml" line="318" />
         <source>Threshold</source>
         <translation>Tröskel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="293" />
+        <location filename="../qml/pages/TaskDialog.qml" line="321" />
         <source>Threshold date</source>
         <translation>Tröskeldatum</translation>
     </message>

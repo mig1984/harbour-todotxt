@@ -108,6 +108,13 @@ void Settings::createExampleList()
     // already falls back to this same default value).
     if (QFile::exists(todo)) {
         m_settings.setValue("todoFolder", folder);
+        setExampleFolder(folder);
+        setExampleList(true);
         emit todoFolderChanged();
     }
+}
+
+void Settings::dismissExampleHint()
+{
+    setExampleList(false);
 }

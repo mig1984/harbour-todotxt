@@ -166,6 +166,33 @@ Dialog {
         return Qt.formatDate(dt, "yyyy-MM-dd")
     }
 
+    function uniqueMatch(list) {
+        var out = []
+        for (var i = 0; i < list.length; i++)
+            if (list[i].length > 0 && out.indexOf(list[i]) < 0)
+                out.push(list[i])
+        return out
+    }
+
+    // Openable links / phone numbers / e-mail addresses in the edited text,
+    // offered as actions (the task long-press menu used to have them).
+    function foundOpenItems() {
+        var items = []
+        var links = uniqueMatch(editor.text.match(/[a-zA-Z][a-zA-Z0-9+.-]*:\/\/[^\s]+/g) || [])
+        for (var i = 0; i < links.length; i++)
+            items.push({ "label": qsTr("Open %1").arg(links[i]), "url": links[i] })
+        var mails = uniqueMatch(editor.text.match(/[a-zA-Z0-9+._%\-]+@[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}(?:\.[a-zA-Z0-9][a-zA-Z0-9\-]{0,25})+/g) || [])
+        for (i = 0; i < mails.length; i++)
+            items.push({ "label": qsTr("Mail %1").arg(mails[i]), "url": "mailto:" + mails[i] })
+        var phones = uniqueMatch((editor.text.match(/(?:^|\s)(\+?[0-9][0-9,#()\-]{3,})(?=\s|$)/g) || []).map(function(s) { return s.trim() }))
+        for (i = 0; i < phones.length; i++) {
+            if (/^\d{4}-\d{2}-\d{2}$/.test(phones[i]) || /^#\d+$/.test(phones[i]))
+                continue
+            items.push({ "label": qsTr("Call %1").arg(phones[i]), "url": "tel:" + phones[i].replace(/[^+0-9]/g, "") })
+        }
+        return items
+    }
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height
@@ -244,6 +271,7 @@ Dialog {
             }
             property string lineDue: { editor.text; editor.cursorPosition; return dateFromLine("due") }
             property string lineThreshold: { editor.text; editor.cursorPosition; return dateFromLine("t") }
+            property var openItems: { editor.text; return foundOpenItems() }
 
             ValueButton {
                 label: app.listsTerm
@@ -292,6 +320,13 @@ Dialog {
                 onClicked: {
                     var p = pageStack.push(Qt.resolvedUrl("DeferPage.qml"), { "title": qsTr("Threshold date"), "current": column.lineThreshold })
                     p.selected.connect(function(d) { setKeyValue("t", deferValue(d)) })
+                }
+            }
+            Repeater {
+                model: column.openItems
+                ValueButton {
+                    label: modelData.label
+                    onClicked: Qt.openUrlExternally(modelData.url)
                 }
             }
             Item { width: 1; height: Theme.paddingLarge }

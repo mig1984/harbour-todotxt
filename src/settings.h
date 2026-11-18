@@ -35,6 +35,9 @@ class Settings : public QObject
     SETTING(QString, savedFiltersJson, SavedFiltersJson, "savedFiltersJson", QString())
     SETTING(int, calendarYear, CalendarYear, "calendarYear", 0)
     SETTING(int, calendarMonth, CalendarMonth, "calendarMonth", -1)
+    // Set while the folder holds the first-run example list (see createExampleList).
+    SETTING(bool, exampleList, ExampleList, "exampleList", false)
+    SETTING(QString, exampleFolder, ExampleFolder, "exampleFolder", QString())
 
 public:
     explicit Settings(QObject *parent = 0);
@@ -47,6 +50,8 @@ public:
     void createExampleList();
     static QStringList exampleTodoLines(const QDate &today);
     static QStringList exampleDoneLines(const QDate &today);
+    // Hide the "this is an example list" hint (called when it is tapped).
+    Q_INVOKABLE void dismissExampleHint();
 
     // The folder is what the user picks; todo.txt and done.txt live inside it.
     Q_PROPERTY(QString todoFile READ todoFile NOTIFY todoFolderChanged)

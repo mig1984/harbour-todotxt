@@ -313,6 +313,7 @@
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="335" />
+        <location filename="../qml/pages/MainPage.qml" line="372" />
         <source>Choose the folder with todo.txt in Settings</source>
         <translation>V nastavení vyberte složku s todo.txt</translation>
     </message>
@@ -327,7 +328,12 @@
         <translation>Klepnutím na ikonu filtru změníte filtr</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="399" />
+        <location filename="../qml/pages/MainPage.qml" line="359" />
+        <source>Example list</source>
+        <translation>Ukázkový seznam</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="438" />
         <source>Due date</source>
         <translation>Termín</translation>
     </message>
@@ -343,7 +349,7 @@
         <translation>Archivuji</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="422" />
+        <location filename="../qml/pages/MainPage.qml" line="461" />
         <source>Deleting %n tasks</source>
         <translation><numerusform>Mažu %n úkol</numerusform><numerusform>Mažu %n úkoly</numerusform><numerusform>Mažu %n úkolů</numerusform></translation>
     </message>
@@ -669,22 +675,6 @@
         <translation>práh %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="236" />
-        <source>Priority</source>
-        <translation>Priorita</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="243" />
-        <location filename="../qml/components/TaskDelegate.qml" line="245" />
-        <source>Due date</source>
-        <translation>Termín</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="228" />
-        <source>Tomorrow</source>
-        <translation>Zítra</translation>
-    </message>
-    <message>
         <location filename="../qml/components/TaskDelegate.qml" line="38" />
         <source>Marking incomplete</source>
         <translation>Označování jako nedokončené</translation>
@@ -694,114 +684,88 @@
         <source>Completing</source>
         <translation>Dokončování</translation>
     </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="232" />
-        <source>Day after tomorrow</source>
-        <translation>Pozítří</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="250" />
-        <location filename="../qml/components/TaskDelegate.qml" line="252" />
-        <source>Threshold date</source>
-        <translation>Prahové datum</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="259" />
-        <source>Open %1</source>
-        <translation>Otevřít %1</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="267" />
-        <source>Call %1</source>
-        <translation>Volat %1</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="274" />
-        <source>Mail %1</source>
-        <translation>Napsat %1</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="279" />
-        <source>Select</source>
-        <translation>Vybrat</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="284" />
-        <source>Delete</source>
-        <translation>Smazat</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="285" />
-        <source>Deleting</source>
-        <translation>Mažu</translation>
-    </message>
 </context>
 <context>
     <name>TaskDialog</name>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="178" />
+        <location filename="../qml/pages/TaskDialog.qml" line="183" />
+        <source>Open %1</source>
+        <translation>Otevřít %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="186" />
+        <source>Mail %1</source>
+        <translation>Napsat %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="191" />
+        <source>Call %1</source>
+        <translation>Volat %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="205" />
         <source>Update</source>
         <translation>Upravit</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="178" />
+        <location filename="../qml/pages/TaskDialog.qml" line="205" />
         <source>Add tasks</source>
         <translation>Přidat úkoly</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="179" />
+        <location filename="../qml/pages/TaskDialog.qml" line="206" />
         <source>Save</source>
         <translation>Uložit</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="186" />
+        <location filename="../qml/pages/TaskDialog.qml" line="213" />
         <source>One task per line</source>
         <translation>Jeden úkol na řádek</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="186" />
+        <location filename="../qml/pages/TaskDialog.qml" line="213" />
         <source>Task</source>
         <translation>Úkol</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="250" />
-        <location filename="../qml/pages/TaskDialog.qml" line="262" />
+        <location filename="../qml/pages/TaskDialog.qml" line="278" />
+        <location filename="../qml/pages/TaskDialog.qml" line="290" />
         <source>None</source>
         <translation>Žádné</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="273" />
+        <location filename="../qml/pages/TaskDialog.qml" line="301" />
         <source>Priority</source>
         <translation>Priorita</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="274" />
+        <location filename="../qml/pages/TaskDialog.qml" line="302" />
         <source>No priority</source>
         <translation>Bez priority</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="282" />
+        <location filename="../qml/pages/TaskDialog.qml" line="310" />
         <source>Due</source>
         <translation>Termín</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="283" />
-        <location filename="../qml/pages/TaskDialog.qml" line="291" />
+        <location filename="../qml/pages/TaskDialog.qml" line="311" />
+        <location filename="../qml/pages/TaskDialog.qml" line="319" />
         <source>No date</source>
         <translation>Bez datumu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="285" />
+        <location filename="../qml/pages/TaskDialog.qml" line="313" />
         <source>Due date</source>
         <translation>Termín</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="290" />
+        <location filename="../qml/pages/TaskDialog.qml" line="318" />
         <source>Threshold</source>
         <translation>Práh</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="293" />
+        <location filename="../qml/pages/TaskDialog.qml" line="321" />
         <source>Threshold date</source>
         <translation>Prahové datum</translation>
     </message>

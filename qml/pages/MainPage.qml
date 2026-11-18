@@ -341,6 +341,45 @@ Page {
         }
     }
 
+    // First-run example-list hint (centred, like the other apps' first-run
+    // hints): the app created a sample todo.txt in the default folder. It
+    // points the user at Settings and disappears once another folder is picked
+    // or the hint is tapped.
+    Item {
+        id: exampleHint
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: parent.width
+        height: exampleHintLabel.height + exampleHintText.height
+        y: parent.height / 3 - height / 2
+        visible: settings.exampleList && settings.todoFolder === settings.exampleFolder
+        z: 2
+
+        InfoLabel {
+            id: exampleHintLabel
+            text: qsTr("Example list")
+        }
+        Text {
+            id: exampleHintText
+            anchors.top: exampleHintLabel.bottom
+            x: Theme.horizontalPageMargin
+            width: parent.width - 2 * x
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.Wrap
+            font.pixelSize: Theme.fontSizeLarge
+            font.family: Theme.fontFamilyHeading
+            color: page.palette.highlightColor
+            opacity: Theme.opacityLow
+            text: qsTr("Choose the folder with todo.txt in Settings")
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                settings.dismissExampleHint()
+                pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
+            }
+        }
+    }
+
     // A data change rebuilds (and may reset) the model; keep the list's scroll
     // position so it does not jump to the top. Filter/sort changes reset the
     // position to the top.

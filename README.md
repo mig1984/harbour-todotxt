@@ -6,7 +6,7 @@ ported from [Simpletask](https://github.com/mpcjanssen/simpletask-android)
 and writes `todo.txt` (and `done.txt` next to it) and can be combined with any
 sync tool that moves the file.
 
-Version 1.5.0 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
+Version 1.5.1 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
 German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
 
 ## Screenshots
@@ -31,9 +31,9 @@ German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
   blue), uppercase headers (optional). The header shows the number of
   *not-completed* tasks and has icon buttons for search, the filter and the
   calendar. Cover shows the counts of overdue and due-today tasks.
-- **Task long-press menu**: priority, due date, a quick **Tomorrow** due action,
-  threshold date, and open/call/mail actions. Complete/uncomplete is done with
-  the checkbox next to the task (or from multi-selection).
+- **Task long-press**: enters multi-selection with the pressed task selected
+  (no context menu). Complete/uncomplete is done with the checkbox next to the
+  task (or from multi-selection).
 - **Calendar**: the date icon in the header opens a month view of the due dates
   of the tasks in the current filter, colour-coded like the list (overdue red,
   today green, tomorrow and the day after blue, later grey).
@@ -44,7 +44,8 @@ German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
   contexts, projects, due and threshold dates. Quick insertion of priority,
   contexts, projects, due and threshold dates (the buttons) applies to the line
   under the cursor. New tasks get a creation date and a capital first letter
-  (both optional).
+  (both optional). Links, phone numbers and e-mail addresses found in the text
+  of the edited task can be opened/called/mailed from the edit form.
 - **Complete / uncomplete**, with recurrence (`rec:Nd|w|m|y`, `rec:+N...` strict
   from the due date) creating the next task.
 - **Multi-selection**: complete, delete, change priority, add/remove contexts and
@@ -96,8 +97,9 @@ The Sailjail permission `Documents` is required for the default location;
 On first start, if no folder has been chosen yet, the app creates a small
 example `todo.txt` (tasks overdue, due today, tomorrow, the day after tomorrow
 and in a week, plus one completed) and a `done.txt` in `~/Documents/todotxt/`,
-so it opens with a usable list. No existing files are ever overwritten; pick
-another folder in Settings at any time.
+so it opens with a usable list. A hint over the list says it is an example and
+points to Settings; it disappears when tapped or once another folder is picked.
+No existing files are ever overwritten.
 
 ---
 

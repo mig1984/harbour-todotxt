@@ -1,6 +1,6 @@
 Name:       harbour-todotxt
 Summary:    Todo.txt task list for Sailfish OS (Simpletask port)
-Version:    1.5.0
+Version:    1.5.1
 Release:    1
 License:    GPLv3
 URL:        https://github.com/mig1984/harbour-todotxt
@@ -41,6 +41,10 @@ desktop-file-install --delete-original \
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Wed Nov 18 2026 Jan Molič <jan.molic@1984.cz> - 1.5.1-1
+- Task long-press now enters multi-selection with the pressed task selected, instead of opening a context menu
+- Links, phone numbers and e-mail addresses in a task can now be opened/called/mailed from the edit form
+- First start: a hint over the example list explains it and points to Settings for choosing the folder
 * Wed Nov 18 2026 Jan Molič <jan.molic@1984.cz> - 1.5.0-1
 - On first start, if no folder has been chosen yet, an example todo.txt and done.txt are created in ~/Documents/todotxt so the app opens with a usable list (tasks overdue, due today, tomorrow, the day after tomorrow and in a week, plus one completed)
 - Existing files are never overwritten; pick another folder in Settings

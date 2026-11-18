@@ -219,70 +219,12 @@ ListItem {
         }
     }
 
-    // The menu is defined inline (not as a Component) on purpose: a
-    // Component-based menu is destroyed by Sailfish when it closes, which also
-    // tears down the pageStack page's "selected" connections registered from
-    // its MenuItem handlers, so picking a priority/date would do nothing.
-    menu: ContextMenu {
-        MenuItem {
-            text: qsTr("Tomorrow")
-            onClicked: store.deferDue([taskId], "1d")
-        }
-        MenuItem {
-            text: qsTr("Day after tomorrow")
-            onClicked: store.deferDue([taskId], "2d")
-        }
-        MenuItem {
-            text: qsTr("Priority")
-            onClicked: {
-                var p = pageStack.push(Qt.resolvedUrl("../pages/PriorityPage.qml"), { "current": priority })
-                p.selected.connect(function(code) { store.setPriority([taskId], code) })
-            }
-        }
-        MenuItem {
-            text: qsTr("Due date")
-            onClicked: {
-                var p = pageStack.push(Qt.resolvedUrl("../pages/DeferPage.qml"), { "title": qsTr("Due date"), "current": due })
-                p.selected.connect(function(d) { store.deferDue([taskId], d) })
-            }
-        }
-        MenuItem {
-            text: qsTr("Threshold date")
-            onClicked: {
-                var p = pageStack.push(Qt.resolvedUrl("../pages/DeferPage.qml"), { "title": qsTr("Threshold date"), "current": threshold })
-                p.selected.connect(function(d) { store.deferThreshold([taskId], d) })
-            }
-        }
-        Repeater {
-            model: links
-            MenuItem {
-                text: qsTr("Open %1").arg(modelData)
-                truncationMode: TruncationMode.Fade
-                onClicked: Qt.openUrlExternally(modelData)
-            }
-        }
-        Repeater {
-            model: phones
-            MenuItem {
-                text: qsTr("Call %1").arg(modelData)
-                onClicked: Qt.openUrlExternally("tel:" + modelData)
-            }
-        }
-        Repeater {
-            model: mails
-            MenuItem {
-                text: qsTr("Mail %1").arg(modelData)
-                onClicked: Qt.openUrlExternally("mailto:" + modelData)
-            }
-        }
-        MenuItem {
-            text: qsTr("Select")
-            visible: !selectionMode
-            onClicked: requestSelectionMode()
-        }
-        MenuItem {
-            text: qsTr("Delete")
-            onClicked: item.remorseAction(qsTr("Deleting"), function() { store.remove([taskId]) })
-        }
+    // Long press enters multi-selection (and selects the pressed task) instead
+    // of opening a context menu, matching the usual Sailfish pattern.
+    onPressAndHold: {
+        if (selectionMode)
+            taskModel.setSelected(taskId, true)
+        else
+            requestSelectionMode()
     }
 }

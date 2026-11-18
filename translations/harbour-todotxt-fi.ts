@@ -313,6 +313,7 @@
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="335" />
+        <location filename="../qml/pages/MainPage.qml" line="372" />
         <source>Choose the folder with todo.txt in Settings</source>
         <translation>Valitse todo.txt-kansio asetuksissa</translation>
     </message>
@@ -327,7 +328,12 @@
         <translation>Muuta suodatinta napauttamalla suodatinkuvaketta</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="399" />
+        <location filename="../qml/pages/MainPage.qml" line="359" />
+        <source>Example list</source>
+        <translation>Esimerkkilista</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="438" />
         <source>Due date</source>
         <translation>Määräpäivä</translation>
     </message>
@@ -343,7 +349,7 @@
         <translation>Arkistoidaan</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="422" />
+        <location filename="../qml/pages/MainPage.qml" line="461" />
         <source>Deleting %n tasks</source>
         <translation><numerusform>Poistetaan %n tehtävä</numerusform><numerusform>Poistetaan %n tehtävää</numerusform></translation>
     </message>
@@ -669,22 +675,6 @@
         <translation>kynnys %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="236" />
-        <source>Priority</source>
-        <translation>Prioriteetti</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="243" />
-        <location filename="../qml/components/TaskDelegate.qml" line="245" />
-        <source>Due date</source>
-        <translation>Määräpäivä</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="228" />
-        <source>Tomorrow</source>
-        <translation>Huomenna</translation>
-    </message>
-    <message>
         <location filename="../qml/components/TaskDelegate.qml" line="38" />
         <source>Marking incomplete</source>
         <translation>Merkitään keskeneräiseksi</translation>
@@ -694,114 +684,88 @@
         <source>Completing</source>
         <translation>Merkitään valmiiksi</translation>
     </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="232" />
-        <source>Day after tomorrow</source>
-        <translation>Ylihuomenna</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="250" />
-        <location filename="../qml/components/TaskDelegate.qml" line="252" />
-        <source>Threshold date</source>
-        <translation>Kynnyspäivä</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="259" />
-        <source>Open %1</source>
-        <translation>Avaa %1</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="267" />
-        <source>Call %1</source>
-        <translation>Soita %1</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="274" />
-        <source>Mail %1</source>
-        <translation>Lähetä sähköpostia: %1</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="279" />
-        <source>Select</source>
-        <translation>Valitse</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="284" />
-        <source>Delete</source>
-        <translation>Poista</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="285" />
-        <source>Deleting</source>
-        <translation>Poistetaan</translation>
-    </message>
 </context>
 <context>
     <name>TaskDialog</name>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="178" />
+        <location filename="../qml/pages/TaskDialog.qml" line="183" />
+        <source>Open %1</source>
+        <translation>Avaa %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="186" />
+        <source>Mail %1</source>
+        <translation>Lähetä sähköpostia: %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="191" />
+        <source>Call %1</source>
+        <translation>Soita %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="205" />
         <source>Update</source>
         <translation>Päivitä</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="178" />
+        <location filename="../qml/pages/TaskDialog.qml" line="205" />
         <source>Add tasks</source>
         <translation>Lisää tehtäviä</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="179" />
+        <location filename="../qml/pages/TaskDialog.qml" line="206" />
         <source>Save</source>
         <translation>Tallenna</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="186" />
+        <location filename="../qml/pages/TaskDialog.qml" line="213" />
         <source>One task per line</source>
         <translation>Yksi tehtävä riviä kohden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="186" />
+        <location filename="../qml/pages/TaskDialog.qml" line="213" />
         <source>Task</source>
         <translation>Tehtävä</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="250" />
-        <location filename="../qml/pages/TaskDialog.qml" line="262" />
+        <location filename="../qml/pages/TaskDialog.qml" line="278" />
+        <location filename="../qml/pages/TaskDialog.qml" line="290" />
         <source>None</source>
         <translation>Ei mitään</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="273" />
+        <location filename="../qml/pages/TaskDialog.qml" line="301" />
         <source>Priority</source>
         <translation>Prioriteetti</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="274" />
+        <location filename="../qml/pages/TaskDialog.qml" line="302" />
         <source>No priority</source>
         <translation>Ei prioriteettia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="282" />
+        <location filename="../qml/pages/TaskDialog.qml" line="310" />
         <source>Due</source>
         <translation>Määräpäivä</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="283" />
-        <location filename="../qml/pages/TaskDialog.qml" line="291" />
+        <location filename="../qml/pages/TaskDialog.qml" line="311" />
+        <location filename="../qml/pages/TaskDialog.qml" line="319" />
         <source>No date</source>
         <translation>Ei päivämäärää</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="285" />
+        <location filename="../qml/pages/TaskDialog.qml" line="313" />
         <source>Due date</source>
         <translation>Määräpäivä</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="290" />
+        <location filename="../qml/pages/TaskDialog.qml" line="318" />
         <source>Threshold</source>
         <translation>Kynnys</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="293" />
+        <location filename="../qml/pages/TaskDialog.qml" line="321" />
         <source>Threshold date</source>
         <translation>Kynnyspäivä</translation>
     </message>
