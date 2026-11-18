@@ -225,6 +225,10 @@ ListItem {
             onClicked: store.deferDue([taskId], "1d")
         }
         MenuItem {
+            text: qsTr("Day after tomorrow")
+            onClicked: store.deferDue([taskId], "2d")
+        }
+        MenuItem {
             text: qsTr("Priority")
             onClicked: {
                 var p = pageStack.push(Qt.resolvedUrl("../pages/PriorityPage.qml"), { "current": priority })

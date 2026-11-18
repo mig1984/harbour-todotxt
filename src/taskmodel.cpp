@@ -2,19 +2,11 @@
 #include "todostore.h"
 #include "query.h"
 #include "settings.h"
+#include "rowdiff.h"
 
 #include <QDate>
+#include <QVariantMap>
 #include <algorithm>
-
-// True when "a" is a subsequence of "b" (same relative order).
-static bool isSubsequence(const QList<int> &a, const QList<int> &b)
-{
-    int j = 0;
-    for (int i = 0; i < b.size() && j < a.size(); ++i)
-        if (b[i] == a[j])
-            ++j;
-    return j == a.size();
-}
 
 TaskModel::TaskModel(TodoStore *store, Query *query, Settings *settings, QObject *parent)
     : QAbstractListModel(parent)
@@ -287,40 +279,87 @@ void TaskModel::rebuild()
     m_pending = pending;
     m_completed = completed;
 
-    if (rows == m_rows) {
-        if (!m_rows.isEmpty())
-            emit dataChanged(index(0), index(m_rows.size() - 1));
-    } else if (isSubsequence(rows, m_rows)) {
-        // Only removals (e.g. deleting, archiving or hiding a task). Report
-        // them as row removals so the view keeps its scroll position instead
-        // of jumping to the top on a full model reset.
-        int j = 0;
-        for (int i = 0; i < m_rows.size(); ) {
-            if (j < rows.size() && m_rows[i] == rows[j]) {
-                ++i;
-                ++j;
-            } else {
-                beginRemoveRows(QModelIndex(), i, i);
-                m_rows.removeAt(i);
-                endRemoveRows();
-            }
-        }
-    } else {
-        if (m_preserveScroll)
-            emit rebuildResetPreserving();
-        else
-            emit rebuildResetTop();
-        beginResetModel();
-        m_rows = rows;
-        endResetModel();
-        if (m_preserveScroll)
-            emit rebuildResetPreservingFinished();
-        else
-            emit rebuildResetTopFinished();
-    }
+    // A filter/sort change starts a fresh view (scroll back to the top); a data
+    // change keeps the current position and is applied incrementally.
+    if (m_preserveScroll)
+        applyRowDiff(rows);
+    else
+        fullReset(rows, false);
     emit countChanged();
     if (selChanged)
         emit selectionChanged();
+}
+
+void TaskModel::fullReset(const QList<int> &rows, bool preserveScroll)
+{
+    if (preserveScroll)
+        emit rebuildResetPreserving();
+    else
+        emit rebuildResetTop();
+    beginResetModel();
+    m_rows = rows;
+    endResetModel();
+    if (preserveScroll)
+        emit rebuildResetPreservingFinished();
+    else
+        emit rebuildResetTopFinished();
+}
+
+// Change m_rows to `rows` with granular insert/remove/move operations, so the
+// view keeps its delegates (and any running undo bars) instead of tearing them
+// all down. Falls back to a full reset when the change is too large.
+void TaskModel::applyRowDiff(const QList<int> &rows)
+{
+    if (rows == m_rows) {
+        if (!m_rows.isEmpty())
+            emit dataChanged(index(0), index(m_rows.size() - 1));
+        return;
+    }
+    if (m_rows.isEmpty()) {
+        beginInsertRows(QModelIndex(), 0, rows.size() - 1);
+        m_rows = rows;
+        endInsertRows();
+        return;
+    }
+    if (rows.isEmpty()) {
+        beginRemoveRows(QModelIndex(), 0, m_rows.size() - 1);
+        m_rows.clear();
+        endRemoveRows();
+        return;
+    }
+
+    const QList<RowDiff::Op> ops = RowDiff::compute(m_rows, rows);
+
+    // A huge change (e.g. a full file reload) is smoother as a single reset.
+    const int maxOps = 24;
+    if (ops.size() > maxOps) {
+        fullReset(rows, m_preserveScroll);
+        return;
+    }
+
+    foreach (const RowDiff::Op &op, ops) {
+        switch (op.kind) {
+        case RowDiff::Op::Remove:
+            beginRemoveRows(QModelIndex(), op.from, op.from);
+            m_rows.removeAt(op.from);
+            endRemoveRows();
+            break;
+        case RowDiff::Op::Insert:
+            beginInsertRows(QModelIndex(), op.to, op.to);
+            m_rows.insert(op.to, op.id);
+            endInsertRows();
+            break;
+        case RowDiff::Op::Move: {
+            int dest = op.to > op.from ? op.to + 1 : op.to;
+            beginMoveRows(QModelIndex(), op.from, op.from, QModelIndex(), dest);
+            m_rows.move(op.from, op.to);
+            endMoveRows();
+            break;
+        }
+        }
+    }
+
+    emit dataChanged(index(0), index(m_rows.size() - 1));
 }
 
 void TaskModel::toggleSelected(int id)
@@ -371,6 +410,56 @@ QVariantList TaskModel::selectedIds() const
         if (m_selected.contains(id))
             r << id;
     return r;
+}
+
+static QString coverPriorityRank(QChar p)
+{
+    return p == '-' ? QString("~") : QString(p);
+}
+
+QVariantList TaskModel::coverTasks() const
+{
+    const int maxItems = 8;
+    const QString dayAfter = QDate::fromString(m_today, "yyyy-MM-dd").addDays(2)
+                                 .toString("yyyy-MM-dd");
+
+    QList<const Task *> soon, rest;
+    for (int i = 0; i < m_rows.size(); ++i) {
+        const Task *t = m_store->findTask(m_rows[i]);
+        if (!t || t->isCompleted())
+            continue;
+        const QString due = t->dueDate();
+        if (!due.isEmpty() && due <= dayAfter)
+            soon << t;
+        else
+            rest << t;
+    }
+    std::stable_sort(soon.begin(), soon.end(), [](const Task *a, const Task *b) {
+        if (a->dueDate() != b->dueDate())
+            return a->dueDate() < b->dueDate();
+        return coverPriorityRank(a->priority()) < coverPriorityRank(b->priority());
+    });
+
+    QVariantList out;
+    foreach (const Task *t, soon) {
+        if (out.size() >= maxItems) break;
+        QVariantMap m;
+        m["text"] = displayHtml(*t);
+        m["priority"] = QString(t->priority());
+        m["due"] = t->dueDate();
+        m["completed"] = t->isCompleted();
+        out << m;
+    }
+    foreach (const Task *t, rest) {
+        if (out.size() >= maxItems) break;
+        QVariantMap m;
+        m["text"] = displayHtml(*t);
+        m["priority"] = QString(t->priority());
+        m["due"] = t->dueDate();
+        m["completed"] = t->isCompleted();
+        out << m;
+    }
+    return out;
 }
 
 QVariantList TaskModel::completedVisibleIds() const

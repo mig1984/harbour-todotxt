@@ -23,6 +23,10 @@ class TaskModel : public QAbstractListModel
     Q_PROPERTY(int selectedCount READ selectedCount NOTIFY selectionChanged)
     Q_PROPERTY(int overdueCount READ overdueCount NOTIFY countChanged)
     Q_PROPERTY(int dueTodayCount READ dueTodayCount NOTIFY countChanged)
+    // Tasks for the cover: non-completed, those due up to the day after
+    // tomorrow first, then the rest (bounded). Each entry is a map with
+    // text/priority/due/completed.
+    Q_PROPERTY(QVariantList coverTasks READ coverTasks NOTIFY countChanged)
     Q_PROPERTY(bool showSelected READ showSelected WRITE setShowSelected NOTIFY showSelectedChanged)
 
 public:
@@ -83,6 +87,8 @@ public:
     Q_INVOKABLE QVariantList selectedIds() const;
     Q_INVOKABLE QVariantList completedVisibleIds() const;
 
+    QVariantList coverTasks() const;
+
     // Lists/tags state of a set of tasks: 0 none, 1 some, 2 all
     Q_INVOKABLE int listState(const QVariantList &ids, const QString &name) const;
     Q_INVOKABLE int tagState(const QVariantList &ids, const QString &name) const;
@@ -127,6 +133,11 @@ private:
     const Task *taskAt(int row) const;
     QString displayHtml(const Task &t) const;
     int dateState(const QString &date) const;
+    // Update m_rows to `rows` with granular insert/remove/move operations so
+    // the view keeps its delegates (and their running undo bars). Falls back
+    // to a full reset when the change would need too many operations.
+    void applyRowDiff(const QList<int> &rows);
+    void fullReset(const QList<int> &rows, bool preserveScroll);
 
     TodoStore *m_store;
     Query *m_query;

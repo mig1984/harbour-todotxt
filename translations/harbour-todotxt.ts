@@ -44,18 +44,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="26"/>
+        <location filename="../qml/pages/DeferPage.qml" line="32"/>
         <source>No date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="27"/>
+        <location filename="../qml/pages/DeferPage.qml" line="26"/>
         <source>Today</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="28"/>
+        <location filename="../qml/pages/DeferPage.qml" line="27"/>
         <source>Tomorrow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DeferPage.qml" line="28"/>
+        <source>Day after tomorrow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -74,7 +79,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="32"/>
+        <location filename="../qml/pages/DeferPage.qml" line="33"/>
         <source>Pick a date…</source>
         <translation type="unfinished"></translation>
     </message>
@@ -661,16 +666,6 @@
 <context>
     <name>TaskDelegate</name>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="38"/>
-        <source>Marking incomplete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="38"/>
-        <source>Completing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qml/components/TaskDelegate.qml" line="47"/>
         <source>done %1</source>
         <translation type="unfinished"></translation>
@@ -686,13 +681,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="228"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="232"/>
         <source>Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="235"/>
-        <location filename="../qml/components/TaskDelegate.qml" line="237"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="239"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="241"/>
         <source>Due date</source>
         <translation type="unfinished"></translation>
     </message>
@@ -702,38 +697,53 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="242"/>
-        <location filename="../qml/components/TaskDelegate.qml" line="244"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="38"/>
+        <source>Marking incomplete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/TaskDelegate.qml" line="38"/>
+        <source>Completing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/TaskDelegate.qml" line="228"/>
+        <source>Day after tomorrow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/TaskDelegate.qml" line="246"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="248"/>
         <source>Threshold date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="251"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="255"/>
         <source>Open %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="259"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="263"/>
         <source>Call %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="266"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="270"/>
         <source>Mail %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="271"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="275"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="276"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="280"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="277"/>
+        <location filename="../qml/components/TaskDelegate.qml" line="281"/>
         <source>Deleting</source>
         <translation type="unfinished"></translation>
     </message>
@@ -811,67 +821,67 @@
 <context>
     <name>TaskModel</name>
     <message>
-        <location filename="../src/taskmodel.cpp" line="151"/>
+        <location filename="../src/taskmodel.cpp" line="143"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="555"/>
+        <location filename="../src/taskmodel.cpp" line="644"/>
         <source>today</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="557"/>
+        <location filename="../src/taskmodel.cpp" line="646"/>
         <source>tomorrow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="559"/>
+        <location filename="../src/taskmodel.cpp" line="648"/>
         <source>yesterday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="563"/>
+        <location filename="../src/taskmodel.cpp" line="652"/>
         <source>%1 days</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="565"/>
+        <location filename="../src/taskmodel.cpp" line="654"/>
         <source>1 week</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="565"/>
+        <location filename="../src/taskmodel.cpp" line="654"/>
         <source>%1 weeks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="567"/>
+        <location filename="../src/taskmodel.cpp" line="656"/>
         <source>1 month</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="567"/>
+        <location filename="../src/taskmodel.cpp" line="656"/>
         <source>%1 months</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="569"/>
+        <location filename="../src/taskmodel.cpp" line="658"/>
         <source>1 year</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="569"/>
+        <location filename="../src/taskmodel.cpp" line="658"/>
         <source>%1 years</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="570"/>
+        <location filename="../src/taskmodel.cpp" line="659"/>
         <source>%1 ago</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="570"/>
+        <location filename="../src/taskmodel.cpp" line="659"/>
         <source>in %1</source>
         <translation type="unfinished"></translation>
     </message>

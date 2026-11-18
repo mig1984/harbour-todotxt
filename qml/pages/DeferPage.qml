@@ -23,12 +23,13 @@ Page {
             description: current.length > 0 ? current : ""
         }
         model: ListModel {
-            ListElement { label: QT_TR_NOOP("No date"); value: "" }
             ListElement { label: QT_TR_NOOP("Today"); value: "0d" }
             ListElement { label: QT_TR_NOOP("Tomorrow"); value: "1d" }
+            ListElement { label: QT_TR_NOOP("Day after tomorrow"); value: "2d" }
             ListElement { label: QT_TR_NOOP("In one week"); value: "1w" }
             ListElement { label: QT_TR_NOOP("In two weeks"); value: "2w" }
             ListElement { label: QT_TR_NOOP("In one month"); value: "1m" }
+            ListElement { label: QT_TR_NOOP("No date"); value: "" }
             ListElement { label: QT_TR_NOOP("Pick a date\u2026"); value: "pick" }
         }
         delegate: ListItem {
