@@ -1,6 +1,6 @@
 Name:       harbour-todotxt
 Summary:    Todo.txt task list for Sailfish OS (Simpletask port)
-Version:    1.3.0
+Version:    1.3.1
 Release:    1
 License:    GPLv3
 URL:        https://github.com/mig1984/harbour-todotxt
@@ -41,6 +41,11 @@ desktop-file-install --delete-original \
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Tue Nov 17 2026 Jan Molič <jan.molic@1984.cz> - 1.3.1-1
+- Fix: the task list jumped back to the top after completing a task (with a
+  filter active) or after dragging a task into a lower due-date group; the
+  scroll position is now kept across such data changes (filter/sort changes
+  still start at the top)
 * Tue Nov 17 2026 Jan Molič <jan.molic@1984.cz> - 1.3.0-1
 - Fix: the task long-press menu's priority, due date and threshold date
   actions had no effect (the Component-based context menu was destroyed on

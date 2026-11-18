@@ -20,15 +20,17 @@ TaskModel::TaskModel(TodoStore *store, Query *query, Settings *settings, QObject
     : QAbstractListModel(parent)
     , m_store(store), m_query(query), m_settings(settings)
     , m_overdue(0), m_dueToday(0), m_pending(0), m_completed(0)
-    , m_showSelected(true), m_moving(false)
+    , m_showSelected(true), m_moving(false), m_preserveScroll(false)
 {
     m_rebuildTimer.setSingleShot(true);
     m_rebuildTimer.setInterval(0);
     connect(&m_rebuildTimer, SIGNAL(timeout()), this, SLOT(rebuild()));
-    connect(m_store, SIGNAL(tasksChanged()), this, SLOT(scheduleRebuild()));
-    connect(m_query, SIGNAL(changed()), this, SLOT(scheduleRebuild()));
-    connect(m_settings, SIGNAL(showDateBarChanged()), this, SLOT(scheduleRebuild()));
-    connect(m_settings, SIGNAL(caseSensitiveSortChanged()), this, SLOT(scheduleRebuild()));
+    // A data change (complete, edit, delete, move, reload) keeps the view's
+    // scroll position; a filter/sort change starts again at the top.
+    connect(m_store, SIGNAL(tasksChanged()), this, SLOT(scheduleRebuildPreserve()));
+    connect(m_query, SIGNAL(changed()), this, SLOT(scheduleRebuildReset()));
+    connect(m_settings, SIGNAL(showDateBarChanged()), this, SLOT(scheduleRebuildReset()));
+    connect(m_settings, SIGNAL(caseSensitiveSortChanged()), this, SLOT(scheduleRebuildReset()));
     m_today = Task::today();
 }
 
@@ -174,6 +176,7 @@ int TaskModel::indexOfId(int id) const
 
 void TaskModel::refresh()
 {
+    m_preserveScroll = true;
     scheduleRebuild();
 }
 
@@ -213,6 +216,7 @@ void TaskModel::setShowSelected(bool s)
         return;
     m_showSelected = s;
     emit showSelectedChanged();
+    m_preserveScroll = true;
     scheduleRebuild();
 }
 
@@ -221,6 +225,18 @@ void TaskModel::scheduleRebuild()
     if (m_moving)
         return;
     m_rebuildTimer.start();
+}
+
+void TaskModel::scheduleRebuildPreserve()
+{
+    m_preserveScroll = true;
+    scheduleRebuild();
+}
+
+void TaskModel::scheduleRebuildReset()
+{
+    m_preserveScroll = false;
+    scheduleRebuild();
 }
 
 void TaskModel::rebuild()
@@ -290,9 +306,17 @@ void TaskModel::rebuild()
             }
         }
     } else {
+        if (m_preserveScroll)
+            emit rebuildResetPreserving();
+        else
+            emit rebuildResetTop();
         beginResetModel();
         m_rows = rows;
         endResetModel();
+        if (m_preserveScroll)
+            emit rebuildResetPreservingFinished();
+        else
+            emit rebuildResetTopFinished();
     }
     emit countChanged();
     if (selChanged)
@@ -334,6 +358,7 @@ void TaskModel::clearSelection()
     m_selected.clear();
     emit selectionChanged();
     // selected-but-filtered tasks may disappear now
+    m_preserveScroll = true;
     scheduleRebuild();
     if (!m_rows.isEmpty())
         emit dataChanged(index(0), index(m_rows.size() - 1), QVector<int>() << SelectedRole);

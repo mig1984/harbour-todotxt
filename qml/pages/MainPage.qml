@@ -274,6 +274,32 @@ Page {
             // due-date group (set by TaskDelegate).
             property int dropIndex: -1
 
+            // Keep the scroll position across a model reset caused by a data
+            // change (complete/uncomplete, edit, drag to another due group), so
+            // the vacated row collapses without the list jumping to the top.
+            // Filter/sort changes still scroll to the top.
+            property real savedContentY: 0
+            property bool restorePending: false
+
+            function saveScroll() {
+                if (!restorePending)
+                    savedContentY = contentY
+            }
+
+            function restoreScroll() {
+                var maxY = Math.max(0, contentHeight - height)
+                contentY = Math.max(0, Math.min(savedContentY, maxY))
+                restorePending = false
+            }
+
+            onContentHeightChanged: if (restorePending) restoreScroll()
+
+            Timer {
+                id: restoreTimer
+                interval: 0
+                onTriggered: listView.restoreScroll()
+            }
+
             section.property: "section"
             section.criteria: ViewSection.FullString
             section.delegate: SectionHeader {
@@ -302,6 +328,22 @@ Page {
             }
 
             VerticalScrollDecorator { }
+        }
+    }
+
+    // A data change rebuilds (and may reset) the model; keep the list's scroll
+    // position so it does not jump to the top. Filter/sort changes reset the
+    // position to the top.
+    Connections {
+        target: taskModel
+        onRebuildResetPreserving: listView.saveScroll()
+        onRebuildResetTop: {
+            listView.restorePending = false
+            restoreTimer.stop()
+        }
+        onRebuildResetPreservingFinished: {
+            listView.restorePending = true
+            restoreTimer.restart()
         }
     }
 

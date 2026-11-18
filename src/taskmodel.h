@@ -109,9 +109,18 @@ signals:
     void countChanged();
     void selectionChanged();
     void showSelectedChanged();
+    // Emitted around a full model reset in rebuild(). "Preserving" means a
+    // data change (the view keeps its scroll position); "Top" means the
+    // filter/sort changed (the view scrolls back to the top).
+    void rebuildResetPreserving();
+    void rebuildResetPreservingFinished();
+    void rebuildResetTop();
+    void rebuildResetTopFinished();
 
 private slots:
     void scheduleRebuild();
+    void scheduleRebuildPreserve();  // data change: keep the scroll position
+    void scheduleRebuildReset();     // filter/sort change: go back to the top
     void rebuild();
 
 private:
@@ -132,6 +141,7 @@ private:
     int m_completed;
     bool m_showSelected;
     bool m_moving;
+    bool m_preserveScroll;
 };
 
 #endif // TASKMODEL_H

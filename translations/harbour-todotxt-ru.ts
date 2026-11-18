@@ -312,37 +312,37 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="296"/>
+        <location filename="../qml/pages/MainPage.qml" line="322"/>
         <source>No folder selected</source>
         <translation>Папка не выбрана</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="298"/>
+        <location filename="../qml/pages/MainPage.qml" line="324"/>
         <source>No matching tasks</source>
         <translation>Нет подходящих задач</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="298"/>
+        <location filename="../qml/pages/MainPage.qml" line="324"/>
         <source>No tasks</source>
         <translation>Нет задач</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="299"/>
+        <location filename="../qml/pages/MainPage.qml" line="325"/>
         <source>Choose the folder with todo.txt in Settings</source>
         <translation>Выберите папку с todo.txt в настройках</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="301"/>
+        <location filename="../qml/pages/MainPage.qml" line="327"/>
         <source>Pull down to add a task</source>
         <translation>Потяните вниз, чтобы добавить задачу</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="301"/>
+        <location filename="../qml/pages/MainPage.qml" line="327"/>
         <source>Tap the filter icon to change the filter</source>
         <translation>Нажмите на значок фильтра, чтобы изменить фильтр</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="347"/>
+        <location filename="../qml/pages/MainPage.qml" line="389"/>
         <source>Due date</source>
         <translation>Срок</translation>
     </message>
@@ -358,7 +358,7 @@
         <translation>Архивирование</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="370"/>
+        <location filename="../qml/pages/MainPage.qml" line="412"/>
         <source>Deleting %n tasks</source>
         <translation>
             <numerusform>Удаление %n задачи</numerusform>
@@ -823,67 +823,67 @@
 <context>
     <name>TaskModel</name>
     <message>
-        <location filename="../src/taskmodel.cpp" line="149"/>
+        <location filename="../src/taskmodel.cpp" line="151"/>
         <source>None</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="530"/>
+        <location filename="../src/taskmodel.cpp" line="555"/>
         <source>today</source>
         <translation>сегодня</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="532"/>
+        <location filename="../src/taskmodel.cpp" line="557"/>
         <source>tomorrow</source>
         <translation>завтра</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="534"/>
+        <location filename="../src/taskmodel.cpp" line="559"/>
         <source>yesterday</source>
         <translation>вчера</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="538"/>
+        <location filename="../src/taskmodel.cpp" line="563"/>
         <source>%1 days</source>
         <translation>%1 дн.</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="540"/>
+        <location filename="../src/taskmodel.cpp" line="565"/>
         <source>1 week</source>
         <translation>1 нед.</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="540"/>
+        <location filename="../src/taskmodel.cpp" line="565"/>
         <source>%1 weeks</source>
         <translation>%1 нед.</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="542"/>
+        <location filename="../src/taskmodel.cpp" line="567"/>
         <source>1 month</source>
         <translation>1 мес.</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="542"/>
+        <location filename="../src/taskmodel.cpp" line="567"/>
         <source>%1 months</source>
         <translation>%1 мес.</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="544"/>
+        <location filename="../src/taskmodel.cpp" line="569"/>
         <source>1 year</source>
         <translation>1 год</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="544"/>
+        <location filename="../src/taskmodel.cpp" line="569"/>
         <source>%1 years</source>
         <translation>%1 г.</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="545"/>
+        <location filename="../src/taskmodel.cpp" line="570"/>
         <source>%1 ago</source>
         <translation>%1 назад</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="545"/>
+        <location filename="../src/taskmodel.cpp" line="570"/>
         <source>in %1</source>
         <translation>через %1</translation>
     </message>
