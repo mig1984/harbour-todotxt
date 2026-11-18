@@ -39,19 +39,32 @@ ListItem {
                            function() { store.toggleComplete(id) })
     }
 
-    function dateLine() {
-        var parts = []
-        if (age.length > 0 && !completed)
-            parts.push(age)
+    // Segments of the date line under the task. Each entry is rendered as a
+    // small label; a missed threshold gets a coloured "chip" (see below).
+    function dateParts() {
+        var list = []
+        if (createDate.length > 0 && !completed)
+            list.push({ "text": app.formatDate(createDate), "color": Theme.secondaryColor, "chip": false })
         if (completionDate.length > 0)
-            parts.push(qsTr("done %1").arg(completionDate))
+            list.push({ "text": qsTr("done %1").arg(completionDate), "color": Theme.secondaryColor, "chip": false })
         if (due.length > 0)
-            parts.push("<font color=\"" + app.dateColor(completed ? "" : due, Theme.secondaryColor) + "\">" + qsTr("due %1").arg(due) + "</font>")
-        if (threshold.length > 0)
-            parts.push("<font color=\"" + app.dateColor(completed ? "" : threshold, Theme.secondaryColor) + "\">" + qsTr("t %1").arg(threshold) + "</font>")
+            list.push({ "text": app.formatDate(due), "color": app.dateColor(completed ? "" : due, Theme.secondaryColor), "chip": false })
+        if (threshold.length > 0) {
+            // A threshold of a not-completed task is always a yellow chip.
+            list.push({ "text": app.thresholdMark + " " + app.formatDate(threshold),
+                        "color": completed ? Theme.secondaryColor : "#000000",
+                        "chip": !completed })
+        }
         if (recurrence.length > 0)
-            parts.push("rec:" + recurrence)
-        return parts.join(" \u2022 ")
+            list.push({ "text": "rec:" + recurrence, "color": Theme.secondaryColor, "chip": false })
+        var out = []
+        for (var i = 0; i < list.length; i++) {
+            // A missed threshold is a coloured chip; no separator before it.
+            if (i > 0 && !list[i].chip)
+                out.push({ "text": "\u2022", "color": Theme.secondaryColor, "chip": false })
+            out.push(list[i])
+        }
+        return out
     }
 
     // Completion / selection mark
@@ -103,14 +116,32 @@ ListItem {
             text: (priority !== "-" ? "<font color=\"" + app.priorityColor(priority) + "\">(" + priority + ")</font> " : "")
                   + display.replace(/#SEC#/g, Theme.secondaryColor).replace(/#LINK#/g, Theme.highlightColor)
         }
-        Label {
+        Flow {
+            id: dateFlow
             width: parent.width
-            visible: settings.showDateBar && text.length > 0
-            wrapMode: Text.Wrap
-            textFormat: Text.StyledText
-            font.pixelSize: Theme.fontSizeExtraSmall
-            color: Theme.secondaryColor
-            text: dateLine()
+            spacing: Theme.paddingSmall
+            visible: settings.showDateBar && parts.length > 0
+            readonly property var parts: item.dateParts()
+            Repeater {
+                model: dateFlow.parts
+                Item {
+                    width: seg.implicitWidth + (modelData.chip ? 2 * Theme.paddingSmall : 0)
+                    height: seg.implicitHeight
+                    Rectangle {
+                        anchors.fill: parent
+                        radius: Theme.paddingSmall / 2
+                        color: app.thresholdColor
+                        visible: modelData.chip
+                    }
+                    Label {
+                        id: seg
+                        anchors.centerIn: parent
+                        text: modelData.text
+                        color: modelData.color
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                    }
+                }
+            }
         }
     }
 

@@ -178,10 +178,25 @@ QStringList TaskModel::dueDates() const
     QStringList out;
     for (int i = 0; i < m_rows.size(); ++i) {
         const Task *t = m_store->findTask(m_rows[i]);
-        if (!t || t->dueDate().isEmpty() || seen.contains(t->dueDate()))
+        if (!t || t->isCompleted() || t->dueDate().isEmpty() || seen.contains(t->dueDate()))
             continue;
         seen.insert(t->dueDate());
         out << t->dueDate();
+    }
+    out.sort();
+    return out;
+}
+
+QStringList TaskModel::thresholdDates() const
+{
+    QSet<QString> seen;
+    QStringList out;
+    for (int i = 0; i < m_rows.size(); ++i) {
+        const Task *t = m_store->findTask(m_rows[i]);
+        if (!t || t->isCompleted() || t->thresholdDate().isEmpty() || seen.contains(t->thresholdDate()))
+            continue;
+        seen.insert(t->thresholdDate());
+        out << t->thresholdDate();
     }
     out.sort();
     return out;
@@ -192,7 +207,7 @@ int TaskModel::rowForDueDate(const QString &date) const
     int completedRow = -1;
     for (int i = 0; i < m_rows.size(); ++i) {
         const Task *t = m_store->findTask(m_rows[i]);
-        if (!t || t->dueDate() != date)
+        if (!t || (t->dueDate() != date && t->thresholdDate() != date))
             continue;
         if (!t->isCompleted())
             return i;

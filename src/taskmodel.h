@@ -75,6 +75,8 @@ public:
     Q_INVOKABLE void refresh();
     // Distinct due dates of visible tasks, sorted (for the calendar).
     Q_INVOKABLE QStringList dueDates() const;
+    // Like dueDates(), but for threshold dates.
+    Q_INVOKABLE QStringList thresholdDates() const;
     // First visible row due on the given yyyy-MM-dd date; -1 if none.
     Q_INVOKABLE int rowForDueDate(const QString &date) const;
 

@@ -58,6 +58,31 @@ ApplicationWindow {
         return fallback
     }
 
+    // Threshold dates are prefixed with this mark in the list so they are not
+    // confused with due dates (both are shown as a bare date there).
+    readonly property string thresholdMark: "\u2264"
+    // Colour of a threshold day / a missed threshold in the list (yellow).
+    readonly property string thresholdColor: "#ffd400"
+
+    // A date as shown in the list and section headers: "<weekday> yyyy-MM-dd"
+    // (e.g. "st 2026-11-18").
+    function formatDate(iso) {
+        if (!iso)
+            return ""
+        var p = iso.split("-")
+        if (p.length !== 3)
+            return iso
+        var d = new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]))
+        return Qt.formatDate(d, "ddd") + " " + iso
+    }
+
+    // Section header text: date sections use formatDate, other keys
+    // (context/project/priority/None) are left as-is; both may be uppercased.
+    function sectionText(s, upper) {
+        var base = /^\d{4}-\d{2}-\d{2}$/.test(s) ? formatDate(s) : s
+        return upper ? base.toUpperCase() : base
+    }
+
     function openTaskDialog(ids) {
         var text = ""
         var lines = []

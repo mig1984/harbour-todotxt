@@ -18,7 +18,7 @@ class Settings : public QObject
 {
     Q_OBJECT
     SETTING(QString, todoFolder, TodoFolder, "todoFolder", defaultTodoFolder())
-    SETTING(bool, prependDate, PrependDate, "prependDate", true)
+    SETTING(bool, prependDate, PrependDate, "prependDate", false)
     SETTING(bool, appendAtEnd, AppendAtEnd, "appendAtEnd", true)
     SETTING(bool, keepPriority, KeepPriority, "keepPriority", true)
     SETTING(bool, autoArchive, AutoArchive, "autoArchive", false)

@@ -313,7 +313,7 @@ Page {
             section.property: "section"
             section.criteria: ViewSection.FullString
             section.delegate: SectionHeader {
-                text: settings.uppercaseHeaders ? section.toUpperCase() : section
+                text: app.sectionText(section, settings.uppercaseHeaders)
                 visible: text.length > 0
                 height: text.length > 0 ? implicitHeight : 0
             }

@@ -4,12 +4,12 @@
 <context>
     <name>CalendarPage</name>
     <message>
-        <location filename="../qml/pages/CalendarPage.qml" line="97" />
+        <location filename="../qml/pages/CalendarPage.qml" line="35" />
         <source>Calendar</source>
         <translation>Kalender</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CalendarPage.qml" line="104" />
+        <location filename="../qml/pages/CalendarPage.qml" line="42" />
         <source>Today</source>
         <translation>Vandaag</translation>
     </message>
@@ -35,49 +35,45 @@
 <context>
     <name>DeferPage</name>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="9" />
+        <location filename="../qml/pages/DeferPage.qml" line="10" />
         <source>Date</source>
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="32" />
+        <location filename="../qml/pages/DeferPage.qml" line="79" />
         <source>No date</source>
         <translation>Geen datum</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="26" />
+        <location filename="../qml/pages/DeferPage.qml" line="46" />
+        <location filename="../qml/pages/DeferPage.qml" line="73" />
         <source>Today</source>
         <translation>Vandaag</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="27" />
+        <location filename="../qml/pages/DeferPage.qml" line="74" />
         <source>Tomorrow</source>
         <translation>Morgen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="28" />
+        <location filename="../qml/pages/DeferPage.qml" line="75" />
         <source>Day after tomorrow</source>
         <translation>Overmorgen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="29" />
+        <location filename="../qml/pages/DeferPage.qml" line="76" />
         <source>In one week</source>
         <translation>Over een week</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="30" />
+        <location filename="../qml/pages/DeferPage.qml" line="77" />
         <source>In two weeks</source>
         <translation>Over twee weken</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="31" />
+        <location filename="../qml/pages/DeferPage.qml" line="78" />
         <source>In one month</source>
         <translation>Over een maand</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DeferPage.qml" line="33" />
-        <source>Pick a date…</source>
-        <translation>Kies een datum…</translation>
     </message>
 </context>
 <context>
@@ -660,19 +656,9 @@
 <context>
     <name>TaskDelegate</name>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="47" />
+        <location filename="../qml/components/TaskDelegate.qml" line="49" />
         <source>done %1</source>
         <translation>voltooid %1</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="49" />
-        <source>due %1</source>
-        <translation>vervalt %1</translation>
-    </message>
-    <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="51" />
-        <source>t %1</source>
-        <translation>drempel %1</translation>
     </message>
     <message>
         <location filename="../qml/components/TaskDelegate.qml" line="38" />
@@ -760,6 +746,16 @@
         <translation>Vervaldatum</translation>
     </message>
     <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="338" />
+        <source>Today</source>
+        <translation>Vandaag</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="343" />
+        <source>Tomorrow</source>
+        <translation>Morgen</translation>
+    </message>
+    <message>
         <location filename="../qml/pages/TaskDialog.qml" line="318" />
         <source>Threshold</source>
         <translation>Drempel</translation>
@@ -778,62 +774,62 @@
         <translation>Geen</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="667" />
+        <location filename="../src/taskmodel.cpp" line="682" />
         <source>today</source>
         <translation>vandaag</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="669" />
+        <location filename="../src/taskmodel.cpp" line="684" />
         <source>tomorrow</source>
         <translation>morgen</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="671" />
+        <location filename="../src/taskmodel.cpp" line="686" />
         <source>yesterday</source>
         <translation>gisteren</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="675" />
+        <location filename="../src/taskmodel.cpp" line="690" />
         <source>%1 days</source>
         <translation>%1 dagen</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="677" />
+        <location filename="../src/taskmodel.cpp" line="692" />
         <source>1 week</source>
         <translation>1 week</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="677" />
+        <location filename="../src/taskmodel.cpp" line="692" />
         <source>%1 weeks</source>
         <translation>%1 weken</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="679" />
+        <location filename="../src/taskmodel.cpp" line="694" />
         <source>1 month</source>
         <translation>1 maand</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="679" />
+        <location filename="../src/taskmodel.cpp" line="694" />
         <source>%1 months</source>
         <translation>%1 maanden</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="681" />
+        <location filename="../src/taskmodel.cpp" line="696" />
         <source>1 year</source>
         <translation>1 jaar</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="681" />
+        <location filename="../src/taskmodel.cpp" line="696" />
         <source>%1 years</source>
         <translation>%1 jaar</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="682" />
+        <location filename="../src/taskmodel.cpp" line="697" />
         <source>%1 ago</source>
         <translation>%1 geleden</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="682" />
+        <location filename="../src/taskmodel.cpp" line="697" />
         <source>in %1</source>
         <translation>over %1</translation>
     </message>

@@ -308,7 +308,7 @@ Dialog {
             }
             ValueButton {
                 label: qsTr("Due")
-                value: column.lineDue.length > 0 ? column.lineDue + " (" + taskModel.relativeDate(column.lineDue) + ")" : qsTr("No date")
+                value: column.lineDue.length > 0 ? app.formatDate(column.lineDue) : qsTr("No date")
                 onClicked: {
                     var p = pageStack.push(Qt.resolvedUrl("DeferPage.qml"), { "title": qsTr("Due date"), "current": column.lineDue })
                     p.selected.connect(function(d) { setKeyValue("due", deferValue(d)) })
@@ -316,7 +316,7 @@ Dialog {
             }
             ValueButton {
                 label: qsTr("Threshold")
-                value: column.lineThreshold.length > 0 ? column.lineThreshold + " (" + taskModel.relativeDate(column.lineThreshold) + ")" : qsTr("No date")
+                value: column.lineThreshold.length > 0 ? app.formatDate(column.lineThreshold) : qsTr("No date")
                 onClicked: {
                     var p = pageStack.push(Qt.resolvedUrl("DeferPage.qml"), { "title": qsTr("Threshold date"), "current": column.lineThreshold })
                     p.selected.connect(function(d) { setKeyValue("t", deferValue(d)) })
@@ -327,6 +327,21 @@ Dialog {
                 ValueButton {
                     label: modelData.label
                     onClicked: Qt.openUrlExternally(modelData.url)
+                }
+            }
+            Flow {
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: Theme.paddingSmall
+                Button {
+                    width: implicitWidth
+                    text: qsTr("Today")
+                    onClicked: setKeyValue("due", addInterval(new Date(), "0d"))
+                }
+                Button {
+                    width: implicitWidth
+                    text: qsTr("Tomorrow")
+                    onClicked: setKeyValue("due", addInterval(new Date(), "1d"))
                 }
             }
             Item { width: 1; height: Theme.paddingLarge }

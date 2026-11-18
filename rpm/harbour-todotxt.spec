@@ -1,6 +1,6 @@
 Name:       harbour-todotxt
 Summary:    Todo.txt task list for Sailfish OS (Simpletask port)
-Version:    1.5.1
+Version:    1.5.2
 Release:    1
 License:    GPLv3
 URL:        https://github.com/mig1984/harbour-todotxt
@@ -41,6 +41,12 @@ desktop-file-install --delete-original \
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Wed Nov 18 2026 Jan Molič <jan.molic@1984.cz> - 1.5.2-1
+- Dates are shown as "<weekday> yyyy-MM-dd" (e.g. "st 2026-11-19") in the list, section headers and the editor; the creation date is no longer shown as "x days ago" and due dates no longer carry a label
+- Threshold dates are always shown as a yellow chip (except completed tasks); in the calendar a threshold day is yellow (today is always green) and days whose tasks are all completed are no longer highlighted
+- Due/threshold page now shows the month calendar inline (the separate date picker is gone), with quick buttons below and a Today reset button
+- Task editor: quick Today/Tomorrow due buttons, moved to the bottom
+- New tasks no longer get a creation date by default
 * Wed Nov 18 2026 Jan Molič <jan.molic@1984.cz> - 1.5.1-1
 - Task long-press now enters multi-selection with the pressed task selected, instead of opening a context menu
 - Links, phone numbers and e-mail addresses in a task can now be opened/called/mailed from the edit form

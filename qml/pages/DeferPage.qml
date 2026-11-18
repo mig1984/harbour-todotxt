@@ -1,7 +1,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "../components"
 
-// Pick a date: none, relative interval, or a specific date.
+// Pick a date: none, a relative interval, or an exact date from the calendar.
 // Emits selected("") / selected("1w") / selected("YYYY-MM-DD").
 Page {
     id: page
@@ -16,44 +17,78 @@ Page {
         pageStack.pop()
     }
 
-    SilicaListView {
-        anchors.fill: parent
-        header: PageHeader {
-            title: page.title
-            description: current.length > 0 ? current : ""
-        }
-        model: ListModel {
-            ListElement { label: QT_TR_NOOP("Today"); value: "0d" }
-            ListElement { label: QT_TR_NOOP("Tomorrow"); value: "1d" }
-            ListElement { label: QT_TR_NOOP("Day after tomorrow"); value: "2d" }
-            ListElement { label: QT_TR_NOOP("In one week"); value: "1w" }
-            ListElement { label: QT_TR_NOOP("In two weeks"); value: "2w" }
-            ListElement { label: QT_TR_NOOP("In one month"); value: "1m" }
-            ListElement { label: QT_TR_NOOP("No date"); value: "" }
-            ListElement { label: QT_TR_NOOP("Pick a date\u2026"); value: "pick" }
-        }
-        delegate: ListItem {
-            Label {
-                x: Theme.horizontalPageMargin
-                anchors.verticalCenter: parent.verticalCenter
-                text: qsTr(label)
-                color: highlighted ? Theme.highlightColor : Theme.primaryColor
+    Component.onCompleted: {
+        if (current.length > 0) {
+            var p = current.split("-")
+            if (p.length === 3) {
+                cal.shownYear = parseInt(p[0])
+                cal.shownMonth = parseInt(p[1]) - 1
             }
-            onClicked: {
-                if (value === "pick") {
-                    var init = current.length > 0 ? new Date(current) : new Date()
-                    var dlg = pageStack.push("Sailfish.Silica.DatePickerDialog", {
-                        "date": init,
-                        "acceptDestination": pageStack.previousPage(page),
-                        "acceptDestinationAction": PageStackAction.Pop
-                    })
-                    dlg.accepted.connect(function() {
-                        selected(Qt.formatDate(dlg.date, "yyyy-MM-dd"))
-                    })
-                } else {
-                    pick(value)
+        }
+    }
+
+    SilicaFlickable {
+        anchors.fill: parent
+        contentHeight: column.height
+
+        Column {
+            id: column
+            width: parent.width
+
+            PageHeader {
+                title: page.title
+                description: page.current.length > 0 ? app.formatDate(page.current) : ""
+            }
+
+            Button {
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Today")
+                onClicked: cal.today()
+            }
+
+            Item { width: 1; height: Theme.paddingLarge }
+
+            MonthCalendar {
+                id: cal
+                width: parent.width
+                onlyMarked: false
+                dueDates: taskModel.dueDates()
+                thresholdDates: taskModel.thresholdDates()
+                onDaySelected: page.pick(date)
+            }
+
+            Item { width: 1; height: Theme.paddingLarge }
+
+            // Two columns; "No date" spans the whole row so the last (odd) one
+            // is not left alone under the left column.
+            Flow {
+                id: quick
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: Theme.paddingSmall
+
+                Repeater {
+                    model: ListModel {
+                        ListElement { label: QT_TR_NOOP("Today"); value: "0d" }
+                        ListElement { label: QT_TR_NOOP("Tomorrow"); value: "1d" }
+                        ListElement { label: QT_TR_NOOP("Day after tomorrow"); value: "2d" }
+                        ListElement { label: QT_TR_NOOP("In one week"); value: "1w" }
+                        ListElement { label: QT_TR_NOOP("In two weeks"); value: "2w" }
+                        ListElement { label: QT_TR_NOOP("In one month"); value: "1m" }
+                        ListElement { label: QT_TR_NOOP("No date"); value: "" }
+                    }
+                    Button {
+                        width: model.value === "" ? quick.width : (quick.width - quick.spacing) / 2
+                        text: qsTr(model.label)
+                        onClicked: page.pick(model.value)
+                    }
                 }
             }
+
+            Item { width: 1; height: Theme.paddingLarge }
         }
+
+        VerticalScrollDecorator { }
     }
 }
