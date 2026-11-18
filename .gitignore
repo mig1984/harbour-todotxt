@@ -22,3 +22,6 @@ documentation.list
 *.swp
 *~
 .DS_Store
+
+# local helper scripts (may contain secrets)
+.scripts/
