@@ -15,6 +15,11 @@ int main(int argc, char *argv[])
     app->setApplicationName("harbour-todotxt");
 
     Settings settings;
+    // Fresh install (no folder chosen yet): create a small example list in the
+    // default folder so the app opens with something usable and the folder
+    // prompt is skipped.
+    if (!settings.todoFolderConfigured())
+        settings.createExampleList();
     TodoStore store(&settings);
     Query query;
     FilterStore filters(&settings);

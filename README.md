@@ -6,7 +6,7 @@ ported from [Simpletask](https://github.com/mpcjanssen/simpletask-android)
 and writes `todo.txt` (and `done.txt` next to it) and can be combined with any
 sync tool that moves the file.
 
-Version 1.4.1 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
+Version 1.5.0 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
 German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
 
 ## Screenshots
@@ -92,6 +92,12 @@ German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
 
 The Sailjail permission `Documents` is required for the default location;
 `UserDirs` lets the picker reach the other user folders.
+
+On first start, if no folder has been chosen yet, the app creates a small
+example `todo.txt` (tasks overdue, due today, tomorrow, the day after tomorrow
+and in a week, plus one completed) and a `done.txt` in `~/Documents/todotxt/`,
+so it opens with a usable list. No existing files are ever overwritten; pick
+another folder in Settings at any time.
 
 ---
 

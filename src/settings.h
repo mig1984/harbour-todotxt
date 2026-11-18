@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QSettings>
 #include <QString>
+#include <QStringList>
+#include <QDate>
 
 #define SETTING(type, name, Name, key, def) \
     Q_PROPERTY(type name READ name WRITE set##Name NOTIFY name##Changed) \
@@ -37,6 +39,14 @@ class Settings : public QObject
 public:
     explicit Settings(QObject *parent = 0);
     static QString defaultTodoFolder();
+
+    // First-run example list: written into the default folder when no folder
+    // has been configured yet, so a fresh install opens with a usable sample
+    // list (dates relative to today). The line generators are pure so they can
+    // be unit-tested.
+    void createExampleList();
+    static QStringList exampleTodoLines(const QDate &today);
+    static QStringList exampleDoneLines(const QDate &today);
 
     // The folder is what the user picks; todo.txt and done.txt live inside it.
     Q_PROPERTY(QString todoFile READ todoFile NOTIFY todoFolderChanged)
