@@ -8,7 +8,8 @@ ListItem {
     property var view
     property bool dragging: false
     property bool dragBlocked: false
-    readonly property bool manual: query.manualSort && !selectionMode && !completed
+    // Only the base row of a task can be reordered/dragged by hand.
+    readonly property bool manual: query.manualSort && !selectionMode && !completed && occurrence === 0
 
     signal requestSelectionMode()
 
@@ -35,8 +36,15 @@ ListItem {
     // Completing/uncompleting shows a remorse bar; tapping it cancels the change.
     function toggleCompleteWithUndo() {
         var id = taskId
+        var d = due
+        var rec = recurring
         item.remorseAction(completed ? qsTr("Marking incomplete") : qsTr("Completing"),
-                           function() { store.toggleComplete(id) })
+                           function() {
+                               if (rec)
+                                   store.toggleDone(id, d)
+                               else
+                                   store.toggleComplete(id)
+                           })
     }
 
     // Segments of the date line under the task. Each entry is rendered as a
@@ -55,7 +63,7 @@ ListItem {
                         "color": completed ? Theme.secondaryColor : "#000000",
                         "chip": !completed })
         }
-        if (recurrence.length > 0)
+        if (recurrence.length > 0 && occurrence === 0)
             list.push({ "text": "rec:" + recurrence, "color": Theme.secondaryColor, "chip": false })
         var out = []
         for (var i = 0; i < list.length; i++) {

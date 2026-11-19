@@ -135,7 +135,7 @@ Page {
                 text: qsTr("Threshold date")
                 visible: selectionMode
                 onClicked: withSelected(function(ids) {
-                    var p = pageStack.push(Qt.resolvedUrl("DeferPage.qml"), { "title": qsTr("Threshold date") })
+                    var p = pageStack.push(Qt.resolvedUrl("DeferPage.qml"), { "title": qsTr("Threshold date"), "threshold": true })
                     p.selected.connect(function(d) { store.deferThreshold(ids, d) })
                 })
             }

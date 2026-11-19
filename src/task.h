@@ -73,6 +73,12 @@ public:
     QString thresholdDate() const;
     void setThresholdDate(const QString &date);
     QString recurrence() const;
+    // Occurrences of a recurring task that are marked done (done:YYYY-MM-DD).
+    QStringList doneDates() const;
+    void addDoneDate(const QString &date);
+    void removeDoneDate(const QString &date);
+    // True when the task is a recurring series anchored on a due date.
+    bool isSeries() const;
     QString uuid() const;
 
     // Priority code: 'A'..'Z' or '-' for none

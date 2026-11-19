@@ -35,6 +35,8 @@ class Settings : public QObject
     SETTING(QString, savedFiltersJson, SavedFiltersJson, "savedFiltersJson", QString())
     SETTING(int, calendarYear, CalendarYear, "calendarYear", 0)
     SETTING(int, calendarMonth, CalendarMonth, "calendarMonth", -1)
+    // How many months ahead to project occurrences of recurring tasks (0 = off).
+    SETTING(int, recurrenceHorizonMonths, RecurrenceHorizonMonths, "recurrenceHorizonMonths", 12)
     // Set while the folder holds the first-run example list (see createExampleList).
     SETTING(bool, exampleList, ExampleList, "exampleList", false)
     SETTING(QString, exampleFolder, ExampleFolder, "exampleFolder", QString())

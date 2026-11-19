@@ -305,6 +305,11 @@ void TodoStore::complete(const QVariantList &ids)
         Task *t = findTask(v.toInt());
         if (!t || t->isCompleted())
             continue;
+        if (t->isSeries()) {
+            // Recurring series: mark this occurrence done, keep the task.
+            t->addDoneDate(t->dueDate());
+            continue;
+        }
         Task n;
         if (t->markComplete(today, &n))
             recurring << n;
@@ -325,8 +330,12 @@ void TodoStore::complete(const QVariantList &ids)
 
 void TodoStore::uncomplete(const QVariantList &ids)
 {
-    foreach (Task *t, resolve(ids))
-        t->markIncomplete();
+    foreach (Task *t, resolve(ids)) {
+        if (t->isSeries())
+            t->removeDoneDate(t->dueDate());
+        else
+            t->markIncomplete();
+    }
     markDirty();
 }
 
@@ -337,10 +346,30 @@ void TodoStore::toggleComplete(int id)
         return;
     QVariantList ids;
     ids << id;
+    if (t->isSeries()) {
+        if (t->doneDates().contains(t->dueDate()))
+            t->removeDoneDate(t->dueDate());
+        else
+            t->addDoneDate(t->dueDate());
+        markDirty();
+        return;
+    }
     if (t->isCompleted())
         uncomplete(ids);
     else
         complete(ids);
+}
+
+void TodoStore::toggleDone(int id, const QString &date)
+{
+    Task *t = findTask(id);
+    if (!t || date.isEmpty())
+        return;
+    if (t->doneDates().contains(date))
+        t->removeDoneDate(date);
+    else
+        t->addDoneDate(date);
+    markDirty();
 }
 
 void TodoStore::remove(const QVariantList &ids)

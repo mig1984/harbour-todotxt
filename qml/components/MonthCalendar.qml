@@ -118,7 +118,7 @@ Item {
                 height: Theme.itemSizeMedium
                 Label {
                     anchors.centerIn: parent
-                    text: Qt.formatDate(new Date(cal.shownYear, cal.shownMonth, 1), "MMMM yyyy")
+                    text: app.monthLabel(cal.shownYear, cal.shownMonth)
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.highlightColor
                 }

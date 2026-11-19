@@ -360,6 +360,59 @@ _EXTRA = {
 for _lang, _tr in _EXTRA.items():
     T[_lang]["Example list"] = _tr
 
+
+# Recurrence editor + settings strings.
+_E = {
+"cs": {"Recurrence":"Opakování","No repetition":"Neopakovat","Presets":"Předvolby","Every day":"Denně","Every 2 days":"Každé 2 dny","Every week":"Týdně","Every 2 weeks":"Každé 2 týdny","Every month":"Měsíčně","Every year":"Ročně","Every week, from due":"Týdně, od termínu","Every month, from due":"Měsíčně, od termínu","Every year, from due":"Ročně, od termínu","Custom":"Vlastní","From due date (strict)":"Od termínu (striktní)","Otherwise the next date counts from completion":"Jinak se další datum počítá od dokončení","Every N":"Každých N","days":"dny","working days":"pracovní dny","weeks":"týdny","months":"měsíce","years":"roky","Set: %1":"Nastavit: %1","Show recurring tasks ahead":"Zobrazovat opakované úkoly dopředu","Off":"Vypnuto"},
+"de": {"Recurrence":"Wiederholung","No repetition":"Keine Wiederholung","Presets":"Vorlagen","Every day":"Täglich","Every 2 days":"Alle 2 Tage","Every week":"Wöchentlich","Every 2 weeks":"Alle 2 Wochen","Every month":"Monatlich","Every year":"Jährlich","Every week, from due":"Wöchentlich, ab Fälligkeit","Every month, from due":"Monatlich, ab Fälligkeit","Every year, from due":"Jährlich, ab Fälligkeit","Custom":"Benutzerdefiniert","From due date (strict)":"Ab Fälligkeitsdatum (strikt)","Otherwise the next date counts from completion":"Sonst zählt das nächste Datum ab Erledigung","Every N":"Alle N","days":"Tage","working days":"Werktage","weeks":"Wochen","months":"Monate","years":"Jahre","Set: %1":"Setzen: %1","Show recurring tasks ahead":"Wiederkehrende Aufgaben vorausschauend anzeigen","Off":"Aus"},
+"fr": {"Recurrence":"Répétition","No repetition":"Aucune répétition","Presets":"Préréglages","Every day":"Chaque jour","Every 2 days":"Tous les 2 jours","Every week":"Chaque semaine","Every 2 weeks":"Toutes les 2 semaines","Every month":"Chaque mois","Every year":"Chaque année","Every week, from due":"Chaque semaine, dès l'échéance","Every month, from due":"Chaque mois, dès l'échéance","Every year, from due":"Chaque année, dès l'échéance","Custom":"Personnalisé","From due date (strict)":"À partir de l'échéance (strict)","Otherwise the next date counts from completion":"Sinon la date suivante part de l'achèvement","Every N":"Tous les N","days":"jours","working days":"jours ouvrés","weeks":"semaines","months":"mois","years":"ans","Set: %1":"Définir : %1","Show recurring tasks ahead":"Afficher les tâches récurrentes à venir","Off":"Désactivé"},
+"es": {"Recurrence":"Repetición","No repetition":"Sin repetición","Presets":"Preajustes","Every day":"Cada día","Every 2 days":"Cada 2 días","Every week":"Cada semana","Every 2 weeks":"Cada 2 semanas","Every month":"Cada mes","Every year":"Cada año","Every week, from due":"Cada semana, desde el vencimiento","Every month, from due":"Cada mes, desde el vencimiento","Every year, from due":"Cada año, desde el vencimiento","Custom":"Personalizado","From due date (strict)":"Desde la fecha de vencimiento (estricto)","Otherwise the next date counts from completion":"Si no, la fecha siguiente cuenta desde la finalización","Every N":"Cada N","days":"días","working days":"días laborables","weeks":"semanas","months":"meses","years":"años","Set: %1":"Establecer: %1","Show recurring tasks ahead":"Mostrar tareas recurrentes próximas","Off":"Desactivado"},
+"it": {"Recurrence":"Ripetizione","No repetition":"Nessuna ripetizione","Presets":"Preimpostazioni","Every day":"Ogni giorno","Every 2 days":"Ogni 2 giorni","Every week":"Ogni settimana","Every 2 weeks":"Ogni 2 settimane","Every month":"Ogni mese","Every year":"Ogni anno","Every week, from due":"Ogni settimana, dalla scadenza","Every month, from due":"Ogni mese, dalla scadenza","Every year, from due":"Ogni anno, dalla scadenza","Custom":"Personalizzato","From due date (strict)":"Dalla data di scadenza (rigoroso)","Otherwise the next date counts from completion":"Altrimenti la data successiva conta dal completamento","Every N":"Ogni N","days":"giorni","working days":"giorni lavorativi","weeks":"settimane","months":"mesi","years":"anni","Set: %1":"Imposta: %1","Show recurring tasks ahead":"Mostra attività ricorrenti future","Off":"Off"},
+"ru": {"Recurrence":"Повторение","No repetition":"Без повторения","Presets":"Шаблоны","Every day":"Ежедневно","Every 2 days":"Каждые 2 дня","Every week":"Еженедельно","Every 2 weeks":"Каждые 2 недели","Every month":"Ежемесячно","Every year":"Ежегодно","Every week, from due":"Еженедельно, от срока","Every month, from due":"Ежемесячно, от срока","Every year, from due":"Ежегодно, от срока","Custom":"Другое","From due date (strict)":"От даты срока (строго)","Otherwise the next date counts from completion":"Иначе следующая дата считается от выполнения","Every N":"Каждые N","days":"дней","working days":"рабочих дней","weeks":"недель","months":"месяцев","years":"лет","Set: %1":"Задать: %1","Show recurring tasks ahead":"Показывать повторяющиеся задачи заранее","Off":"Выкл."},
+"pl": {"Recurrence":"Powtarzanie","No repetition":"Bez powtarzania","Presets":"Ustawienia wstępne","Every day":"Codziennie","Every 2 days":"Co 2 dni","Every week":"Co tydzień","Every 2 weeks":"Co 2 tygodnie","Every month":"Co miesiąc","Every year":"Co rok","Every week, from due":"Co tydzień, od terminu","Every month, from due":"Co miesiąc, od terminu","Every year, from due":"Co rok, od terminu","Custom":"Własne","From due date (strict)":"Od terminu (ścisłe)","Otherwise the next date counts from completion":"W przeciwnym razie następna data liczy się od ukończenia","Every N":"Co N","days":"dni","working days":"dni robocze","weeks":"tygodnie","months":"miesiące","years":"lata","Set: %1":"Ustaw: %1","Show recurring tasks ahead":"Pokazuj zadania cykliczne z wyprzedzeniem","Off":"Wył."},
+"nl": {"Recurrence":"Herhaling","No repetition":"Geen herhaling","Presets":"Voorinstellingen","Every day":"Elke dag","Every 2 days":"Elke 2 dagen","Every week":"Elke week","Every 2 weeks":"Elke 2 weken","Every month":"Elke maand","Every year":"Elk jaar","Every week, from due":"Elke week, vanaf vervaldatum","Every month, from due":"Elke maand, vanaf vervaldatum","Every year, from due":"Elk jaar, vanaf vervaldatum","Custom":"Aangepast","From due date (strict)":"Vanaf vervaldatum (strikt)","Otherwise the next date counts from completion":"Anders telt de volgende datum vanaf afronding","Every N":"Elke N","days":"dagen","working days":"werkdagen","weeks":"weken","months":"maanden","years":"jaren","Set: %1":"Instellen: %1","Show recurring tasks ahead":"Terugkerende taken vooruit tonen","Off":"Uit"},
+"sv": {"Recurrence":"Upprepning","No repetition":"Ingen upprepning","Presets":"Förval","Every day":"Varje dag","Every 2 days":"Varannan dag","Every week":"Varje vecka","Every 2 weeks":"Varannan vecka","Every month":"Varje månad","Every year":"Varje år","Every week, from due":"Varje vecka, från förfallodatum","Every month, from due":"Varje månad, från förfallodatum","Every year, from due":"Varje år, från förfallodatum","Custom":"Anpassad","From due date (strict)":"Från förfallodatum (strikt)","Otherwise the next date counts from completion":"Annars räknas nästa datum från slutförande","Every N":"Var N","days":"dagar","working days":"arbetsdagar","weeks":"veckor","months":"månader","years":"år","Set: %1":"Ange: %1","Show recurring tasks ahead":"Visa återkommande uppgifter i förväg","Off":"Av"},
+"fi": {"Recurrence":"Toisto","No repetition":"Ei toistoa","Presets":"Valmiit asetukset","Every day":"Joka päivä","Every 2 days":"Joka 2. päivä","Every week":"Joka viikko","Every 2 weeks":"Joka 2. viikko","Every month":"Joka kuukausi","Every year":"Joka vuosi","Every week, from due":"Joka viikko, eräpäivästä","Every month, from due":"Joka kuukausi, eräpäivästä","Every year, from due":"Joka vuosi, eräpäivästä","Custom":"Mukautettu","From due date (strict)":"Eräpäivästä (tiukka)","Otherwise the next date counts from completion":"Muuten seuraava päivä lasketaan valmistumisesta","Every N":"Joka N.","days":"päivää","working days":"arkipäivää","weeks":"viikkoa","months":"kuukautta","years":"vuotta","Set: %1":"Aseta: %1","Show recurring tasks ahead":"Näytä toistuvat tehtävät etukäteen","Off":"Pois"},
+"zh_CN": {"Recurrence":"重复","No repetition":"不重复","Presets":"预设","Every day":"每天","Every 2 days":"每2天","Every week":"每周","Every 2 weeks":"每2周","Every month":"每月","Every year":"每年","Every week, from due":"每周，从截止日算起","Every month, from due":"每月，从截止日算起","Every year, from due":"每年，从截止日算起","Custom":"自定义","From due date (strict)":"从截止日期（严格）","Otherwise the next date counts from completion":"否则下一个日期从完成日算起","Every N":"每 N","days":"天","working days":"工作日","weeks":"周","months":"个月","years":"年","Set: %1":"设置：%1","Show recurring tasks ahead":"提前显示重复任务","Off":"关闭"},
+}
+for _lang, _t in _E.items():
+    T[_lang].update(_t)
+
+
+_W = {
+"cs":"Opakované úkoly potřebují termín nebo datum vytvoření",
+"de":"Wiederkehrende Aufgaben brauchen ein Fälligkeits- oder Erstelldatum",
+"fr":"Les tâches récurrentes nécessitent une échéance ou une date de création",
+"es":"Las tareas recurrentes necesitan una fecha de vencimiento o de creación",
+"it":"Le attività ricorrenti richiedono una scadenza o una data di creazione",
+"ru":"Повторяющимся задачам нужна дата срока или создания",
+"pl":"Zadania cykliczne wymagają terminu lub daty utworzenia",
+"nl":"Terugkerende taken hebben een vervaldatum of aanmaakdatum nodig",
+"sv":"Återkommande uppgifter behöver ett förfallodatum eller skapandedatum",
+"fi":"Toistuvat tehtävät tarvitsevat eräpäivän tai luontipäivän",
+"zh_CN":"重复任务需要截止日期或创建日期",
+}
+for _lang, _t in _W.items():
+    T[_lang]["Recurring tasks need a due date or a creation date"] = _t
+
+
+_QC = {
+"cs": {"Quick choice":"Rychlá volba","No due date":"Bez termínu","No threshold":"Bez prahu"},
+"de": {"Quick choice":"Schnellauswahl","No due date":"Kein Fälligkeitsdatum","No threshold":"Keine Schwelle"},
+"fr": {"Quick choice":"Choix rapide","No due date":"Sans échéance","No threshold":"Sans seuil"},
+"es": {"Quick choice":"Elección rápida","No due date":"Sin vencimiento","No threshold":"Sin umbral"},
+"it": {"Quick choice":"Scelta rapida","No due date":"Senza scadenza","No threshold":"Senza soglia"},
+"ru": {"Quick choice":"Быстрый выбор","No due date":"Без срока","No threshold":"Без порога"},
+"pl": {"Quick choice":"Szybki wybór","No due date":"Bez terminu","No threshold":"Bez progu"},
+"nl": {"Quick choice":"Snelle keuze","No due date":"Geen vervaldatum","No threshold":"Geen drempel"},
+"sv": {"Quick choice":"Snabbval","No due date":"Inget förfallodatum","No threshold":"Ingen tröskel"},
+"fi": {"Quick choice":"Pikavalinta","No due date":"Ei eräpäivää","No threshold":"Ei kynnystä"},
+"zh_CN": {"Quick choice":"快速选择","No due date":"无截止日期","No threshold":"无阈值"},
+}
+for _lang, _t in _QC.items():
+    T[_lang].update(_t)
+
+
 base = ET.parse(BASE)
 missing = {}
 for lang, table in T.items():

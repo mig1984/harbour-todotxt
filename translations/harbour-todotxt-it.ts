@@ -40,40 +40,55 @@
         <translation>Data</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="79" />
+        <location filename="../qml/pages/DeferPage.qml" line="66" />
+        <source>Presets</source>
+        <translation>Preimpostazioni</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DeferPage.qml" line="83" />
         <source>No date</source>
         <translation>Nessuna data</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="46" />
-        <location filename="../qml/pages/DeferPage.qml" line="73" />
+        <location filename="../qml/pages/DeferPage.qml" line="49" />
+        <location filename="../qml/pages/DeferPage.qml" line="77" />
         <source>Today</source>
         <translation>Oggi</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="74" />
+        <location filename="../qml/pages/DeferPage.qml" line="78" />
         <source>Tomorrow</source>
         <translation>Domani</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="75" />
+        <location filename="../qml/pages/DeferPage.qml" line="79" />
         <source>Day after tomorrow</source>
         <translation>Dopodomani</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="76" />
+        <location filename="../qml/pages/DeferPage.qml" line="80" />
         <source>In one week</source>
         <translation>Tra una settimana</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="77" />
+        <location filename="../qml/pages/DeferPage.qml" line="81" />
         <source>In two weeks</source>
         <translation>Tra due settimane</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="78" />
+        <location filename="../qml/pages/DeferPage.qml" line="82" />
         <source>In one month</source>
         <translation>Tra un mese</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DeferPage.qml" line="87" />
+        <source>No threshold</source>
+        <translation>Senza soglia</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DeferPage.qml" line="87" />
+        <source>No due date</source>
+        <translation>Senza scadenza</translation>
     </message>
 </context>
 <context>
@@ -449,6 +464,119 @@
     </message>
 </context>
 <context>
+    <name>RecurrencePage</name>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="34" />
+        <source>Recurrence</source>
+        <translation>Ripetizione</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="43" />
+        <source>No repetition</source>
+        <translation>Nessuna ripetizione</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="36" />
+        <source>Presets</source>
+        <translation>Preimpostazioni</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="44" />
+        <source>Every day</source>
+        <translation>Ogni giorno</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="45" />
+        <source>Every 2 days</source>
+        <translation>Ogni 2 giorni</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="46" />
+        <source>Every week</source>
+        <translation>Ogni settimana</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="47" />
+        <source>Every 2 weeks</source>
+        <translation>Ogni 2 settimane</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="48" />
+        <source>Every month</source>
+        <translation>Ogni mese</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="49" />
+        <source>Every year</source>
+        <translation>Ogni anno</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="50" />
+        <source>Every week, from due</source>
+        <translation>Ogni settimana, dalla scadenza</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="51" />
+        <source>Every month, from due</source>
+        <translation>Ogni mese, dalla scadenza</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="52" />
+        <source>Every year, from due</source>
+        <translation>Ogni anno, dalla scadenza</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="66" />
+        <source>Custom</source>
+        <translation>Personalizzato</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="68" />
+        <source>From due date (strict)</source>
+        <translation>Dalla data di scadenza (rigoroso)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="69" />
+        <source>Otherwise the next date counts from completion</source>
+        <translation>Altrimenti la data successiva conta dal completamento</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="75" />
+        <source>Every N</source>
+        <translation>Ogni N</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="89" />
+        <source>days</source>
+        <translation>giorni</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="90" />
+        <source>working days</source>
+        <translation>giorni lavorativi</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="91" />
+        <source>weeks</source>
+        <translation>settimane</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="92" />
+        <source>months</source>
+        <translation>mesi</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="93" />
+        <source>years</source>
+        <translation>anni</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="112" />
+        <source>Set: %1</source>
+        <translation>Imposta: %1</translation>
+    </message>
+</context>
+<context>
     <name>SavedFiltersPage</name>
     <message>
         <location filename="../qml/pages/SavedFiltersPage.qml" line="14" />
@@ -570,37 +698,52 @@
         <translation>Iniziale maiuscola nelle nuove attività</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="80" />
+        <location filename="../qml/pages/SettingsPage.qml" line="81" />
+        <source>Show recurring tasks ahead</source>
+        <translation>Mostra attività ricorrenti future</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="86" />
+        <source>Off</source>
+        <translation>Off</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="86" />
+        <source>%1 months</source>
+        <translation>%1 mesi</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="90" />
         <source>Appearance</source>
         <translation>Aspetto</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="82" />
+        <location filename="../qml/pages/SettingsPage.qml" line="92" />
         <source>Show dates on a separate line</source>
         <translation>Date su una riga separata</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="87" />
+        <location filename="../qml/pages/SettingsPage.qml" line="97" />
         <source>Color due dates</source>
         <translation>Colora le scadenze</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="92" />
+        <location filename="../qml/pages/SettingsPage.qml" line="102" />
         <source>Uppercase section headers</source>
         <translation>Intestazioni di sezione in maiuscolo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="97" />
+        <location filename="../qml/pages/SettingsPage.qml" line="107" />
         <source>Case sensitive sorting</source>
         <translation>Ordinamento sensibile alle maiuscole</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="102" />
+        <location filename="../qml/pages/SettingsPage.qml" line="112" />
         <source>Use todo.txt terms (context/project)</source>
         <translation>Usa i termini todo.txt (contesto/progetto)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="103" />
+        <location filename="../qml/pages/SettingsPage.qml" line="113" />
         <source>Instead of list/tag</source>
         <translation>Invece di lista/etichetta</translation>
     </message>
@@ -656,17 +799,17 @@
 <context>
     <name>TaskDelegate</name>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="49" />
+        <location filename="../qml/components/TaskDelegate.qml" line="57" />
         <source>done %1</source>
         <translation>fatto %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="38" />
+        <location filename="../qml/components/TaskDelegate.qml" line="41" />
         <source>Marking incomplete</source>
         <translation>Contrassegno come incompleta</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="38" />
+        <location filename="../qml/components/TaskDelegate.qml" line="41" />
         <source>Completing</source>
         <translation>Completamento</translation>
     </message>
@@ -674,94 +817,110 @@
 <context>
     <name>TaskDialog</name>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="183" />
+        <location filename="../qml/pages/TaskDialog.qml" line="210" />
         <source>Open %1</source>
         <translation>Apri %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="186" />
+        <location filename="../qml/pages/TaskDialog.qml" line="213" />
         <source>Mail %1</source>
         <translation>Scrivi a %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="191" />
+        <location filename="../qml/pages/TaskDialog.qml" line="218" />
         <source>Call %1</source>
         <translation>Chiama %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="205" />
+        <location filename="../qml/pages/TaskDialog.qml" line="232" />
         <source>Update</source>
         <translation>Aggiorna</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="205" />
+        <location filename="../qml/pages/TaskDialog.qml" line="232" />
         <source>Add tasks</source>
         <translation>Aggiungi attività</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="206" />
+        <location filename="../qml/pages/TaskDialog.qml" line="233" />
         <source>Save</source>
         <translation>Salva</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="213" />
+        <location filename="../qml/pages/TaskDialog.qml" line="240" />
         <source>One task per line</source>
         <translation>Un'attività per riga</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="213" />
+        <location filename="../qml/pages/TaskDialog.qml" line="240" />
         <source>Task</source>
         <translation>Attività</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="278" />
-        <location filename="../qml/pages/TaskDialog.qml" line="290" />
+        <location filename="../qml/pages/TaskDialog.qml" line="298" />
+        <source>Recurring tasks need a due date or a creation date</source>
+        <translation>Le attività ricorrenti richiedono una scadenza o una data di creazione</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="316" />
+        <location filename="../qml/pages/TaskDialog.qml" line="328" />
+        <location filename="../qml/pages/TaskDialog.qml" line="365" />
         <source>None</source>
         <translation>Nessuna</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="301" />
+        <location filename="../qml/pages/TaskDialog.qml" line="339" />
         <source>Priority</source>
         <translation>Priorità</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="302" />
+        <location filename="../qml/pages/TaskDialog.qml" line="340" />
         <source>No priority</source>
         <translation>Nessuna priorità</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="310" />
+        <location filename="../qml/pages/TaskDialog.qml" line="348" />
         <source>Due</source>
         <translation>Scadenza</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="311" />
-        <location filename="../qml/pages/TaskDialog.qml" line="319" />
+        <location filename="../qml/pages/TaskDialog.qml" line="349" />
+        <location filename="../qml/pages/TaskDialog.qml" line="357" />
         <source>No date</source>
         <translation>Nessuna data</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="313" />
+        <location filename="../qml/pages/TaskDialog.qml" line="351" />
         <source>Due date</source>
         <translation>Scadenza</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="338" />
+        <location filename="../qml/pages/TaskDialog.qml" line="364" />
+        <source>Recurrence</source>
+        <translation>Ripetizione</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="378" />
+        <source>Quick choice</source>
+        <translation>Scelta rapida</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="385" />
         <source>Today</source>
         <translation>Oggi</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="343" />
+        <location filename="../qml/pages/TaskDialog.qml" line="393" />
         <source>Tomorrow</source>
         <translation>Domani</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="318" />
+        <location filename="../qml/pages/TaskDialog.qml" line="356" />
         <source>Threshold</source>
         <translation>Soglia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="321" />
+        <location filename="../qml/pages/TaskDialog.qml" line="359" />
         <source>Threshold date</source>
         <translation>Data soglia</translation>
     </message>
@@ -769,67 +928,68 @@
 <context>
     <name>TaskModel</name>
     <message>
-        <location filename="../src/taskmodel.cpp" line="143" />
+        <location filename="../src/taskmodel.cpp" line="222" />
+        <location filename="../src/taskmodel.cpp" line="226" />
         <source>None</source>
         <translation>Nessuna</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="682" />
+        <location filename="../src/taskmodel.cpp" line="848" />
         <source>today</source>
         <translation>oggi</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="684" />
+        <location filename="../src/taskmodel.cpp" line="850" />
         <source>tomorrow</source>
         <translation>domani</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="686" />
+        <location filename="../src/taskmodel.cpp" line="852" />
         <source>yesterday</source>
         <translation>ieri</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="690" />
+        <location filename="../src/taskmodel.cpp" line="856" />
         <source>%1 days</source>
         <translation>%1 giorni</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="692" />
+        <location filename="../src/taskmodel.cpp" line="858" />
         <source>1 week</source>
         <translation>1 settimana</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="692" />
+        <location filename="../src/taskmodel.cpp" line="858" />
         <source>%1 weeks</source>
         <translation>%1 settimane</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="694" />
+        <location filename="../src/taskmodel.cpp" line="860" />
         <source>1 month</source>
         <translation>1 mese</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="694" />
+        <location filename="../src/taskmodel.cpp" line="860" />
         <source>%1 months</source>
         <translation>%1 mesi</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="696" />
+        <location filename="../src/taskmodel.cpp" line="862" />
         <source>1 year</source>
         <translation>1 anno</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="696" />
+        <location filename="../src/taskmodel.cpp" line="862" />
         <source>%1 years</source>
         <translation>%1 anni</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="697" />
+        <location filename="../src/taskmodel.cpp" line="863" />
         <source>%1 ago</source>
         <translation>%1 fa</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="697" />
+        <location filename="../src/taskmodel.cpp" line="863" />
         <source>in %1</source>
         <translation>tra %1</translation>
     </message>
@@ -844,7 +1004,7 @@
     <message>
         <location filename="../src/todostore.cpp" line="188" />
         <location filename="../src/todostore.cpp" line="197" />
-        <location filename="../src/todostore.cpp" line="430" />
+        <location filename="../src/todostore.cpp" line="459" />
         <source>Cannot write %1</source>
         <translation>Impossibile scrivere %1</translation>
     </message>

@@ -284,6 +284,38 @@ QString Task::recurrence() const
     return t ? t->value : QString();
 }
 
+bool Task::isSeries() const
+{
+    return !recurrence().isEmpty() && (!dueDate().isEmpty() || !createDate().isEmpty());
+}
+
+QStringList Task::doneDates() const
+{
+    QStringList r;
+    foreach (const Token &t, m_tokens)
+        if (t.type == TokenType::Ext && t.key.compare("done", Qt::CaseInsensitive) == 0
+                && isDate(t.value) && !r.contains(t.value))
+            r << t.value;
+    r.sort();
+    return r;
+}
+
+void Task::addDoneDate(const QString &date)
+{
+    if (!isDate(date) || doneDates().contains(date))
+        return;
+    appendToken(keyValue(TokenType::Ext, "done", date));
+}
+
+void Task::removeDoneDate(const QString &date)
+{
+    for (int i = m_tokens.size() - 1; i >= 0; --i)
+        if (m_tokens[i].type == TokenType::Ext
+                && m_tokens[i].key.compare("done", Qt::CaseInsensitive) == 0
+                && m_tokens[i].value == date)
+            m_tokens.removeAt(i);
+}
+
 QString Task::uuid() const
 {
     const Token *t = firstToken(TokenType::Uuid);

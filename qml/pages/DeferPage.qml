@@ -9,6 +9,9 @@ Page {
 
     property string title: qsTr("Date")
     property string current: ""
+    // The page is used for both due and threshold dates; only the label of the
+    // "clear" button differs.
+    property bool threshold: false
 
     signal selected(string value)
 
@@ -60,6 +63,7 @@ Page {
 
             Item { width: 1; height: Theme.paddingLarge }
 
+            SectionHeader { text: qsTr("Presets") }
             // Two columns; "No date" spans the whole row so the last (odd) one
             // is not left alone under the left column.
             Flow {
@@ -80,7 +84,7 @@ Page {
                     }
                     Button {
                         width: model.value === "" ? quick.width : (quick.width - quick.spacing) / 2
-                        text: qsTr(model.label)
+                        text: model.value === "" ? (page.threshold ? qsTr("No threshold") : qsTr("No due date")) : qsTr(model.label)
                         onClicked: page.pick(model.value)
                     }
                 }

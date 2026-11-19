@@ -6,6 +6,7 @@
 
 #include <QDate>
 #include <QVariantMap>
+#include <QRegularExpression>
 #include <algorithm>
 
 TaskModel::TaskModel(TodoStore *store, Query *query, Settings *settings, QObject *parent)
@@ -23,6 +24,7 @@ TaskModel::TaskModel(TodoStore *store, Query *query, Settings *settings, QObject
     connect(m_query, SIGNAL(changed()), this, SLOT(scheduleRebuildReset()));
     connect(m_settings, SIGNAL(showDateBarChanged()), this, SLOT(scheduleRebuildReset()));
     connect(m_settings, SIGNAL(caseSensitiveSortChanged()), this, SLOT(scheduleRebuildReset()));
+    connect(m_settings, SIGNAL(recurrenceHorizonMonthsChanged()), this, SLOT(scheduleRebuildReset()));
     m_today = Task::today();
 }
 
@@ -50,6 +52,8 @@ QHash<int, QByteArray> TaskModel::roleNames() const
     r[AgeRole] = "age";
     r[RecurrenceRole] = "recurrence";
     r[OrderRole] = "order";
+    r[OccurrenceRole] = "occurrence";
+    r[RecurringRole] = "recurring";
     return r;
 }
 
@@ -67,7 +71,71 @@ const Task *TaskModel::taskAt(int row) const
 {
     if (row < 0 || row >= m_rows.size())
         return 0;
-    return m_store->findTask(m_rows[row]);
+    return m_store->findTask(m_rows[row].id);
+}
+
+// Step `date` by `times` recurrence intervals (times may be negative).
+static QDate applyInterval(const QDate &date, const QString &rec, int times)
+{
+    if (times == 0)
+        return date;
+    QRegularExpression re("\\+?(\\d*)([dwmyb])");
+    QRegularExpressionMatch m = re.match(rec.toLower());
+    if (!m.hasMatch())
+        return date;
+    const int amount = m.captured(1).isEmpty() ? 1 : m.captured(1).toInt();
+    const QString unit = m.captured(2);
+    const int total = amount * times;
+    if (unit == "d")
+        return date.addDays(total);
+    if (unit == "w")
+        return date.addDays(7 * total);
+    if (unit == "m")
+        return date.addMonths(total);
+    if (unit == "y")
+        return date.addYears(total);
+    if (unit == "b") {
+        QDate d = date;
+        int c = total;
+        while (c != 0) {
+            const int dow = d.dayOfWeek();  // 1 = Mon .. 7 = Sun
+            if (c > 0) {
+                d = d.addDays(dow == 5 ? 3 : dow == 6 ? 2 : 1);
+                c--;
+            } else {
+                d = d.addDays(dow == 1 ? -3 : dow == 7 ? -2 : -1);
+                c++;
+            }
+        }
+        return d;
+    }
+    return date;
+}
+
+QString TaskModel::effectiveDate(const Task &t, int occ, bool threshold) const
+{
+    const QString d = threshold ? t.thresholdDate()
+                     : (t.dueDate().isEmpty() && t.isSeries() ? t.createDate() : t.dueDate());
+    if (occ == 0 || d.isEmpty())
+        return d;
+    const QString rec = t.recurrence();
+    if (rec.isEmpty())
+        return d;
+    QDate date = QDate::fromString(d, "yyyy-MM-dd");
+    const int n = occ < 0 ? -occ : occ;
+    const int step = occ < 0 ? -1 : 1;
+    for (int k = 0; k < n; ++k)
+        date = applyInterval(date, rec, step);
+    return date.toString("yyyy-MM-dd");
+}
+
+bool TaskModel::rowCompleted(const Task &t, int occ) const
+{
+    if (t.isCompleted())
+        return true;
+    if (t.isSeries())
+        return t.doneDates().contains(effectiveDate(t, occ, false));
+    return false;
 }
 
 int TaskModel::dateState(const QString &date) const
@@ -113,6 +181,12 @@ QString TaskModel::displayHtml(const Task &t) const
         case TokenType::Link:
             parts << "<font color=\"#LINK#\">" + tok.text.toHtmlEscaped() + "</font>";
             continue;
+        case TokenType::Ext:
+            // The done:YYYY-MM-DD occurrence markers are metadata, hide them.
+            if (tok.key.compare("done", Qt::CaseInsensitive) == 0)
+                continue;
+            parts << tok.text.toHtmlEscaped();
+            continue;
         default:
             parts << tok.text.toHtmlEscaped();
         }
@@ -122,7 +196,10 @@ QString TaskModel::displayHtml(const Task &t) const
 
 QVariant TaskModel::data(const QModelIndex &index, int role) const
 {
-    const Task *t = taskAt(index.row());
+    if (index.row() < 0 || index.row() >= m_rows.size())
+        return QVariant();
+    const OccRow row = m_rows[index.row()];
+    const Task *t = m_store->findTask(row.id);
     if (!t)
         return QVariant();
     switch (role) {
@@ -130,9 +207,9 @@ QVariant TaskModel::data(const QModelIndex &index, int role) const
     case TextRole: return t->text();
     case DisplayRole: return displayHtml(*t);
     case PriorityRole: return QString(t->priority());
-    case CompletedRole: return t->isCompleted();
-    case DueRole: return t->dueDate();
-    case ThresholdRole: return t->thresholdDate();
+    case CompletedRole: return rowCompleted(*t, row.occ);
+    case DueRole: return effectiveDate(*t, row.occ, false);
+    case ThresholdRole: return effectiveDate(*t, row.occ, true);
     case CreateDateRole: return t->createDate();
     case CompletionDateRole: return t->completionDate();
     case ListsRole: return t->lists();
@@ -140,13 +217,22 @@ QVariant TaskModel::data(const QModelIndex &index, int role) const
     case LinksRole: return t->links();
     case PhonesRole: return t->phones();
     case MailsRole: return t->mails();
-    case SectionRole: return m_query->section(*t, tr("None"));
+    case SectionRole: {
+        if (row.occ == 0)
+            return m_query->section(*t, tr("None"));
+        Task copy(*t);
+        copy.setDueDate(effectiveDate(*t, row.occ, false));
+        copy.setThresholdDate(effectiveDate(*t, row.occ, true));
+        return m_query->section(copy, tr("None"));
+    }
     case SelectedRole: return m_selected.contains(t->id());
     case HiddenRole: return t->isHidden();
     case InFutureRole: return t->inFuture(m_today, m_query->createIsThreshold());
     case AgeRole: return t->createDate().isEmpty() ? QString() : relativeDate(t->createDate());
     case RecurrenceRole: return t->recurrence();
     case OrderRole: return t->manualOrder();
+    case OccurrenceRole: return row.occ;
+    case RecurringRole: return t->isSeries();
     }
     return QVariant();
 }
@@ -163,7 +249,10 @@ QVariantMap TaskModel::get(int row) const
 
 int TaskModel::indexOfId(int id) const
 {
-    return m_rows.indexOf(id);
+    for (int i = 0; i < m_rows.size(); ++i)
+        if (m_rows[i].id == id)
+            return i;
+    return -1;
 }
 
 void TaskModel::refresh()
@@ -177,11 +266,14 @@ QStringList TaskModel::dueDates() const
     QSet<QString> seen;
     QStringList out;
     for (int i = 0; i < m_rows.size(); ++i) {
-        const Task *t = m_store->findTask(m_rows[i]);
-        if (!t || t->isCompleted() || t->dueDate().isEmpty() || seen.contains(t->dueDate()))
+        const Task *t = m_store->findTask(m_rows[i].id);
+        if (!t || rowCompleted(*t, m_rows[i].occ))
             continue;
-        seen.insert(t->dueDate());
-        out << t->dueDate();
+        const QString d = effectiveDate(*t, m_rows[i].occ, false);
+        if (d.isEmpty() || seen.contains(d))
+            continue;
+        seen.insert(d);
+        out << d;
     }
     out.sort();
     return out;
@@ -192,11 +284,14 @@ QStringList TaskModel::thresholdDates() const
     QSet<QString> seen;
     QStringList out;
     for (int i = 0; i < m_rows.size(); ++i) {
-        const Task *t = m_store->findTask(m_rows[i]);
-        if (!t || t->isCompleted() || t->thresholdDate().isEmpty() || seen.contains(t->thresholdDate()))
+        const Task *t = m_store->findTask(m_rows[i].id);
+        if (!t || rowCompleted(*t, m_rows[i].occ))
             continue;
-        seen.insert(t->thresholdDate());
-        out << t->thresholdDate();
+        const QString d = effectiveDate(*t, m_rows[i].occ, true);
+        if (d.isEmpty() || seen.contains(d))
+            continue;
+        seen.insert(d);
+        out << d;
     }
     out.sort();
     return out;
@@ -206,10 +301,13 @@ int TaskModel::rowForDueDate(const QString &date) const
 {
     int completedRow = -1;
     for (int i = 0; i < m_rows.size(); ++i) {
-        const Task *t = m_store->findTask(m_rows[i]);
-        if (!t || (t->dueDate() != date && t->thresholdDate() != date))
+        const Task *t = m_store->findTask(m_rows[i].id);
+        if (!t)
             continue;
-        if (!t->isCompleted())
+        if (effectiveDate(*t, m_rows[i].occ, false) != date
+                && effectiveDate(*t, m_rows[i].occ, true) != date)
+            continue;
+        if (!rowCompleted(*t, m_rows[i].occ))
             return i;
         if (completedRow < 0)
             completedRow = i;
@@ -278,21 +376,75 @@ void TaskModel::rebuild()
         return q->compare(*a, *b) < 0;
     });
 
-    QList<int> rows;
+    // Rows: for a plain task just itself; for a recurring series (rec: + due:)
+    // every occurrence from the creation date (or up to the horizon back) into
+    // the future horizon, so past weeks can be ticked off and upcoming ones are
+    // visible. A done occurrence carries a done: marker.
+    const int horizonMonths = m_settings->recurrenceHorizonMonths();
+    const QDate today = QDate::fromString(m_today, "yyyy-MM-dd");
+    const QDate horizon = today.addMonths(horizonMonths);
+    const QDate minBack = today.addMonths(-horizonMonths);
+    const int maxOcc = 400;
+
+    struct Entry { int id; int occ; Task eff; };
+    QList<Entry> entries;
     int overdue = 0, dueToday = 0, pending = 0;
-    foreach (const Task *t, visible) {
-        rows << t->id();
+
+    for (int vi = 0; vi < visible.size(); ++vi) {
+        const Task *t = visible[vi];
         if (!t->isCompleted()) {
             pending++;
             int s = dateState(t->dueDate());
             if (s == 1) overdue++;
             else if (s == 2) dueToday++;
         }
+        // base occurrence
+        {
+            Entry e; e.id = t->id(); e.occ = 0; e.eff = *t;
+            e.eff.setDueDate(effectiveDate(*t, 0, false));
+            e.eff.setThresholdDate(effectiveDate(*t, 0, true));
+            entries << e;
+        }
+
+        if (t->isCompleted() || horizonMonths <= 0 || !t->isSeries())
+            continue;
+        for (int k = 1; k <= maxOcc; ++k) {
+            const QDate d = QDate::fromString(effectiveDate(*t, k, false), "yyyy-MM-dd");
+            if (!d.isValid() || d > horizon)
+                break;
+            Entry e; e.id = t->id(); e.occ = k; e.eff = *t;
+            e.eff.setDueDate(effectiveDate(*t, k, false));
+            e.eff.setThresholdDate(effectiveDate(*t, k, true));
+            entries << e;
+        }
+        QDate backLimit = t->createDate().isEmpty()
+                ? today : QDate::fromString(t->createDate(), "yyyy-MM-dd");
+        if (!backLimit.isValid() || backLimit < minBack)
+            backLimit = minBack;
+        for (int k = -1; k >= -maxOcc; --k) {
+            const QDate d = QDate::fromString(effectiveDate(*t, k, false), "yyyy-MM-dd");
+            if (!d.isValid() || d < backLimit)
+                break;
+            Entry e; e.id = t->id(); e.occ = k; e.eff = *t;
+            e.eff.setDueDate(effectiveDate(*t, k, false));
+            e.eff.setThresholdDate(effectiveDate(*t, k, true));
+            entries << e;
+        }
     }
     m_overdue = overdue;
     m_dueToday = dueToday;
     m_pending = pending;
     m_completed = completed;
+
+    std::stable_sort(entries.begin(), entries.end(), [q](const Entry &a, const Entry &b) {
+        return q->compare(a.eff, b.eff) < 0;
+    });
+
+    QList<OccRow> rows;
+    foreach (const Entry &e, entries) {
+        OccRow r; r.id = e.id; r.occ = e.occ;
+        rows << r;
+    }
 
     // A filter/sort change starts a fresh view (scroll back to the top); a data
     // change keeps the current position and is applied incrementally.
@@ -305,7 +457,7 @@ void TaskModel::rebuild()
         emit selectionChanged();
 }
 
-void TaskModel::fullReset(const QList<int> &rows, bool preserveScroll)
+void TaskModel::fullReset(const QList<OccRow> &rows, bool preserveScroll)
 {
     if (preserveScroll)
         emit rebuildResetPreserving();
@@ -323,7 +475,7 @@ void TaskModel::fullReset(const QList<int> &rows, bool preserveScroll)
 // Change m_rows to `rows` with granular insert/remove/move operations, so the
 // view keeps its delegates (and any running undo bars) instead of tearing them
 // all down. Falls back to a full reset when the change is too large.
-void TaskModel::applyRowDiff(const QList<int> &rows)
+void TaskModel::applyRowDiff(const QList<OccRow> &rows)
 {
     if (rows == m_rows) {
         if (!m_rows.isEmpty())
@@ -343,7 +495,8 @@ void TaskModel::applyRowDiff(const QList<int> &rows)
         return;
     }
 
-    const QList<RowDiff::Op> ops = RowDiff::compute(m_rows, rows);
+    typedef RowDiff::OpT<OccRow> RowOp;
+    const QList<RowOp> ops = RowDiff::compute(m_rows, rows);
 
     // A huge change (e.g. a full file reload) is smoother as a single reset.
     const int maxOps = 24;
@@ -352,19 +505,19 @@ void TaskModel::applyRowDiff(const QList<int> &rows)
         return;
     }
 
-    foreach (const RowDiff::Op &op, ops) {
+    foreach (const RowOp &op, ops) {
         switch (op.kind) {
-        case RowDiff::Op::Remove:
+        case RowOp::Remove:
             beginRemoveRows(QModelIndex(), op.from, op.from);
             m_rows.removeAt(op.from);
             endRemoveRows();
             break;
-        case RowDiff::Op::Insert:
+        case RowOp::Insert:
             beginInsertRows(QModelIndex(), op.to, op.to);
             m_rows.insert(op.to, op.id);
             endInsertRows();
             break;
-        case RowDiff::Op::Move: {
+        case RowOp::Move: {
             int dest = op.to > op.from ? op.to + 1 : op.to;
             beginMoveRows(QModelIndex(), op.from, op.from, QModelIndex(), dest);
             m_rows.move(op.from, op.to);
@@ -390,7 +543,7 @@ void TaskModel::setSelected(int id, bool on)
         m_selected.insert(id);
     else
         m_selected.remove(id);
-    int row = m_rows.indexOf(id);
+    int row = indexOfId(id);
     if (row >= 0)
         emit dataChanged(index(row), index(row), QVector<int>() << SelectedRole);
     emit selectionChanged();
@@ -398,8 +551,8 @@ void TaskModel::setSelected(int id, bool on)
 
 void TaskModel::selectAll()
 {
-    foreach (int id, m_rows)
-        m_selected.insert(id);
+    foreach (const OccRow &row, m_rows)
+        m_selected.insert(row.id);
     if (!m_rows.isEmpty())
         emit dataChanged(index(0), index(m_rows.size() - 1), QVector<int>() << SelectedRole);
     emit selectionChanged();
@@ -421,9 +574,13 @@ void TaskModel::clearSelection()
 QVariantList TaskModel::selectedIds() const
 {
     QVariantList r;
-    foreach (int id, m_rows)
-        if (m_selected.contains(id))
-            r << id;
+    QSet<int> seen;
+    foreach (const OccRow &row, m_rows) {
+        if (m_selected.contains(row.id) && !seen.contains(row.id)) {
+            seen.insert(row.id);
+            r << row.id;
+        }
+    }
     return r;
 }
 
@@ -442,7 +599,9 @@ QVariantList TaskModel::coverTasks() const
     // or the day after tomorrow. Overdue tasks only fill the remaining slots.
     QList<const Task *> windowTasks, overdue, rest;
     for (int i = 0; i < m_rows.size(); ++i) {
-        const Task *t = m_store->findTask(m_rows[i]);
+        if (m_rows[i].occ != 0)
+            continue;
+        const Task *t = m_store->findTask(m_rows[i].id);
         if (!t || t->isCompleted())
             continue;
         const QString due = t->dueDate();
@@ -503,10 +662,15 @@ QVariantList TaskModel::coverTasks() const
 QVariantList TaskModel::completedVisibleIds() const
 {
     QVariantList r;
-    foreach (int id, m_rows) {
-        const Task *t = m_store->findTask(id);
-        if (t && t->isCompleted())
-            r << id;
+    QSet<int> seen;
+    foreach (const OccRow &row, m_rows) {
+        if (seen.contains(row.id))
+            continue;
+        const Task *t = m_store->findTask(row.id);
+        if (t && t->isCompleted()) {
+            seen.insert(row.id);
+            r << row.id;
+        }
     }
     return r;
 }
@@ -557,18 +721,20 @@ bool TaskModel::canMove(int from, int to) const
     int m = m_query->manualSort() ? m_query->manualSortIndex() : -1;
     if (m < 0 || from < 0 || to < 0 || from >= m_rows.size() || to >= m_rows.size())
         return false;
-    QList<int> rows = m_rows;
+    if (m_rows[from].occ != 0 || m_rows[to].occ != 0)
+        return false;
+    QList<OccRow> rows = m_rows;
     rows.move(from, to);
-    const Task *moved = m_store->findTask(rows[to]);
+    const Task *moved = m_store->findTask(rows[to].id);
     if (!moved)
         return false;
     if (to > 0) {
-        const Task *prev = m_store->findTask(rows[to - 1]);
+        const Task *prev = m_store->findTask(rows[to - 1].id);
         if (prev && m_query->compare(*prev, *moved, m) > 0)
             return false;
     }
     if (to + 1 < rows.size()) {
-        const Task *next = m_store->findTask(rows[to + 1]);
+        const Task *next = m_store->findTask(rows[to + 1].id);
         if (next && m_query->compare(*moved, *next, m) > 0)
             return false;
     }
@@ -624,7 +790,7 @@ void TaskModel::commitMove(int row)
     }
     int counter = 1024;
     for (int i = start; i <= last; ++i) {
-        Task *t = m_store->findTask(m_rows[i]);
+        Task *t = m_store->findTask(m_rows[i].id);
         if (t && !t->isCompleted()) {
             t->setManualOrder(counter);
             counter += 1024;
@@ -637,7 +803,7 @@ void TaskModel::moveToDue(int row, int targetRow)
 {
     if (row < 0 || targetRow < 0 || row >= m_rows.size() || targetRow >= m_rows.size())
         return;
-    Task *moved = m_store->findTask(m_rows[row]);
+    Task *moved = m_store->findTask(m_rows[row].id);
     const Task *target = taskAt(targetRow);
     if (!moved || !target || moved->id() == target->id())
         return;
@@ -653,8 +819,8 @@ void TaskModel::moveToDue(int row, int targetRow)
     // it at the row where it was dropped (commitMove renumbers #N there).
     m_moving = false;
     rebuild();
-    int mIdx = m_rows.indexOf(moved->id());
-    int tIdx = m_rows.indexOf(targetId);
+    int mIdx = indexOfId(moved->id());
+    int tIdx = indexOfId(targetId);
     if (mIdx < 0 || tIdx < 0 || mIdx == tIdx)
         return;
     if (previewMove(mIdx, tIdx))

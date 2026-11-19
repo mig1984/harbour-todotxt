@@ -33,7 +33,7 @@ Page {
 
             PageHeader {
                 title: qsTr("Calendar")
-                description: cal ? Qt.formatDate(new Date(cal.shownYear, cal.shownMonth, 1), "MMMM yyyy") : ""
+                description: cal ? app.monthLabel(cal.shownYear, cal.shownMonth) : ""
             }
 
             Button {

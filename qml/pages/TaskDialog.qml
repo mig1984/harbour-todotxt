@@ -13,13 +13,35 @@ Dialog {
     // next task.
     readonly property bool singleLine: taskIds.length === 1
 
-    canAccept: editing || hasTaskText(editor.text)
+    canAccept: (editing || hasTaskText(editor.text)) && !recurrenceInvalid(editor.text)
 
     onAccepted: {
         if (editing)
             store.updateTasks(taskIds, editor.text)
         else
             store.addTasks(tasksOnly(editor.text))
+    }
+
+    // A line with rec: needs a due date or a creation date as its series anchor.
+    function lineNeedsAnchor(line) {
+        if (!/(^|\s)rec:\S+/i.test(line))
+            return false
+        if (/(^|\s)due:\d{4}-\d{2}-\d{2}/i.test(line))
+            return false
+        var stripped = line.replace(/(^|\s)(due|t):\S+/ig, " ")
+        return !/(^|\s)\d{4}-\d{2}-\d{2}(\s|$)/.test(stripped)
+    }
+    function recurrenceInvalid(text) {
+        var lines = text.split("\n")
+        for (var i = 0; i < lines.length; i++) {
+            if (!lineNeedsAnchor(lines[i]))
+                continue
+            // A new task gets a creation date automatically when that is enabled.
+            if (!dialog.editing && settings.prependDate)
+                continue
+            return true
+        }
+        return false
     }
 
     // True if the line holds any text besides todo.txt structure (priority,
@@ -136,6 +158,11 @@ Dialog {
 
     function dateFromLine(key) {
         var m = currentLine().match(new RegExp("(^|\\s)" + key + ":(\\d{4}-\\d{2}-\\d{2})", "i"))
+        return m ? m[2] : ""
+    }
+
+    function recurrenceFromLine() {
+        var m = currentLine().match(/(^|\s)rec:(\+?\d*[dwmyb])/i)
         return m ? m[2] : ""
     }
 
@@ -261,6 +288,16 @@ Dialog {
                 }
             }
 
+            Label {
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                visible: dialog.recurrenceInvalid(editor.text)
+                wrapMode: Text.Wrap
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: "#ff5d5d"
+                text: qsTr("Recurring tasks need a due date or a creation date")
+            }
+
             // Live values from the line under the cursor
             property string lineLists: { editor.text; editor.cursorPosition; return lineItems("@").map(function(x) { return "@" + x }).join(" ") }
             property string lineTags: { editor.text; editor.cursorPosition; return lineItems("+").map(function(x) { return "+" + x }).join(" ") }
@@ -271,6 +308,7 @@ Dialog {
             }
             property string lineDue: { editor.text; editor.cursorPosition; return dateFromLine("due") }
             property string lineThreshold: { editor.text; editor.cursorPosition; return dateFromLine("t") }
+            property string lineRecurrence: { editor.text; editor.cursorPosition; return recurrenceFromLine() }
             property var openItems: { editor.text; return foundOpenItems() }
 
             ValueButton {
@@ -318,8 +356,16 @@ Dialog {
                 label: qsTr("Threshold")
                 value: column.lineThreshold.length > 0 ? app.formatDate(column.lineThreshold) : qsTr("No date")
                 onClicked: {
-                    var p = pageStack.push(Qt.resolvedUrl("DeferPage.qml"), { "title": qsTr("Threshold date"), "current": column.lineThreshold })
+                    var p = pageStack.push(Qt.resolvedUrl("DeferPage.qml"), { "title": qsTr("Threshold date"), "current": column.lineThreshold, "threshold": true })
                     p.selected.connect(function(d) { setKeyValue("t", deferValue(d)) })
+                }
+            }
+            ValueButton {
+                label: qsTr("Recurrence")
+                value: column.lineRecurrence.length > 0 ? column.lineRecurrence : qsTr("None")
+                onClicked: {
+                    var p = pageStack.push(Qt.resolvedUrl("RecurrencePage.qml"), { "current": column.lineRecurrence })
+                    p.selected.connect(function(v) { setKeyValue("rec", v) })
                 }
             }
             Repeater {
@@ -329,6 +375,7 @@ Dialog {
                     onClicked: Qt.openUrlExternally(modelData.url)
                 }
             }
+            SectionHeader { text: qsTr("Quick choice") }
             Flow {
                 width: parent.width - 2 * Theme.horizontalPageMargin
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -336,12 +383,18 @@ Dialog {
                 Button {
                     width: implicitWidth
                     text: qsTr("Today")
-                    onClicked: setKeyValue("due", addInterval(new Date(), "0d"))
+                    onClicked: {
+                        setKeyValue("due", addInterval(new Date(), "0d"))
+                        dialog.accept()
+                    }
                 }
                 Button {
                     width: implicitWidth
                     text: qsTr("Tomorrow")
-                    onClicked: setKeyValue("due", addInterval(new Date(), "1d"))
+                    onClicked: {
+                        setKeyValue("due", addInterval(new Date(), "1d"))
+                        dialog.accept()
+                    }
                 }
             }
             Item { width: 1; height: Theme.paddingLarge }

@@ -40,40 +40,55 @@
         <translation>日期</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="79" />
+        <location filename="../qml/pages/DeferPage.qml" line="66" />
+        <source>Presets</source>
+        <translation>预设</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DeferPage.qml" line="83" />
         <source>No date</source>
         <translation>无日期</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="46" />
-        <location filename="../qml/pages/DeferPage.qml" line="73" />
+        <location filename="../qml/pages/DeferPage.qml" line="49" />
+        <location filename="../qml/pages/DeferPage.qml" line="77" />
         <source>Today</source>
         <translation>今天</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="74" />
+        <location filename="../qml/pages/DeferPage.qml" line="78" />
         <source>Tomorrow</source>
         <translation>明天</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="75" />
+        <location filename="../qml/pages/DeferPage.qml" line="79" />
         <source>Day after tomorrow</source>
         <translation>后天</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="76" />
+        <location filename="../qml/pages/DeferPage.qml" line="80" />
         <source>In one week</source>
         <translation>一周后</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="77" />
+        <location filename="../qml/pages/DeferPage.qml" line="81" />
         <source>In two weeks</source>
         <translation>两周后</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DeferPage.qml" line="78" />
+        <location filename="../qml/pages/DeferPage.qml" line="82" />
         <source>In one month</source>
         <translation>一个月后</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DeferPage.qml" line="87" />
+        <source>No threshold</source>
+        <translation>无阈值</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DeferPage.qml" line="87" />
+        <source>No due date</source>
+        <translation>无截止日期</translation>
     </message>
 </context>
 <context>
@@ -449,6 +464,119 @@
     </message>
 </context>
 <context>
+    <name>RecurrencePage</name>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="34" />
+        <source>Recurrence</source>
+        <translation>重复</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="43" />
+        <source>No repetition</source>
+        <translation>不重复</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="36" />
+        <source>Presets</source>
+        <translation>预设</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="44" />
+        <source>Every day</source>
+        <translation>每天</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="45" />
+        <source>Every 2 days</source>
+        <translation>每2天</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="46" />
+        <source>Every week</source>
+        <translation>每周</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="47" />
+        <source>Every 2 weeks</source>
+        <translation>每2周</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="48" />
+        <source>Every month</source>
+        <translation>每月</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="49" />
+        <source>Every year</source>
+        <translation>每年</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="50" />
+        <source>Every week, from due</source>
+        <translation>每周，从截止日算起</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="51" />
+        <source>Every month, from due</source>
+        <translation>每月，从截止日算起</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="52" />
+        <source>Every year, from due</source>
+        <translation>每年，从截止日算起</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="66" />
+        <source>Custom</source>
+        <translation>自定义</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="68" />
+        <source>From due date (strict)</source>
+        <translation>从截止日期（严格）</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="69" />
+        <source>Otherwise the next date counts from completion</source>
+        <translation>否则下一个日期从完成日算起</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="75" />
+        <source>Every N</source>
+        <translation>每 N</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="89" />
+        <source>days</source>
+        <translation>天</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="90" />
+        <source>working days</source>
+        <translation>工作日</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="91" />
+        <source>weeks</source>
+        <translation>周</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="92" />
+        <source>months</source>
+        <translation>个月</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="93" />
+        <source>years</source>
+        <translation>年</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/RecurrencePage.qml" line="112" />
+        <source>Set: %1</source>
+        <translation>设置：%1</translation>
+    </message>
+</context>
+<context>
     <name>SavedFiltersPage</name>
     <message>
         <location filename="../qml/pages/SavedFiltersPage.qml" line="14" />
@@ -570,37 +698,52 @@
         <translation>新任务首字母大写</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="80" />
+        <location filename="../qml/pages/SettingsPage.qml" line="81" />
+        <source>Show recurring tasks ahead</source>
+        <translation>提前显示重复任务</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="86" />
+        <source>Off</source>
+        <translation>关闭</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="86" />
+        <source>%1 months</source>
+        <translation>%1 个月</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="90" />
         <source>Appearance</source>
         <translation>外观</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="82" />
+        <location filename="../qml/pages/SettingsPage.qml" line="92" />
         <source>Show dates on a separate line</source>
         <translation>日期单独一行显示</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="87" />
+        <location filename="../qml/pages/SettingsPage.qml" line="97" />
         <source>Color due dates</source>
         <translation>截止日期着色</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="92" />
+        <location filename="../qml/pages/SettingsPage.qml" line="102" />
         <source>Uppercase section headers</source>
         <translation>分组标题大写</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="97" />
+        <location filename="../qml/pages/SettingsPage.qml" line="107" />
         <source>Case sensitive sorting</source>
         <translation>区分大小写排序</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="102" />
+        <location filename="../qml/pages/SettingsPage.qml" line="112" />
         <source>Use todo.txt terms (context/project)</source>
         <translation>使用 todo.txt 术语（上下文/项目）</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="103" />
+        <location filename="../qml/pages/SettingsPage.qml" line="113" />
         <source>Instead of list/tag</source>
         <translation>代替列表/标签</translation>
     </message>
@@ -656,17 +799,17 @@
 <context>
     <name>TaskDelegate</name>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="49" />
+        <location filename="../qml/components/TaskDelegate.qml" line="57" />
         <source>done %1</source>
         <translation>完成于 %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="38" />
+        <location filename="../qml/components/TaskDelegate.qml" line="41" />
         <source>Marking incomplete</source>
         <translation>正在标记为未完成</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="38" />
+        <location filename="../qml/components/TaskDelegate.qml" line="41" />
         <source>Completing</source>
         <translation>正在完成</translation>
     </message>
@@ -674,94 +817,110 @@
 <context>
     <name>TaskDialog</name>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="183" />
+        <location filename="../qml/pages/TaskDialog.qml" line="210" />
         <source>Open %1</source>
         <translation>打开 %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="186" />
+        <location filename="../qml/pages/TaskDialog.qml" line="213" />
         <source>Mail %1</source>
         <translation>发送邮件至 %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="191" />
+        <location filename="../qml/pages/TaskDialog.qml" line="218" />
         <source>Call %1</source>
         <translation>呼叫 %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="205" />
+        <location filename="../qml/pages/TaskDialog.qml" line="232" />
         <source>Update</source>
         <translation>更新</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="205" />
+        <location filename="../qml/pages/TaskDialog.qml" line="232" />
         <source>Add tasks</source>
         <translation>添加任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="206" />
+        <location filename="../qml/pages/TaskDialog.qml" line="233" />
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="213" />
+        <location filename="../qml/pages/TaskDialog.qml" line="240" />
         <source>One task per line</source>
         <translation>每行一个任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="213" />
+        <location filename="../qml/pages/TaskDialog.qml" line="240" />
         <source>Task</source>
         <translation>任务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="278" />
-        <location filename="../qml/pages/TaskDialog.qml" line="290" />
+        <location filename="../qml/pages/TaskDialog.qml" line="298" />
+        <source>Recurring tasks need a due date or a creation date</source>
+        <translation>重复任务需要截止日期或创建日期</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="316" />
+        <location filename="../qml/pages/TaskDialog.qml" line="328" />
+        <location filename="../qml/pages/TaskDialog.qml" line="365" />
         <source>None</source>
         <translation>无</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="301" />
+        <location filename="../qml/pages/TaskDialog.qml" line="339" />
         <source>Priority</source>
         <translation>优先级</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="302" />
+        <location filename="../qml/pages/TaskDialog.qml" line="340" />
         <source>No priority</source>
         <translation>无优先级</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="310" />
+        <location filename="../qml/pages/TaskDialog.qml" line="348" />
         <source>Due</source>
         <translation>截止</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="311" />
-        <location filename="../qml/pages/TaskDialog.qml" line="319" />
+        <location filename="../qml/pages/TaskDialog.qml" line="349" />
+        <location filename="../qml/pages/TaskDialog.qml" line="357" />
         <source>No date</source>
         <translation>无日期</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="313" />
+        <location filename="../qml/pages/TaskDialog.qml" line="351" />
         <source>Due date</source>
         <translation>截止日期</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="338" />
+        <location filename="../qml/pages/TaskDialog.qml" line="364" />
+        <source>Recurrence</source>
+        <translation>重复</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="378" />
+        <source>Quick choice</source>
+        <translation>快速选择</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TaskDialog.qml" line="385" />
         <source>Today</source>
         <translation>今天</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="343" />
+        <location filename="../qml/pages/TaskDialog.qml" line="393" />
         <source>Tomorrow</source>
         <translation>明天</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="318" />
+        <location filename="../qml/pages/TaskDialog.qml" line="356" />
         <source>Threshold</source>
         <translation>阈值</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="321" />
+        <location filename="../qml/pages/TaskDialog.qml" line="359" />
         <source>Threshold date</source>
         <translation>阈值日期</translation>
     </message>
@@ -769,67 +928,68 @@
 <context>
     <name>TaskModel</name>
     <message>
-        <location filename="../src/taskmodel.cpp" line="143" />
+        <location filename="../src/taskmodel.cpp" line="222" />
+        <location filename="../src/taskmodel.cpp" line="226" />
         <source>None</source>
         <translation>无</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="682" />
+        <location filename="../src/taskmodel.cpp" line="848" />
         <source>today</source>
         <translation>今天</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="684" />
+        <location filename="../src/taskmodel.cpp" line="850" />
         <source>tomorrow</source>
         <translation>明天</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="686" />
+        <location filename="../src/taskmodel.cpp" line="852" />
         <source>yesterday</source>
         <translation>昨天</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="690" />
+        <location filename="../src/taskmodel.cpp" line="856" />
         <source>%1 days</source>
         <translation>%1 天</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="692" />
+        <location filename="../src/taskmodel.cpp" line="858" />
         <source>1 week</source>
         <translation>1 周</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="692" />
+        <location filename="../src/taskmodel.cpp" line="858" />
         <source>%1 weeks</source>
         <translation>%1 周</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="694" />
+        <location filename="../src/taskmodel.cpp" line="860" />
         <source>1 month</source>
         <translation>1 个月</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="694" />
+        <location filename="../src/taskmodel.cpp" line="860" />
         <source>%1 months</source>
         <translation>%1 个月</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="696" />
+        <location filename="../src/taskmodel.cpp" line="862" />
         <source>1 year</source>
         <translation>1 年</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="696" />
+        <location filename="../src/taskmodel.cpp" line="862" />
         <source>%1 years</source>
         <translation>%1 年</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="697" />
+        <location filename="../src/taskmodel.cpp" line="863" />
         <source>%1 ago</source>
         <translation>%1 前</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="697" />
+        <location filename="../src/taskmodel.cpp" line="863" />
         <source>in %1</source>
         <translation>%1 后</translation>
     </message>
@@ -844,7 +1004,7 @@
     <message>
         <location filename="../src/todostore.cpp" line="188" />
         <location filename="../src/todostore.cpp" line="197" />
-        <location filename="../src/todostore.cpp" line="430" />
+        <location filename="../src/todostore.cpp" line="459" />
         <source>Cannot write %1</source>
         <translation>无法写入 %1</translation>
     </message>

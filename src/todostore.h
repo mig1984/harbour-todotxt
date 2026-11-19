@@ -47,6 +47,8 @@ public:
     Q_INVOKABLE void complete(const QVariantList &ids);
     Q_INVOKABLE void uncomplete(const QVariantList &ids);
     Q_INVOKABLE void toggleComplete(int id);
+    // Mark/unmark a single occurrence of a recurring series as done.
+    Q_INVOKABLE void toggleDone(int id, const QString &date);
     Q_INVOKABLE void remove(const QVariantList &ids);
     Q_INVOKABLE void setPriority(const QVariantList &ids, const QString &code);
     Q_INVOKABLE void deferDue(const QVariantList &ids, const QString &deferString);

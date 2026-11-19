@@ -76,6 +76,16 @@ Page {
                 checked: settings.capitalizeTasks
                 onCheckedChanged: settings.capitalizeTasks = checked
             }
+            Slider {
+                width: parent.width
+                label: qsTr("Show recurring tasks ahead")
+                minimumValue: 0
+                maximumValue: 24
+                stepSize: 1
+                value: settings.recurrenceHorizonMonths
+                valueText: value === 0 ? qsTr("Off") : qsTr("%1 months").arg(value)
+                onReleased: settings.recurrenceHorizonMonths = value
+            }
 
             SectionHeader { text: qsTr("Appearance") }
             TextSwitch {

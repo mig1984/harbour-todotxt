@@ -83,6 +83,11 @@ ApplicationWindow {
         return upper ? base.toUpperCase() : base
     }
 
+    // Standalone (nominative) month name, e.g. "květen 2026" not "května 2026".
+    function monthLabel(year, month) {
+        return Qt.locale().standaloneMonthName(month, Locale.LongFormat) + " " + year
+    }
+
     function openTaskDialog(ids) {
         var text = ""
         var lines = []

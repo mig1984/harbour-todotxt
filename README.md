@@ -6,7 +6,7 @@ ported from [Simpletask](https://github.com/mpcjanssen/simpletask-android)
 and writes `todo.txt` (and `done.txt` next to it) and can be combined with any
 sync tool that moves the file.
 
-Version 1.5.2 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
+Version 1.6.0 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
 German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
 
 ## Screenshots
@@ -25,7 +25,8 @@ German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
 
 - **todo.txt format**, lossless: every token of a line is kept (`(A)` priority,
   `x` completion with dates, creation date, `@context`, `+project`, `due:`,
-  `t:` threshold, `rec:` recurrence, `h:1` hidden, `key:value` tags, links).
+  `t:` threshold, `rec:` recurrence, `done:` occurrence markers, `h:1` hidden,
+  `key:value` tags, links).
 - **Task list** grouped by the first sort key, with due/threshold dates on a
   separate line (optional), coloured dates (overdue red, today green, soon
   blue), uppercase headers (optional). The header shows the number of
@@ -35,22 +36,38 @@ German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
   (no context menu). Complete/uncomplete is done with the checkbox next to the
   task (or from multi-selection).
 - **Calendar**: the date icon in the header opens a month view of the due dates
-  of the tasks in the current filter, colour-coded like the list (overdue red,
-  today green, tomorrow and the day after blue, later grey).
-  Tap a day to jump to the first task due that day. The shown month/year is
-  remembered; the **Today** button resets it to the current month.
+  of the tasks in the current filter, colour-coded (overdue red, today green,
+  tomorrow and the day after blue, later grey); a day with a threshold is
+  yellow and today is always green. Tap a day to jump to the first task due or
+  starting that day. The shown month/year is remembered; **Today** resets it.
 - **Add / edit** with a text editor. Adding is multi-line ("Add tasks"): press
   Enter to start the next task, prefilled with the current line's priority,
   contexts, projects, due and threshold dates. Quick insertion of priority,
-  contexts, projects, due and threshold dates (the buttons) applies to the line
-  under the cursor. New tasks get a creation date and a capital first letter
-  (both optional). Links, phone numbers and e-mail addresses found in the text
-  of the edited task can be opened/called/mailed from the edit form.
-- **Complete / uncomplete**, with recurrence (`rec:Nd|w|m|y`, `rec:+N...` strict
-  from the due date) creating the next task.
+  contexts, projects, due, threshold and recurrence (the rows) applies to the
+  line under the cursor; the buttons in the **Quick choice** section set the due
+  date to today/tomorrow and save. Links, phone numbers and e-mail addresses
+  found in the text of the edited task can be opened/called/mailed from the form.
+- **Date picker** (Due / Threshold): the month calendar is shown inline (the same
+  look as the jump calendar) with the presets below it (today, tomorrow, the day
+  after tomorrow, in a week, in two weeks, in a month, no date / no threshold).
+- **Dates** are shown as a weekday and the date in the list, section headers and
+  the editor (e.g. `st 2026-11-18`); a threshold is prefixed with `≤` and shown
+  as a yellow chip (and a yellow day in the calendar).
+- **Complete / uncomplete** with the checkbox or from multi-selection.
+- **Recurring tasks** (`rec:[+]<n><unit>`, units `d`/`b`/`w`/`m`/`y`): anchored on
+  the `due:` date (or on the creation date when there is no due date) and shown
+  as a series of occurrences — from the creation date into the future, up to a
+  horizon set in Settings (default 12 months; 0 disables it). Each occurrence is
+  a normal row with its own checkbox; ticking it stores a `done:YYYY-MM-DD`
+  marker on the task (un-ticking removes it) instead of completing the task, so
+  it stays clear which occurrences are done (struck through) and which are still
+  pending or overdue. A recurring task needs a due date or a creation date —
+  otherwise the editor warns and saving is blocked. Recurrence is edited from a
+  **Recurrence** row in the task editor: preset buttons (the active one
+  highlighted) plus a custom count / unit / strict-`+` editor (`+` counts the
+  next date from the due date, otherwise from the completion date).
 - **Multi-selection**: complete, delete, change priority, add/remove contexts and
-  projects, defer due or threshold dates (today, tomorrow, +1 week, +2 weeks,
-  +1 month, pick a date).
+  projects, defer due or threshold dates (presets or the calendar).
 - **Filter page** (opened from the filter icon in the header; the sections start
   collapsed and the expanded one is remembered): contexts, projects, priorities,
   each with inversion ("NOT matching"), show completed / future / hidden.

@@ -3,6 +3,7 @@
 
 #include <QAbstractListModel>
 #include <QSet>
+#include <QHash>
 #include <QTimer>
 #include <QVariantList>
 #include <QStringList>
@@ -11,6 +12,18 @@ class TodoStore;
 class Query;
 class Settings;
 class Task;
+
+// A visible row: a task id plus an occurrence index. occ == 0 is the task
+// itself; occ > 0 is a projected future repetition of a recurring task.
+struct OccRow {
+    int id;
+    int occ;
+    bool operator==(const OccRow &o) const { return id == o.id && occ == o.occ; }
+};
+inline uint qHash(const OccRow &r, uint seed = 0)
+{
+    return ::qHash(r.id, seed) ^ ::qHash(r.occ, seed);
+}
 
 // Visible (filtered + sorted) view of the TodoStore for one Query.
 class TaskModel : public QAbstractListModel
@@ -51,7 +64,9 @@ public:
         InFutureRole,
         AgeRole,
         RecurrenceRole,
-        OrderRole
+        OrderRole,
+        OccurrenceRole,
+        RecurringRole
     };
 
     TaskModel(TodoStore *store, Query *query, Settings *settings, QObject *parent = 0);
@@ -134,17 +149,23 @@ private slots:
 private:
     const Task *taskAt(int row) const;
     QString displayHtml(const Task &t) const;
+    // Due/threshold date of a row: the task's own date for occ == 0, or the
+    // occurrence advanced by the recurrence interval for a projected row.
+    QString effectiveDate(const Task &t, int occ, bool threshold) const;
+    // Whether a row is "done": a completed task, or a recurring occurrence
+    // whose date is in the task's done: markers.
+    bool rowCompleted(const Task &t, int occ) const;
     int dateState(const QString &date) const;
     // Update m_rows to `rows` with granular insert/remove/move operations so
     // the view keeps its delegates (and their running undo bars). Falls back
     // to a full reset when the change would need too many operations.
-    void applyRowDiff(const QList<int> &rows);
-    void fullReset(const QList<int> &rows, bool preserveScroll);
+    void applyRowDiff(const QList<OccRow> &rows);
+    void fullReset(const QList<OccRow> &rows, bool preserveScroll);
 
     TodoStore *m_store;
     Query *m_query;
     Settings *m_settings;
-    QList<int> m_rows;          // task ids in visible order
+    QList<OccRow> m_rows;       // visible rows (task id + occurrence)
     QSet<int> m_selected;
     QTimer m_rebuildTimer;
     QString m_today;

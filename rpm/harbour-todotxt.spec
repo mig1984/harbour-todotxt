@@ -1,6 +1,6 @@
 Name:       harbour-todotxt
 Summary:    Todo.txt task list for Sailfish OS (Simpletask port)
-Version:    1.5.2
+Version:    1.6.0
 Release:    1
 License:    GPLv3
 URL:        https://github.com/mig1984/harbour-todotxt
@@ -41,6 +41,12 @@ desktop-file-install --delete-original \
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Thu Nov 19 2026 Jan Molič <jan.molic@1984.cz> - 1.6.0-1
+- Recurring tasks are now a series anchored on the due date (or the creation date when there is no due date): the occurrences are shown from the creation date into the future (horizon in Settings, default 12 months, 0 = off) and ticking one stores a done:YYYY-MM-DD marker instead of completing the task, so it is clear which occurrences are done
+- A recurring task needs a due date or a creation date; the editor warns and blocks saving otherwise. Recurrence is edited from a new Recurrence row in the task editor (preset buttons with the active one highlighted, plus a custom count / unit / strict + editor)
+- The due/threshold picker now shows the month calendar inline with the presets below it
+- Dates are shown as a weekday and the date (e.g. st 2026-11-18); a threshold is a yellow chip (and a yellow calendar day, except today which is always green); the creation date is no longer shown as x days ago
+- Task editor: a Quick choice section whose buttons set the due date and save; the calendar month title is now in the nominative (e.g. kveten 2026)
 * Wed Nov 18 2026 Jan Molič <jan.molic@1984.cz> - 1.5.2-1
 - Dates are shown as "<weekday> yyyy-MM-dd" (e.g. "st 2026-11-19") in the list, section headers and the editor; the creation date is no longer shown as "x days ago" and due dates no longer carry a label
 - Threshold dates are always shown as a yellow chip (except completed tasks); in the calendar a threshold day is yellow (today is always green) and days whose tasks are all completed are no longer highlighted
