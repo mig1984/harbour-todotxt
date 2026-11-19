@@ -92,6 +92,9 @@ public:
     Q_INVOKABLE QStringList dueDates() const;
     // Like dueDates(), but for threshold dates.
     Q_INVOKABLE QStringList thresholdDates() const;
+    // Like the above, but over every task in the file (ignores the filter).
+    Q_INVOKABLE QStringList allDueDates() const;
+    Q_INVOKABLE QStringList allThresholdDates() const;
     // First visible row due on the given yyyy-MM-dd date; -1 if none.
     Q_INVOKABLE int rowForDueDate(const QString &date) const;
 
@@ -155,6 +158,8 @@ private:
     // Whether a row is "done": a completed task, or a recurring occurrence
     // whose date is in the task's done: markers.
     bool rowCompleted(const Task &t, int occ) const;
+    // Distinct due/threshold dates over every (non-completed) task.
+    QStringList allDates(bool threshold) const;
     int dateState(const QString &date) const;
     // Update m_rows to `rows` with granular insert/remove/move operations so
     // the view keeps its delegates (and their running undo bars). Falls back

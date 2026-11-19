@@ -906,62 +906,62 @@
         <translation>Aucune</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="848" />
+        <location filename="../src/taskmodel.cpp" line="905" />
         <source>today</source>
         <translation>aujourd'hui</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="850" />
+        <location filename="../src/taskmodel.cpp" line="907" />
         <source>tomorrow</source>
         <translation>demain</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="852" />
+        <location filename="../src/taskmodel.cpp" line="909" />
         <source>yesterday</source>
         <translation>hier</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="856" />
+        <location filename="../src/taskmodel.cpp" line="913" />
         <source>%1 days</source>
         <translation>%1 jours</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="858" />
+        <location filename="../src/taskmodel.cpp" line="915" />
         <source>1 week</source>
         <translation>1 semaine</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="858" />
+        <location filename="../src/taskmodel.cpp" line="915" />
         <source>%1 weeks</source>
         <translation>%1 semaines</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="860" />
+        <location filename="../src/taskmodel.cpp" line="917" />
         <source>1 month</source>
         <translation>1 mois</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="860" />
+        <location filename="../src/taskmodel.cpp" line="917" />
         <source>%1 months</source>
         <translation>%1 mois</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="862" />
+        <location filename="../src/taskmodel.cpp" line="919" />
         <source>1 year</source>
         <translation>1 an</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="862" />
+        <location filename="../src/taskmodel.cpp" line="919" />
         <source>%1 years</source>
         <translation>%1 ans</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="863" />
+        <location filename="../src/taskmodel.cpp" line="920" />
         <source>%1 ago</source>
         <translation>il y a %1</translation>
     </message>
     <message>
-        <location filename="../src/taskmodel.cpp" line="863" />
+        <location filename="../src/taskmodel.cpp" line="920" />
         <source>in %1</source>
         <translation>dans %1</translation>
     </message>

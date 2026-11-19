@@ -297,6 +297,63 @@ QStringList TaskModel::thresholdDates() const
     return out;
 }
 
+QStringList TaskModel::allDueDates() const
+{
+    return allDates(false);
+}
+
+QStringList TaskModel::allThresholdDates() const
+{
+    return allDates(true);
+}
+
+QStringList TaskModel::allDates(bool threshold) const
+{
+    QSet<QString> seen;
+    QStringList out;
+    const int horizonMonths = m_settings->recurrenceHorizonMonths();
+    const QDate today = QDate::fromString(m_today, "yyyy-MM-dd");
+    const QDate horizon = today.addMonths(horizonMonths);
+    const QDate minBack = today.addMonths(-horizonMonths);
+    const int maxOcc = 400;
+    const QList<Task> &all = m_store->tasks();
+    for (int i = 0; i < all.size(); ++i) {
+        const Task &t = all[i];
+        if (t.isCompleted())
+            continue;
+        QStringList dates;
+        dates << effectiveDate(t, 0, threshold);
+        if (horizonMonths > 0 && t.isSeries()) {
+            for (int k = 1; k <= maxOcc; ++k) {
+                const QDate d = QDate::fromString(effectiveDate(t, k, false), "yyyy-MM-dd");
+                if (!d.isValid() || d > horizon)
+                    break;
+                if (!t.doneDates().contains(effectiveDate(t, k, false)))
+                    dates << effectiveDate(t, k, threshold);
+            }
+            QDate backLimit = t.createDate().isEmpty()
+                    ? today : QDate::fromString(t.createDate(), "yyyy-MM-dd");
+            if (!backLimit.isValid() || backLimit < minBack)
+                backLimit = minBack;
+            for (int k = -1; k >= -maxOcc; --k) {
+                const QDate d = QDate::fromString(effectiveDate(t, k, false), "yyyy-MM-dd");
+                if (!d.isValid() || d < backLimit)
+                    break;
+                if (!t.doneDates().contains(effectiveDate(t, k, false)))
+                    dates << effectiveDate(t, k, threshold);
+            }
+        }
+        foreach (const QString &d, dates) {
+            if (d.isEmpty() || seen.contains(d))
+                continue;
+            seen.insert(d);
+            out << d;
+        }
+    }
+    out.sort();
+    return out;
+}
+
 int TaskModel::rowForDueDate(const QString &date) const
 {
     int completedRow = -1;

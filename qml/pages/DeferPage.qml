@@ -56,8 +56,8 @@ Page {
                 id: cal
                 width: parent.width
                 onlyMarked: false
-                dueDates: taskModel.dueDates()
-                thresholdDates: taskModel.thresholdDates()
+                dueDates: taskModel.allDueDates()
+                thresholdDates: taskModel.allThresholdDates()
                 onDaySelected: page.pick(date)
             }
 

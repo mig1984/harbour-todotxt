@@ -1,6 +1,6 @@
 Name:       harbour-todotxt
 Summary:    Todo.txt task list for Sailfish OS (Simpletask port)
-Version:    1.6.1
+Version:    1.6.2
 Release:    1
 License:    GPLv3
 URL:        https://github.com/mig1984/harbour-todotxt
@@ -41,6 +41,8 @@ desktop-file-install --delete-original \
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Thu Nov 19 2026 Jan Molič <jan.molic@1984.cz> - 1.6.2-1
+- The calendar in the due/threshold date picker now marks the due/threshold dates of every task in the file, not only the ones matching the active filter (the jump calendar from the header still follows the filter)
 * Thu Nov 19 2026 Jan Molič <jan.molic@1984.cz> - 1.6.1-1
 - Saved filters are now listed on the Filter page (below the filter sections): tap to apply, long press to update/rename/delete. The separate Saved filters page and its menu entry were removed, as was Sort order from the Filter page menu
 - Open the filter by tapping the header title; the filter icon was removed from the header (the header now shows the calendar on the left, search next to it, and the clear button next to the title)
