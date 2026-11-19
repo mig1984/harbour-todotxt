@@ -369,7 +369,7 @@
         <translation>Ukázkový seznam</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="437" />
+        <location filename="../qml/pages/MainPage.qml" line="442" />
         <source>Due date</source>
         <translation>Termín</translation>
     </message>
@@ -385,7 +385,7 @@
         <translation>Archivuji</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="460" />
+        <location filename="../qml/pages/MainPage.qml" line="472" />
         <source>Deleting %n tasks</source>
         <translation><numerusform>Mažu %n úkol</numerusform><numerusform>Mažu %n úkoly</numerusform><numerusform>Mažu %n úkolů</numerusform></translation>
     </message>

@@ -1,6 +1,6 @@
 Name:       harbour-todotxt
 Summary:    Todo.txt task list for Sailfish OS (Simpletask port)
-Version:    1.6.2
+Version:    1.6.3
 Release:    1
 License:    GPLv3
 URL:        https://github.com/mig1984/harbour-todotxt
@@ -41,6 +41,10 @@ desktop-file-install --delete-original \
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Thu Nov 19 2026 Jan Molič <jan.molic@1984.cz> - 1.6.3-1
+- Selection mode now ends automatically when the last selected task is deselected (the bottom panel and the red header band close)
+- The bottom selection panel gained a button that opens the tags (+projects) picker
+- Removed the Complete button from the bottom selection panel; tasks are marked done by tapping their check circle
 * Thu Nov 19 2026 Jan Molič <jan.molic@1984.cz> - 1.6.2-1
 - The calendar in the due/threshold date picker now marks the due/threshold dates of every task in the file, not only the ones matching the active filter (the jump calendar from the header still follows the filter)
 * Thu Nov 19 2026 Jan Molič <jan.molic@1984.cz> - 1.6.1-1

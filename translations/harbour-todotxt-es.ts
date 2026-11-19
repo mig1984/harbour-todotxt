@@ -369,7 +369,7 @@
         <translation>Lista de ejemplo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="437" />
+        <location filename="../qml/pages/MainPage.qml" line="442" />
         <source>Due date</source>
         <translation>Fecha de vencimiento</translation>
     </message>
@@ -385,7 +385,7 @@
         <translation>Archivando</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="460" />
+        <location filename="../qml/pages/MainPage.qml" line="472" />
         <source>Deleting %n tasks</source>
         <translation><numerusform>Eliminando %n tarea</numerusform><numerusform>Eliminando %n tareas</numerusform></translation>
     </message>

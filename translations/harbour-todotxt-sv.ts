@@ -369,7 +369,7 @@
         <translation>Exempellista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="437" />
+        <location filename="../qml/pages/MainPage.qml" line="442" />
         <source>Due date</source>
         <translation>Förfallodatum</translation>
     </message>
@@ -385,7 +385,7 @@
         <translation>Arkiverar</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="460" />
+        <location filename="../qml/pages/MainPage.qml" line="472" />
         <source>Deleting %n tasks</source>
         <translation><numerusform>Tar bort %n uppgift</numerusform><numerusform>Tar bort %n uppgifter</numerusform></translation>
     </message>

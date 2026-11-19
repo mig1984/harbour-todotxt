@@ -407,6 +407,16 @@ Page {
 
     RemorsePopup { id: remorse }
 
+    // Leaving selection mode as soon as the last task is deselected keeps the
+    // bottom panel and the red header band from lingering on an empty selection.
+    Connections {
+        target: taskModel
+        onSelectionChanged: {
+            if (page.selectionMode && taskModel.selectedCount === 0)
+                page.selectionMode = false
+        }
+    }
+
     DockedPanel {
         id: panel
         width: parent.width
@@ -417,11 +427,6 @@ Page {
         Row {
             anchors.centerIn: parent
             spacing: Theme.paddingMedium
-            IconButton {
-                icon.source: "image://theme/icon-m-acknowledge"
-                enabled: taskModel.selectedCount > 0
-                onClicked: withSelected(function(ids) { store.complete(ids); exitSelection() })
-            }
             IconButton {
                 icon.source: "image://theme/icon-m-edit"
                 enabled: taskModel.selectedCount > 0
@@ -451,6 +456,13 @@ Page {
                 enabled: taskModel.selectedCount > 0
                 onClicked: withSelected(function(ids) {
                     pageStack.push(Qt.resolvedUrl("ItemsPage.qml"), { "taskIds": ids, "isLists": true })
+                })
+            }
+            IconButton {
+                icon.source: "image://theme/icon-m-annotation"
+                enabled: taskModel.selectedCount > 0
+                onClicked: withSelected(function(ids) {
+                    pageStack.push(Qt.resolvedUrl("ItemsPage.qml"), { "taskIds": ids, "isLists": false })
                 })
             }
             IconButton {

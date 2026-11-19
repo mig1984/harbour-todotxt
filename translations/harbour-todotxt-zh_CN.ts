@@ -369,7 +369,7 @@
         <translation>示例列表</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="437" />
+        <location filename="../qml/pages/MainPage.qml" line="442" />
         <source>Due date</source>
         <translation>截止日期</translation>
     </message>
@@ -385,7 +385,7 @@
         <translation>正在归档</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="460" />
+        <location filename="../qml/pages/MainPage.qml" line="472" />
         <source>Deleting %n tasks</source>
         <translation><numerusform>正在删除 %n 个任务</numerusform></translation>
     </message>
