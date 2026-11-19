@@ -27,10 +27,6 @@ Page {
                 onClicked: query.clear()
             }
             MenuItem {
-                text: qsTr("Sort order")
-                onClicked: pageStack.push(Qt.resolvedUrl("SortPage.qml"))
-            }
-            MenuItem {
                 text: qsTr("Save as filter")
                 onClicked: {
                     var dlg = pageStack.push(Qt.resolvedUrl("NameDialog.qml"), {
@@ -181,6 +177,58 @@ Page {
                         }
                     }
                 }
+            }
+
+            SectionHeader { text: qsTr("Saved filters") }
+            Repeater {
+                model: filterStore.names
+                ListItem {
+                    id: savedItem
+                    contentHeight: Theme.itemSizeSmall
+                    Label {
+                        x: Theme.horizontalPageMargin
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: modelData
+                        color: query.name === modelData ? Theme.highlightColor : Theme.primaryColor
+                    }
+                    menu: ContextMenu {
+                        MenuItem {
+                            text: qsTr("Update with current filter")
+                            onClicked: {
+                                query.name = modelData
+                                filterStore.save(modelData, query.toJson())
+                            }
+                        }
+                        MenuItem {
+                            text: qsTr("Rename")
+                            onClicked: {
+                                var dlg = pageStack.push(Qt.resolvedUrl("NameDialog.qml"), { "name": modelData, "title": qsTr("Rename filter") })
+                                dlg.accepted.connect(function() {
+                                    if (query.name === modelData) query.name = dlg.name
+                                    filterStore.rename(modelData, dlg.name)
+                                })
+                            }
+                        }
+                        MenuItem {
+                            text: qsTr("Delete")
+                            onClicked: savedItem.remorseAction(qsTr("Deleting"), function() { filterStore.remove(modelData) })
+                        }
+                    }
+                    onClicked: {
+                        query.fromJson(filterStore.get(modelData))
+                        query.name = modelData
+                        pageStack.pop()
+                    }
+                }
+            }
+            Label {
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                visible: filterStore.names.length === 0
+                wrapMode: Text.Wrap
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.secondaryColor
+                text: qsTr("No saved filters")
             }
         }
         VerticalScrollDecorator { }

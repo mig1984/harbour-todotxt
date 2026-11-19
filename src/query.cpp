@@ -119,13 +119,19 @@ QString Query::proposedName() const
 
 QString Query::prefill() const
 {
+    // Prefill a new task so it matches the active filter: the selected
+    // contexts and projects (a single priority, if exactly one is chosen).
     QStringList parts;
     if (!m_prioritiesNot && m_priorities.size() == 1 && m_priorities.first() != "-")
         parts << "(" + m_priorities.first() + ")";
-    if (!m_contextsNot && m_contexts.size() == 1 && m_contexts.first() != "-")
-        parts << "@" + m_contexts.first();
-    if (!m_projectsNot && m_projects.size() == 1 && m_projects.first() != "-")
-        parts << "+" + m_projects.first();
+    if (!m_contextsNot)
+        foreach (const QString &c, m_contexts)
+            if (c != "-")
+                parts << "@" + c;
+    if (!m_projectsNot)
+        foreach (const QString &p, m_projects)
+            if (p != "-")
+                parts << "+" + p;
     return parts.join(" ");
 }
 

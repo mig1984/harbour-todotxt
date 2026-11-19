@@ -1,6 +1,6 @@
 Name:       harbour-todotxt
 Summary:    Todo.txt task list for Sailfish OS (Simpletask port)
-Version:    1.6.0
+Version:    1.6.1
 Release:    1
 License:    GPLv3
 URL:        https://github.com/mig1984/harbour-todotxt
@@ -41,6 +41,10 @@ desktop-file-install --delete-original \
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Thu Nov 19 2026 Jan Molič <jan.molic@1984.cz> - 1.6.1-1
+- Saved filters are now listed on the Filter page (below the filter sections): tap to apply, long press to update/rename/delete. The separate Saved filters page and its menu entry were removed, as was Sort order from the Filter page menu
+- Open the filter by tapping the header title; the filter icon was removed from the header (the header now shows the calendar on the left, search next to it, and the clear button next to the title)
+- A new task is prefilled from the active filter: all selected contexts and projects (and a single priority) are inserted into the new task
 * Thu Nov 19 2026 Jan Molič <jan.molic@1984.cz> - 1.6.0-1
 - Recurring tasks are now a series anchored on the due date (or the creation date when there is no due date): the occurrences are shown from the creation date into the future (horizon in Settings, default 12 months, 0 = off) and ticking one stores a done:YYYY-MM-DD marker instead of completing the task, so it is clear which occurrences are done
 - A recurring task needs a due date or a creation date; the editor warns and blocks saving otherwise. Recurrence is edited from a new Recurrence row in the task editor (preset buttons with the active one highlighted, plus a custom count / unit / strict + editor)

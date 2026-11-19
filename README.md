@@ -6,7 +6,7 @@ ported from [Simpletask](https://github.com/mpcjanssen/simpletask-android)
 and writes `todo.txt` (and `done.txt` next to it) and can be combined with any
 sync tool that moves the file.
 
-Version 1.6.0 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
+Version 1.6.1 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
 German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
 
 ## Screenshots
@@ -85,8 +85,9 @@ German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
   into another due-date group changes its due date (or clears it for "no date")
   and drops it at the target position. `#N` is removed from completed tasks and
   whenever no sort order needs it.
-- **Saved filters**: save the current filter + sort order under a name, rename,
-  update, delete, switch from the pulley.
+- **Saved filters**: save the current filter + sort order under a name; they are
+  listed on the Filter page below the filter sections and can be applied with a
+  tap, or updated / renamed / deleted with a long press.
 - **Archive**: move completed tasks to `done.txt`, on demand from the pulley
   (pull down; archives *every* completed task) or automatically right after
   completing.

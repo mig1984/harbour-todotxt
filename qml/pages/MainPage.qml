@@ -89,11 +89,6 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
             }
             MenuItem {
-                text: qsTr("Saved filters")
-                visible: !selectionMode
-                onClicked: pageStack.push(Qt.resolvedUrl("SavedFiltersPage.qml"))
-            }
-            MenuItem {
                 text: qsTr("Sort order")
                 visible: !selectionMode
                 onClicked: pageStack.push(Qt.resolvedUrl("SortPage.qml"))
@@ -184,7 +179,7 @@ Page {
                 _titleItem.truncationMode: TruncationMode.Elide
                 _titleItem.width: Math.min(_titleItem.implicitWidth,
                     pageHeader.width - pageHeader.leftMargin - pageHeader.rightMargin
-                    - Theme.horizontalPageMargin - calendarButton.width - filterButton.width
+                    - Theme.horizontalPageMargin - calendarButton.width
                     - searchButton.width - (clearButton.visible ? clearButton.width : 0))
 
                 extraContent.children: [
@@ -195,7 +190,7 @@ Page {
                         visible: page.selectionMode || page.hasStructuredFilter
                         anchors {
                             right: parent.right
-                            rightMargin: Theme.horizontalPageMargin
+                            rightMargin: 0
                             verticalCenter: parent.verticalCenter
                         }
                         icon.source: "image://theme/icon-m-clear"
@@ -211,26 +206,18 @@ Page {
                     IconButton {
                         id: calendarButton
                         anchors {
-                            right: clearButton.visible ? clearButton.left : parent.right
-                            rightMargin: clearButton.visible ? 0 : Theme.horizontalPageMargin
+                            left: parent.left
+                            leftMargin: Theme.horizontalPageMargin
                             verticalCenter: parent.verticalCenter
                         }
                         icon.source: "image://theme/icon-m-date"
                         onClicked: page.openCalendar()
                     },
                     IconButton {
-                        id: filterButton
-                        anchors {
-                            right: calendarButton.left
-                            verticalCenter: parent.verticalCenter
-                        }
-                        icon.source: "../symbols/icon-m-filter.svg"
-                        onClicked: page.openFilter()
-                    },
-                    IconButton {
                         id: searchButton
                         anchors {
-                            right: filterButton.left
+                            left: calendarButton.right
+                            leftMargin: Theme.paddingLarge
                             verticalCenter: parent.verticalCenter
                         }
                         icon.source: "image://theme/icon-m-search"
@@ -240,6 +227,18 @@ Page {
                         }
                     }
                 ]
+
+                // Tapping the title (the filter name / "All tasks") opens the
+                // filter page.
+                MouseArea {
+                    anchors {
+                        left: pageHeader._titleItem.left
+                        right: parent.right
+                        top: parent.top
+                        bottom: parent.bottom
+                    }
+                    onClicked: page.openFilter()
+                }
             }
             SearchField {
                 id: searchField

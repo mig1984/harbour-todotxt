@@ -100,105 +100,135 @@
     </message>
     <message>
         <location filename="../qml/pages/FilterPage.qml" line="30" />
-        <source>Sort order</source>
-        <translation>Ordinamento</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FilterPage.qml" line="34" />
         <source>Save as filter</source>
         <translation>Salva come filtro</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="38" />
+        <location filename="../qml/pages/FilterPage.qml" line="34" />
         <source>Save filter</source>
         <translation>Salva filtro</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="53" />
+        <location filename="../qml/pages/FilterPage.qml" line="49" />
         <source>Filter</source>
         <translation>Filtro</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="54" />
+        <location filename="../qml/pages/FilterPage.qml" line="50" />
         <source>No filter</source>
         <translation>Nessun filtro</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="68" />
-        <location filename="../qml/pages/FilterPage.qml" line="96" />
-        <location filename="../qml/pages/FilterPage.qml" line="124" />
+        <location filename="../qml/pages/FilterPage.qml" line="64" />
+        <location filename="../qml/pages/FilterPage.qml" line="92" />
+        <location filename="../qml/pages/FilterPage.qml" line="120" />
         <source>Clear</source>
         <translation>Cancella</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="74" />
-        <location filename="../qml/pages/FilterPage.qml" line="102" />
-        <location filename="../qml/pages/FilterPage.qml" line="130" />
+        <location filename="../qml/pages/FilterPage.qml" line="70" />
+        <location filename="../qml/pages/FilterPage.qml" line="98" />
+        <location filename="../qml/pages/FilterPage.qml" line="126" />
         <source>Invert</source>
         <translation>Inverti</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="75" />
-        <location filename="../qml/pages/FilterPage.qml" line="103" />
+        <location filename="../qml/pages/FilterPage.qml" line="71" />
+        <location filename="../qml/pages/FilterPage.qml" line="99" />
         <source>Show tasks NOT matching the selection</source>
         <translation>Mostra le attività che NON corrispondono alla selezione</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="82" />
-        <location filename="../qml/pages/FilterPage.qml" line="110" />
+        <location filename="../qml/pages/FilterPage.qml" line="78" />
+        <location filename="../qml/pages/FilterPage.qml" line="106" />
         <source>Without %1</source>
         <translation>Senza %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="120" />
+        <location filename="../qml/pages/FilterPage.qml" line="116" />
         <source>Priorities</source>
         <translation>Priorità</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="137" />
+        <location filename="../qml/pages/FilterPage.qml" line="133" />
         <source>No priority</source>
         <translation>Nessuna priorità</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="147" />
+        <location filename="../qml/pages/FilterPage.qml" line="143" />
         <source>Other</source>
         <translation>Altro</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="151" />
+        <location filename="../qml/pages/FilterPage.qml" line="147" />
         <source>Show completed</source>
         <translation>Mostra completate</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="156" />
+        <location filename="../qml/pages/FilterPage.qml" line="152" />
         <source>Show future</source>
         <translation>Mostra future</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="157" />
+        <location filename="../qml/pages/FilterPage.qml" line="153" />
         <source>Tasks with a threshold date in the future</source>
         <translation>Attività con data soglia nel futuro</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="162" />
+        <location filename="../qml/pages/FilterPage.qml" line="158" />
         <source>Show hidden</source>
         <translation>Mostra nascoste</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="163" />
+        <location filename="../qml/pages/FilterPage.qml" line="159" />
         <source>Tasks with h:1</source>
         <translation>Attività con h:1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="168" />
-        <location filename="../qml/pages/FilterPage.qml" line="173" />
+        <location filename="../qml/pages/FilterPage.qml" line="164" />
+        <location filename="../qml/pages/FilterPage.qml" line="169" />
         <source>Show %1 in tasks</source>
         <translation>Mostra %1 nelle attività</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FilterPage.qml" line="178" />
+        <location filename="../qml/pages/FilterPage.qml" line="174" />
         <source>Creation date is threshold</source>
         <translation>Data di creazione come soglia</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FilterPage.qml" line="182" />
+        <source>Saved filters</source>
+        <translation>Filtri salvati</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FilterPage.qml" line="196" />
+        <source>Update with current filter</source>
+        <translation>Sovrascrivi con il filtro attuale</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FilterPage.qml" line="203" />
+        <source>Rename</source>
+        <translation>Rinomina</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FilterPage.qml" line="205" />
+        <source>Rename filter</source>
+        <translation>Rinomina filtro</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FilterPage.qml" line="213" />
+        <source>Delete</source>
+        <translation>Elimina</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FilterPage.qml" line="214" />
+        <source>Deleting</source>
+        <translation>Eliminazione</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FilterPage.qml" line="231" />
+        <source>No saved filters</source>
+        <translation>Nessun filtro salvato</translation>
     </message>
 </context>
 <context>
@@ -249,118 +279,113 @@
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="92" />
-        <source>Saved filters</source>
-        <translation>Filtri salvati</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/MainPage.qml" line="97" />
         <source>Sort order</source>
         <translation>Ordinamento</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="248" />
+        <location filename="../qml/pages/MainPage.qml" line="247" />
         <source>Search</source>
         <translation>Cerca</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="118" />
+        <location filename="../qml/pages/MainPage.qml" line="113" />
         <source>Cancel selection</source>
         <translation>Annulla selezione</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="118" />
+        <location filename="../qml/pages/MainPage.qml" line="113" />
         <source>Select tasks</source>
         <translation>Seleziona attività</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="125" />
+        <location filename="../qml/pages/MainPage.qml" line="120" />
         <source>Select all</source>
         <translation>Seleziona tutto</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="130" />
+        <location filename="../qml/pages/MainPage.qml" line="125" />
         <source>Mark incomplete</source>
         <translation>Segna come non completata</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="150" />
+        <location filename="../qml/pages/MainPage.qml" line="145" />
         <source>Archive</source>
         <translation>Archivia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="157" />
+        <location filename="../qml/pages/MainPage.qml" line="152" />
         <source>New task</source>
         <translation>Nuova attività</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="102" />
+        <location filename="../qml/pages/MainPage.qml" line="97" />
         <source>Reload file</source>
         <translation>Ricarica file</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="107" />
+        <location filename="../qml/pages/MainPage.qml" line="102" />
         <source>Archive completed tasks</source>
         <translation>Archivia attività completate</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="112" />
+        <location filename="../qml/pages/MainPage.qml" line="107" />
         <source>Archiving %n tasks</source>
         <translation><numerusform>Archiviazione di %n attività</numerusform><numerusform>Archiviazione di %n attività</numerusform></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="332" />
+        <location filename="../qml/pages/MainPage.qml" line="331" />
         <source>No folder selected</source>
         <translation>Nessuna cartella selezionata</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="334" />
+        <location filename="../qml/pages/MainPage.qml" line="333" />
         <source>No matching tasks</source>
         <translation>Nessuna attività corrispondente</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="334" />
+        <location filename="../qml/pages/MainPage.qml" line="333" />
         <source>No tasks</source>
         <translation>Nessuna attività</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="335" />
-        <location filename="../qml/pages/MainPage.qml" line="372" />
+        <location filename="../qml/pages/MainPage.qml" line="334" />
+        <location filename="../qml/pages/MainPage.qml" line="371" />
         <source>Choose the folder with todo.txt in Settings</source>
         <translation>Scegli la cartella con todo.txt nelle Impostazioni</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="337" />
+        <location filename="../qml/pages/MainPage.qml" line="336" />
         <source>Pull down to add a task</source>
         <translation>Trascina in basso per aggiungere un'attività</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="337" />
+        <location filename="../qml/pages/MainPage.qml" line="336" />
         <source>Tap the filter icon to change the filter</source>
         <translation>Tocca l'icona del filtro per cambiare il filtro</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="359" />
+        <location filename="../qml/pages/MainPage.qml" line="358" />
         <source>Example list</source>
         <translation>Lista di esempio</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="438" />
+        <location filename="../qml/pages/MainPage.qml" line="437" />
         <source>Due date</source>
         <translation>Scadenza</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="135" />
-        <location filename="../qml/pages/MainPage.qml" line="138" />
+        <location filename="../qml/pages/MainPage.qml" line="130" />
+        <location filename="../qml/pages/MainPage.qml" line="133" />
         <source>Threshold date</source>
         <translation>Data soglia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="153" />
+        <location filename="../qml/pages/MainPage.qml" line="148" />
         <source>Archiving</source>
         <translation>Archiviazione</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/MainPage.qml" line="461" />
+        <location filename="../qml/pages/MainPage.qml" line="460" />
         <source>Deleting %n tasks</source>
         <translation><numerusform>Eliminazione di %n attività</numerusform><numerusform>Eliminazione di %n attività</numerusform></translation>
     </message>
@@ -574,59 +599,6 @@
         <location filename="../qml/pages/RecurrencePage.qml" line="112" />
         <source>Set: %1</source>
         <translation>Imposta: %1</translation>
-    </message>
-</context>
-<context>
-    <name>SavedFiltersPage</name>
-    <message>
-        <location filename="../qml/pages/SavedFiltersPage.qml" line="14" />
-        <source>Save current filter</source>
-        <translation>Salva filtro attuale</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SavedFiltersPage.qml" line="18" />
-        <source>Save filter</source>
-        <translation>Salva filtro</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SavedFiltersPage.qml" line="28" />
-        <source>Saved filters</source>
-        <translation>Filtri salvati</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SavedFiltersPage.qml" line="35" />
-        <source>Update with current filter</source>
-        <translation>Sovrascrivi con il filtro attuale</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SavedFiltersPage.qml" line="42" />
-        <source>Rename</source>
-        <translation>Rinomina</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SavedFiltersPage.qml" line="44" />
-        <source>Rename filter</source>
-        <translation>Rinomina filtro</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SavedFiltersPage.qml" line="52" />
-        <source>Delete</source>
-        <translation>Elimina</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SavedFiltersPage.qml" line="53" />
-        <source>Deleting</source>
-        <translation>Eliminazione</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SavedFiltersPage.qml" line="71" />
-        <source>No saved filters</source>
-        <translation>Nessun filtro salvato</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SavedFiltersPage.qml" line="72" />
-        <source>Set up a filter and pull down to save it</source>
-        <translation>Imposta un filtro e trascina in basso per salvarlo</translation>
     </message>
 </context>
 <context>
