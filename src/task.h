@@ -116,6 +116,9 @@ public:
 
     static QDate addInterval(const QDate &date, const QString &interval);
     static bool isDate(const QString &s);
+    // True if the line holds any real task text besides todo.txt structure
+    // (x, priority, dates, key:value such as due:/t:/rec:, @lists and +tags).
+    static bool hasTaskText(const QString &line);
     static QString today();
 
     static QList<Token> parse(const QString &text);

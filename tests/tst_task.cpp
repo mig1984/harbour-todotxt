@@ -155,6 +155,25 @@ private slots:
         QVERIFY(!Task("Test t:2013-11-31").inFuture("2015-01-01", false));
     }
 
+    void hasTaskText()
+    {
+        QVERIFY(!Task::hasTaskText(""));
+        QVERIFY(!Task::hasTaskText("   "));
+        QVERIFY(!Task::hasTaskText("(A)"));
+        QVERIFY(!Task::hasTaskText("due:2020-01-01"));
+        QVERIFY(!Task::hasTaskText("@home +work"));
+        QVERIFY(!Task::hasTaskText("2020-01-01"));
+        QVERIFY(!Task::hasTaskText("rec:1w"));
+        QVERIFY(!Task::hasTaskText("h:1"));
+        QVERIFY(!Task::hasTaskText("uuid:123e4567-e89b-12d3-a456-426655440000"));
+        QVERIFY(!Task::hasTaskText("x 2020-01-01 @done +arch"));
+        QVERIFY(Task::hasTaskText("Done task"));
+        QVERIFY(Task::hasTaskText("(B) Buy milk +groceries"));
+        QVERIFY(Task::hasTaskText("Call @home due:2020-01-01"));
+        QVERIFY(Task::hasTaskText("Test h:1"));
+        QVERIFY(Task::hasTaskText("key:value"));
+    }
+
     void misc()
     {
         QCOMPARE(Task("1234 Task text with some 33-33 random numbers 12345678 +tag @list due:2020-01-01").alphaParts(),

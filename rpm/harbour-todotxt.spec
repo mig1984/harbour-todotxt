@@ -1,6 +1,6 @@
 Name:       harbour-todotxt
 Summary:    Todo.txt task list for Sailfish OS (Simpletask port)
-Version:    1.6.3
+Version:    1.7.0
 Release:    1
 License:    GPLv3
 URL:        https://github.com/mig1984/harbour-todotxt
@@ -41,6 +41,11 @@ desktop-file-install --delete-original \
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Fri Nov 20 2026 Jan Molič <jan.molic@1984.cz> - 1.7.0-1
+- Recurring tasks: a new Settings slider sets how many occurrences to show into the future and the past (default 5, 0 = only the task), replacing the fixed 12-month horizon
+- Recurring occurrences are shown around today (bounded by the creation date) so the list and calendar are no longer flooded with a year of repetitions
+- The task editor is multi-line while editing too: press Enter to add another task, prefilled from the current line (a line added below the edited ones becomes a new task)
+- Lists, tags and priority rows show a swipeable strip of quick suggestions (most used items over the last 60 days); tapping a chip adds it, tapping the row opens the full picker
 * Thu Nov 19 2026 Jan Molič <jan.molic@1984.cz> - 1.6.3-1
 - Selection mode now ends automatically when the last selected task is deselected (the bottom panel and the red header band close)
 - The bottom selection panel gained a button that opens the tags (+projects) picker

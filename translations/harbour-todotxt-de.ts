@@ -689,8 +689,8 @@
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="81"/>
-        <source>Show occurrences of recurring tasks</source>
-        <translation>Vorkommen wiederkehrender Aufgaben anzeigen</translation>
+        <source>Recurring tasks</source>
+        <translation>Wiederkehrende Aufgaben</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="86"/>
@@ -703,37 +703,42 @@
         <translation>Aus</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="90"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="95"/>
+        <source>Show this number of occurrences into the future and into the past</source>
+        <translation>Diese Anzahl von Vorkommen in Zukunft und Vergangenheit anzeigen</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="98"/>
         <source>Appearance</source>
         <translation>Darstellung</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="92"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="100"/>
         <source>Show dates on a separate line</source>
         <translation>Daten in eigener Zeile anzeigen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="97"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="105"/>
         <source>Color due dates</source>
         <translation>Fälligkeitsdaten einfärben</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="102"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="110"/>
         <source>Uppercase section headers</source>
         <translation>Abschnittsüberschriften in Großbuchstaben</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="107"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="115"/>
         <source>Case sensitive sorting</source>
         <translation>Sortierung nach Groß-/Kleinschreibung</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="112"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="120"/>
         <source>Use todo.txt terms (context/project)</source>
         <translation>todo.txt-Begriffe verwenden (Kontext/Projekt)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="113"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="121"/>
         <source>Instead of list/tag</source>
         <translation>Statt Liste/Tag</translation>
     </message>
@@ -807,115 +812,110 @@
 <context>
     <name>TaskDialog</name>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="210"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="218"/>
         <source>Open %1</source>
         <translation>%1 öffnen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="213"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="221"/>
         <source>Mail %1</source>
         <translation>E-Mail an %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="218"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="226"/>
         <source>Call %1</source>
         <translation>%1 anrufen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="232"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="240"/>
         <source>Update</source>
         <translation>Aktualisieren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="232"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="240"/>
         <source>Add tasks</source>
         <translation>Aufgaben hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="233"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="241"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="240"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="248"/>
         <source>One task per line</source>
         <translation>Eine Aufgabe pro Zeile</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="240"/>
-        <source>Task</source>
-        <translation>Aufgabe</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="298"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="295"/>
         <source>Recurring tasks need a due date or a creation date</source>
         <translation>Wiederkehrende Aufgaben brauchen ein Fälligkeits- oder Erstelldatum</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="316"/>
-        <location filename="../qml/pages/TaskDialog.qml" line="328"/>
-        <location filename="../qml/pages/TaskDialog.qml" line="365"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="327"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="344"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="391"/>
         <source>None</source>
         <translation>Keine</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="339"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="360"/>
         <source>Priority</source>
         <translation>Priorität</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="340"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="361"/>
         <source>No priority</source>
         <translation>Keine Priorität</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="348"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="374"/>
         <source>Due</source>
         <translation>Fällig</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="349"/>
-        <location filename="../qml/pages/TaskDialog.qml" line="357"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="375"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="383"/>
         <source>No date</source>
         <translation>Kein Datum</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="351"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="377"/>
         <source>Due date</source>
         <translation>Fälligkeitsdatum</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="364"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="390"/>
         <source>Recurrence</source>
         <translation>Wiederholung</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="378"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="404"/>
         <source>Quick choice</source>
         <translation>Schnellauswahl</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="386"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="412"/>
         <source>Today</source>
         <translation>Heute</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="394"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="420"/>
         <source>Tomorrow</source>
         <translation>Morgen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="402"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="428"/>
         <source>No due date</source>
         <translation>Kein Fälligkeitsdatum</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="356"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="382"/>
         <source>Threshold</source>
         <translation>Schwelle</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="359"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="385"/>
         <source>Threshold date</source>
         <translation>Schwellendatum</translation>
     </message>
@@ -992,14 +992,14 @@
 <context>
     <name>TodoStore</name>
     <message>
-        <location filename="../src/todostore.cpp" line="154"/>
+        <location filename="../src/todostore.cpp" line="156"/>
         <source>Cannot read %1</source>
         <translation>%1 kann nicht gelesen werden</translation>
     </message>
     <message>
-        <location filename="../src/todostore.cpp" line="188"/>
-        <location filename="../src/todostore.cpp" line="197"/>
-        <location filename="../src/todostore.cpp" line="459"/>
+        <location filename="../src/todostore.cpp" line="190"/>
+        <location filename="../src/todostore.cpp" line="199"/>
+        <location filename="../src/todostore.cpp" line="464"/>
         <source>Cannot write %1</source>
         <translation>%1 kann nicht geschrieben werden</translation>
     </message>

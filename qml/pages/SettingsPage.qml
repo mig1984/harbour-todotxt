@@ -78,13 +78,21 @@ Page {
             }
             Slider {
                 width: parent.width
-                label: qsTr("Show occurrences of recurring tasks")
+                label: qsTr("Recurring tasks")
                 minimumValue: 0
                 maximumValue: 50
                 stepSize: 1
                 value: settings.recurrenceOccurrences
                 valueText: value === 0 ? qsTr("Off") : qsTr("%1 occurrences").arg(value)
                 onReleased: settings.recurrenceOccurrences = value
+            }
+            Label {
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                wrapMode: Text.Wrap
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.secondaryColor
+                text: qsTr("Show this number of occurrences into the future and into the past")
             }
 
             SectionHeader { text: qsTr("Appearance") }

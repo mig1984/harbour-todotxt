@@ -695,8 +695,8 @@
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="81"/>
-        <source>Show occurrences of recurring tasks</source>
-        <translation>Zobrazovat výskyty opakovaných úkolů</translation>
+        <source>Recurring tasks</source>
+        <translation>Opakované úkoly</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="86"/>
@@ -709,37 +709,42 @@
         <translation>Vypnuto</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="90"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="95"/>
+        <source>Show this number of occurrences into the future and into the past</source>
+        <translation>Zobrazovat tento počet výskytů do budoucnosti i do minulosti</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="98"/>
         <source>Appearance</source>
         <translation>Vzhled</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="92"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="100"/>
         <source>Show dates on a separate line</source>
         <translation>Data na samostatném řádku</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="97"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="105"/>
         <source>Color due dates</source>
         <translation>Barevné termíny</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="102"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="110"/>
         <source>Uppercase section headers</source>
         <translation>Hlavičky skupin velkými písmeny</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="107"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="115"/>
         <source>Case sensitive sorting</source>
         <translation>Řazení rozlišuje velikost písmen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="112"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="120"/>
         <source>Use todo.txt terms (context/project)</source>
         <translation>Používat pojmy todo.txt (kontext/projekt)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="113"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="121"/>
         <source>Instead of list/tag</source>
         <translation>Místo seznam/štítek</translation>
     </message>
@@ -813,115 +818,110 @@
 <context>
     <name>TaskDialog</name>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="210"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="218"/>
         <source>Open %1</source>
         <translation>Otevřít %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="213"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="221"/>
         <source>Mail %1</source>
         <translation>Napsat %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="218"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="226"/>
         <source>Call %1</source>
         <translation>Volat %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="232"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="240"/>
         <source>Update</source>
         <translation>Upravit</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="232"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="240"/>
         <source>Add tasks</source>
         <translation>Přidat úkoly</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="233"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="241"/>
         <source>Save</source>
         <translation>Uložit</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="240"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="248"/>
         <source>One task per line</source>
         <translation>Jeden úkol na řádek</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="240"/>
-        <source>Task</source>
-        <translation>Úkol</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="298"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="295"/>
         <source>Recurring tasks need a due date or a creation date</source>
         <translation>Opakované úkoly potřebují termín nebo datum vytvoření</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="316"/>
-        <location filename="../qml/pages/TaskDialog.qml" line="328"/>
-        <location filename="../qml/pages/TaskDialog.qml" line="365"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="327"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="344"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="391"/>
         <source>None</source>
         <translation>Žádné</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="339"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="360"/>
         <source>Priority</source>
         <translation>Priorita</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="340"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="361"/>
         <source>No priority</source>
         <translation>Bez priority</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="348"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="374"/>
         <source>Due</source>
         <translation>Termín</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="349"/>
-        <location filename="../qml/pages/TaskDialog.qml" line="357"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="375"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="383"/>
         <source>No date</source>
         <translation>Bez datumu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="351"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="377"/>
         <source>Due date</source>
         <translation>Termín</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="364"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="390"/>
         <source>Recurrence</source>
         <translation>Opakování</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="378"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="404"/>
         <source>Quick choice</source>
         <translation>Rychlá volba</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="386"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="412"/>
         <source>Today</source>
         <translation>Dnes</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="394"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="420"/>
         <source>Tomorrow</source>
         <translation>Zítra</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="402"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="428"/>
         <source>No due date</source>
         <translation>Bez termínu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="356"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="382"/>
         <source>Threshold</source>
         <translation>Práh</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskDialog.qml" line="359"/>
+        <location filename="../qml/pages/TaskDialog.qml" line="385"/>
         <source>Threshold date</source>
         <translation>Prahové datum</translation>
     </message>
@@ -998,14 +998,14 @@
 <context>
     <name>TodoStore</name>
     <message>
-        <location filename="../src/todostore.cpp" line="154"/>
+        <location filename="../src/todostore.cpp" line="156"/>
         <source>Cannot read %1</source>
         <translation>Nelze číst %1</translation>
     </message>
     <message>
-        <location filename="../src/todostore.cpp" line="188"/>
-        <location filename="../src/todostore.cpp" line="197"/>
-        <location filename="../src/todostore.cpp" line="459"/>
+        <location filename="../src/todostore.cpp" line="190"/>
+        <location filename="../src/todostore.cpp" line="199"/>
+        <location filename="../src/todostore.cpp" line="464"/>
         <source>Cannot write %1</source>
         <translation>Nelze zapsat %1</translation>
     </message>

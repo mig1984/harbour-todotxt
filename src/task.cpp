@@ -95,6 +95,19 @@ QString Task::today()
     return QDate::currentDate().toString("yyyy-MM-dd");
 }
 
+bool Task::hasTaskText(const QString &line)
+{
+    QString s = line;
+    s.replace(QRegularExpression(QStringLiteral("^\\s*x\\s+"),
+                                 QRegularExpression::CaseInsensitiveOption), QStringLiteral(" "));
+    s.replace(QRegularExpression(QStringLiteral("(^|\\s)(due|t|thr|rec|h|uuid|pri):\\S+"),
+                                 QRegularExpression::CaseInsensitiveOption), QStringLiteral(" "));
+    s.replace(QRegularExpression(QStringLiteral("\\d{4}-\\d{2}-\\d{2}")), QStringLiteral(" "));
+    s.replace(QRegularExpression(QStringLiteral("(^|\\s)\\(\\w\\)")), QStringLiteral(" "));
+    s.replace(QRegularExpression(QStringLiteral("(^|\\s)[@+]\\S+")), QStringLiteral(" "));
+    return !s.trimmed().isEmpty();
+}
+
 QList<Token> Task::parse(const QString &text)
 {
     QList<Token> tokens;

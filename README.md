@@ -6,7 +6,7 @@ ported from [Simpletask](https://github.com/mpcjanssen/simpletask-android)
 and writes `todo.txt` (and `done.txt` next to it) and can be combined with any
 sync tool that moves the file.
 
-Version 1.6.3 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
+Version 1.7.0 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
 German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
 
 ## Screenshots
@@ -40,9 +40,15 @@ German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
   tomorrow and the day after blue, later grey); a day with a threshold is
   yellow and today is always green. Tap a day to jump to the first task due or
   starting that day. The shown month/year is remembered; **Today** resets it.
-- **Add / edit** with a text editor. Adding is multi-line ("Add tasks"): press
-  Enter to start the next task, prefilled with the current line's priority,
-  contexts, projects, due and threshold dates. Quick insertion of priority,
+- **Add / edit** with a text editor. The editor is multi-line: press Enter to
+  start the next task, prefilled with the current line's priority, contexts,
+  projects, due and threshold dates. This works while editing as well, so new
+  tasks can be created in the same go (lines added below the edited tasks become
+  new tasks; a prefilled line left without text is dropped). Each list/tag/priority
+  row shows an inline swipeable strip of the most used items still missing on the
+  line (up to 12, counted over tasks dated within the last 60 days and filled up
+  with overall usage); it stays while there is anything left to add. Tapping a chip
+  adds it, while tapping the row itself opens the full picker. Quick insertion of priority,
   contexts, projects, due, threshold and recurrence (the rows) applies to the
   line under the cursor; the buttons in the **Quick choice** section set the due
   date to today/tomorrow and save. Links, phone numbers and e-mail addresses

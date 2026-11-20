@@ -63,6 +63,13 @@ public:
     Q_INVOKABLE QStringList allTags() const;
     Q_INVOKABLE QStringList allPriorities() const;
 
+    // Most-used items: counted over tasks dated within the last `withinDays`
+    // (creation or completion), filled up with overall usage when there are
+    // too few. Most frequent first, then alphabetical. At most `n` items.
+    Q_INVOKABLE QStringList topLists(int n, int withinDays) const;
+    Q_INVOKABLE QStringList topTags(int n, int withinDays) const;
+    Q_INVOKABLE QStringList topPriorities(int n, int withinDays) const;
+
     // Keys of sorts needed by saved filters (union); used to clean #N.
     void setManualOrderNeeded(bool needed);
 

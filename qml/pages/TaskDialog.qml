@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "../components"
 
 Dialog {
     id: dialog
@@ -8,10 +9,15 @@ Dialog {
     property string text: ""
     property int initialCursor: -1
     readonly property bool editing: taskIds.length > 0
-    // One task per line, except when editing a single task, where the editor
-    // stays on a single line. Adding tasks is multi-line: Enter starts the
-    // next task.
-    readonly property bool singleLine: taskIds.length === 1
+    // Quick suggestions for the attribute rows: the most used items over the
+    // last 60 days (filled up with overall usage). Computed when the editor
+    // opens.
+    property var topLists: store.topLists(12, 60)
+    property var topTags: store.topTags(12, 60)
+    property var topPriorities: store.topPriorities(12, 60)
+    // Always multi-line: one task per line. While editing, pressing Enter adds
+    // a new task below (prefilled with the current line's attributes), so new
+    // tasks can be created in the same go.
 
     canAccept: (editing || hasTaskText(editor.text)) && !recurrenceInvalid(editor.text)
 
@@ -36,8 +42,10 @@ Dialog {
         for (var i = 0; i < lines.length; i++) {
             if (!lineNeedsAnchor(lines[i]))
                 continue
-            // A new task gets a creation date automatically when that is enabled.
-            if (!dialog.editing && settings.prependDate)
+            // A line being added (a new task, or an extra line appended while
+            // editing) gets a creation date automatically when that is enabled.
+            var isNew = !dialog.editing || i >= dialog.taskIds.length
+            if (isNew && settings.prependDate)
                 continue
             return true
         }
@@ -237,7 +245,7 @@ Dialog {
                 id: editor
                 width: parent.width
                 text: dialog.text
-                placeholderText: dialog.singleLine ? qsTr("Task") : qsTr("One task per line")
+                placeholderText: qsTr("One task per line")
                 inputMethodHints: settings.capitalizeTasks ? Qt.ImhNone : Qt.ImhNoAutoUppercase
                 // Text as it was before the last edit, to spot a line break
                 // added by pressing Enter; adjusting guards our own edits.
@@ -248,18 +256,7 @@ Dialog {
 
                 onTextChanged: {
                     if (adjusting) { previousText = text; return }
-                    if (dialog.singleLine) {
-                        if (text.indexOf("\n") < 0) { previousText = text; return }
-                        var pos = cursorPosition
-                        var collapsed = text.replace(/\s*\n+\s*/g, " ")
-                        adjusting = true
-                        text = collapsed
-                        cursorPosition = Math.min(pos, collapsed.length)
-                        adjusting = false
-                        previousText = text
-                        return
-                    }
-                    // Multi-line: a line break was just added at the cursor. The
+                    // A line break was just added at the cursor. The
                     // editor may have split the line at the cursor, so rebuild
                     // the whole line we left and add a new task below, prefilled
                     // with all of its attributes.
@@ -311,10 +308,28 @@ Dialog {
             property string lineRecurrence: { editor.text; editor.cursorPosition; return recurrenceFromLine() }
             property var openItems: { editor.text; return foundOpenItems() }
 
-            ValueButton {
+            // Lists and tags can be several, so their strip keeps offering the
+            // ones still missing (with a divider before it). Priority is a
+            // single value: its strip shows only while nothing is set.
+            property var listSuggestions: {
+                editor.text; editor.cursorPosition
+                var used = lineItems("@")
+                return dialog.topLists.filter(function(x) { return used.indexOf(x) < 0 })
+            }
+            property var tagSuggestions: {
+                editor.text; editor.cursorPosition
+                var used = lineItems("+")
+                return dialog.topTags.filter(function(x) { return used.indexOf(x) < 0 })
+            }
+
+            AttributeRow {
                 label: app.listsTerm
                 value: column.lineLists.length > 0 ? column.lineLists : qsTr("None")
-                onClicked: {
+                showSuggestions: column.listSuggestions.length > 0
+                suggestions: column.listSuggestions
+                suggestionPrefix: "@"
+                separator: true
+                onOpened: {
                     var p = pageStack.push(Qt.resolvedUrl("ItemsPage.qml"), {
                         "isLists": true, "checked": lineItems("@") })
                     p.changed.connect(function(added, removed) {
@@ -322,11 +337,16 @@ Dialog {
                         appendToLine(added.map(function(x) { return "@" + x }))
                     })
                 }
+                onPicked: appendToLine(["@" + item])
             }
-            ValueButton {
+            AttributeRow {
                 label: app.tagsTerm
                 value: column.lineTags.length > 0 ? column.lineTags : qsTr("None")
-                onClicked: {
+                showSuggestions: column.tagSuggestions.length > 0
+                suggestions: column.tagSuggestions
+                suggestionPrefix: "+"
+                separator: true
+                onOpened: {
                     var p = pageStack.push(Qt.resolvedUrl("ItemsPage.qml"), {
                         "isLists": false, "checked": lineItems("+") })
                     p.changed.connect(function(added, removed) {
@@ -334,15 +354,21 @@ Dialog {
                         appendToLine(added.map(function(x) { return "+" + x }))
                     })
                 }
+                onPicked: appendToLine(["+" + item])
             }
-            ValueButton {
+            AttributeRow {
                 label: qsTr("Priority")
                 value: column.linePriority !== "-" ? column.linePriority : qsTr("No priority")
                 valueColor: column.linePriority !== "-" ? app.priorityColor(column.linePriority) : Theme.highlightColor
-                onClicked: {
+                showSuggestions: column.linePriority === "-"
+                suggestions: dialog.topPriorities
+                suggestionColor: app.priorityColor
+                separator: true
+                onOpened: {
                     var p = pageStack.push(Qt.resolvedUrl("PriorityPage.qml"), { "current": column.linePriority })
                     p.selected.connect(setPriority)
                 }
+                onPicked: setPriority(item)
             }
             ValueButton {
                 label: qsTr("Due")

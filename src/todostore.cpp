@@ -7,6 +7,8 @@
 #include <QSaveFile>
 #include <QTextStream>
 #include <QDebug>
+#include <QHash>
+#include <QDate>
 #include <algorithm>
 
 TodoStore::TodoStore(Settings *settings, QObject *parent)
@@ -272,7 +274,10 @@ void TodoStore::updateTasks(const QVariantList &ids, const QString &text)
     for (; i < lines.size(); ++i) {
         if (i < tasks.size()) {
             tasks[i]->update(lines[i]);
-        } else if (!lines[i].trimmed().isEmpty()) {
+        } else if (Task::hasTaskText(lines[i])) {
+            // Lines added while editing (beyond the edited tasks) become new
+            // tasks; a line that only holds structure (prefilled due:/@/+ but
+            // no text) is dropped, exactly like when creating tasks.
             extra += lines[i] + "\n";
         }
     }
@@ -505,4 +510,105 @@ QStringList TodoStore::allPriorities() const
     r.removeDuplicates();
     std::sort(r.begin(), r.end());
     return r;
+}
+
+namespace {
+
+// Latest date a task carries (creation or completion), "" when neither is set.
+QString latestDate(const Task &t)
+{
+    const QString c = t.createDate();
+    const QString d = t.completionDate();
+    return c > d ? c : d;
+}
+
+// Items of `recent` first (by count, then alphabetically), filled up with the
+// overall `all` counts, at most `n` items.
+QStringList rankTop(const QHash<QString, int> &recent, const QHash<QString, int> &all, int n)
+{
+    QStringList out;
+    if (n <= 0)
+        return out;
+    QHash<QString, int> rem = recent;
+    while (out.size() < n && !rem.isEmpty()) {
+        QString best;
+        int bestCount = -1;
+        foreach (const QString &k, rem.keys()) {
+            const int c = rem.value(k);
+            if (c > bestCount
+                    || (c == bestCount && QString::compare(k, best, Qt::CaseInsensitive) < 0)) {
+                best = k;
+                bestCount = c;
+            }
+        }
+        out << best;
+        rem.remove(best);
+    }
+    if (out.size() < n) {
+        QHash<QString, int> rest = all;
+        foreach (const QString &k, out)
+            rest.remove(k);
+        while (out.size() < n && !rest.isEmpty()) {
+            QString best;
+            int bestCount = -1;
+            foreach (const QString &k, rest.keys()) {
+                const int c = rest.value(k);
+                if (c > bestCount
+                        || (c == bestCount && QString::compare(k, best, Qt::CaseInsensitive) < 0)) {
+                    best = k;
+                    bestCount = c;
+                }
+            }
+            out << best;
+            rest.remove(best);
+        }
+    }
+    return out;
+}
+
+template <typename Extract>
+QStringList topAttrs(const QList<Task> &tasks, const QString &cutoff, int n, Extract extract)
+{
+    QHash<QString, int> recent, all;
+    foreach (const Task &t, tasks) {
+        const bool isRecent = !cutoff.isEmpty() && latestDate(t) >= cutoff;
+        foreach (const QString &v, extract(t)) {
+            all[v]++;
+            if (isRecent)
+                recent[v]++;
+        }
+    }
+    return rankTop(recent, all, n);
+}
+
+QString cutoffDate(int withinDays)
+{
+    return withinDays > 0
+            ? QDate::currentDate().addDays(-withinDays).toString("yyyy-MM-dd")
+            : QString();
+}
+
+} // namespace
+
+QStringList TodoStore::topLists(int n, int withinDays) const
+{
+    return topAttrs(m_tasks, cutoffDate(withinDays), n,
+                    [](const Task &t) { return t.lists(); });
+}
+
+QStringList TodoStore::topTags(int n, int withinDays) const
+{
+    return topAttrs(m_tasks, cutoffDate(withinDays), n,
+                    [](const Task &t) { return t.tags(); });
+}
+
+QStringList TodoStore::topPriorities(int n, int withinDays) const
+{
+    return topAttrs(m_tasks, cutoffDate(withinDays), n, [](const Task &t) {
+        QStringList r;
+        const QChar p = t.priority();
+        if (p != '-')
+            r << QString(p);
+        return r;
+    });
 }
