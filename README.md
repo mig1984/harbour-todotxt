@@ -56,8 +56,9 @@ German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
 - **Complete / uncomplete** with the checkbox or from multi-selection.
 - **Recurring tasks** (`rec:[+]<n><unit>`, units `d`/`b`/`w`/`m`/`y`): anchored on
   the `due:` date (or on the creation date when there is no due date) and shown
-  as a series of occurrences — from the creation date into the future, up to a
-  horizon set in Settings (default 12 months; 0 disables it). Each occurrence is
+  as a series of occurrences around today — up to a number of occurrences before
+  and after today set in Settings (default 5; 0 shows only the task itself).
+  Each occurrence is
   a normal row with its own checkbox; ticking it stores a `done:YYYY-MM-DD`
   marker on the task (un-ticking removes it) instead of completing the task, so
   it stays clear which occurrences are done (struck through) and which are still

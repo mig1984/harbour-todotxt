@@ -76,6 +76,11 @@ public:
     // Sorting: compares using keys [0, keyCount) of effectiveSorts().
     // keyCount < 0 means all keys.
     int compare(const Task &a, const Task &b, int keyCount = -1) const;
+    // Like compare(), but the "completed" key uses the given flags instead of
+    // Task::isCompleted(). Needed for recurring occurrences, where "done" comes
+    // from the occurrence's done: marker rather than the line's "x".
+    int compare(const Task &a, bool aCompleted, const Task &b, bool bCompleted,
+                int keyCount = -1) const;
     int manualSortIndex() const;       // index of "manual" in effectiveSorts, -1 if absent
     QString section(const Task &t, const QString &empty) const;
 

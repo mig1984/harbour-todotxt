@@ -24,7 +24,7 @@ TaskModel::TaskModel(TodoStore *store, Query *query, Settings *settings, QObject
     connect(m_query, SIGNAL(changed()), this, SLOT(scheduleRebuildReset()));
     connect(m_settings, SIGNAL(showDateBarChanged()), this, SLOT(scheduleRebuildReset()));
     connect(m_settings, SIGNAL(caseSensitiveSortChanged()), this, SLOT(scheduleRebuildReset()));
-    connect(m_settings, SIGNAL(recurrenceHorizonMonthsChanged()), this, SLOT(scheduleRebuildReset()));
+    connect(m_settings, SIGNAL(recurrenceOccurrencesChanged()), this, SLOT(scheduleRebuildReset()));
     m_today = Task::today();
 }
 
@@ -136,6 +136,49 @@ bool TaskModel::rowCompleted(const Task &t, int occ) const
     if (t.isSeries())
         return t.doneDates().contains(effectiveDate(t, occ, false));
     return false;
+}
+
+QString TaskModel::coverDue(const Task &t, int *occOut) const
+{
+    QString due = effectiveDate(t, 0, false);
+    int occ = 0;
+    if (t.isSeries() && !due.isEmpty()) {
+        const int maxOcc = 400;
+        if (due <= m_today) {
+            // Latest occurrence due today or earlier.
+            for (int k = 1; k <= maxOcc; ++k) {
+                const QString d = effectiveDate(t, k, false);
+                if (d.isEmpty() || d > m_today)
+                    break;
+                due = d;
+                occ = k;
+            }
+        } else {
+            // Anchor is in the future: step back to the latest occurrence
+            // that is still not after today.
+            for (int k = -1; k >= -maxOcc; --k) {
+                const QString d = effectiveDate(t, k, false);
+                if (d.isEmpty())
+                    break;
+                if (d <= m_today) {
+                    due = d;
+                    occ = k;
+                    break;
+                }
+            }
+        }
+        // A done occurrence is not the one to count; look at the next one.
+        if (t.doneDates().contains(due)) {
+            const QString next = effectiveDate(t, occ + 1, false);
+            if (!next.isEmpty()) {
+                due = next;
+                occ = occ + 1;
+            }
+        }
+    }
+    if (occOut)
+        *occOut = occ;
+    return due;
 }
 
 int TaskModel::dateState(const QString &date) const
@@ -297,6 +340,100 @@ QStringList TaskModel::thresholdDates() const
     return out;
 }
 
+QList<int> TaskModel::seriesOccurrenceIndices(const Task &t, int n) const
+{
+    QList<int> out;
+    if (!t.isSeries() || n <= 0) {
+        out << 0;
+        return out;
+    }
+    const QDate today = QDate::fromString(m_today, "yyyy-MM-dd");
+    const QDate created = QDate::fromString(t.createDate(), "yyyy-MM-dd");
+    const QString rec = t.recurrence();
+    const QDate anchor = QDate::fromString(effectiveDate(t, 0, false), "yyyy-MM-dd");
+    if (!anchor.isValid()) {
+        out << 0;
+        return out;
+    }
+    // Step incrementally from the anchor (effectiveDate would recompute the
+    // whole interval chain, which is quadratic for a long series).
+    const int safeCap = 100000;
+
+    // c = index of the latest occurrence due on or before today (if any).
+    bool hasC = false;
+    int c = 0;
+    QDate cur = anchor;
+    if (anchor <= today) {
+        hasC = true;
+        for (int k = 1; k <= safeCap; ++k) {
+            const QDate nxt = applyInterval(cur, rec, 1);
+            if (nxt <= cur || nxt > today)
+                break;
+            cur = nxt;
+            c = k;
+        }
+    } else {
+        // The anchor is in the future: walk back to the latest occurrence that
+        // is still not after today.
+        for (int k = 1; k <= safeCap; ++k) {
+            const QDate prv = applyInterval(cur, rec, -1);
+            if (prv >= cur)
+                break;
+            if (prv <= today) {
+                cur = prv;
+                c = -k;
+                hasC = true;
+                break;
+            }
+            cur = prv;
+        }
+    }
+
+    QSet<int> occs;
+    occs.insert(0);
+    if (hasC) {
+        // Past: the n latest occurrences not after today, never before creation.
+        QDate d = cur;
+        for (int j = 0; j < n; ++j) {
+            if (j > 0) {
+                const QDate prv = applyInterval(d, rec, -1);
+                if (prv >= d)
+                    break;
+                d = prv;
+            }
+            if (created.isValid() && d < created)
+                break;
+            occs.insert(c - j);
+        }
+        // Future: the n earliest occurrences after today.
+        QDate f = cur;
+        for (int j = 0; j < n; ++j) {
+            const QDate nxt = applyInterval(f, rec, 1);
+            if (nxt <= f)
+                break;
+            f = nxt;
+            occs.insert(c + 1 + j);
+        }
+    } else {
+        // Everything is in the future: begin at the earliest valid occurrence.
+        QDate d = anchor;
+        int startIdx = 0;
+        for (int k = 1; k <= safeCap; ++k) {
+            const QDate prv = applyInterval(d, rec, -1);
+            if (prv >= d || (created.isValid() && prv < created))
+                break;
+            d = prv;
+            startIdx = -k;
+        }
+        for (int j = 0; j < n; ++j)
+            occs.insert(startIdx + j);
+    }
+
+    out = occs.toList();
+    std::sort(out.begin(), out.end());
+    return out;
+}
+
 QStringList TaskModel::allDueDates() const
 {
     return allDates(false);
@@ -311,11 +448,7 @@ QStringList TaskModel::allDates(bool threshold) const
 {
     QSet<QString> seen;
     QStringList out;
-    const int horizonMonths = m_settings->recurrenceHorizonMonths();
-    const QDate today = QDate::fromString(m_today, "yyyy-MM-dd");
-    const QDate horizon = today.addMonths(horizonMonths);
-    const QDate minBack = today.addMonths(-horizonMonths);
-    const int maxOcc = 400;
+    const int n = m_settings->recurrenceOccurrences();
     const QList<Task> &all = m_store->tasks();
     for (int i = 0; i < all.size(); ++i) {
         const Task &t = all[i];
@@ -323,24 +456,15 @@ QStringList TaskModel::allDates(bool threshold) const
             continue;
         QStringList dates;
         dates << effectiveDate(t, 0, threshold);
-        if (horizonMonths > 0 && t.isSeries()) {
-            for (int k = 1; k <= maxOcc; ++k) {
-                const QDate d = QDate::fromString(effectiveDate(t, k, false), "yyyy-MM-dd");
-                if (!d.isValid() || d > horizon)
-                    break;
-                if (!t.doneDates().contains(effectiveDate(t, k, false)))
-                    dates << effectiveDate(t, k, threshold);
-            }
-            QDate backLimit = t.createDate().isEmpty()
-                    ? today : QDate::fromString(t.createDate(), "yyyy-MM-dd");
-            if (!backLimit.isValid() || backLimit < minBack)
-                backLimit = minBack;
-            for (int k = -1; k >= -maxOcc; --k) {
-                const QDate d = QDate::fromString(effectiveDate(t, k, false), "yyyy-MM-dd");
-                if (!d.isValid() || d < backLimit)
-                    break;
-                if (!t.doneDates().contains(effectiveDate(t, k, false)))
-                    dates << effectiveDate(t, k, threshold);
+        if (t.isSeries()) {
+            const QList<int> occs = seriesOccurrenceIndices(t, n);
+            foreach (int occ, occs) {
+                if (occ == 0)
+                    continue;
+                const QString d = effectiveDate(t, occ, false);
+                if (t.doneDates().contains(d))
+                    continue;
+                dates << effectiveDate(t, occ, threshold);
             }
         }
         foreach (const QString &d, dates) {
@@ -356,20 +480,28 @@ QStringList TaskModel::allDates(bool threshold) const
 
 int TaskModel::rowForDueDate(const QString &date) const
 {
-    int completedRow = -1;
+    // Prefer a not-done task on the requested day. When there is none (e.g.
+    // today with nothing left), jump to the nearest not-done task in the
+    // future instead of landing on a completed one.
+    int futureRow = -1;
+    QString futureDate;
     for (int i = 0; i < m_rows.size(); ++i) {
         const Task *t = m_store->findTask(m_rows[i].id);
-        if (!t)
+        if (!t || rowCompleted(*t, m_rows[i].occ))
             continue;
-        if (effectiveDate(*t, m_rows[i].occ, false) != date
-                && effectiveDate(*t, m_rows[i].occ, true) != date)
-            continue;
-        if (!rowCompleted(*t, m_rows[i].occ))
+        const QString due = effectiveDate(*t, m_rows[i].occ, false);
+        const QString thr = effectiveDate(*t, m_rows[i].occ, true);
+        if (due == date || thr == date)
             return i;
-        if (completedRow < 0)
-            completedRow = i;
+        const QString key = !due.isEmpty() ? due : thr;
+        if (key.isEmpty() || key <= date)
+            continue;
+        if (futureRow < 0 || key < futureDate)
+            futureRow = i;
+        if (futureRow == i)
+            futureDate = key;
     }
-    return completedRow;
+    return futureRow;
 }
 
 void TaskModel::setShowSelected(bool s)
@@ -434,16 +566,12 @@ void TaskModel::rebuild()
     });
 
     // Rows: for a plain task just itself; for a recurring series (rec: + due:)
-    // every occurrence from the creation date (or up to the horizon back) into
-    // the future horizon, so past weeks can be ticked off and upcoming ones are
+    // the occurrences around today (up to the configured count in either
+    // direction), so past weeks can be ticked off and upcoming ones are
     // visible. A done occurrence carries a done: marker.
-    const int horizonMonths = m_settings->recurrenceHorizonMonths();
-    const QDate today = QDate::fromString(m_today, "yyyy-MM-dd");
-    const QDate horizon = today.addMonths(horizonMonths);
-    const QDate minBack = today.addMonths(-horizonMonths);
-    const int maxOcc = 400;
+    const int n = m_settings->recurrenceOccurrences();
 
-    struct Entry { int id; int occ; Task eff; };
+    struct Entry { int id; int occ; Task eff; bool done; };
     QList<Entry> entries;
     int overdue = 0, dueToday = 0, pending = 0;
 
@@ -451,7 +579,7 @@ void TaskModel::rebuild()
         const Task *t = visible[vi];
         if (!t->isCompleted()) {
             pending++;
-            int s = dateState(t->dueDate());
+            int s = dateState(coverDue(*t));
             if (s == 1) overdue++;
             else if (s == 2) dueToday++;
         }
@@ -460,31 +588,20 @@ void TaskModel::rebuild()
             Entry e; e.id = t->id(); e.occ = 0; e.eff = *t;
             e.eff.setDueDate(effectiveDate(*t, 0, false));
             e.eff.setThresholdDate(effectiveDate(*t, 0, true));
+            e.done = rowCompleted(*t, 0);
             entries << e;
         }
 
-        if (t->isCompleted() || horizonMonths <= 0 || !t->isSeries())
+        if (t->isCompleted() || !t->isSeries())
             continue;
-        for (int k = 1; k <= maxOcc; ++k) {
-            const QDate d = QDate::fromString(effectiveDate(*t, k, false), "yyyy-MM-dd");
-            if (!d.isValid() || d > horizon)
-                break;
-            Entry e; e.id = t->id(); e.occ = k; e.eff = *t;
-            e.eff.setDueDate(effectiveDate(*t, k, false));
-            e.eff.setThresholdDate(effectiveDate(*t, k, true));
-            entries << e;
-        }
-        QDate backLimit = t->createDate().isEmpty()
-                ? today : QDate::fromString(t->createDate(), "yyyy-MM-dd");
-        if (!backLimit.isValid() || backLimit < minBack)
-            backLimit = minBack;
-        for (int k = -1; k >= -maxOcc; --k) {
-            const QDate d = QDate::fromString(effectiveDate(*t, k, false), "yyyy-MM-dd");
-            if (!d.isValid() || d < backLimit)
-                break;
-            Entry e; e.id = t->id(); e.occ = k; e.eff = *t;
-            e.eff.setDueDate(effectiveDate(*t, k, false));
-            e.eff.setThresholdDate(effectiveDate(*t, k, true));
+        const QList<int> occs = seriesOccurrenceIndices(*t, n);
+        foreach (int occ, occs) {
+            if (occ == 0)
+                continue;   // the base occurrence is already added
+            Entry e; e.id = t->id(); e.occ = occ; e.eff = *t;
+            e.eff.setDueDate(effectiveDate(*t, occ, false));
+            e.eff.setThresholdDate(effectiveDate(*t, occ, true));
+            e.done = rowCompleted(*t, occ);
             entries << e;
         }
     }
@@ -494,7 +611,7 @@ void TaskModel::rebuild()
     m_completed = completed;
 
     std::stable_sort(entries.begin(), entries.end(), [q](const Entry &a, const Entry &b) {
-        return q->compare(a.eff, b.eff) < 0;
+        return q->compare(a.eff, a.done, b.eff, b.done) < 0;
     });
 
     QList<OccRow> rows;
@@ -654,59 +771,63 @@ QVariantList TaskModel::coverTasks() const
 
     // Preferred first: tasks whose due or threshold falls on today, tomorrow
     // or the day after tomorrow. Overdue tasks only fill the remaining slots.
-    QList<const Task *> windowTasks, overdue, rest;
+    // A recurring task is represented by its current occurrence (see coverDue),
+    // so an already-done occurrence is not shown as due today.
+    struct Cov { const Task *t; QString due; QString threshold; };
+    QList<Cov> windowTasks, overdue, rest;
     for (int i = 0; i < m_rows.size(); ++i) {
         if (m_rows[i].occ != 0)
             continue;
         const Task *t = m_store->findTask(m_rows[i].id);
         if (!t || t->isCompleted())
             continue;
-        const QString due = t->dueDate();
-        const QString threshold = t->thresholdDate();
-        const bool dueInWindow = !due.isEmpty() && due >= m_today && due <= dayAfter;
-        const bool thresholdInWindow = !threshold.isEmpty()
-                && threshold >= m_today && threshold <= dayAfter;
+        int occ = 0;
+        Cov c;
+        c.t = t;
+        c.due = coverDue(*t, &occ);
+        c.threshold = effectiveDate(*t, occ, true);
+        const bool dueInWindow = !c.due.isEmpty() && c.due >= m_today && c.due <= dayAfter;
+        const bool thresholdInWindow = !c.threshold.isEmpty()
+                && c.threshold >= m_today && c.threshold <= dayAfter;
         if (dueInWindow || thresholdInWindow)
-            windowTasks << t;
-        else if (!due.isEmpty() && due < m_today)
-            overdue << t;
+            windowTasks << c;
+        else if (!c.due.isEmpty() && c.due < m_today)
+            overdue << c;
         else
-            rest << t;
+            rest << c;
     }
 
     // The earliest date that put the task into the window (due or threshold).
-    auto windowDate = [&](const Task *t) {
-        const QString due = t->dueDate();
-        const QString threshold = t->thresholdDate();
-        const bool dueIn = !due.isEmpty() && due >= m_today && due <= dayAfter;
-        const bool thrIn = !threshold.isEmpty() && threshold >= m_today && threshold <= dayAfter;
+    auto windowDate = [&](const Cov &c) {
+        const bool dueIn = !c.due.isEmpty() && c.due >= m_today && c.due <= dayAfter;
+        const bool thrIn = !c.threshold.isEmpty() && c.threshold >= m_today && c.threshold <= dayAfter;
         if (dueIn && thrIn)
-            return due < threshold ? due : threshold;
-        return dueIn ? due : threshold;
+            return c.due < c.threshold ? c.due : c.threshold;
+        return dueIn ? c.due : c.threshold;
     };
 
-    std::stable_sort(windowTasks.begin(), windowTasks.end(), [&](const Task *a, const Task *b) {
+    std::stable_sort(windowTasks.begin(), windowTasks.end(), [&](const Cov &a, const Cov &b) {
         const QString da = windowDate(a);
         const QString db = windowDate(b);
         if (da != db)
             return da < db;
-        return coverPriorityRank(a->priority()) < coverPriorityRank(b->priority());
+        return coverPriorityRank(a.t->priority()) < coverPriorityRank(b.t->priority());
     });
-    std::stable_sort(overdue.begin(), overdue.end(), [](const Task *a, const Task *b) {
-        if (a->dueDate() != b->dueDate())
-            return a->dueDate() < b->dueDate();
-        return coverPriorityRank(a->priority()) < coverPriorityRank(b->priority());
+    std::stable_sort(overdue.begin(), overdue.end(), [](const Cov &a, const Cov &b) {
+        if (a.due != b.due)
+            return a.due < b.due;
+        return coverPriorityRank(a.t->priority()) < coverPriorityRank(b.t->priority());
     });
 
     QVariantList out;
-    auto append = [&](const QList<const Task *> &list) {
-        foreach (const Task *t, list) {
+    auto append = [&](const QList<Cov> &list) {
+        foreach (const Cov &c, list) {
             if (out.size() >= maxItems)
                 return;
             QVariantMap m;
-            m["text"] = displayHtml(*t);
-            m["priority"] = QString(t->priority());
-            m["due"] = t->dueDate();
+            m["text"] = displayHtml(*c.t);
+            m["priority"] = QString(c.t->priority());
+            m["due"] = c.due;
             out << m;
         }
     };

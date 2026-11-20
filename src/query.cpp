@@ -357,13 +357,25 @@ QString Query::sortValue(const Task &t, const QString &key) const
 
 int Query::compare(const Task &a, const Task &b, int keyCount) const
 {
+    return compare(a, a.isCompleted(), b, b.isCompleted(), keyCount);
+}
+
+int Query::compare(const Task &a, bool aCompleted, const Task &b, bool bCompleted,
+                   int keyCount) const
+{
     QStringList s = effectiveSorts();
     int n = keyCount < 0 ? s.size() : qMin(keyCount, s.size());
     for (int i = 0; i < n; ++i) {
         bool reversed = s[i].startsWith("-!");
         QString key = s[i].section('!', 1);
-        QString va = sortValue(a, key);
-        QString vb = sortValue(b, key);
+        QString va, vb;
+        if (key == "completed") {
+            va = aCompleted ? "1" : "0";
+            vb = bCompleted ? "1" : "0";
+        } else {
+            va = sortValue(a, key);
+            vb = sortValue(b, key);
+        }
         int c = QString::compare(va, vb);
         if (c != 0)
             return reversed ? -c : c;

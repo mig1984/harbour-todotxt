@@ -26,6 +26,9 @@ Settings::Settings(QObject *parent)
         if (!legacy.isEmpty())
             m_settings.setValue("todoFolder", QFileInfo(legacy).dir().path());
     }
+    // The recurrence view is limited by occurrence count now; drop the old
+    // month-horizon key so it does not linger in the config file.
+    m_settings.remove("recurrenceHorizonMonths");
 }
 
 QString Settings::defaultTodoFolder()

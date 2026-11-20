@@ -158,6 +158,16 @@ private:
     // Whether a row is "done": a completed task, or a recurring occurrence
     // whose date is in the task's done: markers.
     bool rowCompleted(const Task &t, int occ) const;
+    // Occurrence used by the cover and the overdue/today counters: for a
+    // recurring series the latest occurrence due today or earlier, shifted to
+    // the next occurrence when that one is already marked done; for a plain
+    // task its due date. *occOut (optional) receives the occurrence index.
+    QString coverDue(const Task &t, int *occOut = 0) const;
+    // Occurrence indices of a recurring series to show for a limit of `n`
+    // occurrences: up to n occurrences due on/before today (the latest ones)
+    // and up to n after today, plus the anchor (occ == 0). Bounded by the
+    // creation date. Returns just {0} for a non-series or when n <= 0.
+    QList<int> seriesOccurrenceIndices(const Task &t, int n) const;
     // Distinct due/threshold dates over every (non-completed) task.
     QStringList allDates(bool threshold) const;
     int dateState(const QString &date) const;

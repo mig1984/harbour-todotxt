@@ -381,6 +381,7 @@ Dialog {
                 anchors.horizontalCenter: parent.horizontalCenter
                 spacing: Theme.paddingSmall
                 Button {
+                    id: todayButton
                     width: implicitWidth
                     text: qsTr("Today")
                     onClicked: {
@@ -393,6 +394,14 @@ Dialog {
                     text: qsTr("Tomorrow")
                     onClicked: {
                         setKeyValue("due", addInterval(new Date(), "1d"))
+                        dialog.accept()
+                    }
+                }
+                Button {
+                    width: 2 * todayButton.width
+                    text: qsTr("No due date")
+                    onClicked: {
+                        setKeyValue("due", "")
                         dialog.accept()
                     }
                 }

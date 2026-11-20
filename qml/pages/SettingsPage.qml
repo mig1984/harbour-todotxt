@@ -78,13 +78,13 @@ Page {
             }
             Slider {
                 width: parent.width
-                label: qsTr("Show recurring tasks ahead")
+                label: qsTr("Show occurrences of recurring tasks")
                 minimumValue: 0
-                maximumValue: 24
+                maximumValue: 50
                 stepSize: 1
-                value: settings.recurrenceHorizonMonths
-                valueText: value === 0 ? qsTr("Off") : qsTr("%1 months").arg(value)
-                onReleased: settings.recurrenceHorizonMonths = value
+                value: settings.recurrenceOccurrences
+                valueText: value === 0 ? qsTr("Off") : qsTr("%1 occurrences").arg(value)
+                onReleased: settings.recurrenceOccurrences = value
             }
 
             SectionHeader { text: qsTr("Appearance") }
