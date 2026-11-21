@@ -110,11 +110,24 @@ Dialog {
         return editor.text.substring(r[0], r[1])
     }
 
-    function replaceCurrentLine(newLine) {
+    // Opened quickly when tapping an attribute value. Hides the keyboard first
+    // so it does not stay on top of the pushed picker page (the editor keeps
+    // focus while suggestions are tapped).
+    function openPage(url, props) {
+        Qt.inputMethod.hide()
+        return pageStack.push(url, props)
+    }
+
+    // Replaces the line under the cursor. By default the cursor keeps its
+    // offset within the line (so appending attributes at the end does not move
+    // it); pass cursorOffset to place it explicitly.
+    function replaceCurrentLine(newLine, cursorOffset) {
         var r = currentLineRange()
+        if (cursorOffset === undefined)
+            cursorOffset = Math.min(editor.cursorPosition - r[0], newLine.length)
         var t = editor.text
         editor.text = t.substring(0, r[0]) + newLine + t.substring(r[1])
-        editor.cursorPosition = r[0] + newLine.length
+        editor.cursorPosition = r[0] + cursorOffset
     }
 
     // Append words to the current line (if not already there)
@@ -151,9 +164,15 @@ Dialog {
     function setPriority(code) {
         var line = currentLine()
         var m = line.match(/^(x \d{4}-\d{2}-\d{2} )?(\(\w\) )?(.*)$/)
-        var head = m[1] || ""
+        var done = m[1] || ""
+        var oldHead = done + (m[2] || "")
+        var newHead = done + (code !== "-" && code.length > 0 ? "(" + code + ") " : "")
         var rest = m[3]
-        replaceCurrentLine(head + (code !== "-" && code.length > 0 ? "(" + code + ") " : "") + rest)
+        // Keep the cursor on the same text, shifted by the change of the head
+        // (priority is at the start, so the rest of the line moves).
+        var oldOffset = editor.cursorPosition - currentLineRange()[0]
+        var newOffset = Math.max(oldOffset, oldHead.length) + (newHead.length - oldHead.length)
+        replaceCurrentLine(newHead + rest, newOffset)
     }
 
     function lineItems(prefix) {
@@ -178,6 +197,12 @@ Dialog {
         // DeferPage gives "", "YYYY-MM-DD" or interval like "1w" (relative to today)
         if (d.length === 0 || /^\d{4}-\d{2}-\d{2}$/.test(d)) return d
         return addInterval(new Date(), d)
+    }
+
+    function addDays(date, n) {
+        var dt = new Date(date.getFullYear(), date.getMonth(), date.getDate())
+        dt.setDate(dt.getDate() + n)
+        return dt
     }
 
     function addInterval(date, interval) {
@@ -245,8 +270,30 @@ Dialog {
                 id: editor
                 width: parent.width
                 text: dialog.text
+                // White edited text. The underline normally follows the text
+                // color (it would turn white too), so draw it ourselves in the
+                // standard blue.
+                color: Theme.primaryColor
+                background: Component {
+                    Rectangle {
+                        x: parent.textLeftMargin
+                        anchors.top: parent.contentItem.bottom
+                        width: parent.width - x - parent.textRightMargin
+                        height: Math.round(Theme.pixelRatio)
+                        color: Theme.rgba(Theme.secondaryColor, Theme.opacityHigh)
+                        Rectangle {
+                            anchors { left: parent.left; right: parent.right; top: parent.top }
+                            height: parent.height
+                            color: Theme.highlightColor
+                        }
+                    }
+                }
                 placeholderText: qsTr("One task per line")
                 inputMethodHints: settings.capitalizeTasks ? Qt.ImhNone : Qt.ImhNoAutoUppercase
+                // Keep the keyboard open when a suggestion chip (or another
+                // control) is tapped, so attributes can be added and typing
+                // continued without the editor losing focus.
+                focusOutBehavior: FocusBehavior.KeepFocus
                 // Text as it was before the last edit, to spot a line break
                 // added by pressing Enter; adjusting guards our own edits.
                 property string previousText: ""
@@ -330,7 +377,7 @@ Dialog {
                 suggestionPrefix: "@"
                 separator: true
                 onOpened: {
-                    var p = pageStack.push(Qt.resolvedUrl("ItemsPage.qml"), {
+                    var p = openPage(Qt.resolvedUrl("ItemsPage.qml"), {
                         "isLists": true, "checked": lineItems("@") })
                     p.changed.connect(function(added, removed) {
                         removeFromLine(removed.map(function(x) { return "@" + x }))
@@ -347,7 +394,7 @@ Dialog {
                 suggestionPrefix: "+"
                 separator: true
                 onOpened: {
-                    var p = pageStack.push(Qt.resolvedUrl("ItemsPage.qml"), {
+                    var p = openPage(Qt.resolvedUrl("ItemsPage.qml"), {
                         "isLists": false, "checked": lineItems("+") })
                     p.changed.connect(function(added, removed) {
                         removeFromLine(removed.map(function(x) { return "+" + x }))
@@ -365,7 +412,7 @@ Dialog {
                 suggestionColor: app.priorityColor
                 separator: true
                 onOpened: {
-                    var p = pageStack.push(Qt.resolvedUrl("PriorityPage.qml"), { "current": column.linePriority })
+                    var p = openPage(Qt.resolvedUrl("PriorityPage.qml"), { "current": column.linePriority })
                     p.selected.connect(setPriority)
                 }
                 onPicked: setPriority(item)
@@ -374,7 +421,7 @@ Dialog {
                 label: qsTr("Due")
                 value: column.lineDue.length > 0 ? app.formatDate(column.lineDue) : qsTr("No date")
                 onClicked: {
-                    var p = pageStack.push(Qt.resolvedUrl("DeferPage.qml"), { "title": qsTr("Due date"), "current": column.lineDue })
+                    var p = openPage(Qt.resolvedUrl("DeferPage.qml"), { "title": qsTr("Due date"), "current": column.lineDue })
                     p.selected.connect(function(d) { setKeyValue("due", deferValue(d)) })
                 }
             }
@@ -382,7 +429,7 @@ Dialog {
                 label: qsTr("Threshold")
                 value: column.lineThreshold.length > 0 ? app.formatDate(column.lineThreshold) : qsTr("No date")
                 onClicked: {
-                    var p = pageStack.push(Qt.resolvedUrl("DeferPage.qml"), { "title": qsTr("Threshold date"), "current": column.lineThreshold, "threshold": true })
+                    var p = openPage(Qt.resolvedUrl("DeferPage.qml"), { "title": qsTr("Threshold date"), "current": column.lineThreshold, "threshold": true })
                     p.selected.connect(function(d) { setKeyValue("t", deferValue(d)) })
                 }
             }
@@ -390,7 +437,7 @@ Dialog {
                 label: qsTr("Recurrence")
                 value: column.lineRecurrence.length > 0 ? column.lineRecurrence : qsTr("None")
                 onClicked: {
-                    var p = pageStack.push(Qt.resolvedUrl("RecurrencePage.qml"), { "current": column.lineRecurrence })
+                    var p = openPage(Qt.resolvedUrl("RecurrencePage.qml"), { "current": column.lineRecurrence })
                     p.selected.connect(function(v) { setKeyValue("rec", v) })
                 }
             }
@@ -402,33 +449,28 @@ Dialog {
                 }
             }
             SectionHeader { text: qsTr("Quick choice") }
+            // Today, then the next days: tomorrow and the day after are named,
+            // the rest show the (localised) weekday abbreviation. Labels follow
+            // the current day.
             Flow {
                 width: parent.width - 2 * Theme.horizontalPageMargin
                 anchors.horizontalCenter: parent.horizontalCenter
                 spacing: Theme.paddingSmall
-                Button {
-                    id: todayButton
-                    width: implicitWidth
-                    text: qsTr("Today")
-                    onClicked: {
-                        setKeyValue("due", addInterval(new Date(), "0d"))
-                        dialog.accept()
-                    }
-                }
-                Button {
-                    width: implicitWidth
-                    text: qsTr("Tomorrow")
-                    onClicked: {
-                        setKeyValue("due", addInterval(new Date(), "1d"))
-                        dialog.accept()
-                    }
-                }
-                Button {
-                    width: 2 * todayButton.width
-                    text: qsTr("No due date")
-                    onClicked: {
-                        setKeyValue("due", "")
-                        dialog.accept()
+                Repeater {
+                    model: 8
+                    Button {
+                        width: implicitWidth
+                        text: {
+                            if (index === 0)
+                                return qsTr("Today")
+                            if (index === 1)
+                                return qsTr("Tomorrow")
+                            return Qt.formatDate(addDays(new Date(), index), "ddd").toUpperCase()
+                        }
+                        onClicked: {
+                            setKeyValue("due", Qt.formatDate(addDays(new Date(), index), "yyyy-MM-dd"))
+                            dialog.accept()
+                        }
                     }
                 }
             }

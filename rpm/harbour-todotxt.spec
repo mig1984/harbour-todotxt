@@ -1,6 +1,6 @@
 Name:       harbour-todotxt
 Summary:    Todo.txt task list for Sailfish OS (Simpletask port)
-Version:    1.7.0
+Version:    1.7.1
 Release:    1
 License:    GPLv3
 URL:        https://github.com/mig1984/harbour-todotxt
@@ -14,6 +14,8 @@ BuildRequires:  desktop-file-utils
 BuildRequires:  qt5-qttools-linguist
 
 %description
+The best todo app for Sailfish OS - inspired by Simpletask, ADHD friendly and
+built to keep form-filling to a minimum.
 Todo.txt task manager following the Simpletask (Android) feature set:
 priorities, contexts, projects, due and threshold dates, recurrence,
 filters, multi-key sorting, saved filters, archiving to done.txt and
@@ -41,6 +43,12 @@ desktop-file-install --delete-original \
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Sat Nov 21 2026 Jan Molič <jan.molic@1984.cz> - 1.7.1-1
+- Task editor: the keyboard stays open when a list/tag/priority suggestion is tapped, and the suggestion is appended at the end of the line with the cursor kept in place
+- Quick choice now offers Today and the next seven days, labelled with weekday names that follow the current day
+- Drag & drop: fixed the runaway auto-scroll and the back-and-forth flapping at the boundary between two tasks; smoother edge auto-scroll
+- The list jumps to today (or the nearest due date) after clearing the filter
+- Default sort now places priority above the #N position
 * Fri Nov 20 2026 Jan Molič <jan.molic@1984.cz> - 1.7.0-1
 - Recurring tasks: a new Settings slider sets how many occurrences to show into the future and the past (default 5, 0 = only the task), replacing the fixed 12-month horizon
 - Recurring occurrences are shown around today (bounded by the creation date) so the list and calendar are no longer flooded with a year of repetitions

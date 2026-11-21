@@ -7,6 +7,10 @@ Page {
 
     property bool selectionMode: false
     property bool searchOpen: false
+    // Set when the filter is cleared; once the rebuilt model is in place the
+    // list jumps to today's (or the nearest upcoming) due date, like tapping
+    // today in the calendar.
+    property bool jumpToTodayAfterClear: false
 
     // A filter set on the Filter page (contexts/projects/priorities), as
     // opposed to the search box. Only these show the header clear button, so
@@ -198,6 +202,7 @@ Page {
                             if (page.selectionMode) {
                                 page.exitSelection()
                             } else {
+                                page.jumpToTodayAfterClear = true
                                 query.clear()
                                 page.searchOpen = false
                             }
@@ -320,6 +325,7 @@ Page {
             delegate: TaskDelegate {
                 selectionMode: page.selectionMode
                 view: listView
+                outerFlick: scrollArea
                 onRequestSelectionMode: {
                     page.selectionMode = true
                     taskModel.setSelected(taskId, true)
@@ -379,6 +385,15 @@ Page {
         }
     }
 
+    // Jump once the rebuilt model is in place (deferred, so the list has laid
+    // out its sections/delegates after the reset).
+    Timer {
+        id: jumpTimer
+        interval: 0
+        property string date: ""
+        onTriggered: page.scrollToDate(date)
+    }
+
     // A data change rebuilds (and may reset) the model; keep the list's scroll
     // position so it does not jump to the top. Filter/sort changes reset the
     // position to the top.
@@ -392,6 +407,13 @@ Page {
         onRebuildResetPreservingFinished: {
             listView.restorePending = true
             restoreTimer.restart()
+        }
+        onRebuildResetTopFinished: {
+            if (page.jumpToTodayAfterClear) {
+                page.jumpToTodayAfterClear = false
+                jumpTimer.date = taskModel.today()
+                jumpTimer.restart()
+            }
         }
     }
 

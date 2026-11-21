@@ -43,6 +43,7 @@ int main(int argc, char *argv[])
 
     SwipeDetector swipeDetector;
     view->installEventFilter(&swipeDetector);
+    qApp->installEventFilter(&swipeDetector);
     view->rootContext()->setContextProperty("settings", &settings);
     view->rootContext()->setContextProperty("store", &store);
     view->rootContext()->setContextProperty("query", &query);

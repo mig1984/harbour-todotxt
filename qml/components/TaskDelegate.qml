@@ -6,7 +6,7 @@ ListItem {
 
     property bool selectionMode: false
     property var view
-    property bool dragging: false
+    property var outerFlick
     property bool dragBlocked: false
     // Only the base row of a task can be reordered/dragged by hand.
     readonly property bool manual: query.manualSort && !selectionMode && !completed && occurrence === 0
@@ -22,7 +22,7 @@ ListItem {
     // blue highlight of the drop target.
     Rectangle {
         anchors.fill: parent
-        visible: item.dragging
+        visible: handle.dragging
         color: Theme.rgba(Theme.secondaryColor, 0.15)
     }
 
@@ -153,109 +153,53 @@ ListItem {
         }
     }
 
-    // Drag handle for manual ordering
-    Item {
+    // Drag handle for manual ordering.
+    DragHandle {
         id: handle
-        visible: manual
-        width: visible ? Theme.itemSizeSmall : 0
-        height: parent.height
         anchors.right: parent.right
-        Icon {
-            anchors.centerIn: parent
-            source: dragBlocked ? "image://theme/icon-m-cancel" : "image://theme/icon-m-menu"
-            color: dragging ? Theme.highlightColor : Theme.secondaryColor
-            opacity: 0.8
-        }
-        MouseArea {
-            id: dragArea
-            anchors.fill: parent
-            preventStealing: true
+        listView: view
+        scrollFlickable: outerFlick
+        active: item.manual
+        blocked: item.dragBlocked
+        onStarted: item.dragBlocked = false
+        onMoved: item.updateTarget(sceneX, sceneY)
+        onFinished: item.finishDrag()
+    }
 
-            // Pointer position in scene coordinates, so it stays valid while
-            // the list auto-scrolls under a still finger.
-            property real pointerX: 0
-            property real pointerY: 0
-            readonly property real sceneTop: view ? view.mapToItem(null, 0, 0).y : 0
-            readonly property real sceneBottom: view ? view.mapToItem(null, 0, view.height).y : 0
-            readonly property real edge: Theme.itemSizeLarge
-            readonly property int scrollStep: 8
-
-            function updateTarget() {
-                var p = view.contentItem.mapFromItem(null, pointerX, pointerY)
-                var idx = view.indexAt(p.x, p.y)
-                if (idx < 0 || idx === index) { view.dropIndex = -1; return }
-                if (query.sectionKey === "by_due_date"
-                        && taskModel.dueAt(idx) !== taskModel.dueAt(index)) {
-                    // Dragging into another due-date group changes the due date.
-                    view.dropIndex = idx
-                    dragBlocked = false
-                } else {
-                    view.dropIndex = -1
-                    if (taskModel.canMove(index, idx)) {
-                        dragBlocked = false
-                        taskModel.previewMove(index, idx)
-                    } else {
-                        dragBlocked = true
-                    }
-                }
-            }
-
-            onPressed: {
-                dragging = true
+    // Resolve a drop at the given scene position to a target row and reflect it:
+    // a live reorder within the same due group, or a highlight of the target
+    // when the drop would move the task to another due date.
+    function updateTarget(sceneX, sceneY) {
+        var p = view.contentItem.mapFromItem(null, sceneX, sceneY)
+        var idx = view.indexAt(p.x, p.y)
+        if (idx < 0 || idx === index) { view.dropIndex = -1; return }
+        var dir = idx > index ? 1 : -1
+        if (query.sectionKey === "by_due_date"
+                && taskModel.dueAt(idx) !== taskModel.dueAt(index)) {
+            // Dragging into another due-date group changes the due date.
+            view.dropIndex = idx
+            dragBlocked = false
+        } else {
+            view.dropIndex = -1
+            // Reordering within the same due group is shown live, one row at a
+            // time, so it does not jump over rows.
+            if (taskModel.canMove(index, index + dir)) {
                 dragBlocked = false
-                view.interactive = false
-                // Keep the dragged delegate alive while auto-scrolling.
-                view.cacheBuffer = Theme.itemSizeMedium * 60
-                var s = mapToItem(null, mouse.x, mouse.y)
-                pointerX = s.x
-                pointerY = s.y
-            }
-            onPositionChanged: {
-                if (!dragging) return
-                var s = mapToItem(null, mouse.x, mouse.y)
-                pointerX = s.x
-                pointerY = s.y
-                updateTarget()
-            }
-            onReleased: finish()
-            onCanceled: finish()
-            function finish() {
-                if (!dragging) return
-                var target = view.dropIndex
-                dragging = false
-                dragBlocked = false
-                view.interactive = true
-                view.dropIndex = -1
-                view.cacheBuffer = Theme.itemSizeMedium * 8
-                if (target >= 0)
-                    taskModel.moveToDue(index, target)
-                else
-                    taskModel.commitMove(index)
-            }
-
-            // Slowly auto-scroll while the finger is dragged past an edge.
-            Timer {
-                interval: 20
-                repeat: true
-                running: dragging
-                         && (dragArea.pointerY < dragArea.sceneTop + dragArea.edge
-                             || dragArea.pointerY > dragArea.sceneBottom - dragArea.edge)
-                onTriggered: {
-                    var dy = 0
-                    if (dragArea.pointerY < dragArea.sceneTop + dragArea.edge)
-                        dy = -dragArea.scrollStep
-                    else if (dragArea.pointerY > dragArea.sceneBottom - dragArea.edge)
-                        dy = dragArea.scrollStep
-                    if (dy === 0) return
-                    var maxY = Math.max(0, view.contentHeight - view.height)
-                    var y = Math.max(0, Math.min(view.contentY + dy, maxY))
-                    if (y !== view.contentY) {
-                        view.contentY = y
-                        dragArea.updateTarget()
-                    }
-                }
+                taskModel.previewMove(index, index + dir)
+            } else {
+                dragBlocked = true
             }
         }
+    }
+
+    function finishDrag() {
+        var target = view.dropIndex
+        dragBlocked = false
+        view.dropIndex = -1
+        if (target >= 0)
+            taskModel.moveToDue(index, target)
+        else
+            taskModel.commitMove(index)
     }
 
     // Long press enters multi-selection (and selects the pressed task) instead

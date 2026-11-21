@@ -58,11 +58,22 @@ bool SwipeDetector::eventFilter(QObject *watched, QEvent *event)
     }
     case QEvent::TouchEnd: {
         QTouchEvent *te = static_cast<QTouchEvent *>(event);
+        emit released();
         if (!m_touchActive || te->touchPoints().isEmpty())
             break;
         m_touchActive = false;
         m_lastTouchEnd = QDateTime::currentMSecsSinceEpoch();
         finish(te->touchPoints().first().pos(), watched);
+        break;
+    }
+    case QEvent::TouchUpdate: {
+        QTouchEvent *te = static_cast<QTouchEvent *>(event);
+        if (te->touchPoints().size() == 1)
+            emit touchMoved(te->touchPoints().first().scenePos());
+        break;
+    }
+    case QEvent::TouchCancel: {
+        emit released();
         break;
     }
     case QEvent::MouseButtonPress: {
@@ -73,6 +84,7 @@ bool SwipeDetector::eventFilter(QObject *watched, QEvent *event)
         break;
     }
     case QEvent::MouseButtonRelease: {
+        emit released();
         if (m_touchActive
                 || QDateTime::currentMSecsSinceEpoch() - m_lastTouchEnd < TOUCH_MOUSE_GUARD_MS)
             break;

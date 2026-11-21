@@ -18,9 +18,10 @@ Query::Query(QObject *parent)
 
 QStringList Query::allSortKeys()
 {
-    // Order is also the default sort order (see defaultSorts()).
-    return QStringList() << "completed" << "by_due_date" << "manual"
-                         << "by_context" << "by_prio" << "by_project" << "by_creation_date"
+    // Order is also the default sort order (see defaultSorts()). Priority comes
+    // before the manual order (#N) so hand-numbered tasks yield to it.
+    return QStringList() << "completed" << "by_due_date" << "by_context" << "by_prio"
+                         << "manual" << "by_project" << "by_creation_date"
                          << "in_future" << "by_threshold_date" << "by_completion_date"
                          << "alphabetical";
 }

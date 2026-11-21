@@ -6,7 +6,10 @@ ported from [Simpletask](https://github.com/mpcjanssen/simpletask-android)
 and writes `todo.txt` (and `done.txt` next to it) and can be combined with any
 sync tool that moves the file.
 
-Version 1.7.0 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
+**The best todo app for Sailfish OS — inspired by Simpletask, ADHD friendly and
+built to keep form-filling to a minimum.**
+
+Version 1.7.1 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
 German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
 
 ## Screenshots

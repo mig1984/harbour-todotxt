@@ -17,6 +17,14 @@ public:
 
 signals:
     void swipeLeft();
+    // Emitted on every touch/mouse release at the window level. Used as a
+    // backstop to end a custom drag even when the grabbing MouseArea never
+    // receives a released/canceled event.
+    void released();
+    // Scene position of the single touch while it is being dragged. Stable
+    // regardless of items moving underneath (unlike a MouseArea's local mouse
+    // position, which shifts when its delegate is reordered).
+    void touchMoved(const QPointF &scenePos);
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event) override;
