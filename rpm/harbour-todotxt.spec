@@ -1,6 +1,6 @@
 Name:       harbour-todotxt
 Summary:    Todo.txt task list for Sailfish OS (Simpletask port)
-Version:    1.7.1
+Version:    1.7.2
 Release:    1
 License:    GPLv3
 URL:        https://github.com/mig1984/harbour-todotxt
@@ -43,6 +43,9 @@ desktop-file-install --delete-original \
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Sat Nov 21 2026 Jan Molič <jan.molic@1984.cz> - 1.7.2-1
+- Drag & drop: pressing the drag handle no longer nudges the list (it only starts moving once the finger actually moves)
+- Drag & drop: fixed the target row flickering back and forth when dragging a one-line task onto a multi-line one
 * Sat Nov 21 2026 Jan Molič <jan.molic@1984.cz> - 1.7.1-1
 - Task editor: the keyboard stays open when a list/tag/priority suggestion is tapped, and the suggestion is appended at the end of the line with the cursor kept in place
 - Quick choice now offers Today and the next seven days, labelled with weekday names that follow the current day

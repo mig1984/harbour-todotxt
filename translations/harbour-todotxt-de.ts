@@ -776,17 +776,17 @@
 <context>
     <name>TaskDelegate</name>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="57" />
+        <location filename="../qml/components/TaskDelegate.qml" line="66" />
         <source>done %1</source>
         <translation>erledigt %1</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="41" />
+        <location filename="../qml/components/TaskDelegate.qml" line="50" />
         <source>Marking incomplete</source>
         <translation>Wird als unerledigt markiert</translation>
     </message>
     <message>
-        <location filename="../qml/components/TaskDelegate.qml" line="41" />
+        <location filename="../qml/components/TaskDelegate.qml" line="50" />
         <source>Completing</source>
         <translation>Wird abgeschlossen</translation>
     </message>

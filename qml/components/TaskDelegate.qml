@@ -8,6 +8,15 @@ ListItem {
     property var view
     property var outerFlick
     property bool dragBlocked: false
+    // Logical row of the dragged task and the row the finger currently wants it
+    // at. Kept as state (not inferred from the live delegate index, which shifts
+    // as rows are preview-moved) so reordering steps one row at a time without
+    // flip-flopping at a row boundary.
+    property int dragRow: -1
+    property int dropRow: -1
+    // Margin the index probe has to clear past a row boundary before the target
+    // changes, so rows of different heights cannot oscillate.
+    readonly property real hysteresis: Theme.itemSizeSmall / 2
     // Only the base row of a task can be reordered/dragged by hand.
     readonly property bool manual: query.manualSort && !selectionMode && !completed && occurrence === 0
 
@@ -161,21 +170,62 @@ ListItem {
         scrollFlickable: outerFlick
         active: item.manual
         blocked: item.dragBlocked
-        onStarted: item.dragBlocked = false
+        onStarted: {
+            item.dragBlocked = false
+            item.dragRow = item.indexAtScene(sceneX, sceneY)
+            if (item.dragRow < 0)
+                item.dragRow = item.index
+            item.dropRow = item.dragRow
+            item.dragAnchorSceneY = item.sceneYOfRow()
+        }
         onMoved: item.updateTarget(sceneX, sceneY)
         onFinished: item.finishDrag()
+    }
+
+    // The mid-scene Y of the dragged row. Used as the anchor for the step
+    // hysteresis so a row taller than the finger's movement does not flip the
+    // target back and forth at a row boundary.
+    property real dragAnchorSceneY: 0
+    // Scene Y of the dragged row: map the dragged delegate's centre to the scene.
+    function sceneYOfRow() {
+        return view.contentItem.mapToItem(null, 0, y + height / 2).y
+    }
+
+    // Row index at a scene position (independent of which delegate this is).
+    function indexAtScene(sceneX, sceneY) {
+        var p = view.contentItem.mapFromItem(null, sceneX, sceneY)
+        return view.indexAt(p.x, p.y)
     }
 
     // Resolve a drop at the given scene position to a target row and reflect it:
     // a live reorder within the same due group, or a highlight of the target
     // when the drop would move the task to another due date.
+    //
+    // indexAt() is computed at a probe point shifted from the finger by a
+    // hysteresis margin in the movement direction. Rows reordered here have
+    // different heights (task text can wrap), so sampling exactly at the finger
+    // makes the boundary between a short and a tall row oscillate: the probe has
+    // to clear the boundary by a margin before the target changes.
     function updateTarget(sceneX, sceneY) {
-        var p = view.contentItem.mapFromItem(null, sceneX, sceneY)
-        var idx = view.indexAt(p.x, p.y)
-        if (idx < 0 || idx === index) { view.dropIndex = -1; return }
-        var dir = idx > index ? 1 : -1
+        if (dragRow < 0)
+            dragRow = index
+
+        var dir = sceneY < dragAnchorSceneY ? -1 : (sceneY > dragAnchorSceneY ? 1 : 0)
+        var probeY = sceneY
+        if (dir < 0)
+            probeY -= hysteresis
+        else if (dir > 0)
+            probeY += hysteresis
+
+        var idx = indexAtScene(sceneX, probeY)
+        if (idx < 0)
+            return
+        dropRow = idx
+        if (idx === dragRow) { view.dropIndex = -1; return }
+
+        var step = idx > dragRow ? 1 : -1
         if (query.sectionKey === "by_due_date"
-                && taskModel.dueAt(idx) !== taskModel.dueAt(index)) {
+                && taskModel.dueAt(idx) !== taskModel.dueAt(dragRow)) {
             // Dragging into another due-date group changes the due date.
             view.dropIndex = idx
             dragBlocked = false
@@ -183,9 +233,12 @@ ListItem {
             view.dropIndex = -1
             // Reordering within the same due group is shown live, one row at a
             // time, so it does not jump over rows.
-            if (taskModel.canMove(index, index + dir)) {
+            if (taskModel.canMove(dragRow, dragRow + step)) {
                 dragBlocked = false
-                taskModel.previewMove(index, index + dir)
+                if (taskModel.previewMove(dragRow, dragRow + step)) {
+                    dragRow += step
+                    dragAnchorSceneY = sceneY
+                }
             } else {
                 dragBlocked = true
             }
@@ -196,10 +249,13 @@ ListItem {
         var target = view.dropIndex
         dragBlocked = false
         view.dropIndex = -1
+        var row = dragRow >= 0 ? dragRow : index
+        dragRow = -1
+        dropRow = -1
         if (target >= 0)
-            taskModel.moveToDue(index, target)
+            taskModel.moveToDue(row, target)
         else
-            taskModel.commitMove(index)
+            taskModel.commitMove(row)
     }
 
     // Long press enters multi-selection (and selects the pressed task) instead

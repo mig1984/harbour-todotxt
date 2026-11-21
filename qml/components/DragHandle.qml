@@ -21,8 +21,15 @@ Item {
     readonly property bool dragging: _dragging
 
     property bool _dragging: false
+    // Set once the finger has actually moved past moveThreshold. Until then the
+    // list is left untouched: changing interactive/cacheBuffer re-anchors the
+    // content and makes the list jump even while the finger is still.
+    property bool _armed: false
+    property real _pressX: 0
+    property real _pressY: 0
+    readonly property real moveThreshold: Theme.paddingMedium
 
-    signal started()
+    signal started(real sceneX, real sceneY)
     signal moved(real sceneX, real sceneY)
     signal finished()
 
@@ -52,6 +59,7 @@ Item {
     function finish() {
         if (!_dragging) return
         _dragging = false
+        _armed = false
         scrollUp = false
         scrollDown = false
         if (listView) {
@@ -63,10 +71,25 @@ Item {
         finished()
     }
 
+    // Start a real drag. Called on the first movement past moveThreshold, not on
+    // the initial press, so a still finger never re-anchors the list content.
+    function beginDrag() {
+        if (_armed) return
+        _armed = true
+        if (listView) {
+            listView.interactive = false
+            // Keep the dragged delegate alive while auto-scrolling.
+            listView.cacheBuffer = Theme.itemSizeMedium * 60
+        }
+        if (scrollFlickable)
+            scrollFlickable.interactive = false
+        started(pointerX, pointerY)
+    }
+
     // Recompute the auto-scroll direction; called on every move and every tick,
     // so reversing the finger changes/stops the direction right away.
     function updateAutoScroll() {
-        if (!_dragging || !mouseArea.pressed) { scrollUp = false; scrollDown = false; return }
+        if (!_dragging || !mouseArea.pressed || !_armed) { scrollUp = false; scrollDown = false; return }
         var top = sceneTop + edge + (scrollUp ? hysteresis : 0)
         var bottom = sceneBottom - edge - (scrollDown ? hysteresis : 0)
         if (pointerY < top) { scrollUp = true; scrollDown = false }
@@ -94,6 +117,13 @@ Item {
         mouseArea.useTouch = true
         pointerX = x
         pointerY = y
+        if (!_armed) {
+            var dx = x - _pressX
+            var dy = y - _pressY
+            if (Math.sqrt(dx * dx + dy * dy) <= moveThreshold)
+                return
+            beginDrag()
+        }
         moved(x, y)
         updateAutoScroll()
     }
@@ -116,25 +146,26 @@ Item {
 
         onPressed: {
             root._dragging = true
+            root._armed = false
             useTouch = false
-            if (listView) {
-                listView.interactive = false
-                // Keep the dragged delegate alive while auto-scrolling.
-                listView.cacheBuffer = Theme.itemSizeMedium * 60
-            }
-            if (scrollFlickable)
-                scrollFlickable.interactive = false
             var s = mapToItem(null, mouse.x, mouse.y)
             root.pointerX = s.x
             root.pointerY = s.y
-            root.updateAutoScroll()
-            root.started()
+            root._pressX = s.x
+            root._pressY = s.y
         }
         onPositionChanged: {
             if (!root._dragging || useTouch) return
             var s = mapToItem(null, mouse.x, mouse.y)
             root.pointerX = s.x
             root.pointerY = s.y
+            if (!root._armed) {
+                var dx = s.x - root._pressX
+                var dy = s.y - root._pressY
+                if (Math.sqrt(dx * dx + dy * dy) <= root.moveThreshold)
+                    return
+                root.beginDrag()
+            }
             root.moved(root.pointerX, root.pointerY)
             root.updateAutoScroll()
         }
@@ -156,7 +187,7 @@ Item {
     Timer {
         interval: 16
         repeat: true
-        running: root._dragging && mouseArea.pressed && (root.scrollUp || root.scrollDown)
+        running: root._dragging && root._armed && mouseArea.pressed && (root.scrollUp || root.scrollDown)
         onTriggered: {
             root.updateAutoScroll()
             if (!root.scrollUp && !root.scrollDown) return
