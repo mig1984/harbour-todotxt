@@ -1,6 +1,6 @@
 Name:       harbour-todotxt
 Summary:    Todo.txt task list for Sailfish OS (Simpletask port)
-Version:    1.7.2
+Version:    1.7.3
 Release:    1
 License:    GPLv3
 URL:        https://github.com/mig1984/harbour-todotxt
@@ -20,6 +20,30 @@ Todo.txt task manager following the Simpletask (Android) feature set:
 priorities, contexts, projects, due and threshold dates, recurrence,
 filters, multi-key sorting, saved filters, archiving to done.txt and
 manual ordering with #N tokens.
+
+# This description section includes metadata for SailfishOS:Chum, see
+# https://github.com/sailfishos-chum/main/blob/main/Metadata.md
+%if 0%{?_chum}
+Title: Todo.txt
+Type: desktop-application
+DeveloperName: Jan Molič
+Categories:
+ - Office
+ - Utility
+Custom:
+  Repo: https://github.com/mig1984/harbour-todotxt
+PackageIcon: https://github.com/mig1984/harbour-todotxt/raw/main/icons/172x172/harbour-todotxt.png
+Screenshots:
+ - https://github.com/mig1984/harbour-todotxt/raw/main/docs/screenshot-tasks.png
+ - https://github.com/mig1984/harbour-todotxt/raw/main/docs/screenshot-calendar.png
+ - https://github.com/mig1984/harbour-todotxt/raw/main/docs/screenshot-add-tasks.png
+ - https://github.com/mig1984/harbour-todotxt/raw/main/docs/screenshot-search.png
+ - https://github.com/mig1984/harbour-todotxt/raw/main/docs/screenshot-filter.png
+ - https://github.com/mig1984/harbour-todotxt/raw/main/docs/screenshot-sort.png
+Links:
+  Homepage: https://github.com/mig1984/harbour-todotxt
+  Bugtracker: https://github.com/mig1984/harbour-todotxt/issues
+%endif
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -43,6 +67,9 @@ desktop-file-install --delete-original \
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Sat Nov 21 2026 Jan Molič <jan.molic@1984.cz> - 1.7.3-1
+- Chum metadata (AppStream-style) in the spec description for the SailfishOS:Chum GUI
+
 * Sat Nov 21 2026 Jan Molič <jan.molic@1984.cz> - 1.7.2-1
 - Drag & drop: pressing the drag handle no longer nudges the list (it only starts moving once the finger actually moves)
 - Drag & drop: fixed the target row flickering back and forth when dragging a one-line task onto a multi-line one

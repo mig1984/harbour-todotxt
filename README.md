@@ -9,7 +9,7 @@ sync tool that moves the file.
 **The best todo app for Sailfish OS — inspired by Simpletask, ADHD friendly and
 built to keep form-filling to a minimum.**
 
-Version 1.7.2 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
+Version 1.7.3 (see `rpm/harbour-todotxt.spec`). UI languages: English, Czech,
 German, French, Spanish, Italian, Russian, Polish, Dutch, Swedish, Finnish.
 
 ## Screenshots

@@ -23,7 +23,6 @@ DISTFILES += qml/harbour-todotxt.qml \
     qml/cover/CoverPage.qml \
     qml/pages/*.qml \
     qml/components/*.qml \
-    rpm/harbour-todotxt.spec \
     harbour-todotxt.desktop
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
